@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://f5ov75exi6ub"]
 
-[ext_resource type="Script" uid="uid://dapxwticjt3d0" path="res://Scripts/day_night_manager.gd" id="1_jr8of"]
-[ext_resource type="FontFile" uid="uid://2fr4cmq5dle5" path="res://monogram.ttf" id="2_gl63i"]
+[ext_resource type="Script" uid="uid://dapxwticjt3d0" path="res://Day and night/day_night_manager.gd" id="1_rtqch"]
+[ext_resource type="FontFile" uid="uid://2fr4cmq5dle5" path="res://monogram.ttf" id="2_fv4kt"]
 
 [node name="DayNightManager" type="Node"]
-script = ExtResource("1_jr8of")
+script = ExtResource("1_rtqch")
 
 [node name="TEMP BG for testing" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -30,5 +30,5 @@ offset_left = -20.0
 offset_right = 20.0
 offset_bottom = 23.0
 grow_horizontal = 2
-theme_override_fonts/font = ExtResource("2_gl63i")
+theme_override_fonts/font = ExtResource("2_fv4kt")
 theme_override_font_sizes/font_size = 25
