@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://dd4iqf5la6hly"]
+
+[ext_resource type="Script" uid="uid://bj7kbff2cyf66" path="res://player/player.gd" id="1_rkbax"]
+[ext_resource type="Texture2D" uid="uid://bemu00ea6bigs" path="res://icon.svg" id="2_g1dw6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nevrd"]
+radius = 13.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lf62g"]
+radius = 24.0
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 0
+script = ExtResource("1_rkbax")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="PlaceholderSprite" type="Sprite2D" parent="AnimatedSprite2D"]
+scale = Vector2(0.1875, 0.1875)
+texture = ExtResource("2_g1dw6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_nevrd")
+
+[node name="InteractionArea" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("CircleShape2D_lf62g")
