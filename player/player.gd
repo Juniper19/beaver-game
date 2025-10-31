@@ -2,7 +2,7 @@ class_name Player
 extends CharacterBody2D
 
 @export var move_speed: float = 600.0
-
+@export var inventory: PlayerInventory
 @onready var animation_player: AnimationPlayer = $AnimatedSprite2D/AnimationPlayer
 @onready var interaction_area: Area2D = $InteractionArea
 
@@ -37,7 +37,13 @@ func _unhandled_key_input(event): # unhandled? maybe just use _input? _unhandled
 		
 		if closest_interactable:
 			_interact_with_object(closest_interactable)
+	
+	if event.is_action_pressed("drop_item"):
+		inventory.drop_top_item()
 
 func _interact_with_object(obj: Node) -> void:
-	obj.interact()
+	if obj is Item:
+		obj.interact(self)
+	else:
+		obj.interact()
 	## do other stuff?
