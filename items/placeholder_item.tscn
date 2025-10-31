@@ -6,10 +6,10 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_2oiao"]
 radius = 20.396078
 
-[node name="Area2D" type="Area2D"]
+[node name="PlaceholderItem" type="Area2D"]
 script = ExtResource("1_0dke0")
 
-[node name="PlaceholderItem" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.8830403, 7.2196127e-07, 0.46312124, 1)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_mh3ok")

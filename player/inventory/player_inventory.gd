@@ -1,23 +1,30 @@
 class_name PlayerInventory
 extends Marker2D
 
-@export var inventory_items: Array[Area2D] = []
+@export var inventory_items: Array[Node2D] = []
 @export var item_separation: float = 25.0
 
 
-func add_item(item: Area2D):
+func add_item(item: Node2D):
 	if inventory_items.has(item):
 		push_warning("Tried to add inventory item that's already held")
 		return
 	
 	inventory_items.append(item)
+	
+	var item_pos_global: Vector2 = item.global_position
 	item.reparent(self)
+	item.global_position = item_pos_global
 	
-	# stack items!
-	item.position.x = 0.0
-	item.position.y = (inventory_items.size() - 1) * -item_separation
+	var target_pos: Vector2 = Vector2(0.0, (inventory_items.size() - 1) * -item_separation)
 	
-	item.monitorable = false
+	var tween = get_tree().create_tween()
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_BACK)
+	tween.tween_property(item, "position", target_pos, 0.2)
+	
+	if item is Area2D:
+		item.monitorable = false
 
 func drop_all_items():
 	for i in inventory_items.size():
@@ -34,8 +41,10 @@ func drop_item(index: int):
 	var item: Node2D = inventory_items.pop_at(index)
 	var item_pos: Vector2 = item.global_position
 	item.reparent(get_tree().root) ## CHANGE THIS?
-	item.monitorable = true
 	item.global_position = item_pos
+	
+	if item is Area2D:
+		item.monitorable = true
 	
 	_reset_item_positions()
 	
