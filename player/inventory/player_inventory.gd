@@ -27,14 +27,10 @@ func add_item(item: Node2D):
 	if item is Area2D:
 		item.monitorable = false
 
-func drop_all_items():
-	for i in inventory_items.size():
-		drop_item(0)
-
 func drop_top_item():
 	var top = inventory_items.size() - 1
 	if top >= 0:
-		drop_item(inventory_items.size() - 1)
+		drop_item(top)
 
 func drop_item(index: int):
 	if index >= inventory_items.size() or index < 0:
