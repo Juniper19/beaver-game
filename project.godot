@@ -15,6 +15,10 @@ run/main_scene="uid://f5ov75exi6ub"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[gui]
+
+theme/custom_font="uid://2fr4cmq5dle5"
+
 [input]
 
 move_left={
@@ -46,6 +50,3 @@ interact={
 [layer_names]
 
 2d_physics/layer_1="Players"
-[gui]
-
-theme/custom_font="uid://2fr4cmq5dle5"
