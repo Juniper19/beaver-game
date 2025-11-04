@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 DayNightManager="*res://Day and night/day_night_manager.tscn"
+GlobalStats="*res://global/global_stats.gd"
 
 [gui]
 

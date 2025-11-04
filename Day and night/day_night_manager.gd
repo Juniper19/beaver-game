@@ -70,6 +70,16 @@ func _process(delta: float) -> void:
 	if timer_label and current_timer.time_left > 0.0:
 		timer_label.text = ("%s: %.1f" % ["Day" if is_day else "Night", current_timer.time_left]).to_upper()
 
+func freeze_time() -> void:
+	if current_timer:
+		current_timer.paused = true
+		print("⏸️ Day/night cycle paused")
+
+func resume_time() -> void:
+	if current_timer:
+		current_timer.paused = false
+		print("▶️ Day/night cycle resumed")
+
 # ---------------- ONLY SPAWN ONE, important----------------
 static var instance: DayNightManager
 
