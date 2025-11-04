@@ -26,24 +26,17 @@ func _unhandled_key_input(event): # unhandled? maybe just use _input? _unhandled
 	if event.is_action_pressed("interact"):
 		
 		# Get closest ineractable and interact with it
-		var closest_interactable: Node2D = null
+		var closest_interactable: InteractionArea = null
 		var closest_distance: float = INF;
 		for node in interaction_area.get_overlapping_areas():
-			if node.has_method("interact"): ## TODO UPDATE THIS LOGIC
+			if node is InteractionArea: ## TODO UPDATE THIS LOGIC
 				var distance: float = global_position.distance_squared_to(node.global_position)
 				if distance < closest_distance:
 					closest_distance = distance
 					closest_interactable = node
-		
+					
 		if closest_interactable:
-			_interact_with_object(closest_interactable)
+			closest_interactable.interact(self)
 	
 	if event.is_action_pressed("drop_item"):
 		inventory.drop_top_item()
-
-func _interact_with_object(obj: Node) -> void:
-	if obj is Item:
-		obj.interact(self)
-	else:
-		obj.interact()
-	## do other stuff?
