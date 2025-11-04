@@ -73,12 +73,10 @@ func _process(delta: float) -> void:
 func freeze_time() -> void:
 	if current_timer:
 		current_timer.paused = true
-		print("⏸️ Day/night cycle paused")
 
 func resume_time() -> void:
 	if current_timer:
 		current_timer.paused = false
-		print("▶️ Day/night cycle resumed")
 
 # ---------------- ONLY SPAWN ONE, important----------------
 static var instance: DayNightManager
