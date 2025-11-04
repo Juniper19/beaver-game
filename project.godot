@@ -15,6 +15,10 @@ run/main_scene="uid://cl1jmkdurg2bg"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+DayNightManager="*res://Day and night/day_night_manager.tscn"
+
 [gui]
 
 theme/custom_font="uid://2fr4cmq5dle5"
