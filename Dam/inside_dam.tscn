@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://cus4fv7iknxoj"]
+
+[ext_resource type="PackedScene" uid="uid://dd4iqf5la6hly" path="res://player/player.tscn" id="1_applo"]
+[ext_resource type="PackedScene" uid="uid://cxl18pj2uuxtl" path="res://Doors/door.tscn" id="2_6w3bf"]
+[ext_resource type="PackedScene" uid="uid://bnjmxvo72qb0" path="res://Dam/upgrade_manager.tscn" id="3_gxfum"]
+
+[node name="InsideDam" type="Node2D"]
+
+[node name="Door" parent="." instance=ExtResource("2_6w3bf")]
+target_scene = "uid://cl1jmkdurg2bg"
+
+[node name="Player" parent="." instance=ExtResource("1_applo")]
+
+[node name="UpgradeManager" parent="." instance=ExtResource("3_gxfum")]

@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="Beaver Game"
-run/main_scene="uid://f5ov75exi6ub"
+run/main_scene="uid://cl1jmkdurg2bg"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+DayNightManager="*res://Day and night/day_night_manager.tscn"
+GlobalStats="*res://global/global_stats.gd"
 
 [gui]
 
