@@ -22,13 +22,14 @@ func _kill_item_tween(item: Node2D):
 func get_items() -> Array[Node2D]:
 	return inventory_items
 
-func add_item(item: Node2D):
+# Returns if successful
+func add_item(item: Node2D) -> bool:
 	if _blacklist.has(item):
-		return
+		return false
 	
 	if inventory_items.has(item):
 		push_warning("Tried to add inventory item that's already held")
-		return
+		return false
 	
 	var item_pos_global: Vector2 = item.global_position
 	item.get_parent().remove_child(item)
@@ -61,6 +62,8 @@ func add_item(item: Node2D):
 	
 	if item is Area2D:
 		item.monitorable = false
+	
+	return true
 
 
 func drop_top_item():
