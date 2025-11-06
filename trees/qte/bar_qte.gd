@@ -18,32 +18,29 @@ signal miss
 var _marker_bounds: Vector2 # (min, max)
 var _hit_zone_bounds: Vector2 # (min, max)
 
+
 func _ready():
 	_populate_y_bounds()
 	_place_hit_zone()
+
 
 func set_hit_zone_size(size: float):
 	hit_zone.size.y = min(size, background.size.y - _hit_zone_padding * 2.0)
 	_populate_y_bounds()
 	_place_hit_zone()
 
+
 func get_hit_zone_size() -> float:
 	return hit_zone.size.y
+
 
 func set_marker_size(size: float):
 	marker.size.y = min(size, background.size.y - _marker_padding * 2.0)
 	_populate_y_bounds()
 
+
 func get_marker_size() -> float:
 	return marker.size.y
-
-
-#func _input(event: InputEvent) -> void:
-	#if event.is_action_pressed("interact"):
-		#attempt_hit()
-		#
-	#if event.is_action_pressed("ui_accept"):
-		#set_hit_zone_size(get_hit_zone_size() + 1)
 
 
 func _place_hit_zone():
@@ -73,12 +70,14 @@ func attempt_hit():
 		print("miss!")
 		miss.emit()
 
+
 func _populate_y_bounds():
 	_marker_bounds.x = background.position.y + _marker_padding
 	_marker_bounds.y = background.position.y + background.size.y - marker.size.y - _marker_padding
 	
 	_hit_zone_bounds.x = background.position.y + _hit_zone_padding
 	_hit_zone_bounds.y = background.position.y + background.size.y - hit_zone.size.y - _hit_zone_padding
+
 
 func _physics_process(delta: float) -> void:
 	marker.position.y += _marker_velocity * delta
