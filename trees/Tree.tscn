@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://cd3s2mygwd6ul"]
+
+[ext_resource type="Texture2D" uid="uid://bemu00ea6bigs" path="res://icon.svg" id="1_my3ba"]
+[ext_resource type="Script" uid="uid://b8sajxb68u3yc" path="res://trees/tree.gd" id="1_ui6p4"]
+[ext_resource type="Script" uid="uid://diekxh66yt803" path="res://interactables/interaction_area.gd" id="2_ui6p4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mgnsf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uv0fj"]
+radius = 28.071337
+
+[node name="Tree" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_ui6p4")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_mgnsf")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(0, -58)
+scale = Vector2(0.109375, 1)
+texture = ExtResource("1_my3ba")
+
+[node name="InteractionArea" type="Area2D" parent="."]
+collision_layer = 16
+script = ExtResource("2_ui6p4")
+metadata/_custom_type_script = "uid://diekxh66yt803"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("CircleShape2D_uv0fj")
+
+[node name="QTESpawn" type="Marker2D" parent="."]
+position = Vector2(-27, -57)
+
+[connection signal="interaction" from="InteractionArea" to="." method="_on_interaction"]
+[connection signal="player_left_area" from="InteractionArea" to="." method="_on_player_left_area"]
