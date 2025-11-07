@@ -1,6 +1,6 @@
 extends Node
 
-#-----------Clock variables----------------
+#-----------AM/PM Clock related stuff----------------
 @export var day_color: Color = Color(1, 1, 1)
 @export var night_color: Color = Color(0.25, 0.3, 0.45)
 
@@ -9,14 +9,16 @@ var current_time: float = 8 * 60.0  # Start at 8:00 AM
 
 @export var day_start: int = 6 * 60
 @export var night_start: int = 20 * 60
-var has_triggered_new_day = false
 
 var saved_time_speed: float = 60.0
 var canvas_modulate: CanvasModulate
 var clock_label: Label
 
-#----------Day counter-----------
+@onready var warning_label: Label = $UI/WarningLabel
+
+#----------Day counting-----------
 @onready var day_count_label: Label
+var has_triggered_new_day = false
 
 func _ready() -> void:
 	canvas_modulate = $CanvasModulate
@@ -49,6 +51,19 @@ func _process(delta: float) -> void:
 	
 	var stats = get_node("/root/GlobalStats")
 	day_count_label.text = "Day: " + str(stats.day_number)
+	
+	# ----------- Time Warnings -----------
+	var hour = int(current_time / 60) % 24
+	if hour >= 22 and hour < 24:
+		# 10 PM to Midnight
+		warning_label.text = "It's getting late..."
+		warning_label.visible = true
+	elif hour >= 0 and hour < 2:
+		# Midnight to 2 AM
+		warning_label.text = "I need to sleep before 2AM..."
+		warning_label.visible = true
+	else:
+		warning_label.visible = false
 
 func _on_new_day():
 	var stats = get_node("/root/GlobalStats")
