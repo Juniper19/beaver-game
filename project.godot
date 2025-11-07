@@ -23,6 +23,7 @@ GlobalStats="*res://global/global_stats.gd"
 
 world=""
 dam=""
+daynight=""
 
 [gui]
 

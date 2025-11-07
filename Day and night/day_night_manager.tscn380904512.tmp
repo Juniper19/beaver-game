@@ -5,6 +5,11 @@
 
 [node name="DayNightManager" type="Node" groups=["daynight"]]
 script = ExtResource("1_rtqch")
+day_color = null
+night_color = null
+time_speed = null
+day_start = null
+night_start = null
 
 [node name="TEMP BG for testing" type="ColorRect" parent="."]
 visible = false
@@ -29,9 +34,3 @@ offset_bottom = 23.0
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("2_fv4kt")
 theme_override_font_sizes/font_size = 25
-
-[node name="DayCountLabel" type="Label" parent="UI"]
-offset_right = 40.0
-offset_bottom = 13.0
-theme_override_font_sizes/font_size = 24
-text = "Day:"
