@@ -15,7 +15,7 @@ var canvas_modulate: CanvasModulate
 var clock_label: Label
 
 @onready var warning_label: Label = $UI/WarningLabel
-
+var has_triggered_2am: bool = false
 #----------Day counting-----------
 @onready var day_count_label: Label
 var has_triggered_new_day = false
@@ -64,6 +64,16 @@ func _process(delta: float) -> void:
 		warning_label.visible = true
 	else:
 		warning_label.visible = false
+		
+	# pass out at 2am
+	var cutoff_time = 2 * 60
+
+	if current_time >= cutoff_time and current_time < 8 * 60 and not has_triggered_2am:
+		_on_pass_out_time()
+		has_triggered_2am = true
+
+	if current_time >= 8 * 60:
+		has_triggered_2am = false
 
 func _on_new_day():
 	var stats = get_node("/root/GlobalStats")
@@ -106,3 +116,24 @@ func _on_scene_changed() -> void:
 	else:
 		# Any other scene, default pause and hide UI CAN CHANGE THIS IF WE WANT
 		freeze_time()
+
+func _on_pass_out_time():
+	# Freeze clock and display msg
+	saved_time_speed = time_speed
+	time_speed = 0
+	warning_label.text = "I'm passing out from exhaustion..."
+	warning_label.visible = true
+
+	# Shake clock label
+	var original_pos = clock_label.position
+	var shake_amount := 2.0
+	var shake_times := 14
+
+	for i in range(shake_times):
+		clock_label.position = original_pos + Vector2(
+			randf_range(-shake_amount, shake_amount),
+			randf_range(-shake_amount, shake_amount)
+		)
+		await get_tree().process_frame
+
+	clock_label.position = original_pos
