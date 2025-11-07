@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="TreeData" load_steps=6 format=3 uid="uid://cudkyr5livmd3"]
+
+[ext_resource type="Script" uid="uid://y3w4yjg8qy6" path="res://interactables/items/item_resource.gd" id="1_8xixb"]
+[ext_resource type="Resource" uid="uid://n0lsd3ddprs0" path="res://interactables/items/item_resources/default_item.tres" id="2_floyg"]
+[ext_resource type="Script" uid="uid://cn8lyq0xlxhdl" path="res://interactables/trees/tree_data.gd" id="2_h1ac8"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_8xixb"]
+size = Vector2(32, 256)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_h1ac8"]
+size = Vector2(32, 64)
+
+[resource]
+script = ExtResource("2_h1ac8")
+name = "Default Tree"
+texture_sapling = SubResource("PlaceholderTexture2D_h1ac8")
+texture_mature = SubResource("PlaceholderTexture2D_8xixb")
+health = 1
+drops = Dictionary[ExtResource("1_8xixb"), float]({
+ExtResource("2_floyg"): 1.0
+})
+drop_amount = 100
+metadata/_custom_type_script = "uid://cn8lyq0xlxhdl"
