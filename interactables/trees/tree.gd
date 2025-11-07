@@ -70,7 +70,6 @@ func _tree_die():
 		var item_scene = preload("res://interactables/items/item.tscn")
 		var item: Item = item_scene.instantiate()
 		item.data = random_drop
-		print("Drop %s" % random_drop.name)
 		get_tree().current_scene.add_child(item)
 		item.position = random_pos
 	queue_free.call_deferred()

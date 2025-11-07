@@ -63,11 +63,9 @@ func attempt_hit():
 	
 	if abs(hit_zone_middle - marker_middle) <= max_hit_distance:
 		# HIT!
-		print("hit!")
 		_place_hit_zone()
 		hit.emit()
 	else:
-		print("miss!")
 		miss.emit()
 
 

@@ -5,10 +5,10 @@
 [ext_resource type="Script" uid="uid://cn8lyq0xlxhdl" path="res://interactables/trees/tree_data.gd" id="2_h1ac8"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_8xixb"]
-size = Vector2(32, 256)
+size = Vector2(24, 256)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_h1ac8"]
-size = Vector2(32, 64)
+size = Vector2(16, 64)
 
 [resource]
 script = ExtResource("2_h1ac8")
