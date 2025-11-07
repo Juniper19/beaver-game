@@ -13,6 +13,5 @@ func _input(event):
 func next_level():
 	var packed_scene = load(target_scene)
 	var ERR = get_tree().change_scene_to_packed(packed_scene)
-	print(target_scene)
 	if ERR != OK:
 		print("something failed in the door scene")

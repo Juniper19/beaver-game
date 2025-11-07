@@ -1,88 +1,73 @@
 extends Node
 
-@export var day_length: float = 10.0
-@export var night_length: float = 8.0
 @export var day_color: Color = Color(1, 1, 1)
 @export var night_color: Color = Color(0.25, 0.3, 0.45)
-@export var transition_speed: float = 1.5
 
-var is_day: bool = true
-var _initialized: bool = false
+@export var time_speed: float = 60.0
+var current_time: float = 8 * 60.0  # Start at 8:00 AM
+
+@export var day_start: int = 6 * 60
+@export var night_start: int = 20 * 60
+
+var saved_time_speed: float = 60.0
 var canvas_modulate: CanvasModulate
-var day_timer: Timer
-var night_timer: Timer
-var timer_label: Label
-var current_timer: Timer
+var clock_label: Label
 
 func _ready() -> void:
-	if _initialized:
-		return
-	_initialized = true
-
 	canvas_modulate = $CanvasModulate
-	day_timer = $DayTimer
-	night_timer = $NightTimer
-	timer_label = $UI/TimerLabel
-
-	day_timer.wait_time = day_length
-	night_timer.wait_time = night_length
-
-	day_timer.timeout.connect(_on_day_ended)
-	night_timer.timeout.connect(_on_night_ended)
-
-	start_day()
+	clock_label = $UI/TimerLabel
 
 	get_tree().connect("current_scene_changed", Callable(self, "_on_scene_changed"))
-
-func _on_scene_changed() -> void:
-	# Ensure the manager stays attached to the root
-	if get_parent() != get_tree().get_root():
-		get_tree().get_root().add_child(self)
-		set_owner(get_tree().get_root())
-
-	var ui_node := $UI
-	if ui_node and ui_node.is_inside_tree():
-		ui_node.raise()  # valid for Control nodes, works like move_to_front()
-
-func start_day() -> void:
-	is_day = true
-	canvas_modulate.color = day_color
-	current_timer = day_timer
-	day_timer.start()
-
-func _on_day_ended() -> void:
-	is_day = false
-	day_timer.stop()
-	current_timer = night_timer
-	night_timer.start()
-
-func _on_night_ended() -> void:
-	is_day = true
-	night_timer.stop()
-	current_timer = day_timer
-	day_timer.start()
+	_on_scene_changed()
 
 func _process(delta: float) -> void:
-	if not canvas_modulate or not current_timer:
-		return
-	var target_color: Color = day_color if is_day else night_color
-	canvas_modulate.color = canvas_modulate.color.lerp(target_color, delta * transition_speed)
-	if timer_label and current_timer.time_left > 0.0:
-		timer_label.text = ("%s: %.1f" % ["Day" if is_day else "Night", current_timer.time_left]).to_upper()
+	if time_speed == 0:
+		return  # Time paused (in dam)
+
+	current_time += time_speed * delta
+	current_time = fmod(current_time, 1440)  # Wrap at 24h
+
+	var is_day = current_time >= day_start and current_time < night_start
+	var target_color = day_color if is_day else night_color
+
+	canvas_modulate.color = canvas_modulate.color.lerp(target_color, delta * 1.5)
+	clock_label.text = _format_time(current_time)
+
+func _format_time(minutes: float) -> String:
+	var hour = int(minutes / 60) % 24
+	var minute = int(minutes) % 60
+	var ampm = "AM" if hour < 12 else "PM"
+	var display_hour = hour % 12
+	if display_hour == 0:
+		display_hour = 12
+	return "%d:%02d %s" % [display_hour, minute, ampm]
+
+func start_new_day() -> void:
+	current_time = 8 * 60  # Reset to 8:00 AM
 
 func freeze_time() -> void:
-	if current_timer:
-		current_timer.paused = true
+	saved_time_speed = time_speed
+	time_speed = 0
+	$UI.visible = false
 
 func resume_time() -> void:
-	if current_timer:
-		current_timer.paused = false
+	time_speed = saved_time_speed
+	$UI.visible = true
 
-# ---------------- ONLY SPAWN ONE, important----------------
-static var instance: DayNightManager
-
-func _enter_tree() -> void:
-	if instance and instance != self:
-		queue_free()
+func _on_scene_changed() -> void:
+	var scene = get_tree().current_scene
+	if not scene:
 		return
-	instance = self
+
+	if scene.is_in_group("dam"):
+		# Inside dam, stop clock + hide UI
+		freeze_time()
+
+	elif scene.is_in_group("world"):
+		# In outdoor world, show and reset new day
+		resume_time()
+		start_new_day()
+
+	else:
+		# Any other scene, default pause and hide UI CAN CHANGE THIS IF WE WANT
+		freeze_time()

@@ -17,10 +17,6 @@ color = Color(0.28627452, 1, 1, 1)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 
-[node name="DayTimer" type="Timer" parent="."]
-
-[node name="NightTimer" type="Timer" parent="."]
-
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="TimerLabel" type="Label" parent="UI"]
