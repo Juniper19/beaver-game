@@ -3,6 +3,7 @@ extends Node
 var wood: int = 0
 var water_level: int = 0
 var wood_gather_rate = 1
+var day_number: int = 0
 
 # Chosen upgrades get removed from the available cards
 var chosen_upgrades: Array[String] = []
