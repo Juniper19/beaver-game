@@ -5,6 +5,7 @@
 
 [node name="DayNightManager" type="Node" groups=["daynight"]]
 script = ExtResource("1_rtqch")
+dam_scene_path = "uid://cus4fv7iknxoj"
 
 [node name="TEMP BG for testing" type="ColorRect" parent="."]
 visible = false

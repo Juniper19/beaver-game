@@ -1,4 +1,5 @@
 extends Node
+@export_file("*.tscn") var dam_scene_path: String = "res://Dam/inside_dam.tscn"
 
 #-----------AM/PM Clock related stuff----------------
 @export var day_color: Color = Color(1, 1, 1)
@@ -16,6 +17,7 @@ var clock_label: Label
 
 @onready var warning_label: Label = $UI/WarningLabel
 var has_triggered_2am: bool = false
+
 #----------Day counting-----------
 @onready var day_count_label: Label
 var has_triggered_new_day = false
@@ -137,3 +139,12 @@ func _on_pass_out_time():
 		await get_tree().process_frame
 
 	clock_label.position = original_pos
+	# Fade to black
+	var tween = create_tween()
+	tween.tween_property(canvas_modulate, "color", Color(0, 0, 0, 1), 1.2) # 1.2s fade
+	await tween.finished
+
+	# Teleport into dam after passing out
+	var err = get_tree().change_scene_to_file(dam_scene_path)
+	if err != OK:
+		print("Scene change failed")
