@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dd4iqf5la6hly" path="res://player/player.tscn" id="1_f3sb7"]
 [ext_resource type="PackedScene" uid="uid://f5ov75exi6ub" path="res://Day and night/day_night_manager.tscn" id="3_aqk2v"]
 [ext_resource type="PackedScene" uid="uid://cxl18pj2uuxtl" path="res://Doors/door.tscn" id="3_tlwt5"]
-[ext_resource type="PackedScene" uid="uid://b4eodqbksq73q" path="res://interactables/QuotaBoard/quota_board.tscn" id="4_aqk2v"]
+[ext_resource type="PackedScene" uid="uid://dfskvkq4outll" path="res://interactables/QuotaBoard/QuotaBoard.tscn" id="4_aqk2v"]
 
 [node name="World" type="Node2D" groups=["world"]]
 
@@ -11,9 +11,9 @@
 position = Vector2(1, -7)
 target_scene = "uid://cus4fv7iknxoj"
 
-[node name="QuotaBoard" parent="." instance=ExtResource("4_aqk2v")]
-position = Vector2(-133, -6)
-
 [node name="Player" parent="." instance=ExtResource("1_f3sb7")]
 
 [node name="DayNightManager" parent="." instance=ExtResource("3_aqk2v")]
+
+[node name="Quota Board" parent="." instance=ExtResource("4_aqk2v")]
+position = Vector2(-154, -44)
