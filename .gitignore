@@ -14,3 +14,4 @@ export_credentials.cfg
 .mono/
 data_*/
 mono_crash.*.json
+interactables/items/item_resources/default_item.tres
