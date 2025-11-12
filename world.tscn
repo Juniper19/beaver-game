@@ -11,9 +11,9 @@
 position = Vector2(1, -7)
 target_scene = "uid://cus4fv7iknxoj"
 
+[node name="Quota Board" parent="." instance=ExtResource("4_aqk2v")]
+position = Vector2(-230, -54)
+
 [node name="Player" parent="." instance=ExtResource("1_f3sb7")]
 
 [node name="DayNightManager" parent="." instance=ExtResource("3_aqk2v")]
-
-[node name="Quota Board" parent="." instance=ExtResource("4_aqk2v")]
-position = Vector2(-154, -44)
