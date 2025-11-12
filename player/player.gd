@@ -1,7 +1,9 @@
 class_name Player
 extends CharacterBody2D
 
-@export var move_speed: float = 600.0
+@export var base_move_speed: float = 600.0
+@export var speed_mult_per_item: float = 0.75
+var move_speed: float
 @export var inventory: PlayerInventory
 @onready var animation_player: AnimationPlayer = $AnimatedSprite2D/AnimationPlayer
 @onready var interaction_area: Area2D = $InteractionArea
@@ -15,6 +17,8 @@ extends CharacterBody2D
 # !!! Set collision mask for interaction area !!!
 # Update how things are interacted with (the logic of it)
 
+func _ready():
+	move_speed = base_move_speed
 
 func _process(_delta: float) -> void:
 	var move_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -40,3 +44,14 @@ func _unhandled_key_input(event): # unhandled? maybe just use _input? _unhandled
 	
 	if event.is_action_pressed("drop_item"):
 		inventory.drop_top_item()
+
+func _calculate_move_speed():
+	move_speed = base_move_speed * pow(speed_mult_per_item, inventory.get_items().size())
+
+
+func _on_player_inventory_item_added(_item):
+	_calculate_move_speed()
+
+
+func _on_player_inventory_item_removed(_item):
+	_calculate_move_speed()

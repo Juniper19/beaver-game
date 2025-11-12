@@ -4,14 +4,18 @@ extends Node2D
 signal picked_up(by: Node)
 signal dropped(by: Node)
 
-@export var item_name: String = ""
+@onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var interaction_area: InteractionArea = $InteractionArea
 
-@export var interaction_area: InteractionArea
+@export var data: ItemData
+
+var item_name: String = "NO NAME"
 var _held_by: Node
 
 func _ready():
-	if interaction_area == null:
-		interaction_area = $InteractionArea # ITEM MUST HAVE AN INTERACTION AREA!!
+	if data:
+		item_name = data.name
+		sprite_2d.texture = data.texture
 	
 	interaction_area.interaction.connect(_on_interaction)
 

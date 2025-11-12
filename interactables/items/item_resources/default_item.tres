@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://n0lsd3ddprs0"]
 
-[ext_resource type="Script" path="res://interactables/items/item_resource.gd" id="1_c37nf"]
+[ext_resource type="Script" uid="uid://y3w4yjg8qy6" path="res://interactables/items/item_resource.gd" id="1_c37nf"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_c37nf"]
 size = Vector2(32, 32)
