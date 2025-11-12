@@ -1,12 +1,12 @@
-extends Area2D
+extends Node2D
 const GlobalStatsScript = preload("res://global/global_stats.gd")
 const WorldScript = preload("res://Day and night/day_night_manager.gd")
 var global_stats: Node = null
 var world: Node = null
 
-@onready var vbox: VBoxContainer = $BoardUI/PanelContainer/VBoxContainer
+@onready var vbox: VBoxContainer = $InteractionArea/BoardUI/PanelContainer/VBoxContainer
 #CHANGE THESE 3 VALUES BELOW FOR BALANCING
-static var ReqWood = int(randf_range(0,5))
+static var ReqWood = int(randf_range(0,3))
 static var ReqMud = int(randf_range(-5,0))
 static var ReqStone = int(randf_range(-5,0))
 var Day = GlobalStats.day_number
@@ -30,12 +30,12 @@ func _ready() -> void:
 		get_tree().get_root().add_child(world)
 
 	
-	$BoardUI.visible = false
+	%BoardUI.visible = false
 	%Label1.visible = false
 	%Label2.visible = false
 	%Label3.visible = false
 	%CheckIMG.visible = false
-	$InteractLabel.visible = false
+	%InteractLabel.visible = false
 	
 	var TexRect = %CheckIMG
 	var max_size = Vector2(70,70)
@@ -76,14 +76,14 @@ func _process(_delta: float) -> void:
 			%PhysLabel3.visible = true
 		Day = GlobalStats.day_number
 	
-	if get_overlapping_bodies().size() > 0:
-		$InteractLabel.visible = true
+	if $InteractionArea.get_overlapping_bodies().size() > 0:
+		%InteractLabel.visible = true
 	else:
-		$InteractLabel.visible = false
+		%InteractLabel.visible = false
 		
-	if Input.is_action_just_pressed("ui_accept") and get_overlapping_bodies().size() > 0:
+	if Input.is_action_just_pressed("ui_accept") and $InteractionArea.get_overlapping_bodies().size() > 0:
 		show_quota()
-	elif Input.is_action_just_pressed("ui_cancel") or get_overlapping_bodies().size() == 0:
+	elif Input.is_action_just_pressed("ui_cancel") or $InteractionArea.get_overlapping_bodies().size() == 0:
 		hide_quota()	
 		
 	#if current_time >= cutoff_time and current_time < 8 * 60 and not has_triggered_2am:
@@ -105,10 +105,10 @@ func show_quota():
 		%QuotaLabel.visible = true
 		%QuotaLabel.text = "You hit the quota!"
 
-	$BoardUI.visible = true
+	%BoardUI.visible = true
 	
 func hide_quota():
-	$BoardUI.visible = false
+	%BoardUI.visible = false
 
 
 func _on_text_timer_timeout() -> void:

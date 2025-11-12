@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dfskvkq4outll"]
+[gd_scene load_steps=7 format=3 uid="uid://dfskvkq4outll"]
 
 [ext_resource type="Script" uid="uid://dlw7yh385jns4" path="res://interactables/QuotaBoard/quota_board.gd" id="1_kd02m"]
 [ext_resource type="Texture2D" uid="uid://cy3mj6u37mxbw" path="res://art_assets/WoodSign.png" id="2_5fo6y"]
+[ext_resource type="PackedScene" uid="uid://dwafgcp2uqbfl" path="res://interactables/interaction_area.tscn" id="2_ggoti"]
 [ext_resource type="Texture2D" uid="uid://7uoulemsn1o6" path="res://art_assets/GreenCheck.webp" id="3_5fo6y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ggoti"]
@@ -10,19 +11,22 @@ size = Vector2(127.5, 171)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5fo6y"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[node name="Area2D" type="Area2D"]
+[node name="Area2D" type="Node2D"]
 script = ExtResource("1_kd02m")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="InteractionArea" parent="." instance=ExtResource("2_ggoti")]
+
+[node name="Sprite2D" type="Sprite2D" parent="InteractionArea"]
 position = Vector2(0, 39)
 scale = Vector2(0.01930985, 0.019309849)
 texture = ExtResource("2_5fo6y")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
 position = Vector2(-0.75, 44.5)
 shape = SubResource("RectangleShape2D_ggoti")
 
-[node name="InteractLabel" type="Label" parent="."]
+[node name="InteractLabel" type="Label" parent="InteractionArea"]
+unique_name_in_owner = true
 offset_left = -58.0
 offset_top = -77.0
 offset_right = 62.0
@@ -30,9 +34,10 @@ offset_bottom = -45.0
 theme_override_font_sizes/font_size = 40
 text = "Interact"
 
-[node name="BoardUI" type="CanvasLayer" parent="."]
+[node name="BoardUI" type="CanvasLayer" parent="InteractionArea"]
+unique_name_in_owner = true
 
-[node name="PanelContainer" type="PanelContainer" parent="BoardUI"]
+[node name="PanelContainer" type="PanelContainer" parent="InteractionArea/BoardUI"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -45,36 +50,36 @@ offset_bottom = 82.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="BoardUI/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="InteractionArea/BoardUI/PanelContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Label1" type="Label" parent="BoardUI/PanelContainer/VBoxContainer"]
+[node name="Label1" type="Label" parent="InteractionArea/BoardUI/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 35
 
-[node name="Label2" type="Label" parent="BoardUI/PanelContainer/VBoxContainer"]
+[node name="Label2" type="Label" parent="InteractionArea/BoardUI/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 35
 
-[node name="Label3" type="Label" parent="BoardUI/PanelContainer/VBoxContainer"]
+[node name="Label3" type="Label" parent="InteractionArea/BoardUI/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 35
 
-[node name="CenterContainer" type="CenterContainer" parent="BoardUI/PanelContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="InteractionArea/BoardUI/PanelContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="CheckIMG" type="TextureRect" parent="BoardUI/PanelContainer/VBoxContainer/CenterContainer"]
+[node name="CheckIMG" type="TextureRect" parent="InteractionArea/BoardUI/PanelContainer/VBoxContainer/CenterContainer"]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(50, 50)
@@ -84,7 +89,7 @@ texture = ExtResource("3_5fo6y")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="PhysicalPanelContainer" type="PanelContainer" parent="."]
+[node name="PhysicalPanelContainer" type="PanelContainer" parent="InteractionArea"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -97,13 +102,13 @@ size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_5fo6y")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PhysicalPanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="InteractionArea/PhysicalPanelContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 3
 alignment = 1
 
-[node name="PhysLabel1" type="Label" parent="PhysicalPanelContainer/VBoxContainer"]
+[node name="PhysLabel1" type="Label" parent="InteractionArea/PhysicalPanelContainer/VBoxContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -111,7 +116,7 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 22
 text = "Wood"
 
-[node name="PhysLabel2" type="Label" parent="PhysicalPanelContainer/VBoxContainer"]
+[node name="PhysLabel2" type="Label" parent="InteractionArea/PhysicalPanelContainer/VBoxContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -119,7 +124,7 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 22
 text = "Mud"
 
-[node name="PhysLabel3" type="Label" parent="PhysicalPanelContainer/VBoxContainer"]
+[node name="PhysLabel3" type="Label" parent="InteractionArea/PhysicalPanelContainer/VBoxContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -127,9 +132,9 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 22
 text = "Stone"
 
-[node name="OtherUI" type="CanvasLayer" parent="."]
+[node name="OtherUI" type="CanvasLayer" parent="InteractionArea"]
 
-[node name="QuotaLabel" type="Label" parent="OtherUI"]
+[node name="QuotaLabel" type="Label" parent="InteractionArea/OtherUI"]
 unique_name_in_owner = true
 visible = false
 anchors_preset = 3
@@ -143,9 +148,9 @@ grow_horizontal = 0
 grow_vertical = 0
 theme_override_font_sizes/font_size = 24
 
-[node name="TextTimer" type="Timer" parent="."]
+[node name="TextTimer" type="Timer" parent="InteractionArea"]
 unique_name_in_owner = true
 wait_time = 5.0
 one_shot = true
 
-[connection signal="timeout" from="TextTimer" to="." method="_on_text_timer_timeout"]
+[connection signal="timeout" from="InteractionArea/TextTimer" to="." method="_on_text_timer_timeout"]
