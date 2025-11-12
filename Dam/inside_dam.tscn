@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cxl18pj2uuxtl" path="res://Doors/door.tscn" id="2_6w3bf"]
 [ext_resource type="PackedScene" uid="uid://bnjmxvo72qb0" path="res://Dam/upgrade_manager.tscn" id="3_gxfum"]
 
-[node name="InsideDam" type="Node2D"]
+[node name="InsideDam" type="Node2D" groups=["dam"]]
 
 [node name="Door" parent="." instance=ExtResource("2_6w3bf")]
 target_scene = "uid://cl1jmkdurg2bg"

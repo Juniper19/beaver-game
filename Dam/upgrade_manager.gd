@@ -39,10 +39,6 @@ func show_three_cards() -> void:
 	showing = true
 	card_ui.visible = true
 
-	# Freeze day/night while choosing
-	if get_tree().get_root().has_node("DayNightManager"):
-		get_tree().get_root().get_node("DayNightManager").freeze_time()
-
 	for child in card_container.get_children():
 		child.queue_free()
 
@@ -54,11 +50,6 @@ func show_three_cards() -> void:
 func hide_cards() -> void:
 	showing = false
 	card_ui.visible = false
-
-	# Resume day/night
-	if get_tree().get_root().has_node("DayNightManager"):
-		get_tree().get_root().get_node("DayNightManager").resume_time()
-
 
 func _get_random_cards(count: int) -> Array[Dictionary]:
 	var pool = []
