@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cxl18pj2uuxtl"]
 
 [ext_resource type="Script" uid="uid://dule3q33lowsn" path="res://Doors/door.gd" id="1_42blv"]
-[ext_resource type="Texture2D" uid="uid://bjiklfqxr6o7k" path="res://Doors/door.png" id="1_dlf7b"]
+[ext_resource type="Texture2D" uid="uid://bjiklfqxr6o7k" path="res://art_assets/door.png" id="1_dlf7b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dlf7b"]
 size = Vector2(58, 96)
@@ -25,7 +25,7 @@ offset_top = -88.0
 offset_right = 131.0
 offset_bottom = 34.0
 theme_override_font_sizes/font_size = 40
-text = "~SLEEP~"
+text = "~Sleep~"
 
 [node name="GoOutsideLabel" type="Label" parent="."]
 visible = false

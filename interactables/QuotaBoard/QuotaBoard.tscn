@@ -1,0 +1,151 @@
+[gd_scene load_steps=6 format=3 uid="uid://dfskvkq4outll"]
+
+[ext_resource type="Script" uid="uid://dlw7yh385jns4" path="res://interactables/QuotaBoard/quota_board.gd" id="1_kd02m"]
+[ext_resource type="Texture2D" uid="uid://cy3mj6u37mxbw" path="res://art_assets/WoodSign.png" id="2_5fo6y"]
+[ext_resource type="Texture2D" uid="uid://7uoulemsn1o6" path="res://art_assets/GreenCheck.webp" id="3_5fo6y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ggoti"]
+size = Vector2(127.5, 171)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5fo6y"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_kd02m")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 39)
+scale = Vector2(0.01930985, 0.019309849)
+texture = ExtResource("2_5fo6y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.75, 44.5)
+shape = SubResource("RectangleShape2D_ggoti")
+
+[node name="InteractLabel" type="Label" parent="."]
+offset_left = -58.0
+offset_top = -77.0
+offset_right = 62.0
+offset_bottom = -45.0
+theme_override_font_sizes/font_size = 40
+text = "Interact"
+
+[node name="BoardUI" type="CanvasLayer" parent="."]
+
+[node name="PanelContainer" type="PanelContainer" parent="BoardUI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -83.0
+offset_top = -82.0
+offset_right = 83.0
+offset_bottom = 82.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BoardUI/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Label1" type="Label" parent="BoardUI/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 35
+
+[node name="Label2" type="Label" parent="BoardUI/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 35
+
+[node name="Label3" type="Label" parent="BoardUI/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 35
+
+[node name="CenterContainer" type="CenterContainer" parent="BoardUI/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="CheckIMG" type="TextureRect" parent="BoardUI/PanelContainer/VBoxContainer/CenterContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 5
+texture = ExtResource("3_5fo6y")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="PhysicalPanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -51.0
+offset_top = -21.0
+offset_right = 49.0
+offset_bottom = 51.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_5fo6y")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PhysicalPanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 3
+alignment = 1
+
+[node name="PhysLabel1" type="Label" parent="PhysicalPanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 22
+text = "Wood"
+
+[node name="PhysLabel2" type="Label" parent="PhysicalPanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 22
+text = "Mud"
+
+[node name="PhysLabel3" type="Label" parent="PhysicalPanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 22
+text = "Stone"
+
+[node name="OtherUI" type="CanvasLayer" parent="."]
+
+[node name="QuotaLabel" type="Label" parent="OtherUI"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -17.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+
+[node name="TextTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="TextTimer" to="." method="_on_text_timer_timeout"]
