@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://didpb8qch5gt4"]
+
+[ext_resource type="Script" uid="uid://dv21o65j2fnvt" path="res://calendar_ui.gd" id="1_2i05o"]
+[ext_resource type="Script" uid="uid://254v535jk1yl" path="res://calendar_drawer.gd" id="2_ql7md"]
+
+[node name="CalendarUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2i05o")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CalendarDrawer" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_ql7md")
