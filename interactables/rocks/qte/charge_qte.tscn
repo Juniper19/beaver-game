@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://y8wjhrnqgdyp"]
+
+[ext_resource type="Script" uid="uid://bt76xhwyp4fqf" path="res://interactables/rocks/qte/charge_qte.gd" id="1_wul0w"]
+[ext_resource type="Texture2D" uid="uid://ccjdnsx8v7rx2" path="res://interactables/rocks/qte/charge.png" id="2_fha4p"]
+[ext_resource type="Texture2D" uid="uid://d24abs5lrx802" path="res://interactables/rocks/qte/charge_background.png" id="3_fha4p"]
+
+[node name="ChargeQTE" type="Node2D"]
+z_index = 5
+script = ExtResource("1_wul0w")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("3_fha4p")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+max_value = 32.0
+step = 0.0
+value = 16.0
+texture_under = ExtResource("2_fha4p")
+texture_progress = ExtResource("2_fha4p")
+tint_under = Color(0.33101895, 0.33101892, 0.33101892, 1)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true
+
+[node name="CooldownTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="CooldownTimer" to="." method="_off_cooldown"]

@@ -8,6 +8,9 @@ var wood_gather_rate = 1
 var day_number: int = 0
 var current_season: String = ""
 
+var rock_min_damage: float = 0
+var rock_max_damage: float = 1
+
 # Chosen upgrades get removed from the available cards
 var chosen_upgrades: Array[String] = []
 
