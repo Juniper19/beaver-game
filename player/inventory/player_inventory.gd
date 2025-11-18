@@ -72,7 +72,8 @@ func _ready():
 
 func _on_item_in_chest():
 	ChestDrop = true #Used so a loop isn't created
-	drop_item(0)
+	var top = inventory_items.size() - 1
+	drop_item(top)
 
 func drop_top_item():
 	var top = inventory_items.size() - 1
@@ -121,8 +122,12 @@ func drop_item(index: int):
 	item_removed.emit(item)
 	if ChestDrop == false:
 		GlobalStats.emit_signal("inventory_item_removed", item)
+	if ChestDrop == true:
+		item.queue_free()
 	ChestDrop = false
-	
+
+
+
 func _reset_item_positions():
 	for i in inventory_items.size():
 		var item: Node2D = inventory_items[i]
