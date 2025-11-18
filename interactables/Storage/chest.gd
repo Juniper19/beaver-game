@@ -2,14 +2,10 @@ extends Node2D
 
 const GlobalStatsScript = preload("res://global/global_stats.gd")
 
-
 var global_stats: Node = null
 var WoodHeld = 0
 var MudHeld = 0
 var StoneHeld = 0
-
-
-
 
 func _ready() -> void:
 
@@ -49,9 +45,7 @@ func _on_item_added(item):
 		MudHeld += 1
 	if item.item_name == "Stone":
 		StoneHeld += 1
-		#print(WoodHeld)
 		
-
 func _on_item_removed(item):
 	if item.item_name == "Default Item":
 		WoodHeld -= 1
@@ -59,9 +53,6 @@ func _on_item_removed(item):
 		MudHeld -= 1
 	if item.item_name == "Stone":
 		StoneHeld -= 1
-	
-		#print(WoodHeld)
-
 	
 func add_item():
 	print(WoodHeld)
