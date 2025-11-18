@@ -44,7 +44,7 @@ func _tree_die():
 	$Collider.disabled = true
 	var rect: Rect2 = drop_area.shape.get_rect()
 	var weight_sum: float = 0
-	
+
 	for v: float in data.drops.values():
 		weight_sum += v
 	

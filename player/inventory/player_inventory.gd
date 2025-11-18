@@ -11,6 +11,7 @@ signal item_removed(item: Node2D)
 var _item_tweens: Dictionary[Node2D, Tween] = {}
 var _blacklist: Array[Node2D] = []
 
+var ChestDrop: bool
 
 func _kill_item_tween(item: Node2D):
 	if _item_tweens.has(item):
@@ -48,6 +49,7 @@ func add_item(item: Node2D) -> bool:
 		
 	inventory_items.append(item)
 	item_added.emit(item)
+	GlobalStats.emit_signal("inventory_item_added", item)
 	
 	_blacklist.push_back(item)
 	tween.finished.connect(func():
@@ -64,7 +66,13 @@ func add_item(item: Node2D) -> bool:
 		item.monitorable = false
 	
 	return true
+	
+func _ready():
+	GlobalStats.ItemInChest.connect(_on_item_in_chest)
 
+func _on_item_in_chest():
+	ChestDrop = true #Used so a loop isn't created
+	drop_item(0)
 
 func drop_top_item():
 	var top = inventory_items.size() - 1
@@ -72,7 +80,6 @@ func drop_top_item():
 		drop_item(top)
 
 func drop_item(index: int):
-	
 	if index >= inventory_items.size() or index < 0:
 		push_warning("Tried to drop inventory item out of bounds!")
 		return
@@ -112,6 +119,9 @@ func drop_item(index: int):
 		item.monitorable = true
 	
 	item_removed.emit(item)
+	if ChestDrop == false:
+		GlobalStats.emit_signal("inventory_item_removed", item)
+	ChestDrop = false
 	
 func _reset_item_positions():
 	for i in inventory_items.size():

@@ -8,6 +8,10 @@ var wood_gather_rate = 1
 var day_number: int = 0
 var current_season: String = ""
 
+signal inventory_item_added(item)
+signal inventory_item_removed(item)
+signal ItemInChest
+
 # Chosen upgrades get removed from the available cards
 var chosen_upgrades: Array[String] = []
 
