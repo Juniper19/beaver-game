@@ -12,6 +12,7 @@ var _item_tweens: Dictionary[Node2D, Tween] = {}
 var _blacklist: Array[Node2D] = []
 
 var ChestDrop: bool
+var Excess: bool
 
 func _kill_item_tween(item: Node2D):
 	if _item_tweens.has(item):
@@ -69,9 +70,18 @@ func add_item(item: Node2D) -> bool:
 	
 func _ready():
 	GlobalStats.ItemInChest.connect(_on_item_in_chest)
+	GlobalStats.ItemInExcessChest.connect(_on_item_in_excess_chest)
 
+#When deposited into Quota Chest
 func _on_item_in_chest():
 	ChestDrop = true #Used so a loop isn't created
+	var top = inventory_items.size() - 1
+	drop_item(top)
+
+#When deposited into an Excess Chest
+func _on_item_in_excess_chest():
+	ChestDrop = true #Used so a loop isn't created
+	Excess = true
 	var top = inventory_items.size() - 1
 	drop_item(top)
 
@@ -124,7 +134,10 @@ func drop_item(index: int):
 		GlobalStats.emit_signal("inventory_item_removed", item)
 	if ChestDrop == true:
 		item.queue_free()
+	if Excess:
+		GlobalStats.emit_signal("inventory_item_placed", item)
 	ChestDrop = false
+	Excess = false
 
 
 

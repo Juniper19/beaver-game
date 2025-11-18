@@ -89,9 +89,9 @@ func _process(_delta: float) -> void:
 		
 func show_quota():
 	#Testing Purposes *DELETE WHEN WE MERGE*
-	GlobalStats.wood +=10
-	GlobalStats.mud +=3
-	GlobalStats.stone +=1
+	#GlobalStats.wood +=10
+	#GlobalStats.mud +=3
+	#GlobalStats.stone +=1
 	
 	%Label1.text = "Wood: " + str(GlobalStats.wood) + " / " + str(GlobalStats.ReqWood)
 	%Label2.text = "Mud: " + str(GlobalStats.mud) + " / " + str(GlobalStats.ReqMud)

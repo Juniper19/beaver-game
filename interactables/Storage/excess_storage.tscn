@@ -1,12 +1,29 @@
-[gd_scene format=3 uid="uid://mqrrknwtxtd0"]
+[gd_scene load_steps=5 format=3 uid="uid://mqrrknwtxtd0"]
+
+[ext_resource type="Script" uid="uid://cguixmr4uuih2" path="res://interactables/Storage/excess_storage.gd" id="1_64f8w"]
+[ext_resource type="Texture2D" uid="uid://di338gurea4es" path="res://art_assets/Chest2.png" id="1_whsya"]
+[ext_resource type="PackedScene" uid="uid://dwafgcp2uqbfl" path="res://interactables/interaction_area.tscn" id="2_kj6is"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_64f8w"]
+size = Vector2(56, 56)
 
 [node name="ExcessStorage" type="Node2D"]
+script = ExtResource("1_64f8w")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="InteractionArea" parent="." instance=ExtResource("2_kj6is")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="InteractionArea"]
+scale = Vector2(1.75, 1.75)
+texture = ExtResource("1_whsya")
 
-[node name="Label" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 13.0
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("RectangleShape2D_64f8w")
+
+[node name="InteractLabel" type="Label" parent="InteractionArea"]
+unique_name_in_owner = true
+offset_left = -80.0
+offset_top = -55.0
+offset_right = 85.0
+offset_bottom = -23.0
+theme_override_font_sizes/font_size = 40
 text = "Insert Item"

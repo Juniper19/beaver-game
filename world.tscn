@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cl1jmkdurg2bg"]
+[gd_scene load_steps=8 format=3 uid="uid://cl1jmkdurg2bg"]
 
 [ext_resource type="PackedScene" uid="uid://dd4iqf5la6hly" path="res://player/player.tscn" id="1_f3sb7"]
 [ext_resource type="PackedScene" uid="uid://f5ov75exi6ub" path="res://Day and night/day_night_manager.tscn" id="3_aqk2v"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dfskvkq4outll" path="res://interactables/QuotaBoard/QuotaBoard.tscn" id="4_aqk2v"]
 [ext_resource type="PackedScene" uid="uid://dejycdtv58q6s" path="res://interactables/Storage/chest.tscn" id="5_036b0"]
 [ext_resource type="PackedScene" uid="uid://cd3s2mygwd6ul" path="res://interactables/trees/tree.tscn" id="6_dwbse"]
+[ext_resource type="PackedScene" uid="uid://mqrrknwtxtd0" path="res://interactables/Storage/excess_storage.tscn" id="7_pkg7o"]
 
 [node name="World" type="Node2D" groups=["world"]]
 
@@ -25,3 +26,6 @@ position = Vector2(-92, 120)
 
 [node name="Tree" parent="." instance=ExtResource("6_dwbse")]
 position = Vector2(-172, 216)
+
+[node name="ExcessStorage" parent="." instance=ExtResource("7_pkg7o")]
+position = Vector2(-3, 242)

@@ -12,9 +12,17 @@ static var ReqWood = int(randf_range(0,3))
 static var ReqMud = int(randf_range(-5,0))
 static var ReqStone = int(randf_range(-5,0))
 
+var WoodHeld = 0
+var MudHeld = 0
+var StoneHeld = 0
+
+var StorageLimit = 10
+
 signal inventory_item_added(item)
 signal inventory_item_removed(item)
+signal inventory_item_placed(item)
 signal ItemInChest
+signal ItemInExcessChest
 
 # Chosen upgrades get removed from the available cards
 var chosen_upgrades: Array[String] = []
