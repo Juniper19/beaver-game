@@ -10,7 +10,6 @@ func interact(by: Node):
 
 
 func _on_body_exited(body: Node2D) -> void:
-	print("goonga")
 	if body is Player:
 		player_left_area.emit(body)
 

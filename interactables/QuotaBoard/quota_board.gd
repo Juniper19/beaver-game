@@ -44,8 +44,8 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	#print(world.current_time)
-	print(Day)
-	print(GlobalStats.day_number)
+	#print(Day)
+	#print(GlobalStats.day_number)
 	%PhysLabel1.text = "Wood " + str(GlobalStats.wood) + "/" + str(ReqWood)
 	%PhysLabel2.text = "Mud " + str(GlobalStats.mud) + "/" + str(ReqMud)
 	%PhysLabel3.text = "Stone " + str(GlobalStats.stone) + "/" + str(ReqStone)
