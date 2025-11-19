@@ -2,8 +2,7 @@ extends Node2D
 
 const GlobalStatsScript = preload("res://global/global_stats.gd")
 var global_stats: Node = null
-var storage: Array = []
-var storageNames: Array = []
+
 
 func _ready() -> void:
 
@@ -18,6 +17,7 @@ func _ready() -> void:
 	%InteractLabel.visible = false
 	
 	GlobalStats.inventory_item_placed.connect(_on_item_placed)
+	_update_icon()
 
 func _process(_delta: float) -> void:
 	if $InteractionArea.get_overlapping_bodies().size() > 0:
@@ -38,22 +38,22 @@ func add_item():
 
 func _on_item_placed(item) -> void:
 	# Only care if this came from the player inventory drop-for-chest logic
-	if storage.size() < GlobalStats.StorageLimit:
+	if GlobalStats.storage.size() < GlobalStats.StorageLimit:
 		if "data" in item and item.data:
-			storage.append(item.data)   # store the ItemData resource
-			storageNames.append(item.item_name)
-			print(storage)
+			GlobalStats.storage.append(item.data)   # store the ItemData resource
+			GlobalStats.storageNames.append(item.item_name)
+			print(GlobalStats.storage)
 			_update_icon()
 
 		
 
 func remove_item() -> void:
-	if storage.is_empty():
+	if GlobalStats.storage.is_empty():
 		return
 
-	var item_data = storage.pop_back()   # last added first out (LIFO)
-	print(storage)
-	storageNames.pop_back()
+	var item_data = GlobalStats.storage.pop_back()   # last added first out (LIFO)
+	print(GlobalStats.storage)
+	GlobalStats.storageNames.pop_back()
 
 	# Send the ItemData to the inventory
 	GlobalStats.emit_signal("ItemFromExcessChest", item_data)
@@ -61,23 +61,22 @@ func remove_item() -> void:
 	_update_icon()
 
 func _update_icon() -> void:
-	print(storageNames[-1])
-	if storage.is_empty():
+	if GlobalStats.storage.is_empty():
 		%Wood.visible = false
 		%Mud.visible = false
 		%Stone.visible = false
 		return
-	elif storageNames[-1] == "Default Item":
+	elif GlobalStats.storageNames[-1] == "Default Item":
 		%Wood.visible = true
 		%Mud.visible = false
 		%Stone.visible = false
 		return
-	elif storageNames[-1] == "mud":
+	elif GlobalStats.storageNames[-1] == "mud":
 		%Wood.visible = false
 		%Mud.visible = true
 		%Stone.visible = false
 		return
-	elif storageNames[-1] == "stone":
+	elif GlobalStats.storageNames[-1] == "stone":
 		%Wood.visible = false
 		%Mud.visible = false
 		%Stone.visible = true

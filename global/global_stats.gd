@@ -16,6 +16,8 @@ var WoodHeld = 0
 var MudHeld = 0
 var StoneHeld = 0
 
+var storage: Array = []
+var storageNames: Array = []
 var StorageLimit = 10
 var ItemID = ""
 var ExcessChestEntered = false
