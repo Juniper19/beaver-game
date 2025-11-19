@@ -25,8 +25,10 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if $InteractionArea.get_overlapping_bodies().size() > 0:
 		%InteractLabel.visible = true
+		GlobalStats.QuotaChestEntered = true
 	else:
 		%InteractLabel.visible = false
+		GlobalStats.QuotaChestEntered = false
 		
 	if Input.is_action_just_pressed("drop_item") and $InteractionArea.get_overlapping_bodies().size() > 0:
 		add_item()

@@ -2,7 +2,8 @@ extends Node2D
 
 const GlobalStatsScript = preload("res://global/global_stats.gd")
 var global_stats: Node = null
-var storage = []
+var storage: Array = []
+var storageNames: Array = []
 
 func _ready() -> void:
 
@@ -20,49 +21,67 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if $InteractionArea.get_overlapping_bodies().size() > 0:
+		GlobalStats.ExcessChestEntered = true
 		%InteractLabel.visible = true
 	else:
 		%InteractLabel.visible = false
+		GlobalStats.ExcessChestEntered = false
 		
 	if Input.is_action_just_pressed("drop_item") and $InteractionArea.get_overlapping_bodies().size() > 0:
-		a_item()
+		add_item()
 	if Input.is_action_just_pressed("interact") and $InteractionArea.get_overlapping_bodies().size() > 0:
 		remove_item()
 	
-func a_item():
+func add_item():
 	GlobalStats.emit_signal("ItemInExcessChest")
 
 
-func _on_item_placed(item):
-
+func _on_item_placed(item) -> void:
+	# Only care if this came from the player inventory drop-for-chest logic
 	if storage.size() < GlobalStats.StorageLimit:
-		storage.append(item.item_name)
-		print(storage)
-		icon()
+		if "data" in item and item.data:
+			storage.append(item.data)   # store the ItemData resource
+			storageNames.append(item.item_name)
+			print(storage)
+			_update_icon()
+
 		
 
-func remove_item():
-	if storage.size() > 0:
-		GlobalStats.ItemID = storage.pop_back()
-		print(storage)
-		GlobalStats.emit_signal("ItemFromExcessChest")
-		if storage.size() > 0:
-			icon()
-		else:
-			%Wood.visible = false
-			%Mud.visible = false
-			%Stone.visible = false
-		
-func icon():
-	if storage[-1] == "Default Item":
+func remove_item() -> void:
+	if storage.is_empty():
+		return
+
+	var item_data = storage.pop_back()   # last added first out (LIFO)
+	print(storage)
+	storageNames.pop_back()
+
+	# Send the ItemData to the inventory
+	GlobalStats.emit_signal("ItemFromExcessChest", item_data)
+
+	_update_icon()
+
+func _update_icon() -> void:
+	print(storageNames[-1])
+	if storage.is_empty():
+		%Wood.visible = false
+		%Mud.visible = false
+		%Stone.visible = false
+		return
+	elif storageNames[-1] == "Default Item":
 		%Wood.visible = true
 		%Mud.visible = false
 		%Stone.visible = false
-	if storage[-1] == "mud":
+		return
+	elif storageNames[-1] == "mud":
 		%Wood.visible = false
 		%Mud.visible = true
 		%Stone.visible = false
-	if storage[-1] == "stone":
+		return
+	elif storageNames[-1] == "stone":
 		%Wood.visible = false
 		%Mud.visible = false
 		%Stone.visible = true
+		return
+	#var last_data = storage.back()
+	#if "texture" in last_data:
+	#	%IconSprite.texture = last_data.texture

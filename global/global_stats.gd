@@ -18,6 +18,8 @@ var StoneHeld = 0
 
 var StorageLimit = 10
 var ItemID = ""
+var ExcessChestEntered = false
+var QuotaChestEntered = false
 
 signal inventory_item_added(item)
 signal inventory_item_removed(item)

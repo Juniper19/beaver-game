@@ -30,13 +30,17 @@ func _kill_item_tween(item: Node2D):
 func get_items() -> Array[Node2D]:
 	return inventory_items
 
-func _on_item_from_excess_chest(item_name):
-	#var item_name = GlobalStats.ItemID
-	#var item_node = get_node("/")
-	var item_scene: PackedScene = load("res://interactables/items/%s.tscn" % item_name)
-	var item_node: Node = item_scene.instantiate()
-	print(item_node.item_name)
-	#add_item(item_node)
+func _on_item_from_excess_chest(item_data) -> void:
+	# item_data is an ItemData resource coming from the chest
+	var item_scene: PackedScene = load("res://interactables/items/item.tscn")
+	var item: Node2D = item_scene.instantiate()
+
+	# The Item script uses `data` in _ready() to set name and texture
+	if "data" in item:
+		item.data = item_data
+
+	add_item(item)
+
 
 # Returns if successful
 func add_item(item: Node2D) -> bool:
@@ -89,70 +93,82 @@ func add_item(item: Node2D) -> bool:
 #When deposited into Quota Chest
 func _on_item_in_chest():
 	ChestDrop = true #Used so a loop isn't created
-	#var top = inventory_items.size() - 1
-	#drop_item(top)
+	var top = inventory_items.size() - 1
+	if top >= 0:
+		drop_item(top)
 
 #When deposited into an Excess Chest
 func _on_item_in_excess_chest():
 	ChestDrop = true #Used so a loop isn't created
 	Excess = true
-	#var top = inventory_items.size() - 1
-	#drop_item(top)
-
-func drop_top_item():
 	var top = inventory_items.size() - 1
 	if top >= 0:
 		drop_item(top)
 
-func drop_item(index: int):
+func drop_top_item():
+	var top = inventory_items.size() - 1
+	if top >= 0 and ChestDrop == false:
+		drop_item(top)
+
+func drop_item(index: int) -> void:
 	if index >= inventory_items.size() or index < 0:
 		push_warning("Tried to drop inventory item out of bounds!")
 		return
-	
+
 	if _blacklist.has(inventory_items[index]):
 		return
-	
 
 	var item: Node2D = inventory_items.pop_at(index)
-	
+
 	var item_pos: Vector2 = item.global_position
 	remove_child(item)
-	get_tree().current_scene.add_child(item) ## CHANGE THIS? maybe get_parent().get_parent()?
+	get_tree().current_scene.add_child(item)
 	item.global_position = item_pos
-	
-	const TWEEN_TIME: float = 0.3
-	var rng := RandomNumberGenerator.new()
+
+	# Tween & random drop
+	var TWEEN_TIME: float = 0.3
+	var rng = RandomNumberGenerator.new()
 	var rand_angle: float = rng.randf_range(0.0, TAU)
 	var rand_dir: Vector2 = Vector2(cos(rand_angle), abs(sin(rand_angle)) * 2.0)
-	var target_pos = global_position + random_drop_distance * rand_dir
-	var tween: Tween = get_tree().create_tween()
+	var target_pos: Vector2 = global_position + random_drop_distance * rand_dir
+
+	var tween = get_tree().create_tween()
 	tween.set_parallel(true)
 	tween.tween_property(item, "global_position:x", target_pos.x, TWEEN_TIME) \
-			.set_ease(Tween.EASE_IN) \
-			.set_trans(Tween.TRANS_LINEAR)
-			
+		.set_ease(Tween.EASE_IN) \
+		.set_trans(Tween.TRANS_LINEAR)
 	tween.tween_property(item, "global_position:y", target_pos.y, TWEEN_TIME) \
-			.set_ease(Tween.EASE_IN) \
-			.set_trans(Tween.TRANS_BACK)
-			
+		.set_ease(Tween.EASE_IN) \
+		.set_trans(Tween.TRANS_BACK)
+
 	_blacklist.push_back(item)
-	tween.finished.connect(func():
+	tween.finished.connect(func ():
 		if _blacklist.has(item):
 			_blacklist.erase(item)
 	)
 
 	if item is Area2D:
 		item.monitorable = true
-	
+
 	item_removed.emit(item)
-	if ChestDrop == false:
-		GlobalStats.emit_signal("inventory_item_removed", item)
-	if ChestDrop == true:
-		item.queue_free()
+
+	# >>> Chest logic <<<
+	# If we're putting this into a chest, tell the chest which item,
+	# and then remove it from the world.
 	if Excess:
 		GlobalStats.emit_signal("inventory_item_placed", item)
+
+	if ChestDrop:
+		# In chest drops we don't keep the world instance
+		item.queue_free()
+	else:
+		# Normal ground drop
+		GlobalStats.emit_signal("inventory_item_removed", item)
+
 	ChestDrop = false
 	Excess = false
+
+
 
 
 
