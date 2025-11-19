@@ -42,7 +42,7 @@ func _on_item_placed(item) -> void:
 		if "data" in item and item.data:
 			GlobalStats.storage.append(item.data)   # store the ItemData resource
 			GlobalStats.storageNames.append(item.item_name)
-			print(GlobalStats.storage)
+			#print(GlobalStats.storage)
 			_update_icon()
 
 		
@@ -52,7 +52,7 @@ func remove_item() -> void:
 		return
 
 	var item_data = GlobalStats.storage.pop_back()   # last added first out (LIFO)
-	print(GlobalStats.storage)
+	#print(GlobalStats.storage)
 	GlobalStats.storageNames.pop_back()
 
 	# Send the ItemData to the inventory

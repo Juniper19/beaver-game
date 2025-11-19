@@ -31,9 +31,10 @@ func _item_dropped_from_inventory(node: Node2D):
 
 
 func _on_interaction(by: Node):
-	if by is Player:
+	
+	if by is Player and GlobalStats.ExcessChestEntered == false and GlobalStats.QuotaChestEntered == false:
 		var player: Player = by as Player
-		if player.inventory.add_item(self) and GlobalStats.ExcessChestEntered == false and GlobalStats.QuotaChestEntered == false:
+		if player.inventory.add_item(self) :
 			picked_up.emit(player)
 			interaction_area.monitorable = false
 			_held_by = player.inventory

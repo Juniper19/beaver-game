@@ -13,6 +13,7 @@ var _blacklist: Array[Node2D] = []
 
 var ChestDrop: bool
 var Excess: bool
+var Test: bool
 
 func _ready():
 	GlobalStats.ItemInChest.connect(_on_item_in_chest)
@@ -34,17 +35,17 @@ func _on_item_from_excess_chest(item_data) -> void:
 	# item_data is an ItemData resource coming from the chest
 	var item_scene: PackedScene = load("res://interactables/items/item.tscn")
 	var item: Node2D = item_scene.instantiate()
-
+	
 	# The Item script uses `data` in _ready() to set name and texture
 	if "data" in item:
 		item.data = item_data
-
+	Test = true
 	add_item(item)
 
 
 # Returns if successful
 func add_item(item: Node2D) -> bool:
-	print(item)
+	print(inventory_items)
 	#print(item.item_name)
 	if _blacklist.has(item):
 		return false
@@ -68,7 +69,8 @@ func add_item(item: Node2D) -> bool:
 	tween.set_trans(Tween.TRANS_BACK)
 	tween.tween_property(item, "position", target_pos, 0.2)
 	_item_tweens[item] = tween
-		
+	
+
 	inventory_items.append(item)
 	item_added.emit(item)
 	GlobalStats.emit_signal("inventory_item_added", item)
