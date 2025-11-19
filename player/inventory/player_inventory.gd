@@ -14,6 +14,12 @@ var _blacklist: Array[Node2D] = []
 var ChestDrop: bool
 var Excess: bool
 
+func _ready():
+	GlobalStats.ItemInChest.connect(_on_item_in_chest)
+	GlobalStats.ItemInExcessChest.connect(_on_item_in_excess_chest)
+	GlobalStats.ItemFromExcessChest.connect(_on_item_from_excess_chest)
+
+
 func _kill_item_tween(item: Node2D):
 	if _item_tweens.has(item):
 		var tween: Tween = _item_tweens[item]
@@ -24,8 +30,18 @@ func _kill_item_tween(item: Node2D):
 func get_items() -> Array[Node2D]:
 	return inventory_items
 
+func _on_item_from_excess_chest(item_name):
+	#var item_name = GlobalStats.ItemID
+	#var item_node = get_node("/")
+	var item_scene: PackedScene = load("res://interactables/items/%s.tscn" % item_name)
+	var item_node: Node = item_scene.instantiate()
+	print(item_node.item_name)
+	#add_item(item_node)
+
 # Returns if successful
 func add_item(item: Node2D) -> bool:
+	print(item)
+	#print(item.item_name)
 	if _blacklist.has(item):
 		return false
 	
@@ -34,7 +50,8 @@ func add_item(item: Node2D) -> bool:
 		return false
 	
 	var item_pos_global: Vector2 = item.global_position
-	item.get_parent().remove_child(item)
+	if item.get_parent() != null:
+		item.get_parent().remove_child(item)
 	add_child(item)
 	item.position = to_local(item_pos_global)
 	
@@ -68,22 +85,19 @@ func add_item(item: Node2D) -> bool:
 	
 	return true
 	
-func _ready():
-	GlobalStats.ItemInChest.connect(_on_item_in_chest)
-	GlobalStats.ItemInExcessChest.connect(_on_item_in_excess_chest)
 
 #When deposited into Quota Chest
 func _on_item_in_chest():
 	ChestDrop = true #Used so a loop isn't created
-	var top = inventory_items.size() - 1
-	drop_item(top)
+	#var top = inventory_items.size() - 1
+	#drop_item(top)
 
 #When deposited into an Excess Chest
 func _on_item_in_excess_chest():
 	ChestDrop = true #Used so a loop isn't created
 	Excess = true
-	var top = inventory_items.size() - 1
-	drop_item(top)
+	#var top = inventory_items.size() - 1
+	#drop_item(top)
 
 func drop_top_item():
 	var top = inventory_items.size() - 1
@@ -98,6 +112,7 @@ func drop_item(index: int):
 	if _blacklist.has(inventory_items[index]):
 		return
 	
+
 	var item: Node2D = inventory_items.pop_at(index)
 	
 	var item_pos: Vector2 = item.global_position

@@ -28,7 +28,7 @@ func _process(_delta: float) -> void:
 	else:
 		%InteractLabel.visible = false
 		
-	if Input.is_action_just_pressed("ui_accept") and $InteractionArea.get_overlapping_bodies().size() > 0:
+	if Input.is_action_just_pressed("drop_item") and $InteractionArea.get_overlapping_bodies().size() > 0:
 		add_item()
 	
 	

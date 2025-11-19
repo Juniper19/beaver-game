@@ -17,12 +17,14 @@ var MudHeld = 0
 var StoneHeld = 0
 
 var StorageLimit = 10
+var ItemID = ""
 
 signal inventory_item_added(item)
 signal inventory_item_removed(item)
 signal inventory_item_placed(item)
 signal ItemInChest
 signal ItemInExcessChest
+signal ItemFromExcessChest
 
 # Chosen upgrades get removed from the available cards
 var chosen_upgrades: Array[String] = []
