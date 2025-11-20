@@ -50,3 +50,6 @@ visible = false
 position = Vector2(-1, 0)
 scale = Vector2(0.0125, 0.012499996)
 texture = ExtResource("6_x5e16")
+
+[node name="ItemStack" type="Node2D" parent="InteractionArea"]
+unique_name_in_owner = true

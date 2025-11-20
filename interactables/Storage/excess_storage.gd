@@ -3,6 +3,8 @@ extends Node2D
 const GlobalStatsScript = preload("res://global/global_stats.gd")
 var global_stats: Node = null
 
+@export var item_separation: Vector2 = Vector2(0.0, -25.0)
+var original: Sprite2D
 
 func _ready() -> void:
 
@@ -66,21 +68,27 @@ func _update_icon() -> void:
 		%Mud.visible = false
 		%Stone.visible = false
 		return
-	elif GlobalStats.storageNames[-1] == "Default Item":
-		%Wood.visible = true
-		%Mud.visible = false
-		%Stone.visible = false
-		return
-	elif GlobalStats.storageNames[-1] == "mud":
-		%Wood.visible = false
-		%Mud.visible = true
-		%Stone.visible = false
-		return
-	elif GlobalStats.storageNames[-1] == "stone":
-		%Wood.visible = false
-		%Mud.visible = false
-		%Stone.visible = true
-		return
+	else:
+		if GlobalStats.storageNames[-1] == "Default Item":
+			original = %Wood
+			#%Mud.visible = false
+			#%Stone.visible = false
+		if GlobalStats.storageNames[-1] == "mud":
+			original = %Mud
+			#%Wood.visible = false
+			#%Stone.visible = false
+		if GlobalStats.storageNames[-1] == "stone":
+			original = %Stone
+			#%Wood.visible = false
+			#%Mud.visible = false
+		original.visible = true
+		for child in %ItemStack.get_children():
+			if child != original:
+				child.queue_free()
+		for i in range(1, GlobalStats.storageNames.size()):
+			var copy = original.duplicate()
+			copy.position = original.position + (item_separation*i)
+			%ItemStack.add_child(copy)
 	#var last_data = storage.back()
 	#if "texture" in last_data:
 	#	%IconSprite.texture = last_data.texture
