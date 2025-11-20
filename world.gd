@@ -1,21 +1,17 @@
 class_name World
 extends Node2D
 
-var load_initial_resources: bool = true
 const SAVE_PATH = "user://world_save.save"
 
 func _ready():
-	if load_initial_resources:
-		if FileAccess.file_exists(SAVE_PATH):
-			var error: Error = DirAccess.remove_absolute(SAVE_PATH)
-			if error != OK:
-				push_error("Error deleting save file: ", error)
-	else:
-		for node in %InitialResources.get_children():
-			node.queue_free()
+	if GlobalStats.initialize_world:
+		DirAccess.remove_absolute(SAVE_PATH)
+		GlobalStats.initialize_world = false
+	
+	if FileAccess.file_exists(SAVE_PATH):
+		_load()
 
-
-func _on_tree_exiting():
+func save():
 	var save_file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	var save_nodes = get_tree().get_nodes_in_group("persistent")
 	for node in save_nodes:
@@ -31,15 +27,51 @@ func _on_tree_exiting():
 
 		# Call the node's save function.
 		var node_data = node.call("save")
+		print(node_data)
 		node_data["filename"] = node.get_scene_file_path()
-		node_data["parent"] = node.get_parent().get_parent()
+		node_data["parent"] = node.get_parent().get_path()
 
 		# JSON provides a static method to serialized JSON string.
 		var json_string = JSON.stringify(node_data)
+		print(json_string)
 
 		# Store the save dictionary as a new line in the save file.
 		save_file.store_line(json_string)
+	save_file.close()
+	
+	
+# Yanked from the docs
+# https://docs.godotengine.org/en/stable/tutorials/io/saving_games.html
+func _load():
+	if not FileAccess.file_exists(SAVE_PATH):
+		push_error("Loading with no file")
+	
 
+	var save_nodes = get_tree().get_nodes_in_group("persistent")
+	for i in save_nodes:
+		i.queue_free()
+		
+	# Load the file line by line and process that dictionary to restore
+	# the object it represents.
+	var save_file = FileAccess.open(SAVE_PATH, FileAccess.READ)
+	while save_file.get_position() < save_file.get_length():
+		var json_string = save_file.get_line()
 
-func _on_tree_entered():
-	pass # Replace with function body.
+		# Creates the helper class to interact with JSON.
+		var json = JSON.new()
+
+		# Check if there is any error while parsing the JSON string, skip in case of failure.
+		var parse_result = json.parse(json_string)
+		if not parse_result == OK:
+			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+			continue
+
+		# Get the data from the JSON object.
+		var node_data = json.data
+
+		# Firstly, we need to create the object and add it to the tree and set its position.
+		var new_object: Node = load(node_data["filename"]).instantiate()
+		get_node(node_data["parent"]).add_child(new_object)
+		if not new_object.has_method("load"):
+			push_error("Cannot load node without a load function!")
+		new_object.load(node_data)

@@ -1,5 +1,4 @@
 extends Node
-@export_file("*.tscn") var dam_scene_path: String = "res://Dam/inside_dam.tscn"
 
 #-----------AM/PM Clock related stuff----------------
 @export var day_color: Color = Color(1, 1, 1)
@@ -11,7 +10,7 @@ var current_time: float = 8 * 60.0  # Start at 8:00 AM
 @export var day_start: int = 6 * 60
 @export var night_start: int = 20 * 60
 
-var saved_time_speed: float = 60.0
+var saved_time_speed: float
 var canvas_modulate: CanvasModulate
 var clock_label: Label
 
@@ -26,6 +25,7 @@ func _ready() -> void:
 	canvas_modulate = $CanvasModulate
 	clock_label = $UI/TimerLabel
 	day_count_label = $UI/DayCountLabel
+	saved_time_speed = time_speed
 
 	get_tree().connect("current_scene_changed", Callable(self, "_on_scene_changed"))
 	_on_scene_changed()
@@ -146,6 +146,4 @@ func _on_pass_out_time():
 	await tween.finished
 
 	# Teleport into dam after passing out
-	var err = get_tree().change_scene_to_file(dam_scene_path)
-	if err != OK:
-		print("Scene change failed")
+	SceneManager.load_scene(SceneManager.Scene.INSIDE_DAM)
