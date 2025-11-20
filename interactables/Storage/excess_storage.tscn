@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://mqrrknwtxtd0"]
+
+[ext_resource type="Script" uid="uid://cguixmr4uuih2" path="res://interactables/Storage/excess_storage.gd" id="1_64f8w"]
+[ext_resource type="Texture2D" uid="uid://di338gurea4es" path="res://art_assets/Chest2.png" id="1_whsya"]
+[ext_resource type="PackedScene" uid="uid://dwafgcp2uqbfl" path="res://interactables/interaction_area.tscn" id="2_kj6is"]
+[ext_resource type="Texture2D" uid="uid://g20tw60w4ooh" path="res://art_assets/Wood.webp" id="4_kgw8d"]
+[ext_resource type="Texture2D" uid="uid://cly62hiigmmm2" path="res://art_assets/Mud.webp" id="5_4p85k"]
+[ext_resource type="Texture2D" uid="uid://d8mvxcyphwv8" path="res://art_assets/stone.webp" id="6_x5e16"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_64f8w"]
+size = Vector2(56, 56)
+
+[node name="ExcessStorage" type="Node2D"]
+script = ExtResource("1_64f8w")
+
+[node name="InteractionArea" parent="." instance=ExtResource("2_kj6is")]
+
+[node name="Sprite2D" type="Sprite2D" parent="InteractionArea"]
+scale = Vector2(1.75, 1.75)
+texture = ExtResource("1_whsya")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("RectangleShape2D_64f8w")
+
+[node name="InteractLabel" type="Label" parent="InteractionArea"]
+unique_name_in_owner = true
+offset_left = -80.0
+offset_top = -55.0
+offset_right = 85.0
+offset_bottom = -23.0
+theme_override_font_sizes/font_size = 40
+text = "Insert Item"
+
+[node name="Wood" type="Sprite2D" parent="InteractionArea"]
+unique_name_in_owner = true
+visible = false
+position = Vector2(0, 2.0000007)
+scale = Vector2(0.010416668, 0.010416668)
+texture = ExtResource("4_kgw8d")
+
+[node name="Mud" type="Sprite2D" parent="InteractionArea"]
+unique_name_in_owner = true
+visible = false
+scale = Vector2(0.020408163, 0.020408163)
+texture = ExtResource("5_4p85k")
+
+[node name="Stone" type="Sprite2D" parent="InteractionArea"]
+unique_name_in_owner = true
+visible = false
+position = Vector2(-1, 0)
+scale = Vector2(0.0125, 0.012499996)
+texture = ExtResource("6_x5e16")

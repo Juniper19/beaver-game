@@ -71,6 +71,7 @@ func _process(delta: float) -> void:
 	var cutoff_time = 2 * 60
 
 	if current_time >= cutoff_time and current_time < 8 * 60 and not has_triggered_2am:
+		
 		_on_pass_out_time()
 		has_triggered_2am = true
 

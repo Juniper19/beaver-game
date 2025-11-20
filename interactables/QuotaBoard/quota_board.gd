@@ -6,9 +6,7 @@ var world: Node = null
 
 @onready var vbox: VBoxContainer = $InteractionArea/BoardUI/PanelContainer/VBoxContainer
 #CHANGE THESE 3 VALUES BELOW FOR BALANCING
-static var ReqWood = int(randf_range(0,3))
-static var ReqMud = int(randf_range(-5,0))
-static var ReqStone = int(randf_range(-5,0))
+
 var Day = GlobalStats.day_number
 
 
@@ -46,32 +44,32 @@ func _process(_delta: float) -> void:
 	#print(world.current_time)
 	#print(Day)
 	#print(GlobalStats.day_number)
-	%PhysLabel1.text = "Wood " + str(GlobalStats.wood) + "/" + str(ReqWood)
-	%PhysLabel2.text = "Mud " + str(GlobalStats.mud) + "/" + str(ReqMud)
-	%PhysLabel3.text = "Stone " + str(GlobalStats.stone) + "/" + str(ReqStone)
+	%PhysLabel1.text = "Wood " + str(GlobalStats.wood) + "/" + str(GlobalStats.ReqWood)
+	%PhysLabel2.text = "Mud " + str(GlobalStats.mud) + "/" + str(GlobalStats.ReqMud)
+	%PhysLabel3.text = "Stone " + str(GlobalStats.stone) + "/" + str(GlobalStats.ReqStone)
 	#If player failed to meet the quota the day before
-	if GlobalStats.day_number != Day and (GlobalStats.wood < ReqWood or GlobalStats.mud < ReqMud or GlobalStats.stone < ReqStone):
+	if GlobalStats.day_number != Day and (GlobalStats.wood < GlobalStats.ReqWood or GlobalStats.mud < GlobalStats.ReqMud or GlobalStats.stone < GlobalStats.ReqStone):
 		print("Failed to Hit Quota")
 		%TextTimer.start()
 		%QuotaLabel.visible = true
 		%QuotaLabel.text = "You failed to hit the quota yesterday..."
 	#Increasing Quota Requirements as days progress
 	if GlobalStats.day_number != Day:
-		GlobalStats.wood = clamp(GlobalStats.wood - ReqWood, 0, GlobalStats.wood)
-		GlobalStats.mud = clamp(GlobalStats.mud - ReqMud, 0, GlobalStats.mud)
-		GlobalStats.stone = clamp(GlobalStats.stone - ReqStone, 0, GlobalStats.stone)
+		GlobalStats.wood = clamp(GlobalStats.wood - GlobalStats.ReqWood, 0, GlobalStats.wood)
+		GlobalStats.mud = clamp(GlobalStats.mud - GlobalStats.ReqMud, 0, GlobalStats.mud)
+		GlobalStats.stone = clamp(GlobalStats.stone - GlobalStats.ReqStone, 0, GlobalStats.stone)
 
 		#CHANGE THESE 3 VALUES BELOW FOR BALANCING
-		ReqWood += int(randf_range(1,5))
-		ReqMud += int(randf_range(1,3))
-		ReqStone += int(randf_range(1,2))
-		if ReqWood > 0:
+		GlobalStats.ReqWood += int(randf_range(1,5))
+		GlobalStats.ReqMud += int(randf_range(1,3))
+		GlobalStats.ReqStone += int(randf_range(1,2))
+		if GlobalStats.ReqWood > 0:
 			%Label1.visible = true
 			%PhysLabel1.visible = true
-		if ReqMud > 0:
+		if GlobalStats.ReqMud > 0:
 			%Label2.visible = true
 			%PhysLabel2.visible = true
-		if ReqStone > 0:
+		if GlobalStats.ReqStone > 0:
 			%Label3.visible = true
 			%PhysLabel3.visible = true
 		Day = GlobalStats.day_number
@@ -91,15 +89,15 @@ func _process(_delta: float) -> void:
 		
 func show_quota():
 	#Testing Purposes *DELETE WHEN WE MERGE*
-	GlobalStats.wood +=10
-	GlobalStats.mud +=3
-	GlobalStats.stone +=1
+	#GlobalStats.wood +=10
+	#GlobalStats.mud +=3
+	#GlobalStats.stone +=1
 	
-	%Label1.text = "Wood: " + str(GlobalStats.wood) + " / " + str(ReqWood)
-	%Label2.text = "Mud: " + str(GlobalStats.mud) + " / " + str(ReqMud)
-	%Label3.text = "Stone: " + str(GlobalStats.stone) + " / " + str(ReqStone)
+	%Label1.text = "Wood: " + str(GlobalStats.wood) + " / " + str(GlobalStats.ReqWood)
+	%Label2.text = "Mud: " + str(GlobalStats.mud) + " / " + str(GlobalStats.ReqMud)
+	%Label3.text = "Stone: " + str(GlobalStats.stone) + " / " + str(GlobalStats.ReqStone)
 	#Player Reaches Daily Quota
-	if GlobalStats.wood >= ReqWood and GlobalStats.mud >= ReqMud and GlobalStats.stone >= ReqStone:
+	if GlobalStats.wood >= GlobalStats.ReqWood and GlobalStats.mud >= GlobalStats.ReqMud and GlobalStats.stone >= GlobalStats.ReqStone:
 		%CheckIMG.visible = true
 		%TextTimer.start()
 		%QuotaLabel.visible = true

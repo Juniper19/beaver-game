@@ -43,7 +43,8 @@ func _unhandled_key_input(event): # unhandled? maybe just use _input? _unhandled
 			closest_interactable.interact(self)
 	
 	if event.is_action_pressed("drop_item"):
-		inventory.drop_top_item()
+		if GlobalStats.ExcessChestEntered == false and GlobalStats.QuotaChestEntered == false:
+			inventory.drop_top_item()
 
 func _calculate_move_speed():
 	move_speed = base_move_speed * pow(speed_mult_per_item, inventory.get_items().size())
