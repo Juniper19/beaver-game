@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dnk2qt3fa6gye" path="res://interactables/trees/qte/bar_qte.gd" id="1_8wdmh"]
 
 [node name="BarQTE" type="Node2D"]
+z_index = 4
 script = ExtResource("1_8wdmh")
 
 [node name="Background" type="ColorRect" parent="."]

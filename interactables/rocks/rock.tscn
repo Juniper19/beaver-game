@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://fbvlq216070u"]
+
+[ext_resource type="PackedScene" uid="uid://dwafgcp2uqbfl" path="res://interactables/interaction_area.tscn" id="1_b3gg8"]
+[ext_resource type="Script" uid="uid://cv5nc80jc37nn" path="res://interactables/rocks/rock.gd" id="1_q0kvc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qeqfj"]
+radius = 18.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q0kvc"]
+radius = 32.0
+
+[sub_resource type="Gradient" id="Gradient_q0kvc"]
+offsets = PackedFloat32Array(0, 0.27333334)
+colors = PackedColorArray(0, 0, 0, 0.2627451, 0.5629578, 0.56295776, 0.56295776, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qeqfj"]
+gradient = SubResource("Gradient_q0kvc")
+width = 32
+height = 32
+fill_to = Vector2(0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q0kvc"]
+size = Vector2(82, 27)
+
+[node name="Rock" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_q0kvc")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_qeqfj")
+
+[node name="InteractionArea" parent="." instance=ExtResource("1_b3gg8")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("CircleShape2D_q0kvc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_qeqfj")
+
+[node name="DropArea" type="CollisionShape2D" parent="."]
+position = Vector2(0, 13.5)
+shape = SubResource("RectangleShape2D_q0kvc")
+disabled = true
+
+[node name="QTESpawn" type="Marker2D" parent="."]
+position = Vector2(0, -36)
+
+[connection signal="interaction" from="InteractionArea" to="." method="_on_interaction"]
+[connection signal="player_left_area" from="InteractionArea" to="." method="_on_player_left_area"]
