@@ -35,18 +35,19 @@ position = Vector2(-3, 242)
 [node name="Resources" type="Node" parent="."]
 unique_name_in_owner = true
 
-[node name="Tree" parent="Resources" instance=ExtResource("6_dwbse")]
-position = Vector2(-215, 127)
-data = ExtResource("9_ioo17")
-
 [node name="Rock" parent="." instance=ExtResource("10_wse8f")]
 position = Vector2(84, 106)
 
 [node name="Rock2" parent="." instance=ExtResource("10_wse8f")]
 position = Vector2(-56, -102)
 
+[node name="Tree" parent="." instance=ExtResource("6_dwbse")]
+position = Vector2(-215, 127)
+data = ExtResource("9_ioo17")
+
 [node name="Rock3" parent="." instance=ExtResource("10_wse8f")]
 position = Vector2(154, -78)
+health = 2.0
 
 [connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]

@@ -15,32 +15,24 @@ func save():
 	var save_file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	var save_nodes = get_tree().get_nodes_in_group("persistent")
 	for node in save_nodes:
-		# Check the node is an instanced scene so it can be instanced again during load.
 		if node.scene_file_path.is_empty():
-			print("persistent node '%s' is not an instanced scene, skipped" % node.name)
+			push_warning("persistent node %s is not an instanced!?" % node.name)
 			continue
 
-		# Check the node has a save function.
 		if !node.has_method("save"):
-			print("persistent node '%s' is missing a save() function, skipped" % node.name)
+			push_warning("persistent node %s is missing a save() function!!" % node.name)
 			continue
 
-		# Call the node's save function.
 		var node_data = node.call("save")
-		print(node_data)
 		node_data["filename"] = node.get_scene_file_path()
 		node_data["parent"] = node.get_parent().get_path()
 
-		# JSON provides a static method to serialized JSON string.
 		var json_string = JSON.stringify(node_data)
-		print(json_string)
-
-		# Store the save dictionary as a new line in the save file.
 		save_file.store_line(json_string)
 	save_file.close()
 	
 	
-# Yanked from the docs
+# Yanked from the docs bar for bar
 # https://docs.godotengine.org/en/stable/tutorials/io/saving_games.html
 func _load():
 	if not FileAccess.file_exists(SAVE_PATH):
@@ -63,7 +55,7 @@ func _load():
 		# Check if there is any error while parsing the JSON string, skip in case of failure.
 		var parse_result = json.parse(json_string)
 		if not parse_result == OK:
-			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+			push_warning("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
 			continue
 
 		# Get the data from the JSON object.

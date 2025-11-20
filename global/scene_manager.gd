@@ -11,6 +11,7 @@ enum Scene {
 var _scenes: Dictionary[Scene, String] = {
 	Scene.WORLD: "res://world.tscn",
 	Scene.INSIDE_DAM: "res://Dam/inside_dam.tscn"
+	#Scene.MAIN_MENU: <main menu path>
 }
 
 
