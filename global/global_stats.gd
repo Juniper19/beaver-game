@@ -8,6 +8,28 @@ var wood_gather_rate = 1
 var day_number: int = 0
 var current_season: String = ""
 
+static var ReqWood = int(randf_range(0,3))
+static var ReqMud = int(randf_range(-5,0))
+static var ReqStone = int(randf_range(-5,0))
+
+var WoodHeld = 0
+var MudHeld = 0
+var StoneHeld = 0
+
+var storage: Array = []
+var storageNames: Array = []
+var StorageLimit = 10
+var ItemID = ""
+var ExcessChestEntered = false
+var QuotaChestEntered = false
+
+signal inventory_item_added(item)
+signal inventory_item_removed(item)
+signal inventory_item_placed(item)
+signal ItemInChest
+signal ItemInExcessChest
+signal ItemFromExcessChest
+
 # Chosen upgrades get removed from the available cards
 var chosen_upgrades: Array[String] = []
 
