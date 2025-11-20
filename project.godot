@@ -32,6 +32,7 @@ window/stretch/mode="viewport"
 world=""
 dam=""
 daynight=""
+persistent="For stuff that should stay overnight in the world but isn't part of the scene explicitly"
 
 [gui]
 

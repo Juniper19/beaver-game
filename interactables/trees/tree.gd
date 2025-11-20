@@ -13,12 +13,15 @@ var health = 5.0
 
 func _ready():
 	if data:
-		sprite.texture = data.texture_mature
-		sprite.position.y = -sprite.texture.get_height() / 2.0 ### CHANGE ME WHEN TEXTURES
-		health = data.health
+		_set_data(data)
 	else:
 		push_warning("Tree made without data!")
 
+func _set_data(_data: TreeData):
+	data = _data
+	sprite.texture = data.texture_mature
+	sprite.position.y = -sprite.texture.get_height() / 2.0 ### CHANGE ME WHEN TEXTURES
+	health = data.health
 
 func _on_interaction(by: Variant) -> void:
 	if !by is Player:
@@ -78,3 +81,23 @@ func _on_player_left_area(_player: Player) -> void:
 	if qte:
 		qte.queue_free()
 		qte = null
+
+
+## TODO: ADD STUFF FOR TREE GROWTH!!!!!!!!!
+func save() -> Dictionary:
+	var save_data := {
+		"position_x": global_position.x,
+		"position_y": global_position.y,
+		"item_resource": data.resource_path,
+	}
+	
+	return save_data
+
+func load(save_data: Dictionary):
+	position = Vector2(
+		save_data["position_x"],
+		save_data["position_y"]
+	)
+	
+	var _data = ResourceLoader.load(save_data["item_resource"])
+	_set_data(_data)
