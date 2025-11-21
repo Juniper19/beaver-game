@@ -1,18 +1,22 @@
-[gd_scene load_steps=8 format=3 uid="uid://cl1jmkdurg2bg"]
+[gd_scene load_steps=11 format=3 uid="uid://cl1jmkdurg2bg"]
 
 [ext_resource type="PackedScene" uid="uid://dd4iqf5la6hly" path="res://player/player.tscn" id="1_f3sb7"]
+[ext_resource type="Script" uid="uid://b3n8caeiub1dr" path="res://world.gd" id="1_gbfbk"]
 [ext_resource type="PackedScene" uid="uid://f5ov75exi6ub" path="res://Day and night/day_night_manager.tscn" id="3_aqk2v"]
 [ext_resource type="PackedScene" uid="uid://cxl18pj2uuxtl" path="res://Doors/door.tscn" id="3_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://dfskvkq4outll" path="res://interactables/QuotaBoard/QuotaBoard.tscn" id="4_aqk2v"]
 [ext_resource type="PackedScene" uid="uid://dejycdtv58q6s" path="res://interactables/Storage/chest.tscn" id="5_036b0"]
 [ext_resource type="PackedScene" uid="uid://cd3s2mygwd6ul" path="res://interactables/trees/tree.tscn" id="6_dwbse"]
 [ext_resource type="PackedScene" uid="uid://mqrrknwtxtd0" path="res://interactables/Storage/excess_storage.tscn" id="7_pkg7o"]
+[ext_resource type="Resource" uid="uid://dps300dufah0" path="res://interactables/trees/tree_resources/oak_tree.tres" id="9_ioo17"]
+[ext_resource type="PackedScene" uid="uid://fbvlq216070u" path="res://interactables/rocks/rock.tscn" id="10_wse8f"]
 
 [node name="World" type="Node2D" groups=["world"]]
+script = ExtResource("1_gbfbk")
 
 [node name="Door" parent="." instance=ExtResource("3_tlwt5")]
 position = Vector2(1, -7)
-target_scene = "uid://cus4fv7iknxoj"
+target_scene = 2
 
 [node name="Quota Board" parent="." instance=ExtResource("4_aqk2v")]
 position = Vector2(-230, -54)
@@ -20,12 +24,30 @@ position = Vector2(-230, -54)
 [node name="Player" parent="." instance=ExtResource("1_f3sb7")]
 
 [node name="DayNightManager" parent="." instance=ExtResource("3_aqk2v")]
+time_speed = 10.0
 
 [node name="Chest" parent="." instance=ExtResource("5_036b0")]
 position = Vector2(-92, 120)
 
-[node name="Tree" parent="." instance=ExtResource("6_dwbse")]
-position = Vector2(-172, 216)
-
 [node name="ExcessStorage" parent="." instance=ExtResource("7_pkg7o")]
 position = Vector2(-3, 242)
+
+[node name="Resources" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="Rock" parent="." instance=ExtResource("10_wse8f")]
+position = Vector2(84, 106)
+
+[node name="Rock2" parent="." instance=ExtResource("10_wse8f")]
+position = Vector2(-56, -102)
+
+[node name="Tree" parent="." instance=ExtResource("6_dwbse")]
+position = Vector2(-215, 127)
+data = ExtResource("9_ioo17")
+
+[node name="Rock3" parent="." instance=ExtResource("10_wse8f")]
+position = Vector2(154, -78)
+health = 2.0
+
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]

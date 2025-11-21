@@ -106,3 +106,19 @@ func _do_shake() -> void:
 	sprite.position = _default_shake_position + offset_direction * _shake_strength
 	
 	_shake_strength = lerpf(_shake_strength, 0.0, 0.15)
+
+## This assumes all rocks are the same... 
+## which they are for now
+func save() -> Dictionary:
+	var save_data = {
+		"position_x": position.x,
+		"position_y": position.y
+	}
+	
+	return save_data
+
+func load(save_data: Dictionary):
+	position = Vector2(
+		save_data["position_x"],
+		save_data["position_y"]
+	)

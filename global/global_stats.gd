@@ -1,5 +1,7 @@
 extends Node
 
+var initialize_world: bool = true # whether or not to set world to initial, deletes save
+
 var wood: int = 0
 var mud: int = 0
 var stone: int = 0

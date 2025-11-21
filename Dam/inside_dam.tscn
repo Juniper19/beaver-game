@@ -8,7 +8,6 @@
 [node name="InsideDam" type="Node2D" groups=["dam"]]
 
 [node name="Door" parent="." instance=ExtResource("2_6w3bf")]
-target_scene = "uid://cl1jmkdurg2bg"
 
 [node name="Player" parent="." instance=ExtResource("1_applo")]
 
