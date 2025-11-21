@@ -15,10 +15,11 @@ func _ready():
 func spawn_storage_grid(count: int):
 	for i in range(count):
 		var Storage = ExcessStorage.instantiate()
+		
+		Storage.chest_id = i
+		
 		add_child(Storage)
-		
-		
-		
+
 		var row = i / Columns
 		var col = i % Columns
 		

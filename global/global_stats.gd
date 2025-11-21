@@ -32,6 +32,10 @@ signal ItemInChest
 signal ItemInExcessChest(chest)
 signal ItemFromExcessChest
 
+#For saving values when scene changes
+var excess_chest_storages: Array = []
+var excess_chest_storage_names: Array = []
+
 # Chosen upgrades get removed from the available cards
 var chosen_upgrades: Array[String] = []
 

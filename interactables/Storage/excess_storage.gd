@@ -9,6 +9,8 @@ var original: Sprite2D
 var storage: Array = []
 var storage_names: Array = []
 
+@export var chest_id: int = -1
+
 func _ready() -> void:
 
 	# Make sure GlobalStats exists
@@ -18,7 +20,20 @@ func _ready() -> void:
 		global_stats = GlobalStatsScript.new()
 		global_stats.name = "GlobalStats"
 		get_tree().get_root().add_child(global_stats)
-		
+	
+	#connecting this chest to its slot in GlobalStats
+	if chest_id >=0:
+		if GlobalStats.excess_chest_storages.size() <= chest_id:
+			GlobalStats.excess_chest_storages.resize(chest_id+1)
+			GlobalStats.excess_chest_storage_names.resize(chest_id+1)
+			
+		if GlobalStats.excess_chest_storages[chest_id] == null:
+			GlobalStats.excess_chest_storages[chest_id] = []
+			GlobalStats.excess_chest_storage_names[chest_id] = []
+			
+		storage = GlobalStats.excess_chest_storages[chest_id]
+		storage_names = GlobalStats.excess_chest_storage_names[chest_id]
+	
 	%InteractLabel.visible = false
 	
 	GlobalStats.inventory_item_placed.connect(_on_item_placed)
@@ -53,21 +68,19 @@ func _on_item_placed(item) -> void:
 						return
 				storage.append(item.data)   # store the ItemData resource
 				storage_names.append(item.item_name)
-				GlobalStats.storageNames.append(item.item_name)
+				#GlobalStats.storage.append(item.item_name)
+				#GlobalStats.storageNames.append(item.item_name)
 				#print(GlobalStats.storage)
 				_update_icon()
-
-		
 
 func remove_item() -> void:
 	if storage.is_empty():
 		return
-
 	var item_data = storage.pop_back()   # last added first out (LIFO)
 	#print(GlobalStats.storage)
 	storage_names.pop_back()
-	GlobalStats.storageNames.pop_back()
-
+	#GlobalStats.storage.pop_back()
+	#GlobalStats.storageNames.pop_back()
 	# Send the ItemData to the inventory
 	GlobalStats.emit_signal("ItemFromExcessChest", item_data)
 
