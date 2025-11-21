@@ -107,9 +107,21 @@ func _on_item_in_excess_chest(ExSt):
 	#print(ExSt.storage_names)
 	StorageNames = ExSt.storage_names
 	print(StorageNames)
-	#if ExSt.storageNames.size() > 0:
-			#if item.item_name != GlobalStats.storageNames[-1]:
-				#CancelQFree = true
+	
+	#Storage is full
+	if ExSt.storage.size() >= GlobalStats.StorageLimit:
+		return
+	
+	#Inventory Item doesn't match item type in chest
+	var top_index := inventory_items.size() - 1
+	if top_index < 0:
+		return
+		
+	var top_item := inventory_items[top_index]
+	if StorageNames.size() > 0:
+		if top_item.item_name != StorageNames[-1]:
+			return
+	
 	ChestDrop = true #Used so a loop isn't created
 	Excess = true
 	var top = inventory_items.size() - 1
@@ -169,9 +181,9 @@ func drop_item(index: int) -> void:
 	var ItemType = item.item_name
 	
 	if Excess:
-		if StorageNames.size() > 0:
-			if item.item_name != StorageNames[-1]:
-				CancelQFree = true
+		#if StorageNames.size() > 0:
+			#if item.item_name != StorageNames[-1]:
+				#CancelQFree = true
 		GlobalStats.emit_signal("inventory_item_placed", item)
 	if Quota:
 		if ItemType == "Default Item":

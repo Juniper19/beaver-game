@@ -9,7 +9,7 @@ var global_stats: Node = null
 	{"name": "Bigger Lungs", "desc": "Stamina +15", "effect": {"stamina": 15.0}},
 	{"name": "Polished Dam", "desc": "Dam strength +0.3", "effect": {"dam_strength": 0.3}},
 	{"name": "Streamline", "desc": "Movement speed +10", "effect": {"speed": 10.0}},
-	{"name": "Bigger Storage", "desc": "Storage +50%", "effect": {"StorageLimit": 5}},
+	{"name": "Bigger Storage", "desc": "Storage +40%", "effect": {"StorageLimit": 2}},
 ]
 
 @onready var card_ui: CanvasLayer = $CardUI

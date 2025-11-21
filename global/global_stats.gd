@@ -18,7 +18,7 @@ var StoneHeld = 0
 
 var storage: Array = []
 var storageNames: Array = []
-var StorageLimit = 10
+var StorageLimit = 5
 var ItemID = ""
 var ExcessChestEntered = false
 var QuotaChestEntered = false
