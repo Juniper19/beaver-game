@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cy3mj6u37mxbw"
-path="res://.godot/imported/WoodSign.png-ff0cb5b81f56eaee47c26950577c6809.ctex"
+uid="uid://bmmvfw7n5fiw0"
+path="res://.godot/imported/natureSquare.webp-c3f34e6d8f7cbaf2f5638c216e163f10.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_assets/WoodSign.png"
-dest_files=["res://.godot/imported/WoodSign.png-ff0cb5b81f56eaee47c26950577c6809.ctex"]
+source_file="res://art_assets/placeholder_art/natureSquare.webp"
+dest_files=["res://.godot/imported/natureSquare.webp-c3f34e6d8f7cbaf2f5638c216e163f10.ctex"]
 
 [params]
 

@@ -1,14 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://cl1jmkdurg2bg"]
+[gd_scene load_steps=10 format=3 uid="uid://cl1jmkdurg2bg"]
 
 [ext_resource type="PackedScene" uid="uid://dd4iqf5la6hly" path="res://player/player.tscn" id="1_f3sb7"]
+[ext_resource type="Script" uid="uid://b3n8caeiub1dr" path="res://world.gd" id="1_gbfbk"]
 [ext_resource type="PackedScene" uid="uid://f5ov75exi6ub" path="res://Day and night/day_night_manager.tscn" id="3_aqk2v"]
 [ext_resource type="PackedScene" uid="uid://cxl18pj2uuxtl" path="res://Doors/door.tscn" id="3_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://dfskvkq4outll" path="res://interactables/QuotaBoard/QuotaBoard.tscn" id="4_aqk2v"]
 [ext_resource type="PackedScene" uid="uid://dejycdtv58q6s" path="res://interactables/Storage/chest.tscn" id="5_036b0"]
 [ext_resource type="PackedScene" uid="uid://cd3s2mygwd6ul" path="res://interactables/trees/tree.tscn" id="6_dwbse"]
-[ext_resource type="PackedScene" uid="uid://mqrrknwtxtd0" path="res://interactables/Storage/excess_storage.tscn" id="7_pkg7o"]
+[ext_resource type="PackedScene" uid="uid://cdbqttwtbxchw" path="res://interactables/items/item.tscn" id="8_gbfbk"]
+[ext_resource type="Resource" uid="uid://blvhyxs51sep2" path="res://interactables/items/item_resources/stone.tres" id="9_ioo17"]
 
 [node name="World" type="Node2D" groups=["world"]]
+script = ExtResource("1_gbfbk")
 
 [node name="Door" parent="." instance=ExtResource("3_tlwt5")]
 position = Vector2(1, -7)
@@ -27,5 +30,9 @@ position = Vector2(-92, 120)
 [node name="Tree" parent="." instance=ExtResource("6_dwbse")]
 position = Vector2(-172, 216)
 
-[node name="ExcessStorage" parent="." instance=ExtResource("7_pkg7o")]
-position = Vector2(-3, 242)
+[node name="Item" parent="." instance=ExtResource("8_gbfbk")]
+position = Vector2(-83, 232)
+
+[node name="Item2" parent="." instance=ExtResource("8_gbfbk")]
+position = Vector2(-88, 289)
+data = ExtResource("9_ioo17")

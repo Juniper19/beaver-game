@@ -22,12 +22,14 @@ var StorageLimit = 10
 var ItemID = ""
 var ExcessChestEntered = false
 var QuotaChestEntered = false
+var ExcessStorageCount = 5
 
 signal inventory_item_added(item)
 signal inventory_item_removed(item)
+signal Add_to_Quota(item)
 signal inventory_item_placed(item)
 signal ItemInChest
-signal ItemInExcessChest
+signal ItemInExcessChest(chest)
 signal ItemFromExcessChest
 
 # Chosen upgrades get removed from the available cards

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://7uoulemsn1o6"
-path="res://.godot/imported/GreenCheck.webp-ed94883158ccb8a654a2eb23009beaac.ctex"
+path="res://.godot/imported/GreenCheck.webp-d9cf731620245b620cfe64068f48c650.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_assets/GreenCheck.webp"
-dest_files=["res://.godot/imported/GreenCheck.webp-ed94883158ccb8a654a2eb23009beaac.ctex"]
+source_file="res://art_assets/placeholder_art/GreenCheck.webp"
+dest_files=["res://.godot/imported/GreenCheck.webp-d9cf731620245b620cfe64068f48c650.ctex"]
 
 [params]
 

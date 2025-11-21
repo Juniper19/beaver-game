@@ -12,12 +12,15 @@ var _item_tweens: Dictionary[Node2D, Tween] = {}
 var _blacklist: Array[Node2D] = []
 
 var ChestDrop: bool
+var Quota: bool
 var Excess: bool
 var Test: bool
+var CancelQFree: bool
+var StorageNames = []
 
 func _ready():
 	GlobalStats.ItemInChest.connect(_on_item_in_chest)
-	GlobalStats.ItemInExcessChest.connect(_on_item_in_excess_chest)
+	#GlobalStats.ItemInExcessChest.connect(_on_item_in_excess_chest)
 	GlobalStats.ItemFromExcessChest.connect(_on_item_from_excess_chest)
 
 
@@ -45,7 +48,6 @@ func _on_item_from_excess_chest(item_data) -> void:
 
 # Returns if successful
 func add_item(item: Node2D) -> bool:
-	print(inventory_items)
 	#print(item.item_name)
 	if _blacklist.has(item):
 		return false
@@ -95,12 +97,19 @@ func add_item(item: Node2D) -> bool:
 #When deposited into Quota Chest
 func _on_item_in_chest():
 	ChestDrop = true #Used so a loop isn't created
+	Quota = true
 	var top = inventory_items.size() - 1
 	if top >= 0:
 		drop_item(top)
 
 #When deposited into an Excess Chest
-func _on_item_in_excess_chest():
+func _on_item_in_excess_chest(ExSt):
+	#print(ExSt.storage_names)
+	StorageNames = ExSt.storage_names
+	print(StorageNames)
+	#if ExSt.storageNames.size() > 0:
+			#if item.item_name != GlobalStats.storageNames[-1]:
+				#CancelQFree = true
 	ChestDrop = true #Used so a loop isn't created
 	Excess = true
 	var top = inventory_items.size() - 1
@@ -157,10 +166,25 @@ func drop_item(index: int) -> void:
 	# >>> Chest logic <<<
 	# If we're putting this into a chest, tell the chest which item,
 	# and then remove it from the world.
+	var ItemType = item.item_name
+	
 	if Excess:
+		if StorageNames.size() > 0:
+			if item.item_name != StorageNames[-1]:
+				CancelQFree = true
 		GlobalStats.emit_signal("inventory_item_placed", item)
-
-	if ChestDrop:
+	if Quota:
+		if ItemType == "Default Item":
+			if GlobalStats.wood >= GlobalStats.ReqWood:
+				CancelQFree = true
+		elif ItemType == "Mud":
+			if GlobalStats.mud >= GlobalStats.ReqMud:
+				CancelQFree = true
+		elif ItemType == "Stone":
+			if GlobalStats.stone >= GlobalStats.ReqStone:
+				CancelQFree = true
+		GlobalStats.emit_signal("Add_to_Quota", item)
+	if ChestDrop and CancelQFree == false:
 		# In chest drops we don't keep the world instance
 		item.queue_free()
 	else:
@@ -168,7 +192,9 @@ func drop_item(index: int) -> void:
 		GlobalStats.emit_signal("inventory_item_removed", item)
 
 	ChestDrop = false
+	Quota = false
 	Excess = false
+	CancelQFree = false
 
 
 

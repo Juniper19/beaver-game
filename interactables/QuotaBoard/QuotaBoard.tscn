@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://dfskvkq4outll"]
 
 [ext_resource type="Script" uid="uid://dlw7yh385jns4" path="res://interactables/QuotaBoard/quota_board.gd" id="1_kd02m"]
-[ext_resource type="Texture2D" uid="uid://cy3mj6u37mxbw" path="res://art_assets/WoodSign.png" id="2_5fo6y"]
+[ext_resource type="Texture2D" uid="uid://cy3mj6u37mxbw" path="res://art_assets/placeholder_art/WoodSign.png" id="2_5fo6y"]
 [ext_resource type="PackedScene" uid="uid://dwafgcp2uqbfl" path="res://interactables/interaction_area.tscn" id="2_ggoti"]
-[ext_resource type="Texture2D" uid="uid://7uoulemsn1o6" path="res://art_assets/GreenCheck.webp" id="3_5fo6y"]
+[ext_resource type="Texture2D" uid="uid://7uoulemsn1o6" path="res://art_assets/placeholder_art/GreenCheck.webp" id="3_5fo6y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ggoti"]
 size = Vector2(127.5, 171)
