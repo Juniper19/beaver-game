@@ -45,7 +45,9 @@ func _rock_hit(progress: float):
 	## TODO
 	## Change this for balancing
 	## Progress is in [0-1]
+	
 	var damage = progress * (GlobalStats.rock_max_damage - GlobalStats.rock_min_damage) + GlobalStats.rock_min_damage
+	AudioManager.playRockHit(damage)
 	health -= damage
 	if health <= 0:
 		_rock_die()
@@ -55,6 +57,7 @@ func _rock_hit(progress: float):
 
 
 func _rock_die():
+	AudioManager.playQTESuccess()
 	$Collider.disabled = true
 	var rect: Rect2 = drop_area.shape.get_rect()
 	var weight_sum: float = 0
