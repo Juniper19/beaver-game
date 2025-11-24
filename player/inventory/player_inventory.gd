@@ -48,7 +48,6 @@ func _on_item_from_excess_chest(item_data) -> void:
 
 # Returns if successful
 func add_item(item: Node2D) -> bool:
-	#print(item.item_name)
 	if _blacklist.has(item):
 		return false
 	

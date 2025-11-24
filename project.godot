@@ -18,12 +18,22 @@ config/icon="res://icon.svg"
 [autoload]
 
 GlobalStats="*res://global/global_stats.gd"
+SceneManager="*res://global/scene_manager.gd"
+
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=360
+window/size/window_width_override=1920
+window/size/window_height_override=1080
+window/stretch/mode="viewport"
 
 [global_group]
 
 world=""
 dam=""
 daynight=""
+persistent="For stuff that should stay overnight in the world but isn't part of the scene explicitly"
 
 [gui]
 
