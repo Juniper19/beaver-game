@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://cqu2ptwuvfp6u"]
+
+[ext_resource type="Script" uid="uid://y3w4yjg8qy6" path="res://interactables/items/item_resource.gd" id="1_u41jn"]
+[ext_resource type="Texture2D" uid="uid://djmdgue4rqchv" path="res://art_assets/items/aspen_log.png" id="2_qm5by"]
+
+[resource]
+script = ExtResource("1_u41jn")
+name = "Aspen Log"
+texture = ExtResource("2_qm5by")
+metadata/_custom_type_script = "uid://y3w4yjg8qy6"
