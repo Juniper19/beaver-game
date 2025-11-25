@@ -5,7 +5,7 @@ var global_stats: Node = null
 
 # ----------CARD OPTIONS-----------------
 @export var all_cards: Array[Dictionary] = [
-	{"name": "Faster Legs", "desc": "Movement Speed +10%", "effect": {"wood_gather_rate": 0.2}},
+	{"name": "Faster Legs", "desc": "Movement Speed +10%", "effect": {"move_speed_bonus": 1}},
 	{"name": "Ripped!", "desc": "Carry 1 Additional Item", "effect": {"carry_capacity": 1}},
 ]
 

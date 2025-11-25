@@ -47,12 +47,11 @@ func _unhandled_key_input(event): # unhandled? maybe just use _input? _unhandled
 			inventory.drop_top_item()
 
 func _calculate_move_speed():
-	move_speed = base_move_speed * pow(speed_mult_per_item, inventory.get_items().size())
-
+	var gs = get_tree().root.get_node("GlobalStats")
+	move_speed = base_move_speed * (1.0 + gs.move_speed_bonus) * pow(speed_mult_per_item, inventory.get_items().size())
 
 func _on_player_inventory_item_added(_item):
 	_calculate_move_speed()
-
 
 func _on_player_inventory_item_removed(_item):
 	_calculate_move_speed()
