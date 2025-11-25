@@ -67,6 +67,7 @@ func attempt_hit():
 		hit.emit()
 	else:
 		miss.emit()
+		AudioManager.playSwing()
 
 
 func _populate_y_bounds():

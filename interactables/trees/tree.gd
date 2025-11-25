@@ -36,6 +36,7 @@ func _on_interaction(by: Variant) -> void:
 
 
 func _tree_hit():
+	AudioManager.playWoodHit()
 	health -= 1
 	if health <= 0:
 		_tree_die()
@@ -44,6 +45,7 @@ func _tree_hit():
 
 
 func _tree_die():
+	AudioManager.playQTESuccess()
 	$Collider.disabled = true
 	var rect: Rect2 = drop_area.shape.get_rect()
 	var weight_sum: float = 0

@@ -48,6 +48,7 @@ func _on_item_from_excess_chest(item_data) -> void:
 
 # Returns if successful
 func add_item(item: Node2D) -> bool:
+	AudioManager.playItemPickUp()
 	if _blacklist.has(item):
 		return false
 	
@@ -133,6 +134,7 @@ func drop_top_item():
 		drop_item(top)
 
 func drop_item(index: int) -> void:
+	AudioManager.playDrop()
 	if index >= inventory_items.size() or index < 0:
 		push_warning("Tried to drop inventory item out of bounds!")
 		return
