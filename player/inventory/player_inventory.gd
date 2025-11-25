@@ -217,10 +217,6 @@ func drop_item(index: int) -> void:
 	Excess = false
 	CancelQFree = false
 
-
-
-
-
 func _reset_item_positions():
 	for i in inventory_items.size():
 		var item: Node2D = inventory_items[i]
@@ -230,3 +226,63 @@ func _reset_item_positions():
 		tween.set_ease(Tween.EASE_OUT)
 		tween.set_trans(Tween.TRANS_BACK)
 		tween.tween_property(item, "position", target_pos, 0.2)
+		
+func try_plant_seed() -> void:
+	# Must have at least one item
+	if inventory_items.is_empty():
+		return
+
+	var top_item: Node2D = inventory_items[-1]
+
+	# Only seeds are plantable
+	if not top_item.item_name.ends_with("Seed"):
+		return
+
+	var player := get_tree().get_first_node_in_group("player") as Node2D
+	if player == null:
+		print("No player found in 'player' group")
+		return
+	var plant_pos: Vector2 = player.global_position + Vector2(0, 32)
+
+	if not _can_plant_at(plant_pos):
+		print("Cannot plant here - space is blocked!")
+		return
+
+	_plant_sapling(plant_pos)
+
+	var top_index: int = inventory_items.size() - 1
+	var seed: Node2D = inventory_items.pop_at(top_index)
+
+	if _blacklist.has(seed):
+		_blacklist.erase(seed)
+	if _item_tweens.has(seed):
+		_item_tweens.erase(seed)
+
+	seed.queue_free()
+
+	item_removed.emit(seed)
+	GlobalStats.emit_signal("inventory_item_removed", seed)
+
+	_reset_item_positions()
+
+func _can_plant_at(pos: Vector2) -> bool:
+	var space := get_world_2d().direct_space_state
+
+	var shape := RectangleShape2D.new()
+	shape.size = Vector2(24, 24)  # adjust for sapling size
+
+	var query := PhysicsShapeQueryParameters2D.new()
+	query.shape = shape
+	query.transform = Transform2D(0, pos)
+	query.collide_with_areas = true
+	query.collide_with_bodies = true
+
+	var results = space.intersect_shape(query)
+	return results.size() == 0
+
+
+func _plant_sapling(pos: Vector2) -> void:
+	var sapling_scene := preload("res://sapling.tscn")
+	var sapling := sapling_scene.instantiate()
+	sapling.global_position = pos
+	get_tree().current_scene.add_child(sapling)

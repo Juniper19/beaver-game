@@ -45,6 +45,10 @@ func _unhandled_key_input(event): # unhandled? maybe just use _input? _unhandled
 	if event.is_action_pressed("drop_item"):
 		if GlobalStats.ExcessChestEntered == false and GlobalStats.QuotaChestEntered == false:
 			inventory.drop_top_item()
+	
+	if event.is_action_pressed("plant_seed"):
+		inventory.try_plant_seed()
+
 
 func _calculate_move_speed() -> void:
 	var gs = get_tree().root.get_node("GlobalStats")
