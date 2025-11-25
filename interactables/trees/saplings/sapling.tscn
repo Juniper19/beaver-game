@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dclymigad7h00"]
 
-[ext_resource type="Script" uid="uid://dx2d5683dye30" path="res://sapling.gd" id="1_ik5md"]
+[ext_resource type="Script" uid="uid://dx2d5683dye30" path="res://interactables/trees/saplings/sapling.gd" id="1_ik5md"]
 [ext_resource type="Texture2D" uid="uid://t27fjhirsjs5" path="res://global.png" id="2_tyfxy"]
 
 [node name="Sapling" type="Node2D" groups=["persistent"]]

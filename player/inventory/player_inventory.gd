@@ -282,7 +282,7 @@ func _can_plant_at(pos: Vector2) -> bool:
 
 
 func _plant_sapling(pos: Vector2) -> void:
-	var sapling_scene := preload("res://sapling.tscn")
+	var sapling_scene := preload("res://interactables/trees/saplings/sapling.tscn")
 	var sapling := sapling_scene.instantiate()
 	sapling.global_position = pos
 	get_tree().current_scene.add_child(sapling)

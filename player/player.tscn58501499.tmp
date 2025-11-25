@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://dd4iqf5la6hly"]
+
+[ext_resource type="Script" uid="uid://bj7kbff2cyf66" path="res://player/player.gd" id="1_rkbax"]
+[ext_resource type="Texture2D" uid="uid://bemu00ea6bigs" path="res://icon.svg" id="2_g1dw6"]
+[ext_resource type="PackedScene" uid="uid://rojk4k3irxw7" path="res://player/inventory/player_inventory.tscn" id="3_g1dw6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nevrd"]
+radius = 15.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lf62g"]
+radius = 41.109608
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("inventory") groups=["player"]]
+collision_mask = 6
+script = ExtResource("1_rkbax")
+inventory = NodePath("PlayerInventory")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="PlaceholderSprite" type="Sprite2D" parent="AnimatedSprite2D"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_g1dw6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_nevrd")
+
+[node name="InteractionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("CircleShape2D_lf62g")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2(2, 2)
+position_smoothing_enabled = true
+
+[node name="PlayerInventory" parent="." instance=ExtResource("3_g1dw6")]
+position = Vector2(0, -24)
+item_separation = null
+random_drop_distance = null
+
+[connection signal="item_added" from="PlayerInventory" to="." method="_on_player_inventory_item_added"]
+[connection signal="item_removed" from="PlayerInventory" to="." method="_on_player_inventory_item_removed"]
