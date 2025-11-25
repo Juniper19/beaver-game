@@ -56,7 +56,14 @@ func start_mining_animation() -> void:
 
 func stop_mining_animation() -> void:
 	is_mining = false
+var is_cutting: bool = false
 
+func start_cutting_animation() -> void:
+	is_cutting = true
+	sprite.play("cut")
+
+func stop_cutting_animation() -> void:
+	is_cutting = false
 
 func _unhandled_key_input(event):
 	if event.is_action_pressed("interact"):
