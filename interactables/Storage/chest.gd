@@ -33,12 +33,13 @@ func _process(_delta: float) -> void:
 		
 	if Input.is_action_just_pressed("drop_item") and $InteractionArea.get_overlapping_bodies().size() > 0:
 		GlobalStats.ItemInChest.emit()
+		#GlobalStats.emit_signal("ItemInChest", item_data)
 		#add_item(item)
 	
 	
 		
 func _on_item_added(item):
-	if item.item_name == "Default Item":
+	if item.item_name == "Oak Log":
 		GlobalStats.WoodHeld += 1
 	if item.item_name == "Mud":
 		GlobalStats.MudHeld += 1
@@ -47,7 +48,7 @@ func _on_item_added(item):
 		
 func _on_item_removed(item):
 	
-	if item.item_name == "Default Item":
+	if item.item_name == "Oak Log":
 		GlobalStats.WoodHeld -= 1
 	if item.item_name == "Mud":
 		GlobalStats.MudHeld -= 1
@@ -55,7 +56,7 @@ func _on_item_removed(item):
 		GlobalStats.StoneHeld -= 1
 	
 func _on_Add_to_Quota(item):
-	if item.item_name == "Default Item":
+	if item.item_name == "Oak Log":
 		if GlobalStats.wood < GlobalStats.ReqWood:
 			if GlobalStats.WoodHeld > 0:
 				GlobalStats.WoodHeld -= 1
