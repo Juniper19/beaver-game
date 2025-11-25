@@ -4,7 +4,7 @@ extends Node2D
 
 const SAVE_PATH = "user://world_save.save"
 
-extends Node2D
+
 
 const Columns = 3
 const Starting_Pos = Vector2(100,200)

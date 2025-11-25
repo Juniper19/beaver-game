@@ -93,10 +93,12 @@ func _update_icon() -> void:
 		%Stone.visible = false
 		return
 	else:
-		if storage_names[-1] == "Default Item":
+		if storage_names[-1] == "Oak Log":
 			original = %Wood
 			#%Mud.visible = false
 			#%Stone.visible = false
+		if storage_names[-1] == "Oak Seed":
+			original = %OakSeed
 		if storage_names[-1] == "Mud":
 			original = %Mud
 			#%Wood.visible = false

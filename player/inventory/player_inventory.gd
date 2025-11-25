@@ -185,7 +185,9 @@ func drop_item(index: int) -> void:
 				#CancelQFree = true
 		GlobalStats.emit_signal("inventory_item_placed", item)
 	if Quota:
-		if ItemType == "Default Item":
+		if ItemType == "Oak Seed":
+			CancelQFree = true
+		if ItemType == "Oak Log":
 			if GlobalStats.wood >= GlobalStats.ReqWood:
 				CancelQFree = true
 		elif ItemType == "Mud":

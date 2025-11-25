@@ -7,7 +7,7 @@ signal mud_depleted
 var _spawned_mud: int = 0
 
 const ITEM = preload("uid://cdbqttwtbxchw")
-const MUD_DATA = preload("uid://xwo5a6jqxne4")
+const MUD_DATA = preload("uid://xwo5a6jqxne4") #uid://xwo5a6jqxne4
 var rect: RectangleShape2D
 var half_size: Vector2
 

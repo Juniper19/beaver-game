@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cl1jmkdurg2bg"]
+[gd_scene load_steps=13 format=3 uid="uid://cl1jmkdurg2bg"]
 
 [ext_resource type="PackedScene" uid="uid://dd4iqf5la6hly" path="res://player/player.tscn" id="1_f3sb7"]
 [ext_resource type="Script" uid="uid://b3n8caeiub1dr" path="res://world.gd" id="1_gbfbk"]
@@ -11,6 +11,7 @@
 [ext_resource type="Resource" uid="uid://dps300dufah0" path="res://interactables/trees/tree_resources/oak_tree.tres" id="9_ioo17"]
 [ext_resource type="PackedScene" uid="uid://fbvlq216070u" path="res://interactables/rocks/rock.tscn" id="10_wse8f"]
 [ext_resource type="PackedScene" uid="uid://ndteduivwx3c" path="res://interactables/mud/mud_zone.tscn" id="11_ic0uy"]
+[ext_resource type="PackedScene" uid="uid://cdbqttwtbxchw" path="res://interactables/items/item.tscn" id="12_k3n1d"]
 
 [node name="World" type="Node2D" groups=["world"]]
 script = ExtResource("1_gbfbk")
@@ -52,6 +53,9 @@ health = 2.0
 
 [node name="MudZone" parent="." instance=ExtResource("11_ic0uy")]
 position = Vector2(197, 33)
+
+[node name="Item" parent="." instance=ExtResource("12_k3n1d")]
+position = Vector2(-289, 249)
 
 [connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
