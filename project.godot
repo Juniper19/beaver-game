@@ -86,3 +86,7 @@ plant_seed={
 2d_physics/layer_2="Items"
 2d_physics/layer_3="Statics"
 2d_physics/layer_5="Interactions"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

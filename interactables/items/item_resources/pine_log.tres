@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://be0bhxmmgdj84"]
+
+[ext_resource type="Script" uid="uid://y3w4yjg8qy6" path="res://interactables/items/item_resource.gd" id="1_27vga"]
+[ext_resource type="Texture2D" uid="uid://1edc18m08705" path="res://art_assets/items/pine_log.png" id="2_x0as0"]
+
+[resource]
+script = ExtResource("1_27vga")
+name = "Pin Log"
+texture = ExtResource("2_x0as0")
+metadata/_custom_type_script = "uid://y3w4yjg8qy6"

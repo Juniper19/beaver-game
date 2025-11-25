@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" uid="uid://cguixmr4uuih2" path="res://interactables/Storage/excess_storage.gd" id="1_64f8w"]
 [ext_resource type="PackedScene" uid="uid://dwafgcp2uqbfl" path="res://interactables/interaction_area.tscn" id="2_kj6is"]
-[ext_resource type="Texture2D" uid="uid://bmmvfw7n5fiw0" path="res://art_assets/placeholder_art/natureSquare.webp" id="3_kgw8d"]
+[ext_resource type="Texture2D" uid="uid://dk20kbr33ftot" path="res://art_assets/placeholder_storage_bin.png" id="3_kgw8d"]
 [ext_resource type="Texture2D" uid="uid://g20tw60w4ooh" path="res://art_assets/placeholder_art/Wood.webp" id="4_kgw8d"]
 [ext_resource type="Texture2D" uid="uid://cly62hiigmmm2" path="res://art_assets/placeholder_art/Mud.webp" id="5_4p85k"]
 [ext_resource type="Texture2D" uid="uid://d8mvxcyphwv8" path="res://art_assets/placeholder_art/stone.webp" id="6_x5e16"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_64f8w"]
-size = Vector2(84, 80)
+size = Vector2(40, 40)
 
 [sub_resource type="Gradient" id="Gradient_nxcmc"]
 colors = PackedColorArray(0.4196872, 0.24505845, 0.16483825, 1, 1, 1, 1, 0)
@@ -27,7 +27,6 @@ script = ExtResource("1_64f8w")
 [node name="InteractionArea" parent="." instance=ExtResource("2_kj6is")]
 
 [node name="Sprite2D" type="Sprite2D" parent="InteractionArea"]
-scale = Vector2(-0.027340844, -0.027340844)
 texture = ExtResource("3_kgw8d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]

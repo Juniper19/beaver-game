@@ -9,11 +9,11 @@ signal miss
 @onready var marker: ColorRect = $Marker
 
 @export var _marker_padding: float = 0.0
-@export var _hit_zone_padding: float = 16.0
+@export var _hit_zone_padding: float = 2.0
 
 ## How much leeway the player has in hitting the zone
 @export var _hit_margin: float = 4.0
-@export var _marker_velocity: float = 150.0
+@export var _marker_velocity: float = 50.0
 
 var _marker_bounds: Vector2 # (min, max)
 var _hit_zone_bounds: Vector2 # (min, max)
@@ -25,7 +25,7 @@ func _ready():
 
 
 func set_hit_zone_size(size: float):
-	hit_zone.size.y = min(size, background.size.y - _hit_zone_padding * 2.0)
+	hit_zone.size.y = min(size, background.size.y + _hit_zone_padding * 2.0)
 	_populate_y_bounds()
 	_place_hit_zone()
 
@@ -35,7 +35,7 @@ func get_hit_zone_size() -> float:
 
 
 func set_marker_size(size: float):
-	marker.size.y = min(size, background.size.y - _marker_padding * 2.0)
+	marker.size.y = min(size, background.size.y + _marker_padding * 2.0)
 	_populate_y_bounds()
 
 
