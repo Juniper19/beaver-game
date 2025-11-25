@@ -27,8 +27,6 @@ func load_scene(target_scene: Scene) -> void:
 		return
 	
 	var current_scene: Node = get_tree().current_scene
-	print(current_scene)
-	print(Scene.INSIDE_DAM)
 	if current_scene.has_method("save"):
 		current_scene.call("save")
 
@@ -37,6 +35,3 @@ func load_scene(target_scene: Scene) -> void:
 		push_error("Error loading scene: ", error)
 		return
 	current_scene = get_tree().current_scene
-	#print(current_scene)
-	#if current_scene == Scene.INSIDE_DAM:
-		#AudioManager.stopMusic1()
