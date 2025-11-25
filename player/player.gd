@@ -1,51 +1,94 @@
 class_name Player
 extends CharacterBody2D
 
-@export var base_move_speed: float = 600.0
+@export var base_move_speed: float = 250.0
 @export var speed_mult_per_item: float = 0.75
 var move_speed: float
+
 @export var inventory: PlayerInventory
-@onready var animation_player: AnimationPlayer = $AnimatedSprite2D/AnimationPlayer
+
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var interaction_area: Area2D = $InteractionArea
 
-## TODO
-# Add player sprite (delete placeholder)
-# Add player animation
-# Adjust player speed
-# Adjust collision shape
-# Adjust interaction area size
-# !!! Set collision mask for interaction area !!!
-# Update how things are interacted with (the logic of it)
+var last_dir: Vector2 = Vector2.DOWN
+var is_mining: bool = false
 
-func _ready():
+
+func _ready() -> void:
 	move_speed = base_move_speed
 
-func _process(_delta: float) -> void:
-	var move_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	
-	velocity = move_direction * move_speed
+func _process(delta: float) -> void:
+	var move_dir: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	velocity = move_dir * move_speed
 	move_and_slide()
 
-func _unhandled_key_input(event): # unhandled? maybe just use _input? _unhandled_input?
+	_update_anim(move_dir)
+
+func _update_anim(dir: Vector2) -> void:
+	if is_mining:
+		sprite.play("mine")
+		return
+
+	if is_cutting:
+		sprite.play("cut")
+		return
+
+	if dir == Vector2.ZERO:
+		if last_dir.x != 0:
+			sprite.play("idle_side")
+			sprite.flip_h = last_dir.x > 0
+		else:
+			sprite.stop()
+		return
+
+	last_dir = dir
+
+	if abs(dir.x) > abs(dir.y):
+		# Horizontal movement
+		sprite.play("walk_side")
+		sprite.flip_h = dir.x > 0
+	else:
+		# Vertical movement
+		if dir.y < 0:
+			sprite.play("walk_up")
+		else:
+			sprite.play("walk_down")
+
+
+func start_mining_animation() -> void:
+	is_mining = true
+	sprite.play("mine")
+
+func stop_mining_animation() -> void:
+	is_mining = false
+var is_cutting: bool = false
+
+func start_cutting_animation() -> void:
+	is_cutting = true
+	sprite.play("cut")
+
+func stop_cutting_animation() -> void:
+	is_cutting = false
+
+func _unhandled_key_input(event):
 	if event.is_action_pressed("interact"):
-		
-		# Get closest ineractable and interact with it
-		var closest_interactable: InteractionArea = null
-		var closest_distance: float = INF;
+		var closest: InteractionArea = null
+		var closest_dist: float = INF
+
 		for node in interaction_area.get_overlapping_areas():
-			if node is InteractionArea: ## TODO UPDATE THIS LOGIC
-				var distance: float = global_position.distance_squared_to(node.global_position)
-				if distance < closest_distance:
-					closest_distance = distance
-					closest_interactable = node
-					
-		if closest_interactable:
-			closest_interactable.interact(self)
-	
+			if node is InteractionArea:
+				var dist = global_position.distance_squared_to(node.global_position)
+				if dist < closest_dist:
+					closest_dist = dist
+					closest = node
+		
+		if closest:
+			closest.interact(self)
+
 	if event.is_action_pressed("drop_item"):
 		if GlobalStats.ExcessChestEntered == false and GlobalStats.QuotaChestEntered == false:
 			inventory.drop_top_item()
-	
+
 	if event.is_action_pressed("plant_seed"):
 		inventory.try_plant_seed()
 
@@ -56,21 +99,14 @@ func _calculate_move_speed() -> void:
 
 	var item_count: int = inventory.get_items().size()
 
-	# Encumbrance multiplier (Thunder Thighs)
-	var effective_mult_per_item: float = lerp(
-		1.0,
-		speed_mult_per_item,
-		gs.encumbrance_factor
-	)
+	var effective_mult_per_item: float = lerp(1.0, speed_mult_per_item, gs.encumbrance_factor)
 
-	# ----- BASE MOVEMENT -----
 	move_speed = (
 		base_move_speed
 		* (1.0 + gs.move_speed_bonus)
 		* pow(effective_mult_per_item, item_count)
 	)
 
-	# ----- SUNRISE SPARK BONUS -----
 	if day_night and gs.sunrise_spark_duration > 0.0:
 		if day_night.time_since_day_start < gs.sunrise_spark_duration:
 			move_speed *= (1.0 + gs.sunrise_spark_bonus)
