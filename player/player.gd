@@ -28,27 +28,32 @@ func _update_anim(dir: Vector2) -> void:
 	if is_mining:
 		sprite.play("mine")
 		return
-	
+
+	if is_cutting:
+		sprite.play("cut")
+		return
+
 	if dir == Vector2.ZERO:
 		if last_dir.x != 0:
 			sprite.play("idle_side")
 			sprite.flip_h = last_dir.x > 0
-		elif last_dir.y < 0:
-			sprite.play("idle_up")
 		else:
-			sprite.play("idle_down")
+			sprite.stop()
 		return
 
-	# Walking
 	last_dir = dir
 
 	if abs(dir.x) > abs(dir.y):
+		# Horizontal movement
 		sprite.play("walk_side")
 		sprite.flip_h = dir.x > 0
-	elif dir.y < 0:
-		sprite.play("walk_up")
 	else:
-		sprite.play("walk_down")
+		# Vertical movement
+		if dir.y < 0:
+			sprite.play("walk_up")
+		else:
+			sprite.play("walk_down")
+
 
 func start_mining_animation() -> void:
 	is_mining = true
