@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cxl18pj2uuxtl"]
 
 [ext_resource type="Script" uid="uid://dule3q33lowsn" path="res://Doors/door.gd" id="1_42blv"]
-[ext_resource type="Texture2D" uid="uid://bjiklfqxr6o7k" path="res://art_assets/door.png" id="1_dlf7b"]
+[ext_resource type="Texture2D" uid="uid://bjiklfqxr6o7k" path="res://art_assets/placeholder_art/door.png" id="1_dlf7b"]
 [ext_resource type="PackedScene" uid="uid://dwafgcp2uqbfl" path="res://interactables/interaction_area.tscn" id="2_ud23n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dlf7b"]

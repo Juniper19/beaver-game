@@ -17,6 +17,7 @@ func _ready() -> void:
 	
 	GlobalStats.inventory_item_added.connect(_on_item_added)
 	GlobalStats.inventory_item_removed.connect(_on_item_removed)
+	GlobalStats.Add_to_Quota.connect(_on_Add_to_Quota)
 	
 	%InteractLabel.visible = false
 	
@@ -31,30 +32,46 @@ func _process(_delta: float) -> void:
 		GlobalStats.QuotaChestEntered = false
 		
 	if Input.is_action_just_pressed("drop_item") and $InteractionArea.get_overlapping_bodies().size() > 0:
-		add_item()
+		GlobalStats.ItemInChest.emit()
+		#GlobalStats.emit_signal("ItemInChest", item_data)
+		#add_item(item)
 	
 	
 		
 func _on_item_added(item):
-	if item.item_name == "Default Item":
+	if item.item_name == "Oak Log":
 		GlobalStats.WoodHeld += 1
 	if item.item_name == "Mud":
 		GlobalStats.MudHeld += 1
-	if item.item_name == "stone":
+	if item.item_name == "Stone":
 		GlobalStats.StoneHeld += 1
 		
 func _on_item_removed(item):
-	if item.item_name == "Default Item":
+	
+	if item.item_name == "Oak Log":
 		GlobalStats.WoodHeld -= 1
 	if item.item_name == "Mud":
 		GlobalStats.MudHeld -= 1
-	if item.item_name == "stone":
+	if item.item_name == "Stone":
 		GlobalStats.StoneHeld -= 1
 	
-func add_item():
-	#print(GlobalStats.WoodHeld)
-	if GlobalStats.wood < GlobalStats.ReqWood:
-		if GlobalStats.WoodHeld > 0:
-			GlobalStats.WoodHeld -= 1
-			GlobalStats.wood += 1
-			GlobalStats.emit_signal("ItemInChest")
+func _on_Add_to_Quota(item):
+	if item.item_name == "Oak Log":
+		if GlobalStats.wood < GlobalStats.ReqWood:
+			if GlobalStats.WoodHeld > 0:
+				GlobalStats.WoodHeld -= 1
+				GlobalStats.wood += 1
+				#GlobalStats.emit_signal("ItemInChest")
+	elif item.item_name == "Mud":
+		if GlobalStats.mud < GlobalStats.ReqMud:
+			if GlobalStats.MudHeld > 0:
+				GlobalStats.MudHeld -= 1
+				GlobalStats.mud += 1
+				#GlobalStats.emit_signal("ItemInChest")
+	elif item.item_name == "Stone":
+		if GlobalStats.stone < GlobalStats.ReqStone:
+			if GlobalStats.StoneHeld > 0:
+				GlobalStats.StoneHeld -= 1
+				GlobalStats.stone += 1
+				#GlobalStats.emit_signal("ItemInChest")
+	

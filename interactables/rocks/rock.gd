@@ -55,7 +55,6 @@ func _rock_hit(progress: float):
 	# make shake
 	_shake_strength = pow(progress, 2.0) * 5.0
 
-
 func _rock_die():
 	AudioManager.playQTESuccess()
 	$Collider.disabled = true
@@ -65,9 +64,11 @@ func _rock_die():
 	for v: float in drops.values():
 		weight_sum += v
 	
+	# --- Normal drops ---
 	for i in drop_amount:
-		var random_drop: ItemData
+		var random_drop: ItemData = null
 		var rnd = randf_range(0.0, weight_sum)
+
 		for drop: ItemData in drops.keys():
 			var weight = drops[drop]
 			if rnd < weight:
@@ -77,7 +78,7 @@ func _rock_die():
 		
 		var random_pos: Vector2 = Vector2(
 			randf_range(rect.position.x, rect.position.x + rect.size.x),
-			randf_range(rect.position.y, rect.position.y + rect.size.y),
+			randf_range(rect.position.y, rect.position.y + rect.size.y)
 		) + drop_area.global_position
 		
 		if !random_drop:
@@ -89,7 +90,24 @@ func _rock_die():
 		item.data = random_drop
 		get_tree().current_scene.add_child(item)
 		item.position = random_pos
-		
+
+
+	# --- EXTRA DROP UPGRADE (Stone Smasher) ---
+	var gs = get_node("/root/GlobalStats")
+	if randf() < gs.extra_rock_chance:
+		# pick first available drop type (stone)
+		for drop: ItemData in drops.keys():
+			var random_pos: Vector2 = Vector2(
+				randf_range(rect.position.x, rect.position.x + rect.size.x),
+				randf_range(rect.position.y, rect.position.y + rect.size.y)
+			) + drop_area.global_position
+
+			var item_scene = preload("res://interactables/items/item.tscn")
+			var item: Item = item_scene.instantiate()
+			item.data = drop
+			get_tree().current_scene.add_child(item)
+			item.position = random_pos
+			break
 	qte.queue_free()
 	qte = null
 	queue_free.call_deferred()

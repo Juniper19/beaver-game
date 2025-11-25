@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjiklfqxr6o7k"
-path="res://.godot/imported/door.png-d852ade1b430f1fe2d5d056f17cda1b5.ctex"
+uid="uid://cy3mj6u37mxbw"
+path="res://.godot/imported/WoodSign.png-b8f70c70f982fb92ff9fd79e6c8aac1c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_assets/door.png"
-dest_files=["res://.godot/imported/door.png-d852ade1b430f1fe2d5d056f17cda1b5.ctex"]
+source_file="res://art_assets/placeholder_art/WoodSign.png"
+dest_files=["res://.godot/imported/WoodSign.png-b8f70c70f982fb92ff9fd79e6c8aac1c.ctex"]
 
 [params]
 

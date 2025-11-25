@@ -48,11 +48,31 @@ func _process(_delta: float) -> void:
 	%PhysLabel2.text = "Mud " + str(GlobalStats.mud) + "/" + str(GlobalStats.ReqMud)
 	%PhysLabel3.text = "Stone " + str(GlobalStats.stone) + "/" + str(GlobalStats.ReqStone)
 	#If player failed to meet the quota the day before
-	if GlobalStats.day_number != Day and (GlobalStats.wood < GlobalStats.ReqWood or GlobalStats.mud < GlobalStats.ReqMud or GlobalStats.stone < GlobalStats.ReqStone):
-		print("Failed to Hit Quota")
-		%TextTimer.start()
-		%QuotaLabel.visible = true
-		%QuotaLabel.text = "You failed to hit the quota yesterday..."
+	if GlobalStats.day_number != Day:
+		var failed_quota := (
+			GlobalStats.wood < GlobalStats.ReqWood or
+			GlobalStats.mud < GlobalStats.ReqMud or
+			GlobalStats.stone < GlobalStats.ReqStone
+		)
+
+		if failed_quota:
+			if GlobalStats.free_quota_miss > 0:
+				# Consume the free pass
+				GlobalStats.free_quota_miss -= 1
+				print("Quota missed... but Dam Insurance has been used!")
+				
+				%TextTimer.start()
+				%QuotaLabel.visible = true
+				%QuotaLabel.text = "Quota missed... but Dam Insurance saved you!"
+			else:
+				# No free pass → THIS IS A REAL FAIL
+				print("Failed to Hit Quota (no free pass)")
+				
+				%TextTimer.start()
+				%QuotaLabel.visible = true
+				%QuotaLabel.text = "You failed to hit the quota yesterday..."
+				# TODO trigger gmae over
+
 	#Increasing Quota Requirements as days progress
 	if GlobalStats.day_number != Day:
 		GlobalStats.wood = clamp(GlobalStats.wood - GlobalStats.ReqWood, 0, GlobalStats.wood)

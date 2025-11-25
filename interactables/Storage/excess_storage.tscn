@@ -1,14 +1,25 @@
-[gd_scene load_steps=8 format=3 uid="uid://mqrrknwtxtd0"]
+[gd_scene load_steps=10 format=3 uid="uid://mqrrknwtxtd0"]
 
 [ext_resource type="Script" uid="uid://cguixmr4uuih2" path="res://interactables/Storage/excess_storage.gd" id="1_64f8w"]
-[ext_resource type="Texture2D" uid="uid://di338gurea4es" path="res://art_assets/Chest2.png" id="1_whsya"]
 [ext_resource type="PackedScene" uid="uid://dwafgcp2uqbfl" path="res://interactables/interaction_area.tscn" id="2_kj6is"]
-[ext_resource type="Texture2D" uid="uid://g20tw60w4ooh" path="res://art_assets/Wood.webp" id="4_kgw8d"]
-[ext_resource type="Texture2D" uid="uid://cly62hiigmmm2" path="res://art_assets/Mud.webp" id="5_4p85k"]
-[ext_resource type="Texture2D" uid="uid://d8mvxcyphwv8" path="res://art_assets/stone.webp" id="6_x5e16"]
+[ext_resource type="Texture2D" uid="uid://bmmvfw7n5fiw0" path="res://art_assets/placeholder_art/natureSquare.webp" id="3_kgw8d"]
+[ext_resource type="Texture2D" uid="uid://g20tw60w4ooh" path="res://art_assets/placeholder_art/Wood.webp" id="4_kgw8d"]
+[ext_resource type="Texture2D" uid="uid://cly62hiigmmm2" path="res://art_assets/placeholder_art/Mud.webp" id="5_4p85k"]
+[ext_resource type="Texture2D" uid="uid://d8mvxcyphwv8" path="res://art_assets/placeholder_art/stone.webp" id="6_x5e16"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_64f8w"]
-size = Vector2(56, 56)
+size = Vector2(84, 80)
+
+[sub_resource type="Gradient" id="Gradient_nxcmc"]
+colors = PackedColorArray(0.4196872, 0.24505845, 0.16483825, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_h88ec"]
+gradient = SubResource("Gradient_nxcmc")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
 
 [node name="ExcessStorage" type="Node2D"]
 script = ExtResource("1_64f8w")
@@ -16,8 +27,8 @@ script = ExtResource("1_64f8w")
 [node name="InteractionArea" parent="." instance=ExtResource("2_kj6is")]
 
 [node name="Sprite2D" type="Sprite2D" parent="InteractionArea"]
-scale = Vector2(1.75, 1.75)
-texture = ExtResource("1_whsya")
+scale = Vector2(-0.027340844, -0.027340844)
+texture = ExtResource("3_kgw8d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
 shape = SubResource("RectangleShape2D_64f8w")
@@ -25,9 +36,9 @@ shape = SubResource("RectangleShape2D_64f8w")
 [node name="InteractLabel" type="Label" parent="InteractionArea"]
 unique_name_in_owner = true
 offset_left = -80.0
-offset_top = -55.0
+offset_top = 18.0
 offset_right = 85.0
-offset_bottom = -23.0
+offset_bottom = 50.0
 theme_override_font_sizes/font_size = 40
 text = "Insert Item"
 
@@ -50,3 +61,15 @@ visible = false
 position = Vector2(-1, 0)
 scale = Vector2(0.0125, 0.012499996)
 texture = ExtResource("6_x5e16")
+
+[node name="OakSeed" type="Sprite2D" parent="InteractionArea"]
+unique_name_in_owner = true
+visible = false
+position = Vector2(-1, 0)
+scale = Vector2(0.0125, 0.012499996)
+texture = SubResource("GradientTexture2D_h88ec")
+
+[node name="ItemStack" type="Node2D" parent="InteractionArea"]
+unique_name_in_owner = true
+
+[connection signal="player_left_area" from="InteractionArea" to="." method="_on_interaction_area_player_left_area"]

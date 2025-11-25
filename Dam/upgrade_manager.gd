@@ -5,11 +5,15 @@ var global_stats: Node = null
 
 # ----------CARD OPTIONS-----------------
 @export var all_cards: Array[Dictionary] = [
-	{"name": "Stronger Teeth", "desc": "Wood gathering +20%", "effect": {"wood_gather_rate": 0.2}},
-	{"name": "Bigger Lungs", "desc": "Stamina +15", "effect": {"stamina": 15.0}},
-	{"name": "Polished Dam", "desc": "Dam strength +0.3", "effect": {"dam_strength": 0.3}},
-	{"name": "Streamline", "desc": "Movement speed +10", "effect": {"speed": 10.0}},
-	{"name": "Bigger Storage", "desc": "Storage +50%", "effect": {"StorageLimit": 5}},
+	{"name": "Faster Legs", "desc": "Movement Speed +10%", "effect": {"move_speed_bonus": 1}},
+	{"name": "Ripped!", "desc": "Carry 1 Additional Item", "effect": {"carry_capacity": 1}},
+	{"name": "More Ripped!", "desc": "Carry 2 Additional Items", "effect": {"carry_capacity": 2}},
+	{"name": "Stone Smasher", "desc": "50% chance for rocks to drop an extra", "effect": {"extra_rock_chance": 0.5}},
+	{"name": "Thunder Thighs", "desc": "Item weight affects speed less", "effect": {"encumbrance_factor": .85}},
+	{"name": "Dam Insurance", "desc": "The dam is safe from 1 missed quota.", "effect": {"free_quota_miss": 1}},
+	{"name": "Early Bird", "desc": "Start each day 2 hours earlier", "effect": {"early_bird_minutes": 120}},
+	{"name": "Sunrise Spark", "desc": "Move faster for the first 60 seconds of each day", "effect": {"sunrise_spark_duration": 60.0, "sunrise_spark_bonus": 0.20}},
+	{"name": "True Beaver", "desc": "50% chance to get extra wood from trees", "effect": {"extra_wood_chance": 0.5}},
 ]
 
 @onready var card_ui: CanvasLayer = $CardUI
@@ -43,7 +47,7 @@ func show_three_cards() -> void:
 	for child in card_container.get_children():
 		child.queue_free()
 
-	var selected_cards = _get_random_cards(3)
+	var selected_cards = _get_random_cards(2)
 	for card_data in selected_cards:
 		var card = _create_card(card_data)
 		card_container.add_child(card)
@@ -104,6 +108,9 @@ func _create_card(data: Dictionary) -> Control:
 func _apply_card(data: Dictionary) -> void:
 	if global_stats:
 		global_stats.apply_effect(data["effect"])
+		var player = get_tree().get_first_node_in_group("player")
+		if player:
+			player._calculate_move_speed()
 		if not global_stats.chosen_upgrades.has(data["name"]):
 			global_stats.chosen_upgrades.append(data["name"])
 	else:
