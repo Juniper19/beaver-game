@@ -11,6 +11,7 @@ var global_stats: Node = null
 	{"name": "Stone Smasher", "desc": "50% chance for rocks to drop an extra", "effect": {"extra_rock_chance": 0.5}},
 	{"name": "Thunder Thighs", "desc": "Item weight affects speed less", "effect": {"encumbrance_factor": .85}},
 	{"name": "Dam Insurance", "desc": "The dam is safe from 1 missed quota.", "effect": {"free_quota_miss": 1}},
+	{"name": "Early Bird", "desc": "Start each day 2 hours earlier", "effect": {"early_bird_minutes": 120}},
 	{"name": "True Beaver", "desc": "50% chance to get extra wood from trees", "effect": {"extra_wood_chance": 0.5}},
 ]
 
