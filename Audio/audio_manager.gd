@@ -52,15 +52,15 @@ func playDrop():
 	if not mute:
 		$DropTimer.start()
 		if drop == 1:
-			$Drop1.play()
+			$Drop5.play()
 		elif drop == 2:
-			$Drop2.play()
+			$Drop4.play()
 		elif drop == 3:
 			$Drop3.play()
 		elif drop == 4:
-			$Drop4.play()
+			$Drop2.play()
 		elif drop == 5:
-			$Drop5.play()
+			$Drop1.play()
 			drop = 0
 		drop += 1
 
@@ -122,3 +122,10 @@ func playFootsteps():
 
 func _on_footstep_timer_timeout() -> void:
 	wait = false
+	
+func playMusic1():
+	if not mute:
+		$Music1.play()
+		
+func stopMusic1():
+	$Music1.stop()
