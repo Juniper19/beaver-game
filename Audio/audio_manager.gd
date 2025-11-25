@@ -3,6 +3,7 @@ extends Node2D
 @export var mute: bool = false
 var drop: int =1
 var dep: int =1
+var depE: int =1
 
 func playItemPickUp():
 	if not mute:
@@ -48,7 +49,6 @@ func playQuotaMet():
 	
 func playDrop():
 	if not mute:
-		print(drop)
 		$DropTimer.start()
 		if drop == 1:
 			$Drop1.play()
@@ -69,6 +69,7 @@ func _on_drop_timer_timeout() -> void:
 	
 func playDeposit():
 	if not mute:
+		$DepositTimer.start()
 		if dep == 1:
 			$Deposit1.play()
 		elif dep == 2:
@@ -77,3 +78,22 @@ func playDeposit():
 			$Deposit3.play()
 			dep = 0
 		dep +=1
+
+func _on_deposit_timer_timeout() -> void:
+	dep = 1
+	
+	
+func playDepositE():
+	if not mute:
+		$DepositETimer.start()
+		if depE == 1:
+			$DepositE1.play()
+		elif depE == 2:
+			$DepositE2.play()
+		elif depE == 3:
+			$DepositE3.play()
+			depE = 0
+		depE +=1
+
+func _on_deposit_E_timer_timeout() -> void:
+	depE = 1

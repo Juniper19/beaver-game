@@ -78,4 +78,24 @@ stream = ExtResource("17_7ua7b")
 [node name="Deposit3" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("18_v10l4")
 
+[node name="DepositTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="DepositE1" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_ywt6p")
+pitch_scale = 0.5
+
+[node name="DepositE2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("17_7ua7b")
+pitch_scale = 0.5
+
+[node name="DepositE3" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("18_v10l4")
+pitch_scale = 0.5
+
+[node name="DepositETimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="DropTimer" to="." method="_on_drop_timer_timeout"]
+[connection signal="timeout" from="DepositTimer" to="." method="_on_deposit_timer_timeout"]
+[connection signal="timeout" from="DepositETimer" to="." method="_on_deposit_timer_timeout"]

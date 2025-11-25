@@ -102,11 +102,20 @@ func add_item(item: Node2D) -> bool:
 
 #When deposited into Quota Chest
 func _on_item_in_chest():
+	
+	
+	var top = inventory_items.size() - 1
+	if top < 0:
+		return
+	
+	var item := inventory_items[top]
+	if item.item_name == "Oak Seed":
+		return
+		
 	ChestDrop = true #Used so a loop isn't created
 	Quota = true
-	var top = inventory_items.size() - 1
-	if top >= 0:
-		drop_item(top)
+	
+	drop_item(top)
 
 #When deposited into an Excess Chest
 func _on_item_in_excess_chest(ExSt):
@@ -140,7 +149,7 @@ func drop_top_item():
 		drop_item(top)
 
 func drop_item(index: int) -> void:
-	AudioManager.playDrop()
+	
 	if index >= inventory_items.size() or index < 0:
 		push_warning("Tried to drop inventory item out of bounds!")
 		return
@@ -191,25 +200,31 @@ func drop_item(index: int) -> void:
 		#if StorageNames.size() > 0:
 			#if item.item_name != StorageNames[-1]:
 				#CancelQFree = true
+		AudioManager.playDepositE()
 		GlobalStats.emit_signal("inventory_item_placed", item)
 	if Quota:
-		if ItemType == "Oak Seed":
-			return
 		if ItemType == "Oak Log":
 			if GlobalStats.wood >= GlobalStats.ReqWood:
 				CancelQFree = true
+			else:
+				AudioManager.playDeposit()
 		elif ItemType == "Mud":
 			if GlobalStats.mud >= GlobalStats.ReqMud:
 				CancelQFree = true
+			else:
+				AudioManager.playDeposit()
 		elif ItemType == "Stone":
 			if GlobalStats.stone >= GlobalStats.ReqStone:
 				CancelQFree = true
+			else:
+				AudioManager.playDeposit()
 		GlobalStats.emit_signal("Add_to_Quota", item)
 	if ChestDrop and CancelQFree == false:
 		# In chest drops we don't keep the world instance
 		item.queue_free()
 	else:
 		# Normal ground drop
+		AudioManager.playDrop()
 		GlobalStats.emit_signal("inventory_item_removed", item)
 
 	ChestDrop = false
