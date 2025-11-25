@@ -11,13 +11,11 @@ var health = 5.0
 
 @export var data: TreeData
 
-
 func _ready():
 	if data:
 		_set_data(data)
 	else:
 		push_warning("Tree made without data!")
-
 
 func _set_data(_data: TreeData):
 	data = _data
@@ -25,26 +23,21 @@ func _set_data(_data: TreeData):
 	sprite.position.y = -sprite.texture.get_height() / 2.0
 	health = data.health
 
-
 func _on_interaction(by: Variant) -> void:
 	if !by is Player:
 		return
 
 	var player := by as Player
 
-	# First press — create QTE and start chop animation
 	if !qte:
 		qte = BAR_QTE.instantiate()
 		$QTESpawn.add_child(qte)
 		qte.hit.connect(_tree_hit)
 
-		# Tell player to animate chopping
 		player.start_cutting_animation()
 
 	else:
-		# Additional presses = QTE attempts
 		qte.attempt_hit()
-
 
 func _tree_hit():
 	AudioManager.playWoodHit()
@@ -52,9 +45,6 @@ func _tree_hit():
 
 	if health <= 0:
 		_tree_die()
-
-	# QTE bar handles rhythm, no shake needed here
-
 
 func _tree_die():
 	AudioManager.playQTESuccess()
@@ -121,22 +111,18 @@ func _tree_die():
 		qte.queue_free()
 		qte = null
 
-	# Stop chopping animation
 	var player := get_tree().get_first_node_in_group("player")
 	if player:
 		player.stop_cutting_animation()
 
 	queue_free.call_deferred()
 
-
 func _on_player_left_area(player: Player) -> void:
-	# Player walks away mid-chop
 	if qte:
 		qte.queue_free()
 		qte = null
 
 	player.stop_cutting_animation()
-
 
 func save() -> Dictionary:
 	var save_data := {
