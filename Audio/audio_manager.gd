@@ -2,6 +2,7 @@ extends Node2D
 
 @export var mute: bool = false
 var drop: int =1
+var dep: int =1
 
 func playItemPickUp():
 	if not mute:
@@ -65,3 +66,14 @@ func playDrop():
 func _on_drop_timer_timeout() -> void:
 	drop = 1
 	
+	
+func playDeposit():
+	if not mute:
+		if dep == 1:
+			$Deposit1.play()
+		elif dep == 2:
+			$Deposit2.play()
+		elif dep == 3:
+			$Deposit3.play()
+			dep = 0
+		dep +=1
