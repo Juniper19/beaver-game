@@ -1,0 +1,81 @@
+[gd_scene load_steps=19 format=3 uid="uid://bgy687xcjd37g"]
+
+[ext_resource type="Script" uid="uid://b5h4c2m53e0y5" path="res://Audio/audio_manager.gd" id="1_i84i0"]
+[ext_resource type="AudioStream" uid="uid://tg2r87hii353" path="res://Audio/SFX/item-pickup-sound.ogg" id="2_150o5"]
+[ext_resource type="AudioStream" uid="uid://d428whoww4ei" path="res://Audio/SFX/QTE_Success1.wav" id="3_0wlvu"]
+[ext_resource type="AudioStream" uid="uid://12va87ut42up" path="res://Audio/SFX/QTE_Success2.wav" id="4_dxlp5"]
+[ext_resource type="AudioStream" uid="uid://dudnmd2qgcfxa" path="res://Audio/SFX/QTE_Success3.wav" id="5_acx60"]
+[ext_resource type="AudioStream" uid="uid://d11ohbqnhryup" path="res://Audio/SFX/MenuSound.wav" id="6_dxlp5"]
+[ext_resource type="AudioStream" uid="uid://n0r2kftn5jan" path="res://Audio/SFX/RockHit.wav" id="7_acx60"]
+[ext_resource type="AudioStream" uid="uid://bidgem1t1v4ex" path="res://Audio/SFX/Whoosh.mp3" id="8_acx60"]
+[ext_resource type="AudioStream" uid="uid://hm31t8k7dxa3" path="res://Audio/SFX/QuotaMet.wav" id="8_kfdml"]
+[ext_resource type="AudioStream" uid="uid://dcy12kq22aupj" path="res://Audio/SFX/WoodHit.wav" id="9_acx60"]
+[ext_resource type="AudioStream" uid="uid://bmrrxonqynym" path="res://Audio/SFX/Drop1.wav" id="9_lp40b"]
+[ext_resource type="AudioStream" uid="uid://btk6oc5utxetm" path="res://Audio/SFX/Drop2.wav" id="10_0wnxe"]
+[ext_resource type="AudioStream" uid="uid://to306q0djqj0" path="res://Audio/SFX/Drop3.wav" id="11_ywt6p"]
+[ext_resource type="AudioStream" uid="uid://bqmtm65bcat71" path="res://Audio/SFX/Drop4.wav" id="12_7ua7b"]
+[ext_resource type="AudioStream" uid="uid://djkfwbnsey1jt" path="res://Audio/SFX/Drop5.wav" id="13_v10l4"]
+[ext_resource type="AudioStream" uid="uid://dxc4i7muwkdkb" path="res://Audio/SFX/Deposit1.wav" id="16_ywt6p"]
+[ext_resource type="AudioStream" uid="uid://rifokb1bvstl" path="res://Audio/SFX/Deposit2.wav" id="17_7ua7b"]
+[ext_resource type="AudioStream" uid="uid://dvv1ryca12h25" path="res://Audio/SFX/Deposit3.wav" id="18_v10l4"]
+
+[node name="AudioManager" type="Node2D"]
+script = ExtResource("1_i84i0")
+
+[node name="ItemPickUp" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_150o5")
+
+[node name="QTESuccess1" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_0wlvu")
+
+[node name="QTESuccess2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_dxlp5")
+
+[node name="QTESuccess3" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_acx60")
+
+[node name="MenuSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_dxlp5")
+
+[node name="RockHit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_acx60")
+
+[node name="QuotaMet" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_kfdml")
+
+[node name="Drop1" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_lp40b")
+
+[node name="Drop2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_0wnxe")
+
+[node name="Drop3" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_ywt6p")
+
+[node name="Drop4" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_7ua7b")
+
+[node name="Drop5" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_v10l4")
+
+[node name="DropTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Swing" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_acx60")
+volume_db = -7.0
+
+[node name="WoodHit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_acx60")
+volume_db = 3.0
+
+[node name="Deposit1" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_ywt6p")
+
+[node name="Deposit2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("17_7ua7b")
+
+[node name="Deposit3" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("18_v10l4")
+
+[connection signal="timeout" from="DropTimer" to="." method="_on_drop_timer_timeout"]

@@ -4,14 +4,20 @@ extends Node2D
 signal picked_up(by: Node)
 signal dropped(by: Node)
 
-@export var item_name: String = ""
+@onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var interaction_area: InteractionArea = $InteractionArea
 
-@export var interaction_area: InteractionArea
+
+
+@export var data: ItemData
+
+var item_name: String = "NO NAME"
 var _held_by: Node
 
 func _ready():
-	if interaction_area == null:
-		interaction_area = $InteractionArea # ITEM MUST HAVE AN INTERACTION AREA!!
+	if data:
+		item_name = data.name
+		sprite_2d.texture = data.texture
 	
 	interaction_area.interaction.connect(_on_interaction)
 
@@ -27,15 +33,17 @@ func _item_dropped_from_inventory(node: Node2D):
 
 
 func _on_interaction(by: Node):
+	
 	if by is Player:
 		var player: Player = by as Player
-		if player.inventory.add_item(self):
-			picked_up.emit(player)
-			interaction_area.monitorable = false
-			_held_by = player.inventory
-			
-			player.inventory.connect("item_removed", _item_dropped_from_inventory)
-		return
+		if GlobalStats.ExcessChestEntered == false and GlobalStats.QuotaChestEntered == false:
+			if player.inventory.add_item(self) :
+				picked_up.emit(player)
+				interaction_area.monitorable = false
+				_held_by = player.inventory
+				
+				player.inventory.connect("item_removed", _item_dropped_from_inventory)
+			return
 	
 	push_warning("Undandled interaction on item by %s" % by.get_class())
 	

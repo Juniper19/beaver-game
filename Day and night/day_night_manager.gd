@@ -1,5 +1,4 @@
 extends Node
-@export_file("*.tscn") var dam_scene_path: String = "res://Dam/inside_dam.tscn"
 
 #-----------AM/PM Clock related stuff----------------
 @export var day_color: Color = Color(1, 1, 1)
@@ -11,9 +10,10 @@ var current_time: float = 8 * 60.0  # Start at 8:00 AM
 @export var day_start: int = 6 * 60
 @export var night_start: int = 20 * 60
 
-var saved_time_speed: float = 60.0
+var saved_time_speed: float
 var canvas_modulate: CanvasModulate
 var clock_label: Label
+var time_since_day_start: float = 0.0
 
 @onready var warning_label: Label = $UI/WarningLabel
 var has_triggered_2am: bool = false
@@ -26,11 +26,14 @@ func _ready() -> void:
 	canvas_modulate = $CanvasModulate
 	clock_label = $UI/TimerLabel
 	day_count_label = $UI/DayCountLabel
+	saved_time_speed = time_speed
 
 	get_tree().connect("current_scene_changed", Callable(self, "_on_scene_changed"))
 	_on_scene_changed()
 
 func _process(delta: float) -> void:
+	time_since_day_start += delta
+
 	if time_speed == 0:
 		return  # Time paused (in dam)
 
@@ -68,17 +71,22 @@ func _process(delta: float) -> void:
 		warning_label.visible = false
 		
 	# pass out at 2am
-	var cutoff_time = 2 * 60
+	var cutoff_time := 2 * 60  # 2 AM
+	var wake_time := _get_wake_time()
 
-	if current_time >= cutoff_time and current_time < 8 * 60 and not has_triggered_2am:
+	# Pass out only between 2 AM and your actual wake time
+	if current_time >= cutoff_time and current_time < wake_time and not has_triggered_2am:
 		_on_pass_out_time()
 		has_triggered_2am = true
 
-	if current_time >= 8 * 60:
+	# Reset flag after wake time
+	if current_time >= wake_time:
 		has_triggered_2am = false
 
 func _on_new_day():
 	var stats = get_node("/root/GlobalStats")
+	time_since_day_start = 0.0
+
 	stats.day_number += 1
 	print("Day:", stats.day_number)
 	
@@ -92,7 +100,15 @@ func _format_time(minutes: float) -> String:
 	return "%d:%02d %s" % [display_hour, minute, ampm]
 
 func start_new_day() -> void:
-	current_time = 8 * 60  # Reset to 8:00 AM
+	var stats = get_node("/root/GlobalStats")
+
+	# Base start: 8:00 AM
+	var start_minutes: int = (8 * 60) - stats.early_bird_minutes
+
+	# Prevent starting before midnight (0 = 12:00 AM)
+	start_minutes = max(start_minutes, 0)
+
+	current_time = start_minutes
 
 func freeze_time() -> void:
 	saved_time_speed = time_speed
@@ -145,6 +161,9 @@ func _on_pass_out_time():
 	await tween.finished
 
 	# Teleport into dam after passing out
-	var err = get_tree().change_scene_to_file(dam_scene_path)
-	if err != OK:
-		print("Scene change failed")
+	SceneManager.load_scene(SceneManager.Scene.INSIDE_DAM)
+
+func _get_wake_time() -> int:
+	var stats = get_node("/root/GlobalStats")
+	var wake_minutes = (8 * 60) - stats.early_bird_minutes
+	return max(wake_minutes, 0)
