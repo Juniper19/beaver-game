@@ -45,8 +45,11 @@ var excess_chest_storage_names: Array = []
 # Chosen upgrades get removed from the available cards
 var chosen_upgrades: Array[String] = []
 
-var carry_capacity: int = 1  # how many items player can hold at once
+# UPGRADABLE STATS
+var carry_capacity: int = 1
 var move_speed_bonus: int = 0
+var encumbrance_factor: float = 1.0 # 1 is default slow, .5 half as much punishing, etc.
+var extra_rock_chance: float = 0.0
 
 # Called when an upgrade is picked
 # Every upgrade/card passes a dictionary, ie: { "wood_gather_rate": +0.2 }
@@ -62,6 +65,16 @@ func apply_effect(effect: Dictionary) -> void:
 		if key == "move_speed_bonus":
 			move_speed_bonus += float(effect[key])
 			print("MOVE SPEED BONUS NOW =", move_speed_bonus)
+			continue
+			
+		if key == "encumbrance_factor":
+			encumbrance_factor *= float(effect[key])
+			print("Encumbrance factor is now:", encumbrance_factor)
+			continue
+					
+		if key == "extra_rock_chance":
+			extra_rock_chance += float(effect[key])
+			print("Extra rock chance now:", extra_rock_chance)
 			continue
 
 		# Default stat behavior

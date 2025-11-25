@@ -7,6 +7,9 @@ var global_stats: Node = null
 @export var all_cards: Array[Dictionary] = [
 	{"name": "Faster Legs", "desc": "Movement Speed +10%", "effect": {"move_speed_bonus": 1}},
 	{"name": "Ripped!", "desc": "Carry 1 Additional Item", "effect": {"carry_capacity": 1}},
+	{"name": "More Ripped!", "desc": "Carry 2 Additional Items", "effect": {"carry_capacity": 2}},
+	{"name": "Stone Smasher", "desc": "50% chance for rocks to drop an extra", "effect": {"extra_rock_chance": 0.5}},
+	{"name": "Thunder Thighs", "desc": "Item weight affects speed less", "effect": {"encumbrance_factor": .85}},
 ]
 
 @onready var card_ui: CanvasLayer = $CardUI
@@ -40,7 +43,7 @@ func show_three_cards() -> void:
 	for child in card_container.get_children():
 		child.queue_free()
 
-	var selected_cards = _get_random_cards(3)
+	var selected_cards = _get_random_cards(2)
 	for card_data in selected_cards:
 		var card = _create_card(card_data)
 		card_container.add_child(card)
@@ -101,6 +104,9 @@ func _create_card(data: Dictionary) -> Control:
 func _apply_card(data: Dictionary) -> void:
 	if global_stats:
 		global_stats.apply_effect(data["effect"])
+		var player = get_tree().get_first_node_in_group("player")
+		if player:
+			player._calculate_move_speed()
 		if not global_stats.chosen_upgrades.has(data["name"]):
 			global_stats.chosen_upgrades.append(data["name"])
 	else:
