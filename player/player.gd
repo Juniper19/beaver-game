@@ -22,7 +22,9 @@ func _ready():
 
 func _process(_delta: float) -> void:
 	var move_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	
+	if move_direction != Vector2(0.0,0.0):
+		print()
+		AudioManager.playFootsteps()
 	velocity = move_direction * move_speed
 	move_and_slide()
 

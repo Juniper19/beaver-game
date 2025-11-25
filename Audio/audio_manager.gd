@@ -4,6 +4,7 @@ extends Node2D
 var drop: int =1
 var dep: int =1
 var depE: int =1
+var wait: bool = false
 
 func playItemPickUp():
 	if not mute:
@@ -14,9 +15,9 @@ func playQTESuccess():
 		var Random = randf_range(0,3)
 		if Random < 1:
 			$QTESuccess1.play()
-		elif Random > 1 and Random < 2:
+		elif Random >= 1 and Random < 2:
 			$QTESuccess2.play()
-		elif Random > 2:
+		elif Random >= 2:
 			$QTESuccess3.play()
 			
 func playMenuSound():
@@ -95,5 +96,29 @@ func playDepositE():
 			depE = 0
 		depE +=1
 
-func _on_deposit_E_timer_timeout() -> void:
+func _on_deposit_e_timer_timeout() -> void:
 	depE = 1
+	
+func playFootsteps():
+	if not mute and not wait:
+		var Random = randf_range(0,4)
+		if Random < 1:
+			$Footstep1.play()
+			wait = true
+			$FootstepTimer.start()
+		elif Random >= 1 and Random < 2:
+			$Footstep2.play()
+			wait = true
+			$FootstepTimer.start()
+		elif Random >= 2 and Random < 3:
+			$Footstep3.play()
+			wait = true
+			$FootstepTimer.start()
+		elif Random >= 3:
+			$Footstep4.play()
+			wait = true
+			$FootstepTimer.start()
+		
+
+func _on_footstep_timer_timeout() -> void:
+	wait = false
