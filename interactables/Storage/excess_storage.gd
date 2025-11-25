@@ -3,7 +3,7 @@ extends Node2D
 const GlobalStatsScript = preload("res://global/global_stats.gd")
 var global_stats: Node = null
 
-@export var item_separation: Vector2 = Vector2(0.0, -25.0)
+@export var item_separation: Vector2 = Vector2(0.0, -12.0)
 var original: Sprite2D
 
 var storage: Array = []
@@ -91,6 +91,9 @@ func _update_icon() -> void:
 		%Wood.visible = false
 		%Mud.visible = false
 		%Stone.visible = false
+		%OakSeed.visible = false
+		%PineLog.visible = false
+		%AspenLog.visible = false
 		return
 	else:
 		if storage_names[-1] == "Oak Log":

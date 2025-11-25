@@ -1,11 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://mqrrknwtxtd0"]
+[gd_scene load_steps=12 format=3 uid="uid://mqrrknwtxtd0"]
 
 [ext_resource type="Script" uid="uid://cguixmr4uuih2" path="res://interactables/Storage/excess_storage.gd" id="1_64f8w"]
 [ext_resource type="PackedScene" uid="uid://dwafgcp2uqbfl" path="res://interactables/interaction_area.tscn" id="2_kj6is"]
 [ext_resource type="Texture2D" uid="uid://dk20kbr33ftot" path="res://art_assets/placeholder_storage_bin.png" id="3_kgw8d"]
-[ext_resource type="Texture2D" uid="uid://g20tw60w4ooh" path="res://art_assets/placeholder_art/Wood.webp" id="4_kgw8d"]
-[ext_resource type="Texture2D" uid="uid://cly62hiigmmm2" path="res://art_assets/placeholder_art/Mud.webp" id="5_4p85k"]
-[ext_resource type="Texture2D" uid="uid://d8mvxcyphwv8" path="res://art_assets/placeholder_art/stone.webp" id="6_x5e16"]
+[ext_resource type="Texture2D" uid="uid://cwtbcjtvn0g86" path="res://art_assets/items/oak_log.png" id="4_kgw8d"]
+[ext_resource type="Texture2D" uid="uid://bt2eabnqb07si" path="res://art_assets/items/mud.png" id="5_4p85k"]
+[ext_resource type="Texture2D" uid="uid://cucnnj3nxgn3a" path="res://art_assets/items/stone.png" id="6_x5e16"]
+[ext_resource type="Texture2D" uid="uid://1edc18m08705" path="res://art_assets/items/pine_log.png" id="7_x5e16"]
+[ext_resource type="Texture2D" uid="uid://djmdgue4rqchv" path="res://art_assets/items/aspen_log.png" id="8_cm6st"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_64f8w"]
 size = Vector2(40, 40)
@@ -41,32 +43,38 @@ offset_bottom = 50.0
 theme_override_font_sizes/font_size = 40
 text = "Insert Item"
 
-[node name="Wood" type="Sprite2D" parent="InteractionArea"]
-unique_name_in_owner = true
-visible = false
-position = Vector2(0, 2.0000007)
-scale = Vector2(0.010416668, 0.010416668)
-texture = ExtResource("4_kgw8d")
-
 [node name="Mud" type="Sprite2D" parent="InteractionArea"]
 unique_name_in_owner = true
-visible = false
-scale = Vector2(0.020408163, 0.020408163)
+position = Vector2(0.99999994, 0)
+scale = Vector2(1.1428571, 1.1428571)
 texture = ExtResource("5_4p85k")
 
 [node name="Stone" type="Sprite2D" parent="InteractionArea"]
 unique_name_in_owner = true
-visible = false
-position = Vector2(-1, 0)
-scale = Vector2(0.0125, 0.012499996)
+position = Vector2(0, 2)
+scale = Vector2(1.0909096, 1.0909092)
 texture = ExtResource("6_x5e16")
 
 [node name="OakSeed" type="Sprite2D" parent="InteractionArea"]
 unique_name_in_owner = true
-visible = false
-position = Vector2(-1, 0)
-scale = Vector2(0.0125, 0.012499996)
+scale = Vector2(0.75, 0.74999976)
 texture = SubResource("GradientTexture2D_h88ec")
+
+[node name="Wood" type="Sprite2D" parent="InteractionArea"]
+unique_name_in_owner = true
+position = Vector2(0, 2.3841858e-07)
+scale = Vector2(0.9523804, 0.952381)
+texture = ExtResource("4_kgw8d")
+
+[node name="PineLog" type="Sprite2D" parent="InteractionArea"]
+unique_name_in_owner = true
+position = Vector2(0, 1)
+texture = ExtResource("7_x5e16")
+
+[node name="AspenLog" type="Sprite2D" parent="InteractionArea"]
+unique_name_in_owner = true
+position = Vector2(0, 3)
+texture = ExtResource("8_cm6st")
 
 [node name="ItemStack" type="Node2D" parent="InteractionArea"]
 unique_name_in_owner = true
