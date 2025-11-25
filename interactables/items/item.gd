@@ -7,6 +7,8 @@ signal dropped(by: Node)
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var interaction_area: InteractionArea = $InteractionArea
 
+
+
 @export var data: ItemData
 
 var item_name: String = "NO NAME"

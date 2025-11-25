@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dwafgcp2uqbfl" path="res://interactables/interaction_area.tscn" id="1_0r45q"]
 [ext_resource type="Script" uid="uid://c0tloxxr1mgcg" path="res://interactables/Storage/chest.gd" id="1_13hgd"]
-[ext_resource type="Texture2D" uid="uid://0vb6glfk62gx" path="res://art_assets/Chest.png" id="2_cs47r"]
+[ext_resource type="Texture2D" uid="uid://0vb6glfk62gx" path="res://art_assets/placeholder_art/Chest.png" id="2_cs47r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_13hgd"]
 size = Vector2(66, 64)
