@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chpk0mpy1kijj"
-path="res://.godot/imported/beaver_walk_up.png-a073551f7599f8a4f27e3398c4b63aec.ctex"
+uid="uid://6vt4duvytdaw"
+path="res://.godot/imported/beaver_move_2.png-c4075893a006373ed542d358676fa530.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_assets/beaver/beaver_walk_up.png"
-dest_files=["res://.godot/imported/beaver_walk_up.png-a073551f7599f8a4f27e3398c4b63aec.ctex"]
+source_file="res://art_assets/beaver/beaver_move_2.png"
+dest_files=["res://.godot/imported/beaver_move_2.png-c4075893a006373ed542d358676fa530.ctex"]
 
 [params]
 
