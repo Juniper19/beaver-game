@@ -35,6 +35,7 @@ world=""
 dam=""
 daynight=""
 persistent="For stuff that should stay overnight in the world but isn't part of the scene explicitly"
+day_night=""
 
 [gui]
 

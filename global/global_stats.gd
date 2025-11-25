@@ -53,6 +53,8 @@ var extra_rock_chance: float = 0.0
 var extra_wood_chance: float = 0.0
 var free_quota_miss: int = 0
 var early_bird_minutes: int = 0   # subtract from start time
+var sunrise_spark_duration: float = 0.0   # seconds
+var sunrise_spark_bonus: float = 0.0      # multiplier (e.g. 0.2 = +20%)
 
 # Called when an upgrade is picked
 # Every upgrade/card passes a dictionary, ie: { "wood_gather_rate": +0.2 }
@@ -93,6 +95,14 @@ func apply_effect(effect: Dictionary) -> void:
 		if key == "early_bird_minutes":
 			early_bird_minutes += int(effect[key])
 			print("Early bird bonus now:", early_bird_minutes, "minutes")
+			continue
+			
+		if key == "sunrise_spark_duration":
+			sunrise_spark_duration += float(effect[key])
+			continue
+
+		if key == "sunrise_spark_bonus":
+			sunrise_spark_bonus += float(effect[key])
 			continue
 
 

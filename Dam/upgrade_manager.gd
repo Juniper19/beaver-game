@@ -12,6 +12,7 @@ var global_stats: Node = null
 	{"name": "Thunder Thighs", "desc": "Item weight affects speed less", "effect": {"encumbrance_factor": .85}},
 	{"name": "Dam Insurance", "desc": "The dam is safe from 1 missed quota.", "effect": {"free_quota_miss": 1}},
 	{"name": "Early Bird", "desc": "Start each day 2 hours earlier", "effect": {"early_bird_minutes": 120}},
+	{"name": "Sunrise Spark", "desc": "Move faster for the first 60 seconds of each day", "effect": {"sunrise_spark_duration": 60.0, "sunrise_spark_bonus": 0.20}},
 	{"name": "True Beaver", "desc": "50% chance to get extra wood from trees", "effect": {"extra_wood_chance": 0.5}},
 ]
 

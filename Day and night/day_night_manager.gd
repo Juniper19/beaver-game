@@ -13,6 +13,7 @@ var current_time: float = 8 * 60.0  # Start at 8:00 AM
 var saved_time_speed: float
 var canvas_modulate: CanvasModulate
 var clock_label: Label
+var time_since_day_start: float = 0.0
 
 @onready var warning_label: Label = $UI/WarningLabel
 var has_triggered_2am: bool = false
@@ -31,6 +32,8 @@ func _ready() -> void:
 	_on_scene_changed()
 
 func _process(delta: float) -> void:
+	time_since_day_start += delta
+
 	if time_speed == 0:
 		return  # Time paused (in dam)
 
@@ -82,6 +85,8 @@ func _process(delta: float) -> void:
 
 func _on_new_day():
 	var stats = get_node("/root/GlobalStats")
+	time_since_day_start = 0.0
+
 	stats.day_number += 1
 	print("Day:", stats.day_number)
 	
