@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bgy687xcjd37g"]
+[gd_scene load_steps=19 format=3 uid="uid://bgy687xcjd37g"]
 
 [ext_resource type="Script" uid="uid://b5h4c2m53e0y5" path="res://Audio/audio_manager.gd" id="1_i84i0"]
 [ext_resource type="AudioStream" uid="uid://tg2r87hii353" path="res://Audio/SFX/item-pickup-sound.ogg" id="2_150o5"]
@@ -15,6 +15,9 @@
 [ext_resource type="AudioStream" uid="uid://to306q0djqj0" path="res://Audio/SFX/Drop3.wav" id="11_ywt6p"]
 [ext_resource type="AudioStream" uid="uid://bqmtm65bcat71" path="res://Audio/SFX/Drop4.wav" id="12_7ua7b"]
 [ext_resource type="AudioStream" uid="uid://djkfwbnsey1jt" path="res://Audio/SFX/Drop5.wav" id="13_v10l4"]
+[ext_resource type="AudioStream" uid="uid://dxc4i7muwkdkb" path="res://Audio/SFX/Deposit1.wav" id="16_ywt6p"]
+[ext_resource type="AudioStream" uid="uid://rifokb1bvstl" path="res://Audio/SFX/Deposit2.wav" id="17_7ua7b"]
+[ext_resource type="AudioStream" uid="uid://dvv1ryca12h25" path="res://Audio/SFX/Deposit3.wav" id="18_v10l4"]
 
 [node name="AudioManager" type="Node2D"]
 script = ExtResource("1_i84i0")
@@ -65,5 +68,14 @@ volume_db = -7.0
 [node name="WoodHit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("9_acx60")
 volume_db = 3.0
+
+[node name="Deposit1" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_ywt6p")
+
+[node name="Deposit2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("17_7ua7b")
+
+[node name="Deposit3" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("18_v10l4")
 
 [connection signal="timeout" from="DropTimer" to="." method="_on_drop_timer_timeout"]
