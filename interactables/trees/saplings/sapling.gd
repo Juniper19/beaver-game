@@ -2,6 +2,7 @@ extends Node2D
 
 @export var days_to_grow: int = 1
 var planted_day: int = 0
+const OAK_TREE = preload("uid://dps300dufah0")
 
 func _ready() -> void:
 	planted_day = GlobalStats.day_number
@@ -14,6 +15,7 @@ func _grow_into_tree() -> void:
 	var tree_scene: PackedScene = preload("res://interactables/trees/tree.tscn")
 	var tree := tree_scene.instantiate()
 	tree.global_position = global_position
+	tree.data = OAK_TREE
 	get_tree().current_scene.add_child(tree)
 	queue_free()
 
