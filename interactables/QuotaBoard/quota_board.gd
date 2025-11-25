@@ -3,6 +3,7 @@ const GlobalStatsScript = preload("res://global/global_stats.gd")
 const WorldScript = preload("res://Day and night/day_night_manager.gd")
 var global_stats: Node = null
 var world: Node = null
+var failed_quota: bool = false
 
 @onready var vbox: VBoxContainer = $InteractionArea/BoardUI/PanelContainer/VBoxContainer
 #CHANGE THESE 3 VALUES BELOW FOR BALANCING
@@ -49,12 +50,14 @@ func _process(_delta: float) -> void:
 	%PhysLabel3.text = "Stone " + str(GlobalStats.stone) + "/" + str(GlobalStats.ReqStone)
 	#If player failed to meet the quota the day before
 	if GlobalStats.day_number != Day:
-		var failed_quota := (
-			GlobalStats.wood < GlobalStats.ReqWood or
-			GlobalStats.mud < GlobalStats.ReqMud or
-			GlobalStats.stone < GlobalStats.ReqStone
-		)
-
+		if GlobalStats.DayOne == false:
+			if(
+				GlobalStats.wood < GlobalStats.ReqWood or
+				GlobalStats.mud < GlobalStats.ReqMud or
+				GlobalStats.stone < GlobalStats.ReqStone
+			):
+				failed_quota = true
+		
 		if failed_quota:
 			if GlobalStats.free_quota_miss > 0:
 				# Consume the free pass

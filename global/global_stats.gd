@@ -9,6 +9,7 @@ var water_level: int = 0
 var wood_gather_rate = 1
 var day_number: int = 0
 var current_season: String = ""
+var DayOne: bool = true
 
 ## Upgradable Stats
 var rock_min_damage: float = 0

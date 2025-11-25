@@ -37,4 +37,6 @@ func load_scene(target_scene: Scene) -> void:
 	current_scene = get_tree().current_scene
 
 	if target_scene == Scene.INSIDE_DAM:
+		if GlobalStats.DayOne == true:
+			GlobalStats.DayOne=false
 		AudioManager.stopMusic1()
