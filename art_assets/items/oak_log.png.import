@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvbhy63fw8h1n"
-path="res://.godot/imported/beaver_walk_lr.png-cb52cfef21e87592b194845b4ff384ec.ctex"
+uid="uid://cwtbcjtvn0g86"
+path="res://.godot/imported/oak_log.png-72442ad4c89506ef11479db529c5e320.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_assets/beaver_walk_lr.png"
-dest_files=["res://.godot/imported/beaver_walk_lr.png-cb52cfef21e87592b194845b4ff384ec.ctex"]
+source_file="res://art_assets/items/oak_log.png"
+dest_files=["res://.godot/imported/oak_log.png-72442ad4c89506ef11479db529c5e320.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3hu18trqt3gw"
-path="res://.godot/imported/rock_meter_bottom.png-243f9b652b6ab1b4970f8f1a9b40868a.ctex"
+uid="uid://dk20kbr33ftot"
+path="res://.godot/imported/placeholder_storage_bin.png-e19b0936843cb6739d17df3c53d59a35.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_assets/rock_meter_bottom.png"
-dest_files=["res://.godot/imported/rock_meter_bottom.png-243f9b652b6ab1b4970f8f1a9b40868a.ctex"]
+source_file="res://art_assets/placeholder_storage_bin.png"
+dest_files=["res://.godot/imported/placeholder_storage_bin.png-e19b0936843cb6739d17df3c53d59a35.ctex"]
 
 [params]
 

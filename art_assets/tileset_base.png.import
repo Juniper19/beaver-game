@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://di8abb8rbgff1"
-path="res://.godot/imported/calendar_circle.png-658f5b5bcb25601af03e4c9e929118ec.ctex"
+uid="uid://bdq11b35q2usn"
+path="res://.godot/imported/tileset_base.png-7820831f85d947d5d8a01c547c284a71.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_assets/calendar_circle.png"
-dest_files=["res://.godot/imported/calendar_circle.png-658f5b5bcb25601af03e4c9e929118ec.ctex"]
+source_file="res://art_assets/tileset_base.png"
+dest_files=["res://.godot/imported/tileset_base.png-7820831f85d947d5d8a01c547c284a71.ctex"]
 
 [params]
 

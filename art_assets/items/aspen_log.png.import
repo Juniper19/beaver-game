@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cflcfqg1m4jlw"
-path="res://.godot/imported/rock_meter_top.png-14bb691e90616d32805e97339e108e11.ctex"
+uid="uid://djmdgue4rqchv"
+path="res://.godot/imported/aspen_log.png-cc5b6bb9f03813d53cd5e7b2c83c9cc9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_assets/rock_meter_top.png"
-dest_files=["res://.godot/imported/rock_meter_top.png-14bb691e90616d32805e97339e108e11.ctex"]
+source_file="res://art_assets/items/aspen_log.png"
+dest_files=["res://.godot/imported/aspen_log.png-cc5b6bb9f03813d53cd5e7b2c83c9cc9.ctex"]
 
 [params]
 

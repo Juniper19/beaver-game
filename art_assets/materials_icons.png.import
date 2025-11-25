@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c2y13ploxajol"
-path="res://.godot/imported/beaver_mine.png-a42a0373e2adb1d2b1f85235fc0533aa.ctex"
+uid="uid://vkkyipxrvwm8"
+path="res://.godot/imported/materials_icons.png-c7d79826f7f8f46a0f854e811d824bf4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_assets/beaver_mine.png"
-dest_files=["res://.godot/imported/beaver_mine.png-a42a0373e2adb1d2b1f85235fc0533aa.ctex"]
+source_file="res://art_assets/materials_icons.png"
+dest_files=["res://.godot/imported/materials_icons.png-c7d79826f7f8f46a0f854e811d824bf4.ctex"]
 
 [params]
 

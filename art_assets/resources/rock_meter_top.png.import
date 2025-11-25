@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d31a5a3rq454m"
-path="res://.godot/imported/tree_meter_top.png-ee6e9dd7a862e25b8100f12478d5cd93.ctex"
+uid="uid://cflcfqg1m4jlw"
+path="res://.godot/imported/rock_meter_top.png-0a44547fe9a1cd917ef4c28749bd9c88.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_assets/tree_meter_top.png"
-dest_files=["res://.godot/imported/tree_meter_top.png-ee6e9dd7a862e25b8100f12478d5cd93.ctex"]
+source_file="res://art_assets/resources/rock_meter_top.png"
+dest_files=["res://.godot/imported/rock_meter_top.png-0a44547fe9a1cd917ef4c28749bd9c88.ctex"]
 
 [params]
 

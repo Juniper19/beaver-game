@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpd7cvugqj155"
-path="res://.godot/imported/tree_meter_bottom.png-0ce5deb6dc3e1e6c3f34b9af60a66a8e.ctex"
+uid="uid://chpk0mpy1kijj"
+path="res://.godot/imported/beaver_walk_up.png-a073551f7599f8a4f27e3398c4b63aec.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_assets/tree_meter_bottom.png"
-dest_files=["res://.godot/imported/tree_meter_bottom.png-0ce5deb6dc3e1e6c3f34b9af60a66a8e.ctex"]
+source_file="res://art_assets/beaver/beaver_walk_up.png"
+dest_files=["res://.godot/imported/beaver_walk_up.png-a073551f7599f8a4f27e3398c4b63aec.ctex"]
 
 [params]
 

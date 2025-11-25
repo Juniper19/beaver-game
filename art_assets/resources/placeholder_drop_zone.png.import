@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gkaxmdcmnrb2"
-path="res://.godot/imported/beaver_cut.png-efad0a6bec14e9bc561f7ad6c5e426a0.ctex"
+uid="uid://bur1yotsqh5es"
+path="res://.godot/imported/placeholder_drop_zone.png-a08e6b8d4ade02ecf1d3ce65080f7b2f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_assets/beaver_cut.png"
-dest_files=["res://.godot/imported/beaver_cut.png-efad0a6bec14e9bc561f7ad6c5e426a0.ctex"]
+source_file="res://art_assets/resources/placeholder_drop_zone.png"
+dest_files=["res://.godot/imported/placeholder_drop_zone.png-a08e6b8d4ade02ecf1d3ce65080f7b2f.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://khx5p1asxw70"
-path="res://.godot/imported/StartingTiles.png-de6e42dbf029cd6265366cf5c2419cf5.ctex"
+uid="uid://bt2eabnqb07si"
+path="res://.godot/imported/mud.png-c3c614c9263764c1495792a1c384f71c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_assets/StartingTiles.png"
-dest_files=["res://.godot/imported/StartingTiles.png-de6e42dbf029cd6265366cf5c2419cf5.ctex"]
+source_file="res://art_assets/items/mud.png"
+dest_files=["res://.godot/imported/mud.png-c3c614c9263764c1495792a1c384f71c.ctex"]
 
 [params]
 

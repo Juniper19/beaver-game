@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://y6b3rj14lomi"
-path="res://.godot/imported/calendar_dates.png-4e62430c44b2d68664f3fbdad891759e.ctex"
+uid="uid://gkaxmdcmnrb2"
+path="res://.godot/imported/beaver_cut.png-4f58104d09cd6a09ac6d3cd7e0e1241b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_assets/calendar_dates.png"
-dest_files=["res://.godot/imported/calendar_dates.png-4e62430c44b2d68664f3fbdad891759e.ctex"]
+source_file="res://art_assets/beaver/beaver_cut.png"
+dest_files=["res://.godot/imported/beaver_cut.png-4f58104d09cd6a09ac6d3cd7e0e1241b.ctex"]
 
 [params]
 

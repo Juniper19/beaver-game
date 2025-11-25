@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://esupluarx645"
-path="res://.godot/imported/beaver_walk_down.png-f71e0a0bdca4f701c81a6dd7f727302a.ctex"
+uid="uid://c2y13ploxajol"
+path="res://.godot/imported/beaver_mine.png-f6db8f9b4331e6ea64df0f56927d32bb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_assets/beaver_walk_down.png"
-dest_files=["res://.godot/imported/beaver_walk_down.png-f71e0a0bdca4f701c81a6dd7f727302a.ctex"]
+source_file="res://art_assets/beaver/beaver_mine.png"
+dest_files=["res://.godot/imported/beaver_mine.png-f6db8f9b4331e6ea64df0f56927d32bb.ctex"]
 
 [params]
 
