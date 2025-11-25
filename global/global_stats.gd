@@ -51,6 +51,7 @@ var move_speed_bonus: int = 0
 var encumbrance_factor: float = 1.0 # 1 is default slow, .5 half as much punishing, etc.
 var extra_rock_chance: float = 0.0
 var extra_wood_chance: float = 0.0
+var free_quota_miss: int = 0
 
 # Called when an upgrade is picked
 # Every upgrade/card passes a dictionary, ie: { "wood_gather_rate": +0.2 }
@@ -82,6 +83,12 @@ func apply_effect(effect: Dictionary) -> void:
 			extra_wood_chance += float(effect[key])
 			print("Extra wood chance now:", extra_wood_chance)
 			continue
+
+		if key == "free_quota_miss":
+			free_quota_miss += int(effect[key])
+			print("Free quota misses now:", free_quota_miss)
+			continue
+
 
 		# Default stat behavior
 		if key in get_property_names():
