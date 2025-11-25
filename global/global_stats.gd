@@ -46,7 +46,7 @@ var excess_chest_storage_names: Array = []
 var chosen_upgrades: Array[String] = []
 
 # UPGRADABLE STATS
-var carry_capacity: int = 1
+var carry_capacity: int = 3
 var move_speed_bonus: int = 0
 var encumbrance_factor: float = 1.0 # 1 is default slow, .5 half as much punishing, etc.
 var extra_rock_chance: float = 0.0

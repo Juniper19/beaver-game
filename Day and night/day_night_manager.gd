@@ -113,6 +113,7 @@ func start_new_day() -> void:
 func freeze_time() -> void:
 	saved_time_speed = time_speed
 	time_speed = 0
+	
 
 func resume_time() -> void:
 	time_speed = saved_time_speed
@@ -125,11 +126,13 @@ func _on_scene_changed() -> void:
 	if scene.is_in_group("dam"):
 		# Inside dam, stop clock + hide UI
 		freeze_time()
+		AudioManager.stopMusic1()
 
 	elif scene.is_in_group("world"):
 		# In outdoor world, show and reset new day
 		resume_time()
 		start_new_day()
+		AudioManager.playMusic1()
 
 	else:
 		# Any other scene, default pause and hide UI CAN CHANGE THIS IF WE WANT

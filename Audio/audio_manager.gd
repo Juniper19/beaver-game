@@ -3,6 +3,8 @@ extends Node2D
 @export var mute: bool = false
 var drop: int =1
 var dep: int =1
+var depE: int =1
+var wait: bool = false
 
 func playItemPickUp():
 	if not mute:
@@ -13,9 +15,9 @@ func playQTESuccess():
 		var Random = randf_range(0,3)
 		if Random < 1:
 			$QTESuccess1.play()
-		elif Random > 1 and Random < 2:
+		elif Random >= 1 and Random < 2:
 			$QTESuccess2.play()
-		elif Random > 2:
+		elif Random >= 2:
 			$QTESuccess3.play()
 			
 func playMenuSound():
@@ -48,18 +50,17 @@ func playQuotaMet():
 	
 func playDrop():
 	if not mute:
-		print(drop)
 		$DropTimer.start()
 		if drop == 1:
-			$Drop1.play()
+			$Drop5.play()
 		elif drop == 2:
-			$Drop2.play()
+			$Drop4.play()
 		elif drop == 3:
 			$Drop3.play()
 		elif drop == 4:
-			$Drop4.play()
+			$Drop2.play()
 		elif drop == 5:
-			$Drop5.play()
+			$Drop1.play()
 			drop = 0
 		drop += 1
 
@@ -69,6 +70,7 @@ func _on_drop_timer_timeout() -> void:
 	
 func playDeposit():
 	if not mute:
+		$DepositTimer.start()
 		if dep == 1:
 			$Deposit1.play()
 		elif dep == 2:
@@ -77,3 +79,53 @@ func playDeposit():
 			$Deposit3.play()
 			dep = 0
 		dep +=1
+
+func _on_deposit_timer_timeout() -> void:
+	dep = 1
+	
+	
+func playDepositE():
+	if not mute:
+		$DepositETimer.start()
+		if depE == 1:
+			$DepositE1.play()
+		elif depE == 2:
+			$DepositE2.play()
+		elif depE == 3:
+			$DepositE3.play()
+			depE = 0
+		depE +=1
+
+func _on_deposit_e_timer_timeout() -> void:
+	depE = 1
+	
+func playFootsteps():
+	if not mute and not wait:
+		var Random = randf_range(0,4)
+		if Random < 1:
+			$Footstep1.play()
+			wait = true
+			$FootstepTimer.start()
+		elif Random >= 1 and Random < 2:
+			$Footstep2.play()
+			wait = true
+			$FootstepTimer.start()
+		elif Random >= 2 and Random < 3:
+			$Footstep3.play()
+			wait = true
+			$FootstepTimer.start()
+		elif Random >= 3:
+			$Footstep4.play()
+			wait = true
+			$FootstepTimer.start()
+		
+
+func _on_footstep_timer_timeout() -> void:
+	wait = false
+	
+func playMusic1():
+	if not mute:
+		$Music1.play()
+		
+func stopMusic1():
+	$Music1.stop()
