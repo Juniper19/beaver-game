@@ -45,16 +45,27 @@ var excess_chest_storage_names: Array = []
 # Chosen upgrades get removed from the available cards
 var chosen_upgrades: Array[String] = []
 
+var carry_capacity: int = 2  # how many items player can hold at once
+
 # Called when an upgrade is picked
 # Every upgrade/card passes a dictionary, ie: { "wood_gather_rate": +0.2 }
 func apply_effect(effect: Dictionary) -> void:
 	for key in effect.keys():
+		
+		# Special case: carry capacity
+		if key == "carry_capacity":
+			carry_capacity += int(effect[key])
+			print("Carry Capacity increased to:", carry_capacity)
+			continue
+		
+		# Default stat behavior
 		if key in get_property_names():
 			var old_value = get(key)
 			set(key, old_value + effect[key])
 			print("Stat changed:", key, "→", get(key))
 		else:
 			push_warning("Unknown stat: %s" % key)
+
 
 func get_property_names() -> Array[String]:
 	var names: Array[String] = []

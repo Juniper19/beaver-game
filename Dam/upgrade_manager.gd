@@ -5,11 +5,8 @@ var global_stats: Node = null
 
 # ----------CARD OPTIONS-----------------
 @export var all_cards: Array[Dictionary] = [
-	{"name": "Stronger Teeth", "desc": "Wood gathering +20%", "effect": {"wood_gather_rate": 0.2}},
-	{"name": "Bigger Lungs", "desc": "Stamina +15", "effect": {"stamina": 15.0}},
-	{"name": "Polished Dam", "desc": "Dam strength +0.3", "effect": {"dam_strength": 0.3}},
-	{"name": "Streamline", "desc": "Movement speed +10", "effect": {"speed": 10.0}},
-	{"name": "Bigger Storage", "desc": "Storage +40%", "effect": {"StorageLimit": 2}},
+	{"name": "Faster Legs", "desc": "Movement Speed +10%", "effect": {"wood_gather_rate": 0.2}},
+	{"name": "Ripped!", "desc": "Carry 1 Additional Item", "effect": {"carry_capacity": 1}},
 ]
 
 @onready var card_ui: CanvasLayer = $CardUI
