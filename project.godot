@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Beaver Game"
-run/main_scene="uid://cl1jmkdurg2bg"
+run/main_scene="uid://cdqen5kv8kmhx"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
