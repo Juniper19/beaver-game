@@ -29,9 +29,12 @@ func load_scene(target_scene: Scene) -> void:
 	var current_scene: Node = get_tree().current_scene
 	if current_scene.has_method("save"):
 		current_scene.call("save")
-
+	 
 	var error = get_tree().change_scene_to_file(target_path)
 	if error != OK:
 		push_error("Error loading scene: ", error)
 		return
 	current_scene = get_tree().current_scene
+
+	if target_scene == Scene.INSIDE_DAM:
+		AudioManager.stopMusic1()
