@@ -46,13 +46,34 @@ func _unhandled_key_input(event): # unhandled? maybe just use _input? _unhandled
 		if GlobalStats.ExcessChestEntered == false and GlobalStats.QuotaChestEntered == false:
 			inventory.drop_top_item()
 
-func _calculate_move_speed():
-	move_speed = base_move_speed * pow(speed_mult_per_item, inventory.get_items().size())
+func _calculate_move_speed() -> void:
+	var gs = get_tree().root.get_node("GlobalStats")
+	var day_night = get_tree().get_first_node_in_group("day_night")
+
+	var item_count: int = inventory.get_items().size()
+
+	# Encumbrance multiplier (Thunder Thighs)
+	var effective_mult_per_item: float = lerp(
+		1.0,
+		speed_mult_per_item,
+		gs.encumbrance_factor
+	)
+
+	# ----- BASE MOVEMENT -----
+	move_speed = (
+		base_move_speed
+		* (1.0 + gs.move_speed_bonus)
+		* pow(effective_mult_per_item, item_count)
+	)
+
+	# ----- SUNRISE SPARK BONUS -----
+	if day_night and gs.sunrise_spark_duration > 0.0:
+		if day_night.time_since_day_start < gs.sunrise_spark_duration:
+			move_speed *= (1.0 + gs.sunrise_spark_bonus)
 
 
 func _on_player_inventory_item_added(_item):
 	_calculate_move_speed()
-
 
 func _on_player_inventory_item_removed(_item):
 	_calculate_move_speed()

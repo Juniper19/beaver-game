@@ -48,6 +48,12 @@ func _on_item_from_excess_chest(item_data) -> void:
 
 # Returns if successful
 func add_item(item: Node2D) -> bool:
+	var gs = get_tree().root.get_node("GlobalStats")
+
+	if inventory_items.size() >= gs.carry_capacity:
+		print("Inventory full! Cannot carry more items.")
+		return false
+
 	AudioManager.playItemPickUp()
 	if _blacklist.has(item):
 		return false

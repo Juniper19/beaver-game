@@ -43,19 +43,21 @@ func _tree_hit():
 		qte.queue_free()
 		qte = null
 
-
 func _tree_die():
 	AudioManager.playQTESuccess()
 	$Collider.disabled = true
 	var rect: Rect2 = drop_area.shape.get_rect()
 	var weight_sum: float = 0
 
+	# Calculate total weights
 	for v: float in data.drops.values():
 		weight_sum += v
-	
+
+	# --- Normal drops ---
 	for i in data.drop_amount:
-		var random_drop: ItemData
+		var random_drop: ItemData = null
 		var rnd = randf_range(0.0, weight_sum)
+		
 		for drop: ItemData in data.drops.keys():
 			var weight = data.drops[drop]
 			if rnd < weight:
@@ -65,7 +67,7 @@ func _tree_die():
 		
 		var random_pos: Vector2 = Vector2(
 			randf_range(rect.position.x, rect.position.x + rect.size.x),
-			randf_range(rect.position.y, rect.position.y + rect.size.y),
+			randf_range(rect.position.y, rect.position.y + rect.size.y)
 		) + drop_area.global_position
 		
 		if !random_drop:
@@ -77,6 +79,24 @@ func _tree_die():
 		item.data = random_drop
 		get_tree().current_scene.add_child(item)
 		item.position = random_pos
+
+	# --- EXTRA DROP UPGRADE (Lumber Legend) ---
+	var gs = get_node("/root/GlobalStats")
+
+	if randf() < gs.extra_wood_chance:
+		# Drop ONE extra wood item (whatever the first drop type is)
+		for drop: ItemData in data.drops.keys():
+			var random_pos: Vector2 = Vector2(
+				randf_range(rect.position.x, rect.position.x + rect.size.x),
+				randf_range(rect.position.y, rect.position.y + rect.size.y)
+			) + drop_area.global_position
+			
+			var item_scene = preload("res://interactables/items/item.tscn")
+			var item: Item = item_scene.instantiate()
+			item.data = drop
+			get_tree().current_scene.add_child(item)
+			item.position = random_pos
+			break  # only one extra
 	queue_free.call_deferred()
 
 func _on_player_left_area(_player: Player) -> void:
