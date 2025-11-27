@@ -26,7 +26,7 @@ func save() -> Dictionary:
 		"position_y": global_position.y,
 		"is_sapling": true, 
 		"planted_day": planted_day,
-		"days_to_grow": days_to_grow
+		"days_to_grow": days_to_grow - 1 # grow!
 	}
 
 func load(save_data: Dictionary):

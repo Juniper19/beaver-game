@@ -241,7 +241,7 @@ inventory = NodePath("PlayerInventory")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_q28gw")
-animation = &"walk_up"
+animation = &"idle_side"
 
 [node name="PlaceholderSprite" type="Sprite2D" parent="AnimatedSprite2D"]
 visible = false

@@ -21,9 +21,9 @@ func _process(_delta: float) -> void:
 	var move_dir: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if move_dir != Vector2(0.0,0.0):
 		AudioManager.playFootsteps()
-	velocity = move_dir * move_speed
+	velocity = lerp(velocity, move_dir * move_speed, 0.09)
 	move_and_slide()
-
+	
 	_update_anim(move_dir)
 
 func _update_anim(dir: Vector2) -> void:
@@ -35,7 +35,7 @@ func _update_anim(dir: Vector2) -> void:
 		sprite.play("cut")
 		return
 
-	if dir == Vector2.ZERO:
+	if dir.is_zero_approx():
 		if last_dir.x != 0:
 			sprite.play("idle_side")
 			sprite.flip_h = last_dir.x > 0
