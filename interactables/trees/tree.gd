@@ -1,3 +1,4 @@
+@tool
 class_name PhysicalTree
 extends StaticBody2D
 
@@ -9,9 +10,18 @@ var qte: BarQTE = null
 
 var health = 5.0
 
-@export var data: TreeData
+@export var data: TreeData:
+	set(value):
+		data = value
+		if Engine.is_editor_hint() and value and is_inside_tree():
+			var sprite_node := $Sprite2D
+			if sprite_node:
+				sprite_node.texture = value.texture_mature
 
 func _ready():
+	if Engine.is_editor_hint():
+		return
+	
 	if data:
 		_set_data(data)
 	else:

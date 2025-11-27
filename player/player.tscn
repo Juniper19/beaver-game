@@ -265,7 +265,7 @@ scale = Vector2(2, 2)
 position_smoothing_enabled = true
 
 [node name="PlayerInventory" parent="." instance=ExtResource("3_g1dw6")]
-position = Vector2(0, -24)
+position = Vector2(0, -5)
 
 [connection signal="item_added" from="PlayerInventory" to="." method="_on_player_inventory_item_added"]
 [connection signal="item_removed" from="PlayerInventory" to="." method="_on_player_inventory_item_removed"]

@@ -7,7 +7,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_7ml51"]
 radius = 20.0
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_tff1d"]
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_c37nf"]
 size = Vector2(32, 32)
 
 [node name="Item" type="Node2D"]
@@ -23,6 +23,6 @@ metadata/_custom_type_script = "uid://diekxh66yt803"
 shape = SubResource("CircleShape2D_7ml51")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("PlaceholderTexture2D_tff1d")
+texture = SubResource("PlaceholderTexture2D_c37nf")
 
 [connection signal="interaction" from="InteractionArea" to="." method="_on_interaction_area_interaction"]
