@@ -164,7 +164,7 @@ func _on_pass_out_time():
 	await tween.finished
 
 	# Teleport into dam after passing out
-	SceneManager.load_scene(SceneManager.Scene.INSIDE_DAM)
+	SceneManager.load_scene(SceneManager.Scene.INSIDE_DAM, SceneManager.Transition.CIRCLE)
 
 func _get_wake_time() -> int:
 	var stats = get_node("/root/GlobalStats")

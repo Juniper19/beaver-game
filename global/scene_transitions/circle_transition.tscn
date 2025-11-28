@@ -1,0 +1,81 @@
+[gd_scene load_steps=8 format=3 uid="uid://bc7t6gr8ow85a"]
+
+[ext_resource type="Shader" uid="uid://bwp5of6fyry5b" path="res://global/scene_transitions/circle_transition.gdshader" id="1_cv1et"]
+[ext_resource type="Script" uid="uid://glfcib4ok1ty" path="res://global/scene_transitions/scene_transition.gd" id="1_o3ado"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_o3ado"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o3ado"]
+shader = ExtResource("1_cv1et")
+shader_parameter/center = Vector2(0.5, 0.5)
+shader_parameter/progress = 1.0
+shader_parameter/asp = 1.7777778
+
+[sub_resource type="Animation" id="Animation_ayosu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewport/ColorRect:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_o3ado"]
+resource_name = "transition_out"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewport/ColorRect:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.05, 0.6),
+"transitions": PackedFloat32Array(2.5, 6.155711),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ayosu"]
+_data = {
+&"RESET": SubResource("Animation_ayosu"),
+&"transition_out": SubResource("Animation_o3ado")
+}
+
+[node name="CircleTransition" type="CanvasLayer"]
+layer = 50
+script = ExtResource("1_o3ado")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_o3ado")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(160, 90)
+
+[node name="ColorRect" type="ColorRect" parent="SubViewport"]
+modulate = Color(0, 0, 0, 1)
+material = SubResource("ShaderMaterial_o3ado")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport/ColorRect"]
+root_node = NodePath("../../..")
+libraries = {
+&"": SubResource("AnimationLibrary_ayosu")
+}
