@@ -78,6 +78,7 @@ func load_scene(target_scene: Scene, transition: Transition = Transition.NONE) -
 		
 		
 	if transition_node:
+		await get_tree().scene_changed
 		var player: Player = get_tree().get_first_node_in_group("player")
 		transition_node.play(true, player)
 		
