@@ -111,11 +111,9 @@ func cycle_items(down: bool = true):
 	if down:
 		var item: Item = inventory_items.pop_front()
 		inventory_items.push_back(item)
-		item.z_index = 1_000_000
 	else:
 		var item: Item = inventory_items.pop_back()
 		inventory_items.push_front(item)
-		item.z_index = 1_000_000
 	_reset_item_positions(0.35)
 
 

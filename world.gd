@@ -34,6 +34,7 @@ func spawn_storage_grid(count: int):
 		
 		add_child(Storage)
 
+		@warning_ignore("integer_division")
 		var row = i / Columns
 		var col = i % Columns
 		
@@ -91,7 +92,7 @@ func _load():
 
 		# Firstly, we need to create the object and add it to the tree and set its position.
 		var new_object: Node = load(node_data["filename"]).instantiate()
-		get_node(node_data["parent"]).add_child(new_object)
 		if not new_object.has_method("load"):
 			push_error("Cannot load node without a load function!")
 		new_object.load(node_data)
+		get_node(node_data["parent"]).add_child(new_object)
