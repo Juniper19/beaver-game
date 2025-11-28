@@ -10,7 +10,6 @@ signal dropped(by: Node)
 @onready var interaction_area: InteractionArea = $InteractionArea
 
 
-
 @export var data: ItemData:
 	set(value):
 		data = value

@@ -18,6 +18,7 @@ var health = 5.0
 			if sprite_node:
 				sprite_node.texture = value.texture_mature
 
+
 func _ready():
 	if Engine.is_editor_hint():
 		return
@@ -25,13 +26,16 @@ func _ready():
 	if data:
 		_set_data(data)
 	else:
-		push_warning("Tree made without data!")
+		print_stack()
+		push_error("Tree made without data!")
+
 
 func _set_data(_data: TreeData):
 	data = _data
 	sprite.texture = data.texture_mature
 	sprite.position.y = -sprite.texture.get_height() / 2.0
 	health = data.health
+
 
 func _on_interaction(by: Variant) -> void:
 	if !by is Player:
@@ -49,12 +53,14 @@ func _on_interaction(by: Variant) -> void:
 	else:
 		qte.attempt_hit()
 
+
 func _tree_hit():
 	AudioManager.playWoodHit()
 	health -= 1
 
 	if health <= 0:
 		_tree_die()
+
 
 func _tree_die():
 	AudioManager.playQTESuccess()
@@ -127,12 +133,14 @@ func _tree_die():
 
 	queue_free.call_deferred()
 
+
 func _on_player_left_area(player: Player) -> void:
 	if qte:
 		qte.queue_free()
 		qte = null
-
+		
 	player.stop_cutting_animation()
+
 
 func save() -> Dictionary:
 	var save_data := {
@@ -140,6 +148,7 @@ func save() -> Dictionary:
 		"position_y": global_position.y,
 		"item_resource": data.resource_path,
 	}
+	
 	return save_data
 
 
@@ -148,6 +157,5 @@ func load(save_data: Dictionary):
 		save_data["position_x"],
 		save_data["position_y"]
 	)
-
-	var _data = ResourceLoader.load(save_data["item_resource"])
-	_set_data(_data)
+	
+	data = ResourceLoader.load(save_data["item_resource"])

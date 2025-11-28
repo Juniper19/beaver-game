@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="TreeData" load_steps=6 format=3 uid="uid://dps300dufah0"]
+[gd_resource type="Resource" script_class="TreeData" load_steps=8 format=3 uid="uid://dps300dufah0"]
 
 [ext_resource type="Script" uid="uid://y3w4yjg8qy6" path="res://interactables/items/item_resource.gd" id="1_l0kaw"]
 [ext_resource type="Script" uid="uid://cn8lyq0xlxhdl" path="res://interactables/trees/tree_data.gd" id="2_2de6x"]
@@ -6,9 +6,17 @@
 [ext_resource type="Resource" uid="uid://cx3er7cwpxv5w" path="res://interactables/items/item_resources/oak_seed.tres" id="3_l2eqm"]
 [ext_resource type="Texture2D" uid="uid://d3naxlowahgis" path="res://art_assets/placeholder_oak_tree.png" id="5_l2eqm"]
 
+[sub_resource type="Gradient" id="Gradient_l2eqm"]
+colors = PackedColorArray(0, 0, 0, 1, 0.42709297, 0.47238666, 0.10468701, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ee17p"]
+gradient = SubResource("Gradient_l2eqm")
+width = 32
+
 [resource]
 script = ExtResource("2_2de6x")
 name = "Oak Tree"
+texture_sapling = SubResource("GradientTexture2D_ee17p")
 texture_mature = ExtResource("5_l2eqm")
 health = 3
 drops = Dictionary[ExtResource("1_l0kaw"), float]({
@@ -16,4 +24,5 @@ ExtResource("2_vky80"): 4.0,
 ExtResource("3_l2eqm"): 1.0
 })
 drop_amount = 5
+days_to_grow = 1
 metadata/_custom_type_script = "uid://cn8lyq0xlxhdl"

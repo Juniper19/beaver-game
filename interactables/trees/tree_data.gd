@@ -7,3 +7,4 @@ extends Resource
 @export var health: int
 @export var drops: Dictionary[ItemData, float]
 @export var drop_amount: int
+@export var days_to_grow: int
