@@ -17,9 +17,9 @@ func _process(delta: float) -> void:
 
 
 func next_level():
-	SceneManager.load_scene(target_scene)
+	SceneManager.load_scene(target_scene, SceneManager.Transition.CIRCLE)
 
 
 func _on_interaction(by):
 	if by is Player:
-		SceneManager.load_scene(target_scene)
+		SceneManager.load_scene(target_scene, SceneManager.Transition.CIRCLE)
