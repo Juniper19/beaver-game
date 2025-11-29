@@ -19,7 +19,7 @@ offset_left = -5.0
 offset_top = -5.0
 offset_right = 5.0
 offset_bottom = 7.0
-color = Color(0.12866125, 0.37830842, 0.27646026, 1)
+color = Color(0.79772484, 0.42176703, 0, 1)
 
 [node name="Marker" type="ColorRect" parent="."]
 offset_left = -5.0

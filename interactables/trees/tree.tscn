@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cd3s2mygwd6ul"]
+[gd_scene load_steps=7 format=3 uid="uid://cd3s2mygwd6ul"]
 
 [ext_resource type="Script" uid="uid://b8sajxb68u3yc" path="res://interactables/trees/tree.gd" id="1_ui6p4"]
+[ext_resource type="Texture2D" uid="uid://b656iv3jh7cqn" path="res://art_assets/resources/placeholder_aspen_tree.png" id="2_iv782"]
 [ext_resource type="Script" uid="uid://diekxh66yt803" path="res://interactables/interaction_area.gd" id="2_ui6p4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mgnsf"]
@@ -16,11 +17,14 @@ collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_ui6p4")
 
+[node name="SpritePivot" type="Marker2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="SpritePivot"]
+position = Vector2(0, -56)
+texture = ExtResource("2_iv782")
+
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_mgnsf")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -24)
 
 [node name="InteractionArea" type="Area2D" parent="."]
 collision_layer = 16

@@ -5,10 +5,12 @@ extends StaticBody2D
 const BAR_QTE: PackedScene = preload("uid://bmkceaeybu2w4")
 var qte: BarQTE = null
 
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var sprite_pivot: Marker2D = $SpritePivot
+@onready var sprite: Sprite2D = $SpritePivot/Sprite2D
 @onready var drop_area: CollisionShape2D = $DropArea
 
 var health = 5.0
+var _shake_strength: float = 0.0
 
 @export var data: TreeData:
 	set(value):
@@ -28,6 +30,10 @@ func _ready():
 	else:
 		print_stack()
 		push_error("Tree made without data!")
+
+
+func _process(_delta: float):
+	_do_shake()
 
 
 func _set_data(_data: TreeData):
@@ -57,6 +63,7 @@ func _on_interaction(by: Variant) -> void:
 func _tree_hit():
 	AudioManager.playWoodHit()
 	health -= 1
+	_shake_strength = 30.0
 
 	if health <= 0:
 		_tree_die()
@@ -132,6 +139,18 @@ func _tree_die():
 		player.stop_cutting_animation()
 
 	queue_free.call_deferred()
+
+
+func _do_shake() -> void:
+	if _shake_strength <= 0.0 or is_zero_approx(_shake_strength):
+		sprite_pivot.rotation_degrees = 0.0
+		return
+
+	var rand_angle: float = randf_range(-1.0, 1.0)
+	var target_angle: float = rand_angle * _shake_strength
+	
+	sprite_pivot.rotation_degrees = lerpf(sprite_pivot.rotation_degrees, target_angle, 0.15)
+	_shake_strength = lerpf(_shake_strength, 0.0, 0.15)
 
 
 func _on_player_left_area(player: Player) -> void:

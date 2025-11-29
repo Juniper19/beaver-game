@@ -139,7 +139,7 @@ func _on_item_in_chest():
 func _on_item_in_excess_chest(ExSt):
 	#print(ExSt.storage_names)
 	StorageNames = ExSt.storage_names
-	print(StorageNames)
+	#print(StorageNames)
 	
 	#Storage is full
 	if ExSt.storage.size() >= GlobalStats.StorageLimit:
