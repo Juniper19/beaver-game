@@ -3,6 +3,8 @@ extends Node
 var initialize_world: bool = true # whether or not to set world to initial, deletes save
 
 var wood: int = 0
+var pine_log: int = 0
+var aspen_log: int = 0
 var mud: int = 0
 var stone: int = 0
 var water_level: int = 0
@@ -16,12 +18,16 @@ var rock_min_damage: float = 0
 var rock_max_damage: float = 1
 
 static var ReqWood = int(randf_range(0,3))
+static var ReqPineLog = int(randf_range(-5,0))
+static var ReqAspenLog = int(randf_range(-5,0))
 static var ReqMud = int(randf_range(-5,0))
 static var ReqStone = int(randf_range(-5,0))
 
-var WoodHeld = 0
-var MudHeld = 0
-var StoneHeld = 0
+var WoodHeld:int = 0
+var PineLogHeld:int = 0
+var AspenLogHeld:int = 0
+var MudHeld:int = 0
+var StoneHeld:int = 0
 
 var storage: Array = []
 var storageNames: Array = []
