@@ -41,6 +41,10 @@ func _process(_delta: float) -> void:
 func _on_item_added(item):
 	if item.item_name == "Oak Log":
 		GlobalStats.WoodHeld += 1
+	if item.item_name == "Pine Log":
+		GlobalStats.PineLogHeld += 1
+	if item.item_name == "Aspen Log":
+		GlobalStats.AspenLogHeld += 1
 	if item.item_name == "Mud":
 		GlobalStats.MudHeld += 1
 	if item.item_name == "Stone":
@@ -50,6 +54,10 @@ func _on_item_removed(item):
 	
 	if item.item_name == "Oak Log":
 		GlobalStats.WoodHeld -= 1
+	if item.item_name == "Pine Log":
+		GlobalStats.PineLogHeld -= 1
+	if item.item_name == "Aspen Log":
+		GlobalStats.AspenLogHeld -= 1
 	if item.item_name == "Mud":
 		GlobalStats.MudHeld -= 1
 	if item.item_name == "Stone":
@@ -61,6 +69,18 @@ func _on_Add_to_Quota(item):
 			if GlobalStats.WoodHeld > 0:
 				GlobalStats.WoodHeld -= 1
 				GlobalStats.wood += 1
+				#GlobalStats.emit_signal("ItemInChest")
+	if item.item_name == "Pine Log":
+		if GlobalStats.pine_log < GlobalStats.ReqPineLog:
+			if GlobalStats.PineLogHeld > 0:
+				GlobalStats.PineLogHeld -= 1
+				GlobalStats.pine_log += 1
+				#GlobalStats.emit_signal("ItemInChest")
+	if item.item_name == "Aspen Log":
+		if GlobalStats.aspen_log < GlobalStats.ReqAspenLog:
+			if GlobalStats.AspenLogHeld > 0:
+				GlobalStats.AspenLogHeld -= 1
+				GlobalStats.aspen_log += 1
 				#GlobalStats.emit_signal("ItemInChest")
 	elif item.item_name == "Mud":
 		if GlobalStats.mud < GlobalStats.ReqMud:
