@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://y3w4yjg8qy6" path="res://interactables/items/item_resource.gd" id="1_o5lfv"]
 [ext_resource type="Script" uid="uid://cn8lyq0xlxhdl" path="res://interactables/trees/tree_data.gd" id="2_bm1n4"]
-[ext_resource type="Texture2D" uid="uid://dsrtdm2jbinqn" path="res://art_assets/placeholder_pine_tree.png" id="3_bm1n4"]
+[ext_resource type="Texture2D" uid="uid://dpmcce4fujeds" path="res://art_assets/resources/pine_full.png" id="3_bm1n4"]
 
 [sub_resource type="Gradient" id="Gradient_l2eqm"]
 colors = PackedColorArray(0, 0, 0, 1, 0.42709297, 0.47238666, 0.10468701, 1)

@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://cn8lyq0xlxhdl" path="res://interactables/trees/tree_data.gd" id="2_2de6x"]
 [ext_resource type="Resource" uid="uid://djvommoh1q7y6" path="res://interactables/items/item_resources/oak_log.tres" id="2_vky80"]
 [ext_resource type="Resource" uid="uid://cx3er7cwpxv5w" path="res://interactables/items/item_resources/oak_seed.tres" id="3_l2eqm"]
-[ext_resource type="Texture2D" uid="uid://d3naxlowahgis" path="res://art_assets/placeholder_oak_tree.png" id="5_l2eqm"]
+[ext_resource type="Texture2D" uid="uid://batbkxq2dkbsn" path="res://art_assets/resources/oak_full.png" id="5_l2eqm"]
 
 [sub_resource type="Gradient" id="Gradient_l2eqm"]
 colors = PackedColorArray(0, 0, 0, 1, 0.42709297, 0.47238666, 0.10468701, 1)

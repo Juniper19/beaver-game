@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://y3w4yjg8qy6" path="res://interactables/items/item_resource.gd" id="1_rhcb2"]
 [ext_resource type="Script" uid="uid://cn8lyq0xlxhdl" path="res://interactables/trees/tree_data.gd" id="2_jwji4"]
-[ext_resource type="Texture2D" uid="uid://cxgq0seuxx6jb" path="res://art_assets/placeholder_aspen_tree.png" id="3_jwji4"]
+[ext_resource type="Texture2D" uid="uid://bx4h1x70frpcm" path="res://art_assets/resources/aspen_full.png" id="3_jwji4"]
 
 [sub_resource type="Gradient" id="Gradient_jwji4"]
 colors = PackedColorArray(0, 0, 0, 1, 0.973834, 0.8004369, 0.64252144, 1)
