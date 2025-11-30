@@ -3,47 +3,8 @@
 [ext_resource type="Script" uid="uid://0rsat0yldopr" path="res://menu/game_over_ui.gd" id="1_qrqej"]
 [ext_resource type="Texture2D" uid="uid://gy7vowehiugb" path="res://art_assets/placeholder_art/DAM_transparent_v2.png" id="2_qlkfc"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_siat8"]
-
-[sub_resource type="Animation" id="Animation_qlkfc"]
-resource_name = "show"
-step = 1.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Panel/TextureRect:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(30.189163, -231), Vector2(30.189163, 2)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Panel/Label:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.6),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Panel/VBoxContainer:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.8),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qlkfc"]
+bg_color = Color(0.78022224, 0.5131417, 0.56723815, 1)
 
 [sub_resource type="Animation" id="Animation_siat8"]
 length = 0.001
@@ -84,6 +45,46 @@ tracks/2/keys = {
 "values": [Color(1, 1, 1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_qlkfc"]
+resource_name = "show"
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel/TextureRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(150, -231), Vector2(220, 65)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel/Label:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel/VBoxContainer:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_siat8"]
 _data = {
 &"RESET": SubResource("Animation_siat8"),
@@ -100,13 +101,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -153.0
-offset_top = -143.0
-offset_right = 153.0
-offset_bottom = 143.0
+offset_left = -343.0
+offset_top = -209.0
+offset_right = 343.0
+offset_bottom = 209.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_siat8")
+theme_override_styles/panel = SubResource("StyleBoxFlat_qlkfc")
 
 [node name="TextureRect" type="TextureRect" parent="Panel"]
 layout_mode = 1
@@ -115,10 +116,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -122.81084
-offset_top = -141.0
-offset_right = 122.81085
-offset_bottom = 0.9999695
+offset_left = -312.81085
+offset_top = -207.0
+offset_right = -67.18915
+offset_bottom = -64.99983
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_qlkfc")
