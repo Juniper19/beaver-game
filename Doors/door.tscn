@@ -1,11 +1,11 @@
 [gd_scene load_steps=5 format=3 uid="uid://cxl18pj2uuxtl"]
 
 [ext_resource type="Script" uid="uid://dule3q33lowsn" path="res://Doors/door.gd" id="1_42blv"]
-[ext_resource type="Texture2D" uid="uid://bjiklfqxr6o7k" path="res://art_assets/placeholder_art/door.png" id="1_dlf7b"]
 [ext_resource type="PackedScene" uid="uid://dwafgcp2uqbfl" path="res://interactables/interaction_area.tscn" id="2_ud23n"]
+[ext_resource type="Texture2D" uid="uid://bgn5rgc52iuiv" path="res://art_assets/the_dam_house.png" id="3_ud23n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dlf7b"]
-size = Vector2(58, 96)
+size = Vector2(27, 27)
 
 [node name="Door" type="Node2D"]
 script = ExtResource("1_42blv")
@@ -15,11 +15,10 @@ target_scene = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="InteractionArea"]
 position = Vector2(1.25, 0.25)
-scale = Vector2(0.3008982, 0.3008982)
-texture = ExtResource("1_dlf7b")
+texture = ExtResource("3_ud23n")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
-position = Vector2(1, -0.5)
+position = Vector2(33.5, 26.5)
 shape = SubResource("RectangleShape2D_dlf7b")
 
 [node name="SleepLabel" type="Label" parent="InteractionArea"]
