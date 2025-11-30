@@ -228,9 +228,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_boad6"]
-radius = 7.0
-height = 24.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_nevrd"]
+radius = 15.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lf62g"]
 radius = 41.109608
@@ -252,9 +251,7 @@ texture = ExtResource("2_g1dw6")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 9)
-rotation = 1.5707964
-shape = SubResource("CapsuleShape2D_boad6")
+shape = SubResource("CircleShape2D_nevrd")
 
 [node name="InteractionArea" type="Area2D" parent="."]
 collision_layer = 0
