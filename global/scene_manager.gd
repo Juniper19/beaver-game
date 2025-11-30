@@ -75,6 +75,7 @@ func load_scene(target_scene: Scene, transition: Transition = Transition.NONE) -
 		if GlobalStats.DayOne == true:
 			GlobalStats.DayOne=false
 		AudioManager.stopMusic1()
+		AudioManager.playInsideMusic()
 		GlobalStats.QuotaCheck.emit()
 	if transition_node:
 		await get_tree().scene_changed
