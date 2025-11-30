@@ -119,22 +119,35 @@ func _process(_delta: float) -> void:
 		hide_quota()	
 		
 	#if current_time >= cutoff_time and current_time < 8 * 60 and not has_triggered_2am:
-
 func onQuotaCheck():
-	if GlobalStats.DayOne == false:
-		if(
-			GlobalStats.wood < GlobalStats.ReqWood or
-			GlobalStats.pine_log < GlobalStats.ReqPineLog or
-			GlobalStats.aspen_log < GlobalStats.ReqAspenLog or
-			GlobalStats.mud < GlobalStats.ReqMud or
-			GlobalStats.stone < GlobalStats.ReqStone
-				
-		):
-			failed_quota = true
-		
-	if failed_quota:
-		GlobalStats.GameOver.emit()
-		
+	if GlobalStats.DayOne:
+		return
+	
+	var missed := (
+		GlobalStats.wood < GlobalStats.ReqWood or
+		GlobalStats.pine_log < GlobalStats.ReqPineLog or
+		GlobalStats.aspen_log < GlobalStats.ReqAspenLog or
+		GlobalStats.mud < GlobalStats.ReqMud or
+		GlobalStats.stone < GlobalStats.ReqStone
+	)
+
+	if not missed:
+		return  # Quota passed, nothing to do
+
+	# Check dam insurance
+	if GlobalStats.free_quota_miss > 0:
+		GlobalStats.free_quota_miss -= 1
+		print("Quota missed... but Dam Insurance has been used!")
+
+		%TextTimer.start()
+		%QuotaLabel.visible = true
+		%QuotaLabel.text = "Quota missed... but Dam Insurance saved you!"
+
+		return 
+
+	print("Failed quota with no insurance. Game Over.")
+	GlobalStats.GameOver.emit()
+
 func show_quota():
 	#Testing Purposes *DELETE WHEN WE MERGE*
 	#GlobalStats.wood +=10
