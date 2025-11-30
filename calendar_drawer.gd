@@ -1,7 +1,7 @@
 extends Control
 
 @export var calendar_spritesheet: Texture2D
-@export var top_left: Vector2 = Vector2(24, 40)
+@export var top_left: Vector2 = Vector2(24, 10)
 @export var spacing: float = 8.0
 
 var tile_w: float
@@ -35,20 +35,26 @@ func _season_block_start(day: int) -> int:
 func _day_in_block(day: int) -> int:
 	return ((day - 1) % 7) + 1
 
+
 func _draw() -> void:
 	var stats = _get_stats()
 	if not stats:
 		return
 
+	var control_w = size.x
+	var calendar_w = (tile_w * 7.0) + (spacing * 6.0)
+	var top_left_x = (control_w - calendar_w) * 0.5
+	var top_left_y = top_left.y
+
 	var today = max(stats.day_number, 1)
 	var block_start = _season_block_start(today)
-	var season_row = _season_index_for_day(today)  # 0 = Spring, 1 = Summer, etc.
+	var season_row = _season_index_for_day(today)
 
 	for i in range(7):
 		var day_abs = block_start + i
-		var day_index = _day_in_block(day_abs) - 1   # 0-6
+		var day_index = _day_in_block(day_abs) - 1  # 0..6
 
-		# Past OR today, use X tile
+		# Past OR today, X tile
 		var is_past_or_today = day_abs <= today
 		var tile_index = 7 if is_past_or_today else day_index
 
@@ -58,8 +64,8 @@ func _draw() -> void:
 		)
 
 		var dst_pos = Vector2(
-			top_left.x + i * (tile_w + spacing),
-			top_left.y
+			top_left_x + i * (tile_w + spacing),
+			top_left_y
 		)
 
 		draw_texture_rect_region(
