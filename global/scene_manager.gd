@@ -75,8 +75,7 @@ func load_scene(target_scene: Scene, transition: Transition = Transition.NONE) -
 		if GlobalStats.DayOne == true:
 			GlobalStats.DayOne=false
 		AudioManager.stopMusic1()
-		
-		
+		GlobalStats.QuotaCheck.emit()
 	if transition_node:
 		await get_tree().scene_changed
 		var player: Player = get_tree().get_first_node_in_group("player")
@@ -86,3 +85,8 @@ func load_scene(target_scene: Scene, transition: Transition = Transition.NONE) -
 		transition_node.queue_free()
 	
 	changing_scenes = false
+		
+func start_new_game() -> void:
+	#reset globals
+	GlobalStats.reset()
+	load_scene(Scene.WORLD)
