@@ -21,9 +21,9 @@ func _process(_delta: float) -> void:
 	var move_dir: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if move_dir != Vector2(0.0,0.0):
 		AudioManager.playFootsteps()
-	velocity = move_dir * move_speed
+	velocity = lerp(velocity, move_dir * move_speed, 0.09)
 	move_and_slide()
-
+	
 	_update_anim(move_dir)
 
 func _update_anim(dir: Vector2) -> void:
@@ -35,7 +35,7 @@ func _update_anim(dir: Vector2) -> void:
 		sprite.play("cut")
 		return
 
-	if dir == Vector2.ZERO:
+	if dir.is_zero_approx():
 		if last_dir.x != 0:
 			sprite.play("idle_side")
 			sprite.flip_h = last_dir.x > 0
@@ -76,9 +76,12 @@ func _unhandled_key_input(event):
 	if event.is_action_pressed("interact"):
 		var closest: InteractionArea = null
 		var closest_dist: float = INF
+		var ignore_items: bool = inventory.is_full()
 
 		for node in interaction_area.get_overlapping_areas():
 			if node is InteractionArea:
+				if ignore_items and node.get_parent() is Item:
+					continue
 				var dist = global_position.distance_squared_to(node.global_position)
 				if dist < closest_dist:
 					closest_dist = dist
@@ -92,8 +95,13 @@ func _unhandled_key_input(event):
 			inventory.drop_top_item()
 
 	if event.is_action_pressed("plant_seed"):
-		inventory.try_plant_seed()
-
+		inventory.try_plant_seed(global_position + Vector2(0, 32))
+	
+	if event.is_action_pressed("cycle_down"):
+		inventory.cycle_items(true)
+	elif event.is_action_pressed("cycle_up"):
+		inventory.cycle_items(false)
+	
 
 func _calculate_move_speed() -> void:
 	var gs = get_tree().root.get_node("GlobalStats")

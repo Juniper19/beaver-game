@@ -1,21 +1,38 @@
+class_name Sapling
 extends Node2D
 
-@export var days_to_grow: int = 1
-var planted_day: int = 0
-const OAK_TREE = preload("uid://dps300dufah0")
+@export var tree_data: TreeData = null
+var days_until_grown = -1
+
 
 func _ready() -> void:
-	planted_day = GlobalStats.day_number
+	if !tree_data:
+		print_stack()
+		push_error("Sapling has no data!")
+		
+	if days_until_grown < 0:
+		days_until_grown = tree_data.days_to_grow
+	elif days_until_grown > 0:
+		days_until_grown -= 1
+		
+	_update()
 
-func _process(_delta: float) -> void:
-	if GlobalStats.day_number >= planted_day + days_to_grow:
-		_grow_into_tree()
+
+func _update():
+	if !tree_data:
+		print_stack()
+		push_error("Sapling made with no data!")
+	
+	$Sprite2D.texture = tree_data.texture_sapling
+	if days_until_grown <= 0:
+		_grow_into_tree.call_deferred()
+
 
 func _grow_into_tree() -> void:
 	var tree_scene: PackedScene = preload("res://interactables/trees/tree.tscn")
 	var tree := tree_scene.instantiate()
 	tree.global_position = global_position
-	tree.data = OAK_TREE
+	tree.data = tree_data
 	get_tree().current_scene.add_child(tree)
 	queue_free()
 
@@ -24,9 +41,8 @@ func save() -> Dictionary:
 	return {
 		"position_x": global_position.x,
 		"position_y": global_position.y,
-		"is_sapling": true, 
-		"planted_day": planted_day,
-		"days_to_grow": days_to_grow
+		"days_until_grown": days_until_grown,
+		"tree_data": tree_data.resource_path,
 	}
 
 func load(save_data: Dictionary):
@@ -34,6 +50,6 @@ func load(save_data: Dictionary):
 		save_data["position_x"],
 		save_data["position_y"]
 	)
-
-	planted_day = save_data.get("planted_day", GlobalStats.day_number)
-	days_to_grow = save_data.get("days_to_grow", 1)
+	
+	days_until_grown = save_data["days_until_grown"]
+	tree_data = ResourceLoader.load(save_data["tree_data"])

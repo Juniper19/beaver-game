@@ -121,6 +121,15 @@ signal ItemInExcessChest(chest)
 signal ItemFromExcessChest
 signal QuotaCheck
 signal GameOver
+
+## Janky-ass way to do it but... it works
+const ITEM_TO_TREE: Dictionary[String, String] = {
+	"Oak Seed": "uid://dps300dufah0",
+	"Aspen Seed": "uid://de4jpe12kbg52",
+	"Pine Seed": "uid://coq60gmhpggti",
+}
+
+
 # Called when an upgrade is picked
 # Every upgrade/card passes a dictionary, ie: { "wood_gather_rate": +0.2 }
 func apply_effect(effect: Dictionary) -> void:

@@ -1,3 +1,5 @@
+@tool
+
 class_name Item
 extends Node2D
 
@@ -8,13 +10,21 @@ signal dropped(by: Node)
 @onready var interaction_area: InteractionArea = $InteractionArea
 
 
-
-@export var data: ItemData
+@export var data: ItemData:
+	set(value):
+		data = value
+		if Engine.is_editor_hint() and value:
+			var sprite := get_node_or_null("Sprite2D")
+			if sprite:
+				sprite.texture = value.texture
 
 var item_name: String = "NO NAME"
 var _held_by: Node
 
 func _ready():
+	if Engine.is_editor_hint():
+		return
+	
 	if data:
 		item_name = data.name
 		sprite_2d.texture = data.texture

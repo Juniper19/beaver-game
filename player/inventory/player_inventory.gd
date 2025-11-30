@@ -5,7 +5,7 @@ signal item_added(item: Node2D)
 signal item_removed(item: Node2D)
 
 @export var inventory_items: Array[Node2D] = []
-@export var item_separation: Vector2 = Vector2(0.0, -25.0)
+@export var item_separation: Vector2 = Vector2(0.0, -12.0)
 @export var random_drop_distance: float = 40.0
 
 var _item_tweens: Dictionary[Node2D, Tween] = {}
@@ -17,6 +17,7 @@ var Excess: bool
 var Test: bool
 var CancelQFree: bool
 var StorageNames = []
+
 
 func _ready():
 	GlobalStats.ItemInChest.connect(_on_item_in_chest)
@@ -31,8 +32,10 @@ func _kill_item_tween(item: Node2D):
 			tween.kill()
 		_item_tweens.erase(item)
 
+
 func get_items() -> Array[Node2D]:
 	return inventory_items
+
 
 func _on_item_from_excess_chest(item_data) -> void:
 	# item_data is an ItemData resource coming from the chest
@@ -46,11 +49,12 @@ func _on_item_from_excess_chest(item_data) -> void:
 	add_item(item)
 
 
+func is_full() -> bool:
+	return inventory_items.size() >= GlobalStats.carry_capacity
+
 # Returns if successful
 func add_item(item: Node2D) -> bool:
-	var gs = get_tree().root.get_node("GlobalStats")
-
-	if inventory_items.size() >= gs.carry_capacity:
+	if is_full():
 		print("Inventory full! Cannot carry more items.")
 		return false
 
@@ -100,6 +104,19 @@ func add_item(item: Node2D) -> bool:
 	return true
 	
 
+func cycle_items(down: bool = true):
+	if inventory_items.size() <= 1:
+		return
+	
+	if down:
+		var item: Item = inventory_items.pop_front()
+		inventory_items.push_back(item)
+	else:
+		var item: Item = inventory_items.pop_back()
+		inventory_items.push_front(item)
+	_reset_item_positions(0.35)
+
+
 #When deposited into Quota Chest
 func _on_item_in_chest():
 	
@@ -117,11 +134,12 @@ func _on_item_in_chest():
 	
 	drop_item(top)
 
+
 #When deposited into an Excess Chest
 func _on_item_in_excess_chest(ExSt):
 	#print(ExSt.storage_names)
 	StorageNames = ExSt.storage_names
-	print(StorageNames)
+	#print(StorageNames)
 	
 	#Storage is full
 	if ExSt.storage.size() >= GlobalStats.StorageLimit:
@@ -143,10 +161,12 @@ func _on_item_in_excess_chest(ExSt):
 	if top >= 0:
 		drop_item(top)
 
+
 func drop_top_item():
 	var top = inventory_items.size() - 1
 	if top >= 0 and ChestDrop == false:
 		drop_item(top)
+
 
 func drop_item(index: int) -> void:
 	
@@ -231,23 +251,34 @@ func drop_item(index: int) -> void:
 	Quota = false
 	Excess = false
 	CancelQFree = false
+	
+	_set_z_order()
 
-func _reset_item_positions():
+
+func _reset_item_positions(time: float = 0.2):
 	for i in inventory_items.size():
 		var item: Node2D = inventory_items[i]
 		var target_pos: Vector2 = i * item_separation
 		
+		_blacklist.push_back(item)
+		
 		var tween = get_tree().create_tween()
 		tween.set_ease(Tween.EASE_OUT)
 		tween.set_trans(Tween.TRANS_BACK)
-		tween.tween_property(item, "position", target_pos, 0.2)
-		
-func try_plant_seed() -> void:
+		tween.tween_property(item, "position", target_pos, time)
+		tween.finished.connect(func ():
+			if _blacklist.has(item):
+				_blacklist.erase(item)
+		)
+	_set_z_order()
+
+
+func try_plant_seed(plant_pos_global: Vector2) -> void:
 	# Must have at least one item
 	if inventory_items.is_empty():
 		return
 
-	var top_item: Node2D = inventory_items[-1]
+	var top_item: Item = inventory_items[-1]
 
 	# Only seeds are plantable
 	if not top_item.item_name.ends_with("Seed"):
@@ -257,28 +288,38 @@ func try_plant_seed() -> void:
 	if player == null:
 		print("No player found in 'player' group")
 		return
-	var plant_pos: Vector2 = player.global_position + Vector2(0, 32)
 
-	if not _can_plant_at(plant_pos):
+	if not _can_plant_at(plant_pos_global):
 		print("Cannot plant here - space is blocked!")
 		return
+		
+	var seed_item: Item = inventory_items.pop_back()
+	var tree_data_uid = GlobalStats.ITEM_TO_TREE.get(seed_item.data.name)
+	if !tree_data_uid:
+		push_warning("Tried to plant seed with no tree data!")
+		return
+	
+	
+	_plant_sapling(tree_data_uid, plant_pos_global)
 
-	_plant_sapling(plant_pos)
 
-	var top_index: int = inventory_items.size() - 1
-	var seed: Node2D = inventory_items.pop_at(top_index)
+	if _blacklist.has(seed_item):
+		_blacklist.erase(seed_item)
+	if _item_tweens.has(seed_item):
+		_item_tweens.erase(seed_item)
 
-	if _blacklist.has(seed):
-		_blacklist.erase(seed)
-	if _item_tweens.has(seed):
-		_item_tweens.erase(seed)
+	seed_item.queue_free()
 
-	seed.queue_free()
-
-	item_removed.emit(seed)
-	GlobalStats.emit_signal("inventory_item_removed", seed)
+	item_removed.emit(seed_item)
+	GlobalStats.emit_signal("inventory_item_removed", seed_item)
 
 	_reset_item_positions()
+
+
+func _set_z_order():
+	for i in inventory_items.size():
+		inventory_items[i].z_index = i
+
 
 func _can_plant_at(pos: Vector2) -> bool:
 	var space := get_world_2d().direct_space_state
@@ -296,8 +337,9 @@ func _can_plant_at(pos: Vector2) -> bool:
 	return results.size() == 0
 
 
-func _plant_sapling(pos: Vector2) -> void:
+func _plant_sapling(tree_data_uid: String, pos: Vector2,) -> void:
 	var sapling_scene := preload("res://interactables/trees/saplings/sapling.tscn")
-	var sapling := sapling_scene.instantiate()
+	var sapling: Sapling = sapling_scene.instantiate()
 	sapling.global_position = pos
+	sapling.tree_data = ResourceLoader.load(tree_data_uid)
 	get_tree().current_scene.add_child(sapling)
