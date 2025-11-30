@@ -41,3 +41,8 @@ func load_scene(target_scene: Scene) -> void:
 			GlobalStats.DayOne=false
 		AudioManager.stopMusic1()
 		GlobalStats.QuotaCheck.emit()
+		
+func start_new_game() -> void:
+	#reset globals
+	GlobalStats.reset()
+	load_scene(Scene.WORLD)

@@ -1,7 +1,6 @@
 extends Node
 
 var initialize_world: bool = true # whether or not to set world to initial, deletes save
-
 var wood: int = 0
 var pine_log: int = 0
 var aspen_log: int = 0
@@ -13,7 +12,7 @@ var day_number: int = 0
 var current_season: String = ""
 var DayOne: bool = true
 
-## Upgradable Stats
+	## Upgradable Stats
 var rock_min_damage: float = 0
 var rock_max_damage: float = 1
 
@@ -37,24 +36,16 @@ var ExcessChestEntered = false
 var QuotaChestEntered = false
 var ExcessStorageCount = 5
 
-signal inventory_item_added(item)
-signal inventory_item_removed(item)
-signal Add_to_Quota(item)
-signal inventory_item_placed(item)
-signal ItemInChest
-signal ItemInExcessChest(chest)
-signal ItemFromExcessChest
-signal QuotaCheck
-signal GameOver
 
-#For saving values when scene changes
+
+	#For saving values when scene changes
 var excess_chest_storages: Array = []
 var excess_chest_storage_names: Array = []
 
-# Chosen upgrades get removed from the available cards
+	# Chosen upgrades get removed from the available cards
 var chosen_upgrades: Array[String] = []
 
-# UPGRADABLE STATS
+	# UPGRADABLE STATS
 var carry_capacity: int = 3
 var move_speed_bonus: int = 0
 var encumbrance_factor: float = 1.0 # 1 is default slow, .5 half as much punishing, etc.
@@ -65,6 +56,71 @@ var early_bird_minutes: int = 0   # subtract from start time
 var sunrise_spark_duration: float = 0.0   # seconds
 var sunrise_spark_bonus: float = 0.0      # multiplier (e.g. 0.2 = +20%)
 
+#All start game values reset with new game
+func reset():
+	wood = 0
+	pine_log = 0
+	aspen_log = 0
+	mud = 0
+	stone = 0
+	water_level = 0
+	wood_gather_rate = 1
+	day_number = 0
+	current_season = ""
+	DayOne = true
+
+	## Upgradable Stats
+	rock_min_damage = 0
+	rock_max_damage = 1
+
+	ReqWood = int(randf_range(0,1))
+	ReqPineLog = int(randf_range(-10,-5))
+	ReqAspenLog = int(randf_range(-10,-5))
+	ReqMud = int(randf_range(-5,0))
+	ReqStone = int(randf_range(-5,0))
+
+	WoodHeld = 0
+	PineLogHeld = 0
+	AspenLogHeld = 0
+	MudHeld = 0
+	StoneHeld= 0
+
+	storage = []
+	storageNames = []
+	StorageLimit = 5
+	ItemID = ""
+	ExcessChestEntered = false
+	QuotaChestEntered = false
+	ExcessStorageCount = 5
+
+	#For saving values when scene changes
+	excess_chest_storages = []
+	excess_chest_storage_names = []
+
+	# Chosen upgrades get removed from the available cards
+	chosen_upgrades = []
+
+	# UPGRADABLE STATS
+	carry_capacity = 3
+	move_speed_bonus = 0
+	encumbrance_factor = 1.0 # 1 is default slow, .5 half as much punishing, etc.
+	extra_rock_chance = 0.0
+	extra_wood_chance = 0.0
+	free_quota_miss = 0
+	early_bird_minutes= 0   # subtract from start time
+	sunrise_spark_duration = 0.0   # seconds
+	sunrise_spark_bonus = 0.0      # multiplier (e.g. 0.2 = +20%)
+
+
+signal inventory_item_added(item)
+signal inventory_item_removed(item)
+signal Add_to_Quota(item)
+signal inventory_item_placed(item)
+signal ItemInChest
+signal ItemInExcessChest(chest)
+signal ItemFromExcessChest
+signal QuotaCheck
+signal GameOver
 # Called when an upgrade is picked
 # Every upgrade/card passes a dictionary, ie: { "wood_gather_rate": +0.2 }
 func apply_effect(effect: Dictionary) -> void:

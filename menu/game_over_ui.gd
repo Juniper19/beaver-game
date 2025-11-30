@@ -29,12 +29,22 @@ func _on_global_game_over() -> void:
 		t.timeout.connect(_on_game_over_pause)
 
 func _on_game_over_pause():
-	get_tree().paused = true
+	pass
+	#get_tree().paused = true
 
 func _on_retry_pressed() -> void:
+	anim.stop()
+	anim.seek(0.0, true)
+	#visible = false
+	
 	get_tree().paused = false
-	get_tree().reload_current_scene()
+	SceneManager.start_new_game()
 
 func _on_menu_pressed() -> void:
+	anim.stop()
+	anim.seek(0.0, true)
+	visible = false
+	
 	get_tree().paused = false
-	get_tree().change_scene_to_file("res://MainMenu.tscn")
+	SceneManager.start_new_game()
+	get_tree().change_scene_to_file("res://menu/main_menu.tscn")
