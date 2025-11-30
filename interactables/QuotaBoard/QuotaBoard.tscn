@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cwf488mhirgal" path="res://art_assets/icon_4.png" id="6_bb7ti"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ggoti"]
-size = Vector2(78, 82)
+size = Vector2(78, 64)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5fo6y"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -26,10 +26,10 @@ stone_icon = ExtResource("6_bb7ti")
 [node name="InteractionArea" parent="." instance=ExtResource("2_ggoti")]
 
 [node name="Sprite2D" type="Sprite2D" parent="InteractionArea"]
+scale = Vector2(1.16, 1.16)
 texture = ExtResource("3_ggoti")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
-position = Vector2(0, 13)
 shape = SubResource("RectangleShape2D_ggoti")
 
 [node name="InteractLabel" type="Label" parent="InteractionArea"]

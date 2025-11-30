@@ -17,9 +17,9 @@ var DayOne: bool = true
 var rock_min_damage: float = 0
 var rock_max_damage: float = 1
 
-static var ReqWood = int(randf_range(0,3))
-static var ReqPineLog = int(randf_range(-5,0))
-static var ReqAspenLog = int(randf_range(-5,0))
+static var ReqWood = int(randf_range(0,1))
+static var ReqPineLog = int(randf_range(-10,-5))
+static var ReqAspenLog = int(randf_range(-10,-5))
 static var ReqMud = int(randf_range(-5,0))
 static var ReqStone = int(randf_range(-5,0))
 
@@ -44,6 +44,8 @@ signal inventory_item_placed(item)
 signal ItemInChest
 signal ItemInExcessChest(chest)
 signal ItemFromExcessChest
+signal QuotaCheck
+signal GameOver
 
 #For saving values when scene changes
 var excess_chest_storages: Array = []

@@ -40,3 +40,4 @@ func load_scene(target_scene: Scene) -> void:
 		if GlobalStats.DayOne == true:
 			GlobalStats.DayOne=false
 		AudioManager.stopMusic1()
+		GlobalStats.QuotaCheck.emit()
