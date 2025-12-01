@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://cl1jmkdurg2bg"]
+[gd_scene load_steps=12 format=4 uid="uid://cl1jmkdurg2bg"]
 
 [ext_resource type="PackedScene" uid="uid://dd4iqf5la6hly" path="res://player/player.tscn" id="1_f3sb7"]
 [ext_resource type="Script" uid="uid://b3n8caeiub1dr" path="res://world.gd" id="1_gbfbk"]
@@ -6,16 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://cxl18pj2uuxtl" path="res://Doors/door.tscn" id="3_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://dfskvkq4outll" path="res://interactables/QuotaBoard/QuotaBoard.tscn" id="4_aqk2v"]
 [ext_resource type="PackedScene" uid="uid://dejycdtv58q6s" path="res://interactables/Storage/chest.tscn" id="5_036b0"]
-[ext_resource type="PackedScene" uid="uid://cd3s2mygwd6ul" path="res://interactables/trees/tree.tscn" id="6_dwbse"]
-[ext_resource type="Resource" uid="uid://dps300dufah0" path="res://interactables/trees/tree_resources/oak_tree.tres" id="9_ioo17"]
-[ext_resource type="PackedScene" uid="uid://fbvlq216070u" path="res://interactables/rocks/rock.tscn" id="10_wse8f"]
 [ext_resource type="PackedScene" uid="uid://ndteduivwx3c" path="res://interactables/mud/mud_zone.tscn" id="11_ic0uy"]
 [ext_resource type="Texture2D" uid="uid://bdq11b35q2usn" path="res://art_assets/tileset_base.png" id="11_k3n1d"]
-[ext_resource type="PackedScene" uid="uid://cdbqttwtbxchw" path="res://interactables/items/item.tscn" id="12_k3n1d"]
-[ext_resource type="Resource" uid="uid://be0bhxmmgdj84" path="res://interactables/items/item_resources/pine_log.tres" id="13_2o6r5"]
-[ext_resource type="Resource" uid="uid://djvommoh1q7y6" path="res://interactables/items/item_resources/oak_log.tres" id="13_2u3nc"]
-[ext_resource type="Resource" uid="uid://cqu2ptwuvfp6u" path="res://interactables/items/item_resources/aspen_log.tres" id="13_udxuc"]
-[ext_resource type="Resource" uid="uid://blvhyxs51sep2" path="res://interactables/items/item_resources/stone.tres" id="15_ikiii"]
 [ext_resource type="PackedScene" uid="uid://nlwiy157iw5k" path="res://interactables/resource spawning/ResourceArea.tscn" id="17_udxuc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2o6r5"]
@@ -1086,48 +1078,8 @@ position = Vector2(-92, 120)
 [node name="DefaultStuff" type="Node" parent="."]
 unique_name_in_owner = true
 
-[node name="Rock" parent="." instance=ExtResource("10_wse8f")]
-position = Vector2(84, 106)
-
-[node name="Rock2" parent="." instance=ExtResource("10_wse8f")]
-position = Vector2(-56, -102)
-
-[node name="Tree" parent="." instance=ExtResource("6_dwbse")]
-position = Vector2(-215, 127)
-data = ExtResource("9_ioo17")
-
-[node name="Rock3" parent="." instance=ExtResource("10_wse8f")]
-visible = false
-position = Vector2(154, -78)
-health = 2.0
-
 [node name="MudZone" parent="." instance=ExtResource("11_ic0uy")]
-visible = false
 position = Vector2(197, 33)
-
-[node name="Item" parent="." instance=ExtResource("12_k3n1d")]
-visible = false
-position = Vector2(31, 146)
-
-[node name="Item2" parent="." instance=ExtResource("12_k3n1d")]
-visible = false
-position = Vector2(-5, 191)
-data = ExtResource("13_udxuc")
-
-[node name="Item3" parent="." instance=ExtResource("12_k3n1d")]
-visible = false
-position = Vector2(-33, 194)
-data = ExtResource("13_2u3nc")
-
-[node name="Item4" parent="." instance=ExtResource("12_k3n1d")]
-visible = false
-position = Vector2(-26, 254)
-data = ExtResource("15_ikiii")
-
-[node name="Item5" parent="." instance=ExtResource("12_k3n1d")]
-visible = false
-position = Vector2(-83, 208)
-data = ExtResource("13_2o6r5")
 
 [node name="InitialResourceSpawners" type="Node" parent="."]
 
