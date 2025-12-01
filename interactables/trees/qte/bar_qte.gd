@@ -12,7 +12,7 @@ signal miss
 @export var _hit_zone_padding: float = 2.0
 
 ## How much leeway the player has in hitting the zone
-@export var _hit_margin: float = 4.0
+@export var _hit_margin: float = 0.0
 @export var _marker_velocity: float = 50.0
 
 var _marker_bounds: Vector2 # (min, max)

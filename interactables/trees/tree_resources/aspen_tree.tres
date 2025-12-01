@@ -12,6 +12,7 @@ script = ExtResource("2_jwji4")
 name = "Aspen Tree"
 texture_sapling = ExtResource("6_ymetu")
 texture_mature = ExtResource("3_jwji4")
+health = 6
 drops = Dictionary[ExtResource("1_rhcb2"), float]({
 ExtResource("2_rc0pc"): 50.0,
 ExtResource("3_tvovk"): 50.0

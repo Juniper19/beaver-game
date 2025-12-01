@@ -9,11 +9,13 @@ func interact(by: Node):
 	interaction.emit(by)
 
 
-func _on_body_exited(body: Node2D) -> void:
-	if body is Player:
-		player_left_area.emit(body)
+func _on_area_exited(body: Area2D) -> void:
+	var parent = body.get_parent()
+	if parent is Player:
+		player_left_area.emit(parent)
 
 
-func _on_body_entered(body: Node2D) -> void:
-	if body is Player:
-		player_entered_area.emit(body)
+func _on_area_entered(body: Area2D) -> void:
+	var parent = body.get_parent()
+	if parent is Player:
+		player_entered_area.emit(parent)

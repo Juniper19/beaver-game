@@ -6,7 +6,7 @@ signal item_removed(item: Node2D)
 
 @export var inventory_items: Array[Node2D] = []
 @export var item_separation: Vector2 = Vector2(0.0, -12.0)
-@export var random_drop_distance: float = 40.0
+@export var random_drop_distance: float = 32.0
 
 var _item_tweens: Dictionary[Node2D, Tween] = {}
 var _blacklist: Array[Node2D] = []
@@ -329,6 +329,7 @@ func _can_plant_at(pos: Vector2) -> bool:
 
 	var query := PhysicsShapeQueryParameters2D.new()
 	query.shape = shape
+	query.collision_mask = 4
 	query.transform = Transform2D(0, pos)
 	query.collide_with_areas = true
 	query.collide_with_bodies = true
