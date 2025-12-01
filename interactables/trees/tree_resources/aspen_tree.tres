@@ -1,20 +1,21 @@
-[gd_resource type="Resource" script_class="TreeData" load_steps=6 format=3 uid="uid://de4jpe12kbg52"]
+[gd_resource type="Resource" script_class="TreeData" load_steps=7 format=3 uid="uid://de4jpe12kbg52"]
 
 [ext_resource type="Script" uid="uid://y3w4yjg8qy6" path="res://interactables/items/item_resource.gd" id="1_rhcb2"]
 [ext_resource type="Script" uid="uid://cn8lyq0xlxhdl" path="res://interactables/trees/tree_data.gd" id="2_jwji4"]
-[ext_resource type="Texture2D" uid="uid://cxgq0seuxx6jb" path="res://art_assets/placeholder_aspen_tree.png" id="3_jwji4"]
-
-[sub_resource type="Gradient" id="Gradient_jwji4"]
-colors = PackedColorArray(0, 0, 0, 1, 0.973834, 0.8004369, 0.64252144, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_3pjb4"]
-gradient = SubResource("Gradient_jwji4")
-width = 32
+[ext_resource type="Resource" uid="uid://cqu2ptwuvfp6u" path="res://interactables/items/item_resources/aspen_log.tres" id="2_rc0pc"]
+[ext_resource type="Texture2D" uid="uid://batebnpgdqf5g" path="res://art_assets/resources/aspen_full.png" id="3_jwji4"]
+[ext_resource type="Resource" uid="uid://cc4ubpnvwbrh8" path="res://interactables/items/item_resources/aspen_seed.tres" id="3_tvovk"]
+[ext_resource type="Texture2D" uid="uid://b7xwk062ye6d7" path="res://art_assets/resources/aspen_sapling.png" id="6_ymetu"]
 
 [resource]
 script = ExtResource("2_jwji4")
 name = "Aspen Tree"
-texture_sapling = SubResource("GradientTexture2D_3pjb4")
+texture_sapling = ExtResource("6_ymetu")
 texture_mature = ExtResource("3_jwji4")
+drops = Dictionary[ExtResource("1_rhcb2"), float]({
+ExtResource("2_rc0pc"): 50.0,
+ExtResource("3_tvovk"): 50.0
+})
+drop_amount = 3
 days_to_grow = 2
 metadata/_custom_type_script = "uid://cn8lyq0xlxhdl"

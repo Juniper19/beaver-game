@@ -1,20 +1,22 @@
-[gd_resource type="Resource" script_class="TreeData" load_steps=6 format=3 uid="uid://coq60gmhpggti"]
+[gd_resource type="Resource" script_class="TreeData" load_steps=7 format=3 uid="uid://coq60gmhpggti"]
 
 [ext_resource type="Script" uid="uid://y3w4yjg8qy6" path="res://interactables/items/item_resource.gd" id="1_o5lfv"]
 [ext_resource type="Script" uid="uid://cn8lyq0xlxhdl" path="res://interactables/trees/tree_data.gd" id="2_bm1n4"]
-[ext_resource type="Texture2D" uid="uid://dsrtdm2jbinqn" path="res://art_assets/placeholder_pine_tree.png" id="3_bm1n4"]
-
-[sub_resource type="Gradient" id="Gradient_l2eqm"]
-colors = PackedColorArray(0, 0, 0, 1, 0.42709297, 0.47238666, 0.10468701, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_bm1n4"]
-gradient = SubResource("Gradient_l2eqm")
-width = 32
+[ext_resource type="Resource" uid="uid://be0bhxmmgdj84" path="res://interactables/items/item_resources/pine_log.tres" id="2_ywhby"]
+[ext_resource type="Resource" uid="uid://dc0c5rb0ubn6k" path="res://interactables/items/item_resources/pine_seed.tres" id="3_2sy8d"]
+[ext_resource type="Texture2D" uid="uid://dpmcce4fujeds" path="res://art_assets/resources/pine_full.png" id="3_bm1n4"]
+[ext_resource type="Texture2D" uid="uid://4ds8lr628ako" path="res://art_assets/resources/pine_sapling.png" id="4_dg354"]
 
 [resource]
 script = ExtResource("2_bm1n4")
 name = "Pine Tree"
-texture_sapling = SubResource("GradientTexture2D_bm1n4")
+texture_sapling = ExtResource("4_dg354")
 texture_mature = ExtResource("3_bm1n4")
+health = 10
+drops = Dictionary[ExtResource("1_o5lfv"), float]({
+ExtResource("2_ywhby"): 30.0,
+ExtResource("3_2sy8d"): 10.0
+})
+drop_amount = 6
 days_to_grow = 3
 metadata/_custom_type_script = "uid://cn8lyq0xlxhdl"

@@ -23,6 +23,7 @@ var _shake_strength: float = 0.0
 
 func _ready():
 	_default_shake_position = sprite.position
+	$Sprite2D.flip_h = randf() <= 0.5
 
 
 func _physics_process(_delta):

@@ -39,6 +39,7 @@ func _process(_delta: float):
 func _set_data(_data: TreeData):
 	data = _data
 	sprite.texture = data.texture_mature
+	sprite.flip_h = randf() <= 0.5
 	sprite.position.y = -sprite.texture.get_height() / 2.0
 	health = data.health
 
@@ -165,7 +166,7 @@ func save() -> Dictionary:
 	var save_data := {
 		"position_x": global_position.x,
 		"position_y": global_position.y,
-		"item_resource": data.resource_path,
+		"tree_resource": data.resource_path,
 	}
 	
 	return save_data
@@ -177,4 +178,4 @@ func load(save_data: Dictionary):
 		save_data["position_y"]
 	)
 	
-	data = ResourceLoader.load(save_data["item_resource"])
+	data = ResourceLoader.load(save_data["tree_resource"])
