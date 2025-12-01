@@ -1,20 +1,10 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://cc4ubpnvwbrh8"]
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://cc4ubpnvwbrh8"]
 
 [ext_resource type="Script" uid="uid://y3w4yjg8qy6" path="res://interactables/items/item_resource.gd" id="1_xevfq"]
-
-[sub_resource type="Gradient" id="Gradient_xevfq"]
-colors = PackedColorArray(0.8485809, 0.5973379, 0.484954, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_nokst"]
-gradient = SubResource("Gradient_xevfq")
-width = 32
-height = 32
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(1, 0.5)
+[ext_resource type="Texture2D" uid="uid://qhsh1w6w6sgg" path="res://art_assets/items/aspen_seed.png" id="2_nokst"]
 
 [resource]
 script = ExtResource("1_xevfq")
 name = "Aspen Seed"
-texture = SubResource("GradientTexture2D_nokst")
+texture = ExtResource("2_nokst")
 metadata/_custom_type_script = "uid://y3w4yjg8qy6"
