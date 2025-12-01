@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://cdqen5kv8kmhx"]
+[gd_scene load_steps=4 format=3 uid="uid://cdqen5kv8kmhx"]
 
 [ext_resource type="Script" uid="uid://cwo68e4tx8ejq" path="res://menu/main_menu.gd" id="1_06t4h"]
 [ext_resource type="Texture2D" uid="uid://wdouuryip8pu" path="res://menu/Beaver.png" id="2_7vrkn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f5okj"]
+bg_color = Color(0.46899897, 0.6110476, 0.7917542, 1)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -38,3 +41,89 @@ alignment = 1
 [node name="Button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Start Game"
+
+[node name="AudioSettings Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Audio Settings"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Quit
+"
+
+[node name="Panel" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -374.0
+offset_top = -211.0
+offset_right = 374.0
+offset_bottom = 211.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f5okj")
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -63.0
+offset_top = 127.0
+offset_right = 63.0
+offset_bottom = 146.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 24
+text = "Audio Settings"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -28.5
+offset_right = 36.0
+offset_bottom = 82.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="SFX" type="Label" parent="Panel/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "SFX Volume"
+
+[node name="HSlider" type="HSlider" parent="Panel/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.01
+
+[node name="Music" type="Label" parent="Panel/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Music Volume"
+
+[node name="HSlider2" type="HSlider" parent="Panel/VBoxContainer2"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+
+[node name="MMButton" type="Button" parent="Panel/VBoxContainer2"]
+layout_mode = 2
+text = "Main Menu"
+
+[connection signal="pressed" from="VBoxContainer/AudioSettings Button" to="." method="_on_audio_settings_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="changed" from="Panel/VBoxContainer2/HSlider" to="." method="_on_h_slider_changed"]
+[connection signal="value_changed" from="Panel/VBoxContainer2/HSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="changed" from="Panel/VBoxContainer2/HSlider2" to="." method="_on_h_slider_2_changed"]
+[connection signal="value_changed" from="Panel/VBoxContainer2/HSlider2" to="." method="_on_h_slider_2_value_changed"]
+[connection signal="pressed" from="Panel/VBoxContainer2/MMButton" to="." method="_on_mm_button_pressed"]

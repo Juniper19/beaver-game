@@ -19,7 +19,7 @@ func _ready() -> void:
 
 func _on_global_game_over() -> void:
 	# Show UI and play animation
-	
+	AudioManager.stopInsideMusic()
 	get_tree().paused = true
 	visible = true
 	await get_tree().create_timer(0.4).timeout

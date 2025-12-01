@@ -129,3 +129,10 @@ func playMusic1():
 		
 func stopMusic1():
 	$Music1.stop()
+
+func playInsideMusic():
+	if not mute:
+		$InsideMusic.play()
+		
+func stopInsideMusic():
+	$InsideMusic.stop()

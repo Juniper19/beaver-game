@@ -1081,22 +1081,18 @@ position = Vector2(-91, 27)
 time_speed = 10.0
 
 [node name="Chest" parent="." instance=ExtResource("5_036b0")]
-visible = false
 position = Vector2(-92, 120)
 
 [node name="DefaultStuff" type="Node" parent="."]
 unique_name_in_owner = true
 
 [node name="Rock" parent="." instance=ExtResource("10_wse8f")]
-visible = false
 position = Vector2(84, 106)
 
 [node name="Rock2" parent="." instance=ExtResource("10_wse8f")]
-visible = false
 position = Vector2(-56, -102)
 
 [node name="Tree" parent="." instance=ExtResource("6_dwbse")]
-visible = false
 position = Vector2(-215, 127)
 data = ExtResource("9_ioo17")
 

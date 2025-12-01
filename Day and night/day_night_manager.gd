@@ -132,7 +132,9 @@ func _on_scene_changed() -> void:
 		# In outdoor world, show and reset new day
 		resume_time()
 		start_new_day()
+		AudioManager.stopInsideMusic()
 		AudioManager.playMusic1()
+		
 
 	else:
 		# Any other scene, default pause and hide UI CAN CHANGE THIS IF WE WANT
