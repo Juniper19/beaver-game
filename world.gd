@@ -7,7 +7,7 @@ const SAVE_PATH = "user://world_save.save"
 
 
 const Columns = 3
-const Starting_Pos = Vector2(100,200)
+const Starting_Pos = Vector2(60,60)
 const Cell_Size = Vector2(110,110)
 
 

@@ -11,6 +11,7 @@ size = Vector2(116, 116)
 script = ExtResource("1_13hgd")
 
 [node name="InteractionArea" parent="." instance=ExtResource("1_0r45q")]
+collision_layer = 18
 
 [node name="Sprite2D" type="Sprite2D" parent="InteractionArea"]
 scale = Vector2(1.625, 1.625)
@@ -27,3 +28,6 @@ offset_right = 84.0
 offset_bottom = -55.0
 theme_override_font_sizes/font_size = 40
 text = "Insert Item"
+
+[connection signal="player_entered_area" from="InteractionArea" to="." method="_on_interaction_area_player_entered_area"]
+[connection signal="player_left_area" from="InteractionArea" to="." method="_on_interaction_area_player_left_area"]

@@ -27,6 +27,7 @@ fill_to = Vector2(1, 0.5)
 script = ExtResource("1_64f8w")
 
 [node name="InteractionArea" parent="." instance=ExtResource("2_kj6is")]
+collision_layer = 18
 
 [node name="Sprite2D" type="Sprite2D" parent="InteractionArea"]
 texture = ExtResource("3_kgw8d")
@@ -79,4 +80,5 @@ texture = ExtResource("8_cm6st")
 [node name="ItemStack" type="Node2D" parent="InteractionArea"]
 unique_name_in_owner = true
 
+[connection signal="player_entered_area" from="InteractionArea" to="." method="_on_interaction_area_player_entered_area"]
 [connection signal="player_left_area" from="InteractionArea" to="." method="_on_interaction_area_player_left_area"]

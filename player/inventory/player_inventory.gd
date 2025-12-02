@@ -126,8 +126,28 @@ func _on_item_in_chest():
 		return
 	
 	var item := inventory_items[top]
-	if item.item_name == "Oak Seed":
+	if item.item_name in ["Oak Seed", "Aspen Seed", "Pine Seed"]:
 		return
+		
+	if item.item_name == "Oak Log":
+		if GlobalStats.wood >= GlobalStats.ReqWood:
+			return
+			
+	if item.item_name == "Pine Log":
+		if GlobalStats.pine_log >= GlobalStats.ReqPineLog:
+			return
+		
+	if item.item_name == "Aspen Log":
+		if GlobalStats.aspen_log >= GlobalStats.ReqAspenLog:
+			return
+		
+	elif item.item_name == "Mud":
+		if GlobalStats.mud >= GlobalStats.ReqMud:
+			return
+		
+	elif item.item_name == "Stone":
+		if GlobalStats.stone >= GlobalStats.ReqStone:
+			return
 		
 	ChestDrop = true #Used so a loop isn't created
 	Quota = true
@@ -223,21 +243,9 @@ func drop_item(index: int) -> void:
 		AudioManager.playDepositE()
 		GlobalStats.emit_signal("inventory_item_placed", item)
 	if Quota:
-		if ItemType == "Oak Log":
-			if GlobalStats.wood >= GlobalStats.ReqWood:
-				CancelQFree = true
-			else:
-				AudioManager.playDeposit()
-		elif ItemType == "Mud":
-			if GlobalStats.mud >= GlobalStats.ReqMud:
-				CancelQFree = true
-			else:
-				AudioManager.playDeposit()
-		elif ItemType == "Stone":
-			if GlobalStats.stone >= GlobalStats.ReqStone:
-				CancelQFree = true
-			else:
-				AudioManager.playDeposit()
+		
+			
+		AudioManager.playDeposit()
 		GlobalStats.emit_signal("Add_to_Quota", item)
 	if ChestDrop and CancelQFree == false:
 		# In chest drops we don't keep the world instance

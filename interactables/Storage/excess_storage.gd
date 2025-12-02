@@ -10,6 +10,7 @@ var storage: Array = []
 var storage_names: Array = []
 
 @export var chest_id: int = -1
+var Inside: bool
 
 func _ready() -> void:
 
@@ -40,17 +41,18 @@ func _ready() -> void:
 	_update_icon()
 
 func _process(_delta: float) -> void:
-	if $InteractionArea.get_overlapping_bodies().size() > 0:
-		GlobalStats.ExcessChestEntered = true
-		%InteractLabel.visible = true
+	#print($InteractionArea.get_overlapping_bodies().size())
+	#if $InteractionArea.get_overlapping_bodies().size() > 0:
+		#GlobalStats.ExcessChestEntered = true
+		#%InteractLabel.visible = true
 	#else:
 		
 			#%InteractLabel.visible = false
 			#GlobalStats.ExcessChestEntered = false
 		
-	if Input.is_action_just_pressed("drop_item") and $InteractionArea.get_overlapping_bodies().size() > 0:
+	if Input.is_action_just_pressed("drop_item") and Inside == true:
 		add_item()
-	if Input.is_action_just_pressed("interact") and $InteractionArea.get_overlapping_bodies().size() > 0:
+	if Input.is_action_just_pressed("interact") and Inside == true:
 		remove_item()
 	
 func add_item():
@@ -58,7 +60,7 @@ func add_item():
 
 
 func _on_item_placed(item) -> void:
-	if $InteractionArea.get_overlapping_bodies().size() == 0:
+	if Inside == false:
 		return
 	# Only care if this came from the player inventory drop-for-chest logic
 	if storage.size() < GlobalStats.StorageLimit:
@@ -122,7 +124,12 @@ func _update_icon() -> void:
 	#if "texture" in last_data:
 	#	%IconSprite.texture = last_data.texture
 
+func _on_interaction_area_player_entered_area(player: Player) -> void:
+	GlobalStats.ExcessChestEntered = true
+	Inside = true
+	%InteractLabel.visible = true
 
 func _on_interaction_area_player_left_area(player: Player) -> void:
 	%InteractLabel.visible = false
+	Inside = false
 	GlobalStats.ExcessChestEntered = false

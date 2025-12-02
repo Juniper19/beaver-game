@@ -3,7 +3,7 @@ extends Node2D
 const GlobalStatsScript = preload("res://global/global_stats.gd")
 var global_stats: Node = null
 
-
+var Inside: bool
 
 func _ready() -> void:
 
@@ -24,14 +24,16 @@ func _ready() -> void:
 	
 	
 func _process(_delta: float) -> void:
-	if $InteractionArea.get_overlapping_bodies().size() > 0:
-		%InteractLabel.visible = true
-		GlobalStats.QuotaChestEntered = true
-	else:
-		%InteractLabel.visible = false
-		GlobalStats.QuotaChestEntered = false
+	#print($InteractionArea.get_overlapping_areas().size())
+	#if $InteractionArea.get_overlapping_areas().size() > 0:
+		#%InteractLabel.visible = true
+		#GlobalStats.QuotaChestEntered = true
+	#else:
+		#%InteractLabel.visible = false
+		#GlobalStats.QuotaChestEntered = false
 		
-	if Input.is_action_just_pressed("drop_item") and $InteractionArea.get_overlapping_bodies().size() > 0:
+	if Input.is_action_just_pressed("drop_item") and Inside == true:
+		print("Yes")
 		GlobalStats.ItemInChest.emit()
 		#GlobalStats.emit_signal("ItemInChest", item_data)
 		#add_item(item)
@@ -95,3 +97,14 @@ func _on_Add_to_Quota(item):
 				GlobalStats.stone += 1
 				#GlobalStats.emit_signal("ItemInChest")
 	
+
+
+func _on_interaction_area_player_entered_area(player: Player) -> void:
+	%InteractLabel.visible = true
+	GlobalStats.QuotaChestEntered = true
+	Inside = true
+
+func _on_interaction_area_player_left_area(player: Player) -> void:
+	%InteractLabel.visible = false
+	GlobalStats.QuotaChestEntered = false
+	Inside = false
