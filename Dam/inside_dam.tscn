@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cus4fv7iknxoj"]
+[gd_scene load_steps=25 format=3 uid="uid://cus4fv7iknxoj"]
 
 [ext_resource type="PackedScene" uid="uid://dd4iqf5la6hly" path="res://player/player.tscn" id="1_applo"]
 [ext_resource type="Script" uid="uid://by2c314a07312" path="res://Dam/inside_dam.gd" id="1_i0yba"]
@@ -37,6 +37,69 @@ size = Vector2(62, 4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ma61p"]
 size = Vector2(20, 12)
+
+[sub_resource type="Animation" id="Animation_tnj8q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:material:shader_parameter/TWIST_FACTOR")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Background:material:shader_parameter/FROM_COLOR")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.058653772, 0.030840987, 0.004306759, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Background:material:shader_parameter/TO_COLOR")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.13954258, 0.086489, 0.013788822, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("InsideClip/SubViewportContainer/SubViewport/Lights:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_ma61p"]
 resource_name = "sleep"
@@ -94,7 +157,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("InsideClip/Lights:modulate")
+tracks/4/path = NodePath("InsideClip/SubViewportContainer/SubViewport/Lights:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -128,84 +191,25 @@ tracks/6/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_tnj8q"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Background:material:shader_parameter/TWIST_FACTOR")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [-1.5]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Background:material:shader_parameter/FROM_COLOR")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.058653772, 0.030840987, 0.004306759, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Background:material:shader_parameter/TO_COLOR")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.13954258, 0.086489, 0.013788822, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("InsideClip/Lights:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath(".:modulate")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xe44a"]
 _data = {
 &"RESET": SubResource("Animation_tnj8q"),
 &"sleep": SubResource("Animation_ma61p")
 }
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tnj8q"]
+blend_mode = 4
+
 [sub_resource type="Gradient" id="Gradient_ma61p"]
-offsets = PackedFloat32Array(0.008733625, 1)
-colors = PackedColorArray(1, 1, 1, 0, 0.8777341, 0.69737065, 0.4743722, 0.70980394)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.4627451)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ma61p"]
 gradient = SubResource("Gradient_ma61p")
 width = 12
 height = 30
 fill_to = Vector2(0, 1)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ma61p"]
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_tnj8q"]
 gradient = SubResource("Gradient_ma61p")
@@ -239,6 +243,7 @@ position = Vector2(0, 59)
 zoom = Vector2(2, 2)
 
 [node name="Colliders" type="StaticBody2D" parent="."]
+visible = false
 collision_layer = 4
 collision_mask = 0
 
@@ -315,20 +320,35 @@ position = Vector2(0, 51)
 base_move_speed = 80.0
 disable_camera = true
 
-[node name="Lights" type="Node2D" parent="InsideClip"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="InsideClip"]
+material = SubResource("CanvasItemMaterial_tnj8q")
+offset_left = -160.0
+offset_top = -90.0
+offset_right = 160.0
+offset_bottom = 90.0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="InsideClip/SubViewportContainer"]
+transparent_bg = true
+snap_2d_transforms_to_pixel = true
+size = Vector2i(320, 180)
+
+[node name="Lights" type="Node2D" parent="InsideClip/SubViewportContainer/SubViewport"]
 modulate = Color(1, 1, 1, 0)
+position = Vector2(160, 90)
 
-[node name="Window" type="Sprite2D" parent="InsideClip/Lights"]
-position = Vector2(48.999992, 15.999999)
-rotation = -2.1816616
+[node name="Window" type="Sprite2D" parent="InsideClip/SubViewportContainer/SubViewport/Lights"]
+position = Vector2(46.1475, 8.768454)
+rotation = -2.0333085
 texture = SubResource("GradientTexture2D_ma61p")
 
-[node name="Window2" type="Sprite2D" parent="InsideClip/Lights"]
-position = Vector2(48.999996, 6.000001)
-rotation = -2.1816616
+[node name="Window2" type="Sprite2D" parent="InsideClip/SubViewportContainer/SubViewport/Lights"]
+position = Vector2(46.1475, 1.7684541)
+rotation = -2.0333085
 texture = SubResource("GradientTexture2D_ma61p")
 
-[node name="DoorLight" type="Sprite2D" parent="InsideClip/Lights"]
+[node name="DoorLight" type="Sprite2D" parent="InsideClip/SubViewportContainer/SubViewport/Lights"]
+material = SubResource("CanvasItemMaterial_ma61p")
 position = Vector2(0, 55)
 texture = SubResource("GradientTexture2D_tnj8q")
 
