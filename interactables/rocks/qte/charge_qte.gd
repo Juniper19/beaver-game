@@ -18,7 +18,10 @@ var _bar_texture_width: int
 func _ready():
 	timer.wait_time = time_to_max
 	_bar_texture_width = progress_bar.texture_progress.get_width()
-
+	
+	for qte in get_tree().get_nodes_in_group("qte"):
+		if qte != self:
+			qte.queue_free()
 
 func _calculate_and_set_progress():
 	if _on_cooldown:

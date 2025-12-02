@@ -1,5 +1,7 @@
 extends Node
 
+signal upgrade_selected
+
 const GlobalStatsScript = preload("res://global/global_stats.gd")
 var global_stats: Node = null
 
@@ -106,6 +108,7 @@ func _create_card(data: Dictionary) -> Control:
 	return rect
 
 func _apply_card(data: Dictionary) -> void:
+	upgrade_selected.emit()
 	if global_stats:
 		global_stats.apply_effect(data["effect"])
 		var player = get_tree().get_first_node_in_group("player")

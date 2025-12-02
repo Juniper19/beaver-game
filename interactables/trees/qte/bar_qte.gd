@@ -22,6 +22,10 @@ var _hit_zone_bounds: Vector2 # (min, max)
 func _ready():
 	_populate_y_bounds()
 	_place_hit_zone()
+	
+	for qte in get_tree().get_nodes_in_group("qte"):
+		if qte != self:
+			qte.queue_free()
 
 
 func set_hit_zone_size(size: float):

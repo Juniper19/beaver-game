@@ -68,8 +68,6 @@ func _spawn_tree(spawn_area: SpawnArea, data: TreeData, parent_node: Node):
 
 func _spawn_tree_2(point: Vector2, data: TreeData, parent_node: Node):
 	if _point_overlaps(point + global_position):
-		print(point + global_position)
-		print("Skipped")
 		return
 	var tree: PhysicalTree = TREE.instantiate()
 	tree.data = data
