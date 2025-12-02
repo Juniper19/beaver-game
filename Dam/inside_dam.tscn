@@ -1,25 +1,338 @@
-[gd_scene load_steps=5 format=3 uid="uid://cus4fv7iknxoj"]
+[gd_scene load_steps=23 format=3 uid="uid://cus4fv7iknxoj"]
 
 [ext_resource type="PackedScene" uid="uid://dd4iqf5la6hly" path="res://player/player.tscn" id="1_applo"]
+[ext_resource type="Script" uid="uid://by2c314a07312" path="res://Dam/inside_dam.gd" id="1_i0yba"]
 [ext_resource type="PackedScene" uid="uid://cxl18pj2uuxtl" path="res://Doors/door.tscn" id="2_6w3bf"]
+[ext_resource type="Shader" uid="uid://80inwcp4qi1s" path="res://Dam/inside_dam_background.gdshader" id="2_ma61p"]
 [ext_resource type="PackedScene" uid="uid://bnjmxvo72qb0" path="res://Dam/upgrade_manager.tscn" id="3_gxfum"]
 [ext_resource type="PackedScene" uid="uid://didpb8qch5gt4" path="res://calendar_ui.tscn" id="4_bnjr0"]
+[ext_resource type="Texture2D" uid="uid://hvwvuo4m5xam" path="res://art_assets/interior.png" id="5_64isp"]
+[ext_resource type="PackedScene" uid="uid://dwafgcp2uqbfl" path="res://interactables/interaction_area.tscn" id="7_i0yba"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tnj8q"]
+shader = ExtResource("2_ma61p")
+shader_parameter/sizeY = 180
+shader_parameter/SPEED_FACTOR = 0.1
+shader_parameter/TWIST_SPEED_FACTOR = 1.0
+shader_parameter/TWIST_FACTOR = -1.5
+shader_parameter/TWIST_MOVE_FACTOR = 0.0
+shader_parameter/aspectRatio = 1.777777
+shader_parameter/FROM_COLOR = Color(0.058653772, 0.030840987, 0.004306759, 1)
+shader_parameter/TO_COLOR = Color(0.13954258, 0.086489, 0.013788822, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_64isp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_64isp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vuihg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i0yba"]
+size = Vector2(36, 11.000002)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tnj8q"]
+size = Vector2(38, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xe44a"]
+size = Vector2(62, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ma61p"]
+size = Vector2(20, 12)
+
+[sub_resource type="Animation" id="Animation_ma61p"]
+resource_name = "sleep"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:material:shader_parameter/TWIST_FACTOR")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.75, 2.3666666),
+"transitions": PackedFloat32Array(2.5, 0.25, 1),
+"update": 0,
+"values": [-1.5, 0.0, 1.5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Background:material:shader_parameter/FROM_COLOR")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.93333334, 2.3333333),
+"transitions": PackedFloat32Array(2.1763775, 1),
+"update": 0,
+"values": [Color(0.117220916, 0.07256582, 0.010795162, 1), Color(0.15248051, 0.10064895, 0.018309455, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Background:material:shader_parameter/TO_COLOR")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.93333334, 2.3333333),
+"transitions": PackedFloat32Array(1.8946468, 1),
+"update": 0,
+"values": [Color(0.20285422, 0.13178834, 0.027882192, 1), Color(0.27090752, 0.18209985, 0.047382846, 1)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = false
+tracks/3/path = NodePath("UpgradeManager")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.033333335),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"show_three_cards"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("InsideClip/Lights:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1.7, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.96666664, 2.5),
+"transitions": PackedFloat32Array(0.3298769, 1.2311436, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.4211694, 0.5050374, 0.58211577, 1), Color(1, 1, 0.85490197, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("InsideClip/Player:process_mode")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(2.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_tnj8q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:material:shader_parameter/TWIST_FACTOR")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Background:material:shader_parameter/FROM_COLOR")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.058653772, 0.030840987, 0.004306759, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Background:material:shader_parameter/TO_COLOR")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.13954258, 0.086489, 0.013788822, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("InsideClip/Lights:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xe44a"]
+_data = {
+&"RESET": SubResource("Animation_tnj8q"),
+&"sleep": SubResource("Animation_ma61p")
+}
+
+[sub_resource type="Gradient" id="Gradient_ma61p"]
+offsets = PackedFloat32Array(0.008733625, 1)
+colors = PackedColorArray(1, 1, 1, 0, 0.8777341, 0.69737065, 0.4743722, 0.70980394)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ma61p"]
+gradient = SubResource("Gradient_ma61p")
+width = 12
+height = 30
+fill_to = Vector2(0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tnj8q"]
+gradient = SubResource("Gradient_ma61p")
+width = 37
+height = 40
+fill_to = Vector2(0, 1)
 
 [node name="InsideDam" type="Node2D" groups=["dam"]]
+script = ExtResource("1_i0yba")
+
+[node name="Background" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_tnj8q")
+offset_left = -160.0
+offset_top = -90.0
+offset_right = 160.0
+offset_bottom = 90.0
+color = Color(1.9853935e-07, 0.115532644, 0.17637151, 1)
+
+[node name="Interior" type="Sprite2D" parent="."]
+texture = ExtResource("5_64isp")
 
 [node name="Door" parent="." instance=ExtResource("2_6w3bf")]
-
-[node name="Player" parent="." instance=ExtResource("1_applo")]
+process_mode = 4
+position = Vector2(0, 59)
 
 [node name="UpgradeManager" parent="." instance=ExtResource("3_gxfum")]
 
 [node name="CalendarUI" parent="." instance=ExtResource("4_bnjr0")]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.0
-offset_left = -241.0
-offset_top = -315.0
-offset_right = 359.0
-offset_bottom = -115.0
-grow_vertical = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="Colliders" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="West Wall" type="CollisionShape2D" parent="Colliders"]
+position = Vector2(-58, 0)
+rotation = 1.5707964
+shape = SubResource("WorldBoundaryShape2D_64isp")
+
+[node name="East Wall" type="CollisionShape2D" parent="Colliders"]
+position = Vector2(59, -3)
+rotation = -1.5707964
+shape = SubResource("WorldBoundaryShape2D_64isp")
+
+[node name="North Wall" type="CollisionShape2D" parent="Colliders"]
+position = Vector2(0, -34)
+rotation = 3.1415927
+shape = SubResource("WorldBoundaryShape2D_64isp")
+
+[node name="Stove" type="CollisionShape2D" parent="Colliders"]
+position = Vector2(43, -28)
+rotation = 3.1415927
+shape = SubResource("RectangleShape2D_64isp")
+
+[node name="Table" type="CollisionShape2D" parent="Colliders"]
+position = Vector2(-4, -31)
+rotation = -3.1415925
+shape = SubResource("RectangleShape2D_vuihg")
+
+[node name="Bed Bottom" type="CollisionShape2D" parent="Colliders"]
+position = Vector2(-36, 13.500001)
+rotation = -3.1415925
+shape = SubResource("RectangleShape2D_i0yba")
+
+[node name="South Wall Left" type="CollisionShape2D" parent="Colliders"]
+position = Vector2(-44, 55)
+shape = SubResource("RectangleShape2D_tnj8q")
+
+[node name="South Wall Right" type="CollisionShape2D" parent="Colliders"]
+position = Vector2(45, 55)
+shape = SubResource("RectangleShape2D_tnj8q")
+
+[node name="DoorCollider" type="CollisionShape2D" parent="Colliders"]
+position = Vector2(0, 64.5)
+shape = SubResource("RectangleShape2D_xe44a")
+
+[node name="SleepText" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_left = -51.0
+offset_top = -56.0
+offset_right = -21.0
+offset_bottom = -43.0
+text = "Sleep"
+horizontal_alignment = 1
+
+[node name="Bed" parent="." instance=ExtResource("7_i0yba")]
+position = Vector2(-73, -85)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bed"]
+position = Vector2(19, 68)
+shape = SubResource("RectangleShape2D_ma61p")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_xe44a")
+}
+
+[node name="InsideClip" type="Polygon2D" parent="."]
+clip_children = 1
+polygon = PackedVector2Array(-24, 56, 25, 56, 25, 40, 57, 40, 57, -56, -56, -56, -56, 7, -55, 6, -54, 6, -54, 5, -52, 5, -52, 4, -49, 4, -49, 3, -44, 3, -44, 2, -28, 2, -28, 3, -23, 3, -23, 4, -20, 4, -20, 5, -18, 5, -18, 6, -17, 6, -18, 10, -55, 10, -55, 6, -56, 7, -56, 40, -24, 40)
+
+[node name="Player" parent="InsideClip" instance=ExtResource("1_applo")]
+unique_name_in_owner = true
+position = Vector2(0, 51)
+base_move_speed = 80.0
+disable_camera = true
+
+[node name="Lights" type="Node2D" parent="InsideClip"]
+modulate = Color(1, 1, 1, 0)
+
+[node name="Window" type="Sprite2D" parent="InsideClip/Lights"]
+position = Vector2(48.999992, 15.999999)
+rotation = -2.1816616
+texture = SubResource("GradientTexture2D_ma61p")
+
+[node name="Window2" type="Sprite2D" parent="InsideClip/Lights"]
+position = Vector2(48.999996, 6.000001)
+rotation = -2.1816616
+texture = SubResource("GradientTexture2D_ma61p")
+
+[node name="DoorLight" type="Sprite2D" parent="InsideClip/Lights"]
+position = Vector2(0, 55)
+texture = SubResource("GradientTexture2D_tnj8q")
+
+[connection signal="upgrade_selected" from="UpgradeManager" to="." method="_on_upgrade_selected"]
+[connection signal="interaction" from="Bed" to="." method="_on_bed_interaction"]
+[connection signal="player_entered_area" from="Bed" to="." method="_on_bed_player_entered_area"]
+[connection signal="player_left_area" from="Bed" to="." method="_on_bed_player_left_area"]

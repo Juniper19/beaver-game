@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://d3hu18trqt3gw" path="res://art_assets/resources/rock_meter_bottom.png" id="2_fha4p"]
 [ext_resource type="Texture2D" uid="uid://cflcfqg1m4jlw" path="res://art_assets/resources/rock_meter_top.png" id="3_cvhkb"]
 
-[node name="ChargeQTE" type="Node2D"]
+[node name="ChargeQTE" type="Node2D" groups=["qte"]]
 z_index = 5
 script = ExtResource("1_wul0w")
 

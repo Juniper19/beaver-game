@@ -133,6 +133,7 @@ func stopMusic1():
 func playInsideMusic():
 	if not mute:
 		$InsideMusic.play()
+		$InsideMusic.finished.connect($InsideMusic.play)
 		
 func stopInsideMusic():
 	$InsideMusic.stop()

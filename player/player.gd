@@ -10,6 +10,8 @@ var move_speed: float
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var interaction_area: Area2D = $InteractionArea
 
+@export var disable_camera: bool = false
+
 var last_dir: Vector2 = Vector2.DOWN
 var is_mining: bool = false
 

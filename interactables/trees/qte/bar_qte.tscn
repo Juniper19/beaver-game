@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dnk2qt3fa6gye" path="res://interactables/trees/qte/bar_qte.gd" id="1_8wdmh"]
 [ext_resource type="Texture2D" uid="uid://d31a5a3rq454m" path="res://art_assets/resources/tree_meter_top.png" id="2_43b4a"]
 
-[node name="BarQTE" type="Node2D"]
+[node name="BarQTE" type="Node2D" groups=["qte"]]
 z_index = 4
 script = ExtResource("1_8wdmh")
 
