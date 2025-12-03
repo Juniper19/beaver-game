@@ -8,7 +8,7 @@ const SAVE_PATH = "user://world_save.save"
 
 const Columns = 3
 const Starting_Pos = Vector2(60,60)
-const Cell_Size = Vector2(60,80)
+const Cell_Size = Vector2(88,88)
 
 
 const ExcessStorage = preload("res://interactables/Storage/excess_storage.tscn")

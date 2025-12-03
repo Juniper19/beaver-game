@@ -35,7 +35,7 @@ var ItemID = ""
 var ExcessChestEntered = false
 var QuotaChestEntered = false
 
-
+var MaxedInv: bool = false
 
 
 	#For saving values when scene changes
@@ -93,7 +93,7 @@ func reset():
 	ExcessChestEntered = false
 	QuotaChestEntered = false
 	ExcessStorageCount = 5
-
+	MaxedInv = false
 	#For saving values when scene changes
 	excess_chest_storages = []
 	excess_chest_storage_names = []

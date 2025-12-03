@@ -146,4 +146,5 @@ func _on_interaction_area_player_left_area(player: Player) -> void:
 
 
 func _on_interaction_area_interaction(_by):
-	remove_item()
+	if GlobalStats.MaxedInv == false:
+		remove_item()

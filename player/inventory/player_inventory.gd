@@ -24,6 +24,11 @@ func _ready():
 	#GlobalStats.ItemInExcessChest.connect(_on_item_in_excess_chest)
 	GlobalStats.ItemFromExcessChest.connect(_on_item_from_excess_chest)
 
+func _process(delta: float) -> void:
+	if inventory_items.size() >= GlobalStats.carry_capacity:
+		GlobalStats.MaxedInv = true
+	else:
+		GlobalStats.MaxedInv = false
 
 func _kill_item_tween(item: Node2D):
 	if _item_tweens.has(item):
@@ -41,8 +46,7 @@ func _on_item_from_excess_chest(item_data) -> void:
 	# item_data is an ItemData resource coming from the chest
 	var item_scene: PackedScene = load("res://interactables/items/item.tscn")
 	var item: Node2D = item_scene.instantiate()
-	if inventory_items.size() >= GlobalStats.carry_capacity:
-		return
+	
 	# The Item script uses `data` in _ready() to set name and texture
 	if "data" in item:
 		item.data = item_data
