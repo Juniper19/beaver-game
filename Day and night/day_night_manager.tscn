@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://f5ov75exi6ub"]
+[gd_scene load_steps=5 format=3 uid="uid://f5ov75exi6ub"]
 
 [ext_resource type="Script" uid="uid://dapxwticjt3d0" path="res://Day and night/day_night_manager.gd" id="1_rtqch"]
 [ext_resource type="FontFile" uid="uid://2fr4cmq5dle5" path="res://monogram.ttf" id="2_fv4kt"]
+[ext_resource type="Texture2D" uid="uid://c6xcbojrlvjs3" path="res://Day and night/day_counter.png" id="2_t25f7"]
+[ext_resource type="Texture2D" uid="uid://cig5l2l3fykeu" path="res://Day and night/time_counter.png" id="3_t25f7"]
 
 [node name="DayNightManager" type="Node" groups=["day_night", "daynight"]]
 script = ExtResource("1_rtqch")
@@ -19,28 +21,44 @@ color = Color(0.28627452, 1, 1, 1)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
+[node name="DayBox" type="Sprite2D" parent="UI"]
+position = Vector2(268, 28)
+texture = ExtResource("2_t25f7")
+
+[node name="TimerBox" type="Sprite2D" parent="UI"]
+position = Vector2(360, 28)
+texture = ExtResource("3_t25f7")
+
 [node name="TimerLabel" type="Label" parent="UI"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 23.0
+offset_left = 22.0
+offset_top = 19.0
+offset_right = 62.0
+offset_bottom = 42.0
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("2_fv4kt")
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 17
+metadata/_edit_use_anchors_ = true
 
 [node name="DayCountLabel" type="Label" parent="UI"]
-offset_right = 40.0
-offset_bottom = 13.0
-theme_override_font_sizes/font_size = 24
+offset_left = 248.0
+offset_top = 21.0
+offset_right = 288.0
+offset_bottom = 40.0
+theme_override_font_sizes/font_size = 17
 text = "Day:"
+metadata/_edit_use_anchors_ = true
 
 [node name="WarningLabel" type="Label" parent="UI"]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -13.0
-offset_right = 40.0
+offset_left = 29.0
+offset_top = -15.0
+offset_right = 69.0
+offset_bottom = 4.0
 grow_vertical = 0
 theme_override_font_sizes/font_size = 24
+metadata/_edit_use_anchors_ = true
