@@ -41,7 +41,8 @@ func _on_item_from_excess_chest(item_data) -> void:
 	# item_data is an ItemData resource coming from the chest
 	var item_scene: PackedScene = load("res://interactables/items/item.tscn")
 	var item: Node2D = item_scene.instantiate()
-	
+	if inventory_items.size() >= GlobalStats.carry_capacity:
+		return
 	# The Item script uses `data` in _ready() to set name and texture
 	if "data" in item:
 		item.data = item_data

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://cl1jmkdurg2bg"]
+[gd_scene load_steps=14 format=4 uid="uid://cl1jmkdurg2bg"]
 
 [ext_resource type="PackedScene" uid="uid://dd4iqf5la6hly" path="res://player/player.tscn" id="1_f3sb7"]
 [ext_resource type="Script" uid="uid://b3n8caeiub1dr" path="res://world.gd" id="1_gbfbk"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://cxl18pj2uuxtl" path="res://Doors/door.tscn" id="3_tlwt5"]
 [ext_resource type="Texture2D" uid="uid://bgn5rgc52iuiv" path="res://art_assets/the_dam_house.png" id="3_wse8f"]
 [ext_resource type="PackedScene" uid="uid://dfskvkq4outll" path="res://interactables/QuotaBoard/QuotaBoard.tscn" id="4_aqk2v"]
-[ext_resource type="PackedScene" uid="uid://dejycdtv58q6s" path="res://interactables/Storage/chest.tscn" id="5_036b0"]
 [ext_resource type="PackedScene" uid="uid://djqs2f8vtkkp7" path="res://interactables/deposit zone/deposit_zone.tscn" id="11_2o6r5"]
 [ext_resource type="PackedScene" uid="uid://ndteduivwx3c" path="res://interactables/mud/mud_zone.tscn" id="11_ic0uy"]
 [ext_resource type="Texture2D" uid="uid://bdq11b35q2usn" path="res://art_assets/tileset_base.png" id="11_k3n1d"]
@@ -1097,9 +1096,6 @@ position_smoothing_enabled = true
 
 [node name="DayNightManager" parent="." instance=ExtResource("3_aqk2v")]
 time_speed = 10.0
-
-[node name="Chest" parent="." instance=ExtResource("5_036b0")]
-position = Vector2(-92, 120)
 
 [node name="DefaultStuff" type="Node" parent="."]
 unique_name_in_owner = true

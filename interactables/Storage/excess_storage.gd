@@ -94,6 +94,8 @@ func _update_icon() -> void:
 		%Mud.visible = false
 		%Stone.visible = false
 		%OakSeed.visible = false
+		%PineSeed.visible = false
+		%AspenSeed.visible = false
 		%PineLog.visible = false
 		%AspenLog.visible = false
 		return

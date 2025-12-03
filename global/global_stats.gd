@@ -34,7 +34,7 @@ var StorageLimit = 5
 var ItemID = ""
 var ExcessChestEntered = false
 var QuotaChestEntered = false
-var ExcessStorageCount = 5
+
 
 
 
@@ -46,6 +46,7 @@ var excess_chest_storage_names: Array = []
 var chosen_upgrades: Array[String] = []
 
 	# UPGRADABLE STATS
+var ExcessStorageCount = 5
 var carry_capacity: int = 3
 var move_speed_bonus: float = 0
 var encumbrance_factor: float = 1.0 # 1 is default slow, .5 half as much punishing, etc.
