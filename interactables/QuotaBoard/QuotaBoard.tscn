@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dfskvkq4outll"]
+[gd_scene load_steps=12 format=3 uid="uid://dfskvkq4outll"]
 
 [ext_resource type="Script" uid="uid://dlw7yh385jns4" path="res://interactables/QuotaBoard/quota_board.gd" id="1_kd02m"]
 [ext_resource type="Texture2D" uid="uid://b3wimdrlsm0m4" path="res://art_assets/icon_1.png" id="2_g838p"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://b1tijf34pup4g" path="res://art_assets/icon_3.png" id="4_7tna5"]
 [ext_resource type="Texture2D" uid="uid://c2dh1b1awu2tc" path="res://art_assets/icon_5.png" id="5_hc7cm"]
 [ext_resource type="Texture2D" uid="uid://cwf488mhirgal" path="res://art_assets/icon_4.png" id="6_bb7ti"]
+[ext_resource type="FontFile" uid="uid://2fr4cmq5dle5" path="res://monogram.ttf" id="9_lpsny"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ggoti"]
 size = Vector2(78, 64)
@@ -38,6 +39,7 @@ offset_left = -58.0
 offset_top = -77.0
 offset_right = 62.0
 offset_bottom = -45.0
+theme_override_fonts/font = ExtResource("9_lpsny")
 theme_override_font_sizes/font_size = 40
 text = "Interact"
 
@@ -77,6 +79,7 @@ alignment = 1
 [node name="Label" type="Label" parent="InteractionArea/PhysicalPanelContainer/HBoxContainer/VBoxContainerLeft/HBoxLeft1"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("9_lpsny")
 theme_override_font_sizes/font_size = 12
 text = "Wood"
 
