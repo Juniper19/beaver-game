@@ -15,10 +15,11 @@ func _ready() -> void:
 	
 	retry_button.pressed.connect(_on_retry_pressed)
 	main_menu_button.pressed.connect(_on_menu_pressed)
-	%Label.text = "You didn't hit the quota! You reached Day" + str(GlobalStats.day_number + 1)
+	
 
 func _on_global_game_over() -> void:
 	# Show UI and play animation
+	%Label.text = "You didn't hit the quota! You reached Day " + str(GlobalStats.day_number)
 	AudioManager.stopInsideMusic()
 	get_tree().paused = true
 	visible = true

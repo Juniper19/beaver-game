@@ -5,6 +5,7 @@ var drop: int =1
 var dep: int =1
 var depE: int =1
 var wait: bool = false
+var song = 1
 
 func playItemPickUp():
 	if not mute:
@@ -125,7 +126,14 @@ func _on_footstep_timer_timeout() -> void:
 	
 func playMusic1():
 	if not mute:
-		$Music1.play()
+		if song == 1:
+			$Music1.play()
+		elif song == 2:
+			$Music2.play()
+		song +=1
+		if song == 3:
+			song = 1
+		
 		
 func stopMusic1():
 	$Music1.stop()

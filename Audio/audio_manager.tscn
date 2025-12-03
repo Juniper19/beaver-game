@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bgy687xcjd37g"]
+[gd_scene load_steps=26 format=3 uid="uid://bgy687xcjd37g"]
 
 [ext_resource type="Script" uid="uid://b5h4c2m53e0y5" path="res://Audio/audio_manager.gd" id="1_i84i0"]
 [ext_resource type="AudioStream" uid="uid://tg2r87hii353" path="res://Audio/SFX/item-pickup-sound.ogg" id="2_150o5"]
@@ -23,7 +23,8 @@
 [ext_resource type="AudioStream" uid="uid://clky4wb0mxdp6" path="res://Audio/SFX/Footstep3.wav" id="21_lyn0w"]
 [ext_resource type="AudioStream" uid="uid://cdw8uyb1465kp" path="res://Audio/SFX/Footstep4 (1).wav" id="22_e6nft"]
 [ext_resource type="AudioStream" uid="uid://355xmk47dm3c" path="res://Audio/Music/BeaverrrSong.mp3" id="23_hfd4y"]
-[ext_resource type="AudioStream" uid="uid://djgi7mivxby1t" path="res://Audio/Music/Inside_Dam.wav" id="24_lyn0w"]
+[ext_resource type="AudioStream" uid="uid://dbo66h4gjl5on" path="res://Audio/Music/HauntedBeaver.mp3" id="24_gp4fw"]
+[ext_resource type="AudioStream" uid="uid://c5s1pelvn1ree" path="res://Audio/Music/InsideDam.mp3" id="24_lyn0w"]
 
 [node name="AudioManager" type="Node2D"]
 script = ExtResource("1_i84i0")
@@ -169,6 +170,9 @@ stream = ExtResource("23_hfd4y")
 volume_db = -7.0
 bus = &"Music"
 parameters/looping = true
+
+[node name="Music2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("24_gp4fw")
 
 [node name="InsideMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("24_lyn0w")
