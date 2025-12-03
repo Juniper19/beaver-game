@@ -1,19 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://cdqen5kv8kmhx"]
+[gd_scene load_steps=6 format=3 uid="uid://cdqen5kv8kmhx"]
 
 [ext_resource type="Script" uid="uid://cwo68e4tx8ejq" path="res://menu/main_menu.gd" id="1_06t4h"]
 [ext_resource type="Texture2D" uid="uid://be8xu8efgowfd" path="res://menu/menu_background.png" id="2_f5okj"]
 [ext_resource type="Shader" uid="uid://c74orcxpkor67" path="res://menu/main_menu.gdshader" id="2_o5w3e"]
-[ext_resource type="Texture2D" uid="uid://cfbelu2cor38x" path="res://menu/menu_buttons.png" id="4_1x3cv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1x3cv"]
 shader = ExtResource("2_o5w3e")
-shader_parameter/scroll_speed = Vector2(40, 40)
-shader_parameter/texture_size = Vector2(256, 256)
 
-[sub_resource type="Theme" id="Theme_jc45y"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f5okj"]
+bg_color = Color(0.46899897, 0.6110476, 0.7917542, 1)
 
 [node name="MainMenu" type="Control"]
-texture_repeat = 2
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,6 +18,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_06t4h")
+scroll_speed = null
 
 [node name="BG" type="TextureRect" parent="."]
 texture_repeat = 2
@@ -33,70 +31,43 @@ texture = ExtResource("2_f5okj")
 expand_mode = 1
 stretch_mode = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="BG2" type="TextureRect" parent="."]
+texture_repeat = 2
+layout_mode = 0
+offset_right = 641.0
+offset_bottom = 362.0
+texture = ExtResource("2_f5okj")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.67200005
-anchor_top = 0.92800003
-anchor_right = 0.67200005
-anchor_bottom = 0.92800003
-offset_left = -429.08002
-offset_top = -81.08002
-offset_right = 210.91998
-offset_bottom = -3.080017
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -69.0
+offset_right = 20.0
+offset_bottom = -29.0
 grow_horizontal = 2
 grow_vertical = 0
 tooltip_text = "Start Game"
 alignment = 1
 
-[node name="PlayButton" type="TextureButton" parent="HBoxContainer"]
+[node name="Button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme = SubResource("Theme_jc45y")
-texture_normal = ExtResource("4_1x3cv")
-texture_pressed = ExtResource("4_1x3cv")
-texture_hover = ExtResource("4_1x3cv")
-texture_disabled = ExtResource("4_1x3cv")
-texture_focused = ExtResource("4_1x3cv")
+text = "Start Game"
 
-[node name="Label" type="Label" parent="HBoxContainer/PlayButton"]
-layout_mode = 0
-offset_right = 82.0
-offset_bottom = 25.0
-text = "Play"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="AudioSettings Button" type="TextureButton" parent="HBoxContainer"]
+[node name="AudioSettings Button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-texture_normal = ExtResource("4_1x3cv")
-texture_pressed = ExtResource("4_1x3cv")
-texture_hover = ExtResource("4_1x3cv")
-texture_disabled = ExtResource("4_1x3cv")
-texture_focused = ExtResource("4_1x3cv")
+text = "Audio Settings"
 
-[node name="Label" type="Label" parent="HBoxContainer/AudioSettings Button"]
-layout_mode = 0
-offset_right = 82.0
-offset_bottom = 25.0
-text = "Settings"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="QuitButton" type="TextureButton" parent="HBoxContainer"]
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-texture_normal = ExtResource("4_1x3cv")
-texture_pressed = ExtResource("4_1x3cv")
-texture_hover = ExtResource("4_1x3cv")
-texture_disabled = ExtResource("4_1x3cv")
-texture_focused = ExtResource("4_1x3cv")
-
-[node name="Label" type="Label" parent="HBoxContainer/QuitButton"]
-layout_mode = 0
-offset_right = 82.0
-offset_bottom = 25.0
-text = "Quit"
-horizontal_alignment = 1
-vertical_alignment = 1
+text = "Quit
+"
 
 [node name="Panel" type="Panel" parent="."]
 visible = false
@@ -112,6 +83,7 @@ offset_right = 374.0
 offset_bottom = 211.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f5okj")
 
 [node name="Label" type="Label" parent="Panel"]
 layout_mode = 1
@@ -166,8 +138,8 @@ step = 0.01
 layout_mode = 2
 text = "Main Menu"
 
-[connection signal="pressed" from="HBoxContainer/AudioSettings Button" to="." method="_on_audio_settings_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/AudioSettings Button" to="." method="_on_audio_settings_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="changed" from="Panel/VBoxContainer2/HSlider" to="." method="_on_h_slider_changed"]
 [connection signal="value_changed" from="Panel/VBoxContainer2/HSlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="changed" from="Panel/VBoxContainer2/HSlider2" to="." method="_on_h_slider_2_changed"]

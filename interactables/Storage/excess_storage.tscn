@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://mqrrknwtxtd0"]
+[gd_scene load_steps=14 format=3 uid="uid://mqrrknwtxtd0"]
 
 [ext_resource type="Script" uid="uid://cguixmr4uuih2" path="res://interactables/Storage/excess_storage.gd" id="1_64f8w"]
 [ext_resource type="PackedScene" uid="uid://dwafgcp2uqbfl" path="res://interactables/interaction_area.tscn" id="2_kj6is"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://cucnnj3nxgn3a" path="res://art_assets/items/stone.png" id="6_x5e16"]
 [ext_resource type="Texture2D" uid="uid://1edc18m08705" path="res://art_assets/items/pine_log.png" id="7_x5e16"]
 [ext_resource type="Texture2D" uid="uid://djmdgue4rqchv" path="res://art_assets/items/aspen_log.png" id="8_cm6st"]
+[ext_resource type="Texture2D" uid="uid://qhsh1w6w6sgg" path="res://art_assets/items/aspen_seed.png" id="9_58gnw"]
+[ext_resource type="Texture2D" uid="uid://n264df3ic20r" path="res://art_assets/items/pine_seed.png" id="10_physo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_64f8w"]
 size = Vector2(40, 40)
@@ -76,6 +78,12 @@ texture = ExtResource("7_x5e16")
 unique_name_in_owner = true
 position = Vector2(0, 3)
 texture = ExtResource("8_cm6st")
+
+[node name="AspenSeed" type="Sprite2D" parent="InteractionArea"]
+texture = ExtResource("9_58gnw")
+
+[node name="PineSeed" type="Sprite2D" parent="InteractionArea"]
+texture = ExtResource("10_physo")
 
 [node name="ItemStack" type="Node2D" parent="InteractionArea"]
 unique_name_in_owner = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bgy687xcjd37g"]
+[gd_scene load_steps=28 format=3 uid="uid://bgy687xcjd37g"]
 
 [ext_resource type="Script" uid="uid://b5h4c2m53e0y5" path="res://Audio/audio_manager.gd" id="1_i84i0"]
 [ext_resource type="AudioStream" uid="uid://tg2r87hii353" path="res://Audio/SFX/item-pickup-sound.ogg" id="2_150o5"]
@@ -25,6 +25,8 @@
 [ext_resource type="AudioStream" uid="uid://355xmk47dm3c" path="res://Audio/Music/BeaverrrSong.mp3" id="23_hfd4y"]
 [ext_resource type="AudioStream" uid="uid://dbo66h4gjl5on" path="res://Audio/Music/HauntedBeaver.mp3" id="24_gp4fw"]
 [ext_resource type="AudioStream" uid="uid://c5s1pelvn1ree" path="res://Audio/Music/InsideDam.mp3" id="24_lyn0w"]
+[ext_resource type="AudioStream" uid="uid://bsd6wy3tcv4rf" path="res://Audio/SFX/bicycle-wheel-fx-39267.mp3" id="26_awwpy"]
+[ext_resource type="AudioStream" uid="uid://btxhlqxbb7k6" path="res://Audio/SFX/plop-333525.mp3" id="27_ic4ac"]
 
 [node name="AudioManager" type="Node2D"]
 script = ExtResource("1_i84i0")
@@ -174,11 +176,27 @@ parameters/looping = true
 [node name="Music2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("24_gp4fw")
 volume_db = -10.0
+parameters/looping = true
 
 [node name="InsideMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("24_lyn0w")
 volume_db = -7.0
 bus = &"Music"
+
+[node name="Jackhammer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("26_awwpy")
+volume_db = -15.0
+pitch_scale = 0.5
+
+[node name="Chainsaw" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("26_awwpy")
+volume_db = -15.0
+pitch_scale = 0.8
+
+[node name="MudScoop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("27_ic4ac")
+volume_db = -11.0
+pitch_scale = 0.6
 
 [connection signal="timeout" from="DropTimer" to="." method="_on_drop_timer_timeout"]
 [connection signal="timeout" from="DepositTimer" to="." method="_on_deposit_timer_timeout"]
