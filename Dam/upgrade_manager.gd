@@ -35,12 +35,12 @@ func _ready() -> void:
 
 	card_ui.visible = false
 
-func _process(_delta: float) -> void:
-	# CHANGE THIS BASED ON WHEN WE WANT TO TRIGGER UPGRADES
-	if Input.is_action_just_pressed("ui_accept") and not showing:
-		show_three_cards()
-	elif Input.is_action_just_pressed("ui_cancel") and showing:
-		hide_cards()
+#func _process(_delta: float) -> void:
+	## CHANGE THIS BASED ON WHEN WE WANT TO TRIGGER UPGRADES
+	#if Input.is_action_just_pressed("ui_accept") and not showing:
+		#show_three_cards()
+	#elif Input.is_action_just_pressed("ui_cancel") and showing:
+		#hide_cards()
 
 func show_three_cards() -> void:
 	showing = true
@@ -87,13 +87,13 @@ func _create_card(data: Dictionary) -> Control:
 	var name_label = Label.new()
 	name_label.text = data["name"]
 	name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	name_label.add_theme_font_size_override("font_size", 20)
+	name_label.add_theme_font_size_override("font_size", 32)
 
 	var desc_label = Label.new()
 	desc_label.text = data["desc"]
 	desc_label.autowrap_mode = TextServer.AUTOWRAP_WORD
 	desc_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	desc_label.add_theme_font_size_override("font_size", 14)
+	desc_label.add_theme_font_size_override("font_size", 16)
 
 	var button = Button.new()
 	button.text = "Choose"

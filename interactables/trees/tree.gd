@@ -79,7 +79,8 @@ func _tree_die():
 
 	for v: float in data.drops.values():
 		weight_sum += v
-
+	
+	
 	# --- Normal drops ---
 	for i in data.drop_amount:
 		var random_drop: ItemData = null
@@ -115,6 +116,9 @@ func _tree_die():
 
 	if randf() < gs.extra_wood_chance:
 		for drop: ItemData in data.drops.keys():
+			if !drop.name.containsn("log"):
+				continue
+			
 			var random_pos: Vector2 = (
 				Vector2(
 					randf_range(rect.position.x, rect.position.x + rect.size.x),

@@ -14,9 +14,9 @@ texture_sapling = ExtResource("6_ee17p")
 texture_mature = ExtResource("5_l2eqm")
 health = 3
 drops = Dictionary[ExtResource("1_l0kaw"), float]({
-ExtResource("2_vky80"): 1.0,
-ExtResource("3_l2eqm"): 1.0
+ExtResource("2_vky80"): 20.0,
+ExtResource("3_l2eqm"): 10.0
 })
-drop_amount = 2
+drop_amount = 3
 days_to_grow = 1
 metadata/_custom_type_script = "uid://cn8lyq0xlxhdl"

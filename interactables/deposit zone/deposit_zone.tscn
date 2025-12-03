@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://djqs2f8vtkkp7"]
+
+[ext_resource type="Script" uid="uid://c4btfddl02rq0" path="res://interactables/deposit zone/deposit_zone.gd" id="1_m5gxi"]
+[ext_resource type="Texture2D" uid="uid://cj1awb5epk73k" path="res://art_assets/drop_zone.png" id="2_5pf85"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gx510"]
+size = Vector2(44, 44)
+
+[node name="DepositZone" type="Area2D"]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("1_m5gxi")
+
+[node name="DropZone" type="Sprite2D" parent="."]
+texture = ExtResource("2_5pf85")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gx510")

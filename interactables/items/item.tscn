@@ -15,7 +15,7 @@ script = ExtResource("1_0dke0")
 data = ExtResource("2_7ml51")
 
 [node name="InteractionArea" type="Area2D" parent="."]
-collision_layer = 16
+collision_layer = 24
 script = ExtResource("3_mtoai")
 metadata/_custom_type_script = "uid://diekxh66yt803"
 

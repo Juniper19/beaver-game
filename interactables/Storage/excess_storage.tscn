@@ -80,5 +80,6 @@ texture = ExtResource("8_cm6st")
 [node name="ItemStack" type="Node2D" parent="InteractionArea"]
 unique_name_in_owner = true
 
+[connection signal="interaction" from="InteractionArea" to="." method="_on_interaction_area_interaction"]
 [connection signal="player_entered_area" from="InteractionArea" to="." method="_on_interaction_area_player_entered_area"]
 [connection signal="player_left_area" from="InteractionArea" to="." method="_on_interaction_area_player_left_area"]
