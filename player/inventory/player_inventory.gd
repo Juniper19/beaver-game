@@ -6,7 +6,7 @@ signal item_removed(item: Node2D)
 
 @export var inventory_items: Array[Node2D] = []
 @export var item_separation: Vector2 = Vector2(0.0, -12.0)
-@export var random_drop_distance: float = 32.0
+@export var random_drop_distance: float = 16.0
 
 var _item_tweens: Dictionary[Node2D, Tween] = {}
 var _blacklist: Array[Node2D] = []

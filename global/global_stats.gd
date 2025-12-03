@@ -47,7 +47,7 @@ var chosen_upgrades: Array[String] = []
 
 	# UPGRADABLE STATS
 var carry_capacity: int = 3
-var move_speed_bonus: int = 0
+var move_speed_bonus: float = 0
 var encumbrance_factor: float = 1.0 # 1 is default slow, .5 half as much punishing, etc.
 var extra_rock_chance: float = 0.0
 var extra_wood_chance: float = 0.0
@@ -106,7 +106,7 @@ func reset():
 	encumbrance_factor = 1.0 # 1 is default slow, .5 half as much punishing, etc.
 	extra_rock_chance = 0.0
 	extra_wood_chance = 0.0
-	free_quota_miss = 1
+	free_quota_miss = 0
 	early_bird_minutes= 0   # subtract from start time
 	sunrise_spark_duration = 0.0   # seconds
 	sunrise_spark_bonus = 0.0      # multiplier (e.g. 0.2 = +20%)

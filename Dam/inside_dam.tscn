@@ -330,8 +330,10 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="InsideClip/SubViewportContainer"]
 transparent_bg = true
+handle_input_locally = false
 snap_2d_transforms_to_pixel = true
 size = Vector2i(320, 180)
+render_target_update_mode = 4
 
 [node name="Lights" type="Node2D" parent="InsideClip/SubViewportContainer/SubViewport"]
 modulate = Color(1, 1, 1, 0)

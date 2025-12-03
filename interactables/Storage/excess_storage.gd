@@ -52,8 +52,8 @@ func _process(_delta: float) -> void:
 		
 	if Input.is_action_just_pressed("drop_item") and Inside == true:
 		add_item()
-	if Input.is_action_just_pressed("interact") and Inside == true:
-		remove_item()
+	#if Input.is_action_just_pressed("interact") and Inside == true:
+		#remove_item()
 	
 func add_item():
 	GlobalStats.emit_signal("ItemInExcessChest", self)
@@ -133,3 +133,7 @@ func _on_interaction_area_player_left_area(player: Player) -> void:
 	%InteractLabel.visible = false
 	Inside = false
 	GlobalStats.ExcessChestEntered = false
+
+
+func _on_interaction_area_interaction(_by):
+	remove_item()
