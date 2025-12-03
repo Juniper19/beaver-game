@@ -7,7 +7,7 @@ var global_stats: Node = null
 
 # ----------CARD OPTIONS-----------------
 @export var all_cards: Array[Dictionary] = [
-	{"name": "Faster Legs", "desc": "Movement Speed +10%", "effect": {"move_speed_bonus": 1}},
+	{"name": "Faster Legs", "desc": "Movement Speed +10%", "effect": {"move_speed_bonus": 0.1}},
 	{"name": "Ripped!", "desc": "Carry 1 Additional Item", "effect": {"carry_capacity": 1}},
 	{"name": "More Ripped!", "desc": "Carry 2 Additional Items", "effect": {"carry_capacity": 2}},
 	{"name": "Stone Smasher", "desc": "50% chance for rocks to drop an extra", "effect": {"extra_rock_chance": 0.5}},
