@@ -19,7 +19,7 @@ func _ready():
 func _spawn_mud():
 	if _spawned_mud >= max_spawnable_mud:
 		return
-	
+	AudioManager.playMudScoop()
 	var rand_point: Vector2 = Vector2(
 		randi_range(int(-half_size.x), int(half_size.x)),
 		randi_range(int(-half_size.y), int(half_size.y))

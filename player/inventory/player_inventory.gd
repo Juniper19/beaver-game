@@ -98,8 +98,10 @@ func add_item(item: Node2D) -> bool:
 			_blacklist.erase(item)
 	)
 	
-	if item is Area2D:
-		item.monitorable = false
+	
+	for child in item.get_children():
+		if child is Area2D:
+			child.monitorable = false
 	
 	return true
 	
@@ -226,15 +228,15 @@ func drop_item(index: int) -> void:
 			_blacklist.erase(item)
 	)
 
-	if item is Area2D:
-		item.monitorable = true
+	for child in item.get_children():
+		if child is Area2D:
+			child.monitorable = false
 
 	item_removed.emit(item)
 
 	# >>> Chest logic <<<
 	# If we're putting this into a chest, tell the chest which item,
 	# and then remove it from the world.
-	var ItemType = item.item_name
 	
 	if Excess:
 		#if StorageNames.size() > 0:

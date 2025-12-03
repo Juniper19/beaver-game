@@ -145,3 +145,21 @@ func playInsideMusic():
 		
 func stopInsideMusic():
 	$InsideMusic.stop()
+	
+func playJackhammer():
+	if not mute:
+		$Jackhammer.play()
+
+func stopJackhammer():
+	$Jackhammer.stop()
+	
+func playChainsaw():
+	if not mute:
+		$Chainsaw.play()
+
+func stopChainsaw():
+	$Chainsaw.stop()
+	
+func playMudScoop():
+	if not mute:
+		$MudScoop.play()

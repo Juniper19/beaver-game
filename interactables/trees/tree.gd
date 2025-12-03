@@ -54,6 +54,7 @@ func _on_interaction(by: Variant) -> void:
 		qte = BAR_QTE.instantiate()
 		$QTESpawn.add_child(qte)
 		qte.hit.connect(_tree_hit)
+		AudioManager.playChainsaw()
 
 		player.start_cutting_animation()
 
@@ -72,6 +73,7 @@ func _tree_hit():
 
 func _tree_die():
 	AudioManager.playQTESuccess()
+	AudioManager.stopChainsaw()
 	$Collider.disabled = true
 
 	var rect: Rect2 = drop_area.shape.get_rect()
@@ -162,6 +164,7 @@ func _on_player_left_area(player: Player) -> void:
 	if qte:
 		qte.queue_free()
 		qte = null
+		AudioManager.stopChainsaw()
 		
 	player.stop_cutting_animation()
 

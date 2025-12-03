@@ -102,8 +102,16 @@ func _update_icon() -> void:
 			original = %Wood
 			#%Mud.visible = false
 			#%Stone.visible = false
+		if storage_names[-1] == "Pine Log":
+			original = %PineLog
+		if storage_names[-1] == "Aspen Log":
+			original = %AspenLog
 		if storage_names[-1] == "Oak Seed":
 			original = %OakSeed
+		if storage_names[-1] == "Pine Seed":
+			original = %PineSeed
+		if storage_names[-1] == "Aspen Seed":
+			original = %AspenSeed
 		if storage_names[-1] == "Mud":
 			original = %Mud
 			#%Wood.visible = false

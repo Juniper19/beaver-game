@@ -41,6 +41,7 @@ func _on_interaction(by: Variant) -> void:
 		qte = CHARGE_QTE.instantiate()
 		$QTESpawn.add_child(qte)
 		qte.hit.connect(_rock_hit)
+		AudioManager.playJackhammer()
 
 		# Tell player to animate mining
 		player.start_mining_animation()
@@ -65,7 +66,7 @@ func _rock_hit(progress: float):
 
 func _rock_die():
 	AudioManager.playQTESuccess()
-
+	AudioManager.stopJackhammer()
 	# Disable future collisions
 	$Collider.disabled = true
 
@@ -142,6 +143,7 @@ func _on_player_left_area(player: Player) -> void:
 	if qte:
 		qte.queue_free()
 		qte = null
+		AudioManager.stopJackhammer()
 
 	# Stop animation on player
 	player.stop_mining_animation()
