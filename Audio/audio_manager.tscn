@@ -173,6 +173,7 @@ parameters/looping = true
 
 [node name="Music2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("24_gp4fw")
+volume_db = -10.0
 
 [node name="InsideMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("24_lyn0w")
