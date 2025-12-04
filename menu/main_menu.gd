@@ -19,8 +19,7 @@ func _ready() -> void:
 	$Panel/VBoxContainer2/HSlider2.set_value_no_signal(db_to_linear(AudioServer.get_bus_volume_db(music)))
 
 func _on_play_pressed() -> void:
-	var world_scene: PackedScene = load("res://world.tscn")
-	get_tree().change_scene_to_packed(world_scene)
+	SceneManager.load_scene(SceneManager.Scene.WORLD, SceneManager.Transition.CIRCLE)
 
 func _on_audio_settings_button_pressed() -> void:
 	$Panel.visible = true

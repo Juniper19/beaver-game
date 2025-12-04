@@ -5,7 +5,8 @@ enum Scene {
 	NONE,
 	WORLD,
 	INSIDE_DAM,
-	#MAIN_MENU
+	MAIN_MENU,
+	GAME_OVER
 }
 
 enum Transition {
@@ -15,8 +16,9 @@ enum Transition {
 
 var _scenes: Dictionary[Scene, String] = {
 	Scene.WORLD: "uid://cl1jmkdurg2bg",
-	Scene.INSIDE_DAM: "uid://cus4fv7iknxoj"
-	#Scene.MAIN_MENU: <main menu path>
+	Scene.INSIDE_DAM: "uid://cus4fv7iknxoj",
+	Scene.MAIN_MENU: "uid://cdqen5kv8kmhx",
+	Scene.GAME_OVER: "uid://djrcbfdpd5ytu"
 }
 
 var _transitions: Dictionary[Transition, String] = {
@@ -34,6 +36,11 @@ func load_scene(target_scene: Scene, transition: Transition = Transition.NONE) -
 	if target_scene == Scene.NONE:
 		push_warning("Cannot change scene to NONE!")
 		return
+	
+	if target_scene == Scene.INSIDE_DAM and !GlobalStats.is_quota_met():
+		print("Quota not met! No inside dam, sending to game over screen")
+		target_scene = Scene.GAME_OVER
+	
 		
 	var target_path: String = _scenes[target_scene]
 	if not ResourceLoader.exists(target_path):
@@ -52,15 +59,20 @@ func load_scene(target_scene: Scene, transition: Transition = Transition.NONE) -
 		transition_node = transition_scene.instantiate()
 		get_tree().root.add_child(transition_node)
 		
-		var player: Player = get_tree().get_first_node_in_group("player")
-		transition_node.play(false, player)
+		var to_follow: Node2D = get_tree().get_first_node_in_group("transition_follow")
+		transition_node.play(false, to_follow)
 		
 		await transition_node.finished
 	
+	if target_scene != Scene.WORLD:
+		AudioManager.stopMusic1()
+		if target_scene == Scene.INSIDE_DAM:
+			if GlobalStats.DayOne == true:
+				GlobalStats.DayOne = false
+
+			
 	
 	var error = get_tree().change_scene_to_file(target_path)
-	
-	
 	if error != OK:
 		if transition_node:
 			transition_node.queue_free()
@@ -71,15 +83,10 @@ func load_scene(target_scene: Scene, transition: Transition = Transition.NONE) -
 	
 	current_scene = get_tree().current_scene
 	
-	if target_scene == Scene.INSIDE_DAM:
-		if GlobalStats.DayOne == true:
-			GlobalStats.DayOne=false
-		AudioManager.stopMusic1()
-		GlobalStats.QuotaCheck.emit()
 	if transition_node:
 		await get_tree().scene_changed
-		var player: Player = get_tree().get_first_node_in_group("player")
-		transition_node.play(true, player)
+		var to_follow: Node2D = get_tree().get_first_node_in_group("transition_follow")
+		transition_node.play(true, to_follow)
 		
 		await transition_node.finished
 		transition_node.queue_free()
@@ -89,4 +96,4 @@ func load_scene(target_scene: Scene, transition: Transition = Transition.NONE) -
 func start_new_game() -> void:
 	#reset globals
 	GlobalStats.reset()
-	load_scene(Scene.WORLD)
+	#load_scene(Scene.WORLD)

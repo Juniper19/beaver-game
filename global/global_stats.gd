@@ -59,6 +59,8 @@ var sunrise_spark_bonus: float = 0.0      # multiplier (e.g. 0.2 = +20%)
 
 #All start game values reset with new game
 func reset():
+	initialize_world = true
+	
 	wood = 0
 	pine_log = 0
 	aspen_log = 0
@@ -119,7 +121,6 @@ signal inventory_item_placed(item)
 signal ItemInChest
 signal ItemInExcessChest(chest)
 signal ItemFromExcessChest
-signal QuotaCheck
 signal GameOver
 
 ## Janky-ass way to do it but... it works
@@ -194,3 +195,38 @@ func get_property_names() -> Array[String]:
 	for p in get_property_list():
 		names.append(p.name)
 	return names
+
+
+func is_quota_met() -> bool:
+	#if DayOne:
+		#return true
+
+	var missed := (
+		wood < ReqWood or
+		pine_log < ReqPineLog or
+		aspen_log < ReqAspenLog or
+		mud < ReqMud or
+		stone < ReqStone
+	)
+
+	if not missed:
+		return true
+
+	# --------------------------------------------------------------------
+	# Dam Insurance check (FULLY FIXED — now properly subtracts and persists)
+	# --------------------------------------------------------------------
+	if free_quota_miss > 0:
+
+		free_quota_miss -= 1
+		print("Dam Insurance used! Now:", free_quota_miss)
+
+		%TextTimer.start()
+		%QuotaLabel.visible = true
+		%QuotaLabel.text = "Quota missed... but Dam Insurance saved you!"
+
+		return true
+	# --------------------------------------------------------------------
+
+	# No dam insurance → Game over
+	print("Failed quota with no insurance. Game Over.")
+	return false

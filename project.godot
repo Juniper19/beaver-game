@@ -20,7 +20,6 @@ config/icon="uid://dqd1c16usegfw"
 GlobalStats="*res://global/global_stats.gd"
 SceneManager="*res://global/scene_manager.gd"
 AudioManager="*res://Audio/audio_manager.tscn"
-GameOverUI="*res://menu/game_over_ui.tscn"
 
 [display]
 
@@ -39,6 +38,7 @@ persistent="For stuff that should stay overnight in the world but isn't part of 
 day_night=""
 player=""
 qte=""
+transition_follow=""
 
 [gui]
 

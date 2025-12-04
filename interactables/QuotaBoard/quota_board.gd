@@ -44,8 +44,6 @@ func _ready() -> void:
 	%BoardUI.visible = false
 	%InteractLabel.visible = false
 
-	GlobalStats.QuotaCheck.connect(onQuotaCheck)
-
 	var max_size = Vector2(70,70)
 
 
@@ -85,40 +83,40 @@ func _process(_delta: float) -> void:
 		hide_quota()
 
 
-func onQuotaCheck():
-
-	if GlobalStats.DayOne:
-		return
-
-	var missed := (
-		GlobalStats.wood < GlobalStats.ReqWood or
-		GlobalStats.pine_log < GlobalStats.ReqPineLog or
-		GlobalStats.aspen_log < GlobalStats.ReqAspenLog or
-		GlobalStats.mud < GlobalStats.ReqMud or
-		GlobalStats.stone < GlobalStats.ReqStone
-	)
-
-	if not missed:
-		return  # Passed quota
-
-	# --------------------------------------------------------------------
-	# Dam Insurance check (FULLY FIXED — now properly subtracts and persists)
-	# --------------------------------------------------------------------
-	if GlobalStats.free_quota_miss > 0:
-
-		GlobalStats.free_quota_miss -= 1
-		print("Dam Insurance used! Now:", GlobalStats.free_quota_miss)
-
-		%TextTimer.start()
-		%QuotaLabel.visible = true
-		%QuotaLabel.text = "Quota missed... but Dam Insurance saved you!"
-
-		return 
-	# --------------------------------------------------------------------
-
-	# No dam insurance → Game over
-	print("Failed quota with no insurance. Game Over.")
-	GlobalStats.GameOver.emit()
+#func onQuotaCheck():
+#
+	#if GlobalStats.DayOne:
+		#return
+#
+	#var missed := (
+		#GlobalStats.wood < GlobalStats.ReqWood or
+		#GlobalStats.pine_log < GlobalStats.ReqPineLog or
+		#GlobalStats.aspen_log < GlobalStats.ReqAspenLog or
+		#GlobalStats.mud < GlobalStats.ReqMud or
+		#GlobalStats.stone < GlobalStats.ReqStone
+	#)
+#
+	#if not missed:
+		#return  # Passed quota
+#
+	## --------------------------------------------------------------------
+	## Dam Insurance check (FULLY FIXED — now properly subtracts and persists)
+	## --------------------------------------------------------------------
+	#if GlobalStats.free_quota_miss > 0:
+#
+		#GlobalStats.free_quota_miss -= 1
+		#print("Dam Insurance used! Now:", GlobalStats.free_quota_miss)
+#
+		#%TextTimer.start()
+		#%QuotaLabel.visible = true
+		#%QuotaLabel.text = "Quota missed... but Dam Insurance saved you!"
+#
+		#return 
+	## --------------------------------------------------------------------
+#
+	## No dam insurance → Game over
+	#print("Failed quota with no insurance. Game Over.")
+	#GlobalStats.GameOver.emit()
 
 
 func show_quota():
