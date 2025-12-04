@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://mqrrknwtxtd0"]
+[gd_scene load_steps=13 format=3 uid="uid://mqrrknwtxtd0"]
 
 [ext_resource type="Script" uid="uid://cguixmr4uuih2" path="res://interactables/Storage/excess_storage.gd" id="1_64f8w"]
 [ext_resource type="PackedScene" uid="uid://dwafgcp2uqbfl" path="res://interactables/interaction_area.tscn" id="2_kj6is"]
 [ext_resource type="Texture2D" uid="uid://dk20kbr33ftot" path="res://art_assets/placeholder_storage_bin.png" id="3_kgw8d"]
 [ext_resource type="Texture2D" uid="uid://cwtbcjtvn0g86" path="res://art_assets/items/oak_log.png" id="4_kgw8d"]
 [ext_resource type="Texture2D" uid="uid://bt2eabnqb07si" path="res://art_assets/items/mud.png" id="5_4p85k"]
+[ext_resource type="Texture2D" uid="uid://cw3kc3jkgdlq8" path="res://art_assets/items/oak_seed.png" id="6_physo"]
 [ext_resource type="Texture2D" uid="uid://cucnnj3nxgn3a" path="res://art_assets/items/stone.png" id="6_x5e16"]
 [ext_resource type="Texture2D" uid="uid://1edc18m08705" path="res://art_assets/items/pine_log.png" id="7_x5e16"]
 [ext_resource type="Texture2D" uid="uid://djmdgue4rqchv" path="res://art_assets/items/aspen_log.png" id="8_cm6st"]
@@ -14,19 +15,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_64f8w"]
 size = Vector2(40, 40)
 
-[sub_resource type="Gradient" id="Gradient_nxcmc"]
-colors = PackedColorArray(0.4196872, 0.24505845, 0.16483825, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_h88ec"]
-gradient = SubResource("Gradient_nxcmc")
-width = 32
-height = 32
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(1, 0.5)
-
 [node name="ExcessStorage" type="Node2D"]
 script = ExtResource("1_64f8w")
+item_separation = null
+chest_id = null
 
 [node name="InteractionArea" parent="." instance=ExtResource("2_kj6is")]
 collision_layer = 18
@@ -61,7 +53,7 @@ texture = ExtResource("6_x5e16")
 [node name="OakSeed" type="Sprite2D" parent="InteractionArea"]
 unique_name_in_owner = true
 scale = Vector2(0.75, 0.74999976)
-texture = SubResource("GradientTexture2D_h88ec")
+texture = ExtResource("6_physo")
 
 [node name="Wood" type="Sprite2D" parent="InteractionArea"]
 unique_name_in_owner = true
@@ -80,9 +72,11 @@ position = Vector2(0, 3)
 texture = ExtResource("8_cm6st")
 
 [node name="AspenSeed" type="Sprite2D" parent="InteractionArea"]
+unique_name_in_owner = true
 texture = ExtResource("9_58gnw")
 
 [node name="PineSeed" type="Sprite2D" parent="InteractionArea"]
+unique_name_in_owner = true
 texture = ExtResource("10_physo")
 
 [node name="ItemStack" type="Node2D" parent="InteractionArea"]

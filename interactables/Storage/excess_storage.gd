@@ -95,6 +95,8 @@ func _update_icon() -> void:
 		%Mud.visible = false
 		%Stone.visible = false
 		%OakSeed.visible = false
+		%PineSeed.visible = false
+		%AspenSeed.visible = false
 		%PineLog.visible = false
 		%AspenLog.visible = false
 		return
@@ -145,4 +147,5 @@ func _on_interaction_area_player_left_area(player: Player) -> void:
 
 
 func _on_interaction_area_interaction(_by):
-	remove_item()
+	if GlobalStats.MaxedInv == false:
+		remove_item()
