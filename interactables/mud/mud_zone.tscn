@@ -1,18 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://ndteduivwx3c"]
+[gd_scene load_steps=4 format=3 uid="uid://ndteduivwx3c"]
 
 [ext_resource type="Script" uid="uid://76f6g1ukyvb5" path="res://interactables/mud/mud_zone.gd" id="1_2dgoh"]
+[ext_resource type="Texture2D" uid="uid://dc86o32fhxmgu" path="res://art_assets/resources/mud_source.png" id="2_jgtb4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jgtb4"]
-size = Vector2(34, 64)
+size = Vector2(58, 14)
 
 [node name="MudZone" type="Area2D"]
+z_index = -200
 collision_layer = 16
 monitoring = false
 script = ExtResource("1_2dgoh")
+max_spawnable_mud = 3
 metadata/_custom_type_script = "uid://diekxh66yt803"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_jgtb4")
 debug_color = Color(0.6140645, 0.36309007, 0.21508908, 0.41960785)
+
+[node name="MudSource" type="Sprite2D" parent="."]
+position = Vector2(-1, -9)
+texture = ExtResource("2_jgtb4")
 
 [connection signal="interaction" from="." to="." method="_on_interaction"]
