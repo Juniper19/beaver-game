@@ -75,6 +75,7 @@ func _on_item_placed(item) -> void:
 				#print(GlobalStats.storage)
 				_update_icon()
 
+
 func remove_item() -> void:
 	if storage.is_empty():
 		return

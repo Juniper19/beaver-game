@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://cl1jmkdurg2bg"]
+[gd_scene load_steps=14 format=4 uid="uid://cl1jmkdurg2bg"]
 
 [ext_resource type="PackedScene" uid="uid://dd4iqf5la6hly" path="res://player/player.tscn" id="1_f3sb7"]
 [ext_resource type="Script" uid="uid://b3n8caeiub1dr" path="res://world.gd" id="1_gbfbk"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://cxl18pj2uuxtl" path="res://Doors/door.tscn" id="3_tlwt5"]
 [ext_resource type="Texture2D" uid="uid://bgn5rgc52iuiv" path="res://art_assets/the_dam_house.png" id="3_wse8f"]
 [ext_resource type="PackedScene" uid="uid://dfskvkq4outll" path="res://interactables/QuotaBoard/QuotaBoard.tscn" id="4_aqk2v"]
-[ext_resource type="PackedScene" uid="uid://dejycdtv58q6s" path="res://interactables/Storage/chest.tscn" id="5_036b0"]
 [ext_resource type="PackedScene" uid="uid://djqs2f8vtkkp7" path="res://interactables/deposit zone/deposit_zone.tscn" id="11_2o6r5"]
 [ext_resource type="PackedScene" uid="uid://ndteduivwx3c" path="res://interactables/mud/mud_zone.tscn" id="11_ic0uy"]
 [ext_resource type="Texture2D" uid="uid://bdq11b35q2usn" path="res://art_assets/tileset_base.png" id="11_k3n1d"]
@@ -1098,14 +1097,8 @@ position_smoothing_enabled = true
 [node name="DayNightManager" parent="." instance=ExtResource("3_aqk2v")]
 time_speed = 10.0
 
-[node name="Chest" parent="." instance=ExtResource("5_036b0")]
-position = Vector2(-92, 120)
-
 [node name="DefaultStuff" type="Node" parent="."]
 unique_name_in_owner = true
-
-[node name="MudZone" parent="." instance=ExtResource("11_ic0uy")]
-position = Vector2(82, 65)
 
 [node name="InitialResourceSpawners" type="Node" parent="."]
 
@@ -1147,6 +1140,27 @@ oak_density = 2.765
 aspen_density = 8.333
 pine_density = 24.123
 stone_density = 9.21
+
+[node name="MudZone2" parent="." instance=ExtResource("11_ic0uy")]
+position = Vector2(-127, 636)
+
+[node name="MudZone3" parent="." instance=ExtResource("11_ic0uy")]
+position = Vector2(-82, 730)
+
+[node name="MudZone4" parent="." instance=ExtResource("11_ic0uy")]
+position = Vector2(930, 972)
+
+[node name="MudZone5" parent="." instance=ExtResource("11_ic0uy")]
+position = Vector2(-818, 1466)
+
+[node name="MudZone6" parent="." instance=ExtResource("11_ic0uy")]
+position = Vector2(-828, 1512)
+
+[node name="MudZone7" parent="." instance=ExtResource("11_ic0uy")]
+position = Vector2(-829, 1597)
+
+[node name="MudZone8" parent="." instance=ExtResource("11_ic0uy")]
+position = Vector2(-787, 1386)
 
 [connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
