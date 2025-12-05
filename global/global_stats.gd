@@ -12,6 +12,9 @@ var day_number: int = 0
 var current_season: String = ""
 var DayOne: bool = true
 
+# Special calendar day stat for sleeping.
+var calendar_day : int = 0
+
 	## Upgradable Stats
 var rock_min_damage: float = 0
 var rock_max_damage: float = 1

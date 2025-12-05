@@ -2,6 +2,7 @@ extends Node2D
 
 var has_slept: bool = false
 
+
 func _ready():
 	AudioManager.playInsideMusic()
 
@@ -24,6 +25,7 @@ func _on_bed_interaction(_by):
 	
 	%Player.process_mode = Node.PROCESS_MODE_DISABLED
 	_transition_node_alpha($SleepText, 0.0)
+	
 	$Bed.queue_free() # no more interaction!!
 	$UpgradeManager.show_three_cards()
 
@@ -32,4 +34,6 @@ func _on_upgrade_selected():
 	AudioManager.playSleep()
 	#%Player.process_mode = Node.PROCESS_MODE_INHERIT
 	$AnimationPlayer.play("sleep")
+	get_node("/root/GlobalStats").calendar_day += 1
+	AudioManager.playPageTurn()
 	$Door.process_mode = Node.PROCESS_MODE_INHERIT
