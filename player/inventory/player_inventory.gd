@@ -57,6 +57,10 @@ func _on_item_from_excess_chest(item_data) -> void:
 func is_full() -> bool:
 	return inventory_items.size() >= GlobalStats.carry_capacity
 
+
+func is_empty() -> bool:
+	return inventory_items.is_empty()
+
 # Returns if successful
 func add_item(item: Node2D) -> bool:
 	if is_full():

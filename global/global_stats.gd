@@ -38,6 +38,14 @@ var QuotaChestEntered = false
 var MaxedInv: bool = false
 
 
+var tutorial_interact = true
+var tutorial_drop = true
+var tutorial_store = true
+var tutorial_cycle = true
+var tutorial_plant = true
+var tutorials_left = 5
+
+
 	#For saving values when scene changes
 var excess_chest_storages: Array = []
 var excess_chest_storage_names: Array = []
