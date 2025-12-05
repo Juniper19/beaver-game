@@ -105,7 +105,7 @@ func _create_card(data: Dictionary) -> Control:
 	#vbox.add_child(button)
 	#rect.add_child(vbox)
 	
-	var card: UpgradeCard = preload("uid://dmk6cp0m381x1").instantiate()
+	var card: UpgradeCard = preload("res://art_assets/upgrade_card.png").instantiate()
 	card.set_data(data["name"], data["desc"])
 	card.pressed.connect(_apply_card.bind(data))
 

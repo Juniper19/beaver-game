@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://djrcbfdpd5ytu"]
+[gd_scene load_steps=8 format=3 uid="uid://r6ajf0ispbbp"]
 
 [ext_resource type="Script" uid="uid://0rsat0yldopr" path="res://menu/game_over_ui.gd" id="1_qrqej"]
-[ext_resource type="Texture2D" uid="uid://gy7vowehiugb" path="res://art_assets/placeholder_art/DAM_transparent_v2.png" id="2_qlkfc"]
+[ext_resource type="Texture2D" uid="uid://btt6ai64uwytp" path="res://art_assets/title.png" id="2_siat8"]
 [ext_resource type="FontFile" uid="uid://2fr4cmq5dle5" path="res://monogram.ttf" id="3_siat8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qlkfc"]
@@ -119,11 +119,11 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -312.811
 offset_top = -369.0
-offset_right = -67.18936
-offset_bottom = -226.99979
+offset_right = -98.32445
+offset_bottom = -244.99977
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_qlkfc")
+texture = ExtResource("2_siat8")
 expand_mode = 1
 
 [node name="Label" type="Label" parent="Panel"]
