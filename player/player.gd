@@ -9,6 +9,7 @@ var move_speed: float
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var interaction_area: Area2D = $InteractionArea
+@onready var tutorial_popup: TutorialPopup = $TutorialPopup
 
 @export var disable_camera: bool = false
 
@@ -129,3 +130,6 @@ func _on_player_inventory_item_added(_item):
 
 func _on_player_inventory_item_removed(_item):
 	_calculate_move_speed()
+
+func _show_tutorial():
+	

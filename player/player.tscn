@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://dd4iqf5la6hly"]
+[gd_scene load_steps=38 format=3 uid="uid://dd4iqf5la6hly"]
 
 [ext_resource type="Script" uid="uid://bj7kbff2cyf66" path="res://player/player.gd" id="1_rkbax"]
 [ext_resource type="Texture2D" uid="uid://gkaxmdcmnrb2" path="res://art_assets/beaver/beaver_cut.png" id="2_boad6"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dnbj4tabvwq3h" path="res://art_assets/beaver/beaver_move_2 (2).png" id="3_hg6s5"]
 [ext_resource type="Texture2D" uid="uid://c2y13ploxajol" path="res://art_assets/beaver/beaver_mine.png" id="3_rgyib"]
 [ext_resource type="Texture2D" uid="uid://ghhtm4ee6msn" path="res://art_assets/beaver/beaver_swim.png" id="4_hg6s5"]
+[ext_resource type="PackedScene" uid="uid://dbk6eug77tjwx" path="res://tutorials/TutorialPopup.tscn" id="8_rgyib"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2ieo8"]
 atlas = ExtResource("2_boad6")
@@ -238,12 +239,15 @@ radius = 23.0
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("inventory") groups=["player", "transition_follow"]]
 collision_mask = 6
 script = ExtResource("1_rkbax")
+base_move_speed = null
+speed_mult_per_item = null
 inventory = NodePath("PlayerInventory")
+disable_camera = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -9)
 sprite_frames = SubResource("SpriteFrames_q28gw")
-animation = &"idle_side"
+animation = &"cut"
 
 [node name="PlaceholderSprite" type="Sprite2D" parent="AnimatedSprite2D"]
 visible = false
@@ -266,6 +270,9 @@ shape = SubResource("CircleShape2D_lf62g")
 
 [node name="PlayerInventory" parent="." instance=ExtResource("3_g1dw6")]
 position = Vector2(0, -14)
+
+[node name="TutorialPopup" parent="." instance=ExtResource("8_rgyib")]
+position = Vector2(0, 19)
 
 [connection signal="item_added" from="PlayerInventory" to="." method="_on_player_inventory_item_added"]
 [connection signal="item_removed" from="PlayerInventory" to="." method="_on_player_inventory_item_removed"]
