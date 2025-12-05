@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://dd4iqf5la6hly"]
+[gd_scene load_steps=48 format=3 uid="uid://dd4iqf5la6hly"]
 
 [ext_resource type="Script" uid="uid://bj7kbff2cyf66" path="res://player/player.gd" id="1_rkbax"]
 [ext_resource type="Texture2D" uid="uid://gkaxmdcmnrb2" path="res://art_assets/beaver/beaver_cut.png" id="2_boad6"]
@@ -8,6 +8,15 @@
 [ext_resource type="Texture2D" uid="uid://c2y13ploxajol" path="res://art_assets/beaver/beaver_mine.png" id="3_rgyib"]
 [ext_resource type="Texture2D" uid="uid://dpb0uy1m1xqth" path="res://art_assets/beaver/beaver_move_3.png" id="5_hg6s5"]
 [ext_resource type="PackedScene" uid="uid://dbk6eug77tjwx" path="res://tutorials/TutorialPopup.tscn" id="8_rgyib"]
+
+[sub_resource type="Gradient" id="Gradient_rgyib"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hg6s5"]
+gradient = SubResource("Gradient_rgyib")
+fill = 1
+fill_from = Vector2(0.52403843, 0.52403843)
+fill_to = Vector2(0.7980769, 0.23076923)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2ieo8"]
 atlas = ExtResource("2_boad6")
@@ -307,6 +316,12 @@ y_sort_enabled = true
 collision_mask = 6
 script = ExtResource("1_rkbax")
 inventory = NodePath("PlayerInventory")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-2.9999998, -3.0000002)
+scale = Vector2(3.7500002, 3.7500007)
+energy = 0.75
+texture = SubResource("GradientTexture2D_hg6s5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -9)
