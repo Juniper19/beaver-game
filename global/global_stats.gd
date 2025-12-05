@@ -1,5 +1,12 @@
 extends Node
 
+
+#Audio Settings, don't reset
+var sfx_volume_db: float = 0.0
+var music_volume_db: float = 0.0
+var initialized := false
+
+
 var initialize_world: bool = true # whether or not to set world to initial, deletes save
 var wood: int = 0
 var pine_log: int = 0

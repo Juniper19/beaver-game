@@ -15,9 +15,14 @@ func _ready() -> void:
 	mat.set_shader_parameter("texture_size", bg.texture.get_size())
 
 	play_button.pressed.connect(_on_play_pressed)
+	if not GlobalStats.initialized:
+		GlobalStats.sfx_volume_db = AudioServer.get_bus_volume_db(sfx)
+		GlobalStats.music_volume_db = AudioServer.get_bus_volume_db(music)
+		GlobalStats.initialized = true
 
-	$Panel/VBoxContainer2/HSlider.set_value_no_signal(db_to_linear(AudioServer.get_bus_volume_db(sfx)))
-	$Panel/VBoxContainer2/HSlider2.set_value_no_signal(db_to_linear(AudioServer.get_bus_volume_db(music)))
+
+	$Panel/VBoxContainer2/HSlider.set_value_no_signal(db_to_linear(AudioServer.get_bus_volume_db(GlobalStats.sfx_volume_db)))
+	$Panel/VBoxContainer2/HSlider2.set_value_no_signal(db_to_linear(AudioServer.get_bus_volume_db(GlobalStats.music_volume_db)))
 
 
 func _on_play_pressed() -> void:
@@ -33,8 +38,11 @@ func _on_mm_button_pressed() -> void:
 	$Panel.visible = false
 
 func _on_h_slider_value_changed(value: float) -> void:
-	AudioServer.set_bus_volume_db(sfx, linear_to_db(value))
+	GlobalStats.sfx_volume_db = linear_to_db(value)
+	AudioServer.set_bus_volume_db(sfx, GlobalStats.sfx_volume_db)
 	AudioManager.playMenuSound()
 
+
 func _on_h_slider_2_value_changed(value: float) -> void:
-	AudioServer.set_bus_volume_db(music, linear_to_db(value))
+	GlobalStats.music_volume_db = linear_to_db(value)
+	AudioServer.set_bus_volume_db(music, GlobalStats.music_volume_db)

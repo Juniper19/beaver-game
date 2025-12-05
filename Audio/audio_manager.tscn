@@ -200,6 +200,7 @@ parameters/looping = true
 [node name="Music2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("24_gp4fw")
 volume_db = -11.0
+bus = &"Music"
 parameters/looping = true
 
 [node name="InsideMusic" type="AudioStreamPlayer" parent="."]
@@ -232,6 +233,7 @@ volume_db = -8.0
 
 [node name="PageTurn" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("33_xnepa")
+volume_db = -7.0
 
 [connection signal="timeout" from="DropTimer" to="." method="_on_drop_timer_timeout"]
 [connection signal="timeout" from="DepositTimer" to="." method="_on_deposit_timer_timeout"]
