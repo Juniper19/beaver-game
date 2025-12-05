@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cdqen5kv8kmhx"]
+[gd_scene load_steps=8 format=3 uid="uid://cdqen5kv8kmhx"]
 
 [ext_resource type="Script" uid="uid://cwo68e4tx8ejq" path="res://menu/main_menu.gd" id="1_06t4h"]
 [ext_resource type="Texture2D" uid="uid://be8xu8efgowfd" path="res://menu/menu_background.png" id="2_f5okj"]
-[ext_resource type="Shader" uid="uid://c74orcxpkor67" path="res://menu/main_menu.gdshader" id="2_o5w3e"]
+[ext_resource type="Shader" path="res://menu/main_menu.gdshader" id="2_o5w3e"]
 [ext_resource type="Texture2D" uid="uid://cfbelu2cor38x" path="res://menu/menu_buttons.png" id="4_1x3cv"]
+[ext_resource type="Texture2D" uid="uid://btt6ai64uwytp" path="res://art_assets/title.png" id="4_jc45y"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1x3cv"]
 shader = ExtResource("2_o5w3e")
@@ -32,6 +33,21 @@ mouse_filter = 2
 texture = ExtResource("2_f5okj")
 expand_mode = 1
 stretch_mode = 1
+
+[node name="Title" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -127.5
+offset_top = -48.5
+offset_right = 127.5
+offset_bottom = 32.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_jc45y")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
