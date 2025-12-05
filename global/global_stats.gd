@@ -53,7 +53,7 @@ var excess_chest_storage_names: Array = []
 	# Chosen upgrades get removed from the available cards
 var chosen_upgrades: Array[String] = []
 
-	# UPGRADABLE STATS
+	# UPGRADABLE STATS, other stats are also uesd in upgrades but these are exclusively for upgrades
 var ExcessStorageCount = 1
 var carry_capacity: int = 3
 var move_speed_bonus: float = 0
