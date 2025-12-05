@@ -1,0 +1,20 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://ehungn6pi8g2"]
+
+[ext_resource type="Texture2D" uid="uid://bjaacixas3aj7" path="res://art_assets/decorators.png" id="1_ogc3w"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_swjcl"]
+texture = ExtResource("1_ogc3w")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+
+[resource]
+sources/0 = SubResource("TileSetAtlasSource_swjcl")
