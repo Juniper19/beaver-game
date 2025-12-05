@@ -27,7 +27,9 @@ func _on_bed_interaction(_by):
 	_transition_node_alpha($SleepText, 0.0)
 	
 	$Bed.queue_free() # no more interaction!!
-	$UpgradeManager.show_three_cards()
+	var shown: bool = $UpgradeManager.show_three_cards()
+	if !shown:
+		_on_upgrade_selected()
 
 
 func _on_upgrade_selected():

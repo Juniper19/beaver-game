@@ -48,7 +48,7 @@ func _ready() -> void:
 	#elif Input.is_action_just_pressed("ui_cancel") and showing:
 		#hide_cards()
 
-func show_three_cards() -> void:
+func show_three_cards() -> bool:
 	showing = true
 	card_ui.visible = true
 
@@ -56,9 +56,14 @@ func show_three_cards() -> void:
 		child.queue_free()
 
 	var selected_cards = _get_random_cards(3)
+	if selected_cards.is_empty():
+		return false
+	
 	for card_data in selected_cards:
 		var card = _create_card(card_data)
 		card_container.add_child(card)
+	
+	return true
 
 func hide_cards() -> void:
 	showing = false

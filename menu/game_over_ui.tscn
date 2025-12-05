@@ -1,10 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://r6ajf0ispbbp"]
+[gd_scene load_steps=10 format=3 uid="uid://djrcbfdpd5ytu"]
 
 [ext_resource type="Script" uid="uid://0rsat0yldopr" path="res://menu/game_over_ui.gd" id="1_qrqej"]
 [ext_resource type="Texture2D" uid="uid://bpigsofsqfgy1" path="res://art_assets/death_straight_up.png" id="2_siat8"]
 [ext_resource type="FontFile" uid="uid://2fr4cmq5dle5" path="res://monogram.ttf" id="3_siat8"]
 [ext_resource type="Texture2D" uid="uid://cfbelu2cor38x" path="res://menu/menu_buttons.png" id="4_u6iod"]
-[ext_resource type="Script" uid="uid://cs5vb52s8yfae" path="res://menu/play_button.gd" id="5_frdm8"]
+[ext_resource type="Script" path="res://menu/play_button.gd" id="5_frdm8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qlkfc"]
 bg_color = Color(0.11796937, 0.21860242, 0.3516547, 1)
