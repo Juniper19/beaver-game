@@ -55,7 +55,7 @@ func show_three_cards() -> void:
 	for child in card_container.get_children():
 		child.queue_free()
 
-	var selected_cards = _get_random_cards(2)
+	var selected_cards = _get_random_cards(3)
 	for card_data in selected_cards:
 		var card = _create_card(card_data)
 		card_container.add_child(card)
