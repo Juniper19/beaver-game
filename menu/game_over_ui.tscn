@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://djrcbfdpd5ytu"]
+[gd_scene load_steps=9 format=3 uid="uid://r6ajf0ispbbp"]
 
 [ext_resource type="Script" uid="uid://0rsat0yldopr" path="res://menu/game_over_ui.gd" id="1_qrqej"]
 [ext_resource type="Texture2D" uid="uid://bpigsofsqfgy1" path="res://art_assets/death_straight_up.png" id="2_siat8"]
