@@ -20,7 +20,8 @@ var global_stats: Node = null
 	{"name": "Storage I", "desc": "Gain an extra storage unit.", "effect": {"ExcessStorageCount": 1}},
 	{"name": "Storage II", "desc": "Gain an extra storage unit.", "effect": {"ExcessStorageCount": 1}, "requires": "Bigger Barn I"},
 	{"name": "Storage III", "desc": "Gain an extra storage unit.", "effect": {"ExcessStorageCount": 1}, "requires": "Bigger Barn II"},
-
+	{"name": "Rock Breaker I", "desc": "Deal more damage to rocks", "effect": {"rock_min_damage": 0.5, "rock_max_damage": 0.5}},
+	{"name": "Rock Breaker II", "desc": "Deal way more damage to rocks", "effect": {"rock_min_damage": 0.5, "rock_max_damage": 0.75}, "requires": "Rock Breaker I"},
 ]
 
 @onready var card_ui: CanvasLayer = $CardUI
