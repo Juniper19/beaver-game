@@ -60,7 +60,7 @@ var sunrise_spark_bonus: float = 0.0      # multiplier (e.g. 0.2 = +20%)
 #All start game values reset with new game
 func reset():
 	initialize_world = true
-	
+	AudioManager.stopMusic1()
 	wood = 0
 	pine_log = 0
 	aspen_log = 0
