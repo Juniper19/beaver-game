@@ -23,6 +23,8 @@ var has_triggered_2am: bool = false
 @onready var day_count_label: Label
 var has_triggered_new_day = false
 
+var t_max = 0
+
 func _ready() -> void:
 	canvas_modulate = $CanvasModulate
 	clock_label = $UI/TimerLabel
@@ -51,6 +53,11 @@ func _process(delta: float) -> void:
 	else:
 		# Fade between 6 PM and 10 PM
 		t = float(current_time - evening_start) / float(night_start - evening_start)
+		
+	t_max = max(t, t_max)
+		
+	if (t_max >= 1) and !has_triggered_2am:
+		t = 1.0
 
 	t = clamp(t, 0.0, 1.0)
 
@@ -63,6 +70,7 @@ func _process(delta: float) -> void:
 	var new_day_time = 6 * 60
 	if current_time >= new_day_time and not has_triggered_new_day:
 		_on_new_day()
+		t_max = 0
 		has_triggered_new_day = true
 	if current_time < new_day_time:
 		has_triggered_new_day = false

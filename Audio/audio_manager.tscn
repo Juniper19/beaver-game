@@ -55,6 +55,7 @@ bus = &"SFX"
 
 [node name="MenuSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_dxlp5")
+volume_db = 10.0
 bus = &"SFX"
 
 [node name="RockHit" type="AudioStreamPlayer" parent="."]

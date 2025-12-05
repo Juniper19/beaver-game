@@ -66,6 +66,12 @@ func _draw() -> void:
 			Vector2(tile_index * tile_w, season_row * tile_h),
 			Vector2(tile_w, tile_h)
 		)
+		
+		if (tile_index == 7):
+			src = Rect2(
+				Vector2(tile_index * tile_w, season_row * tile_h),
+				Vector2(tile_w, tile_h)
+			)
 
 		var dst_pos = Vector2(
 			top_left_x + i * (tile_w + spacing),
