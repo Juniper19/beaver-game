@@ -21,8 +21,8 @@ var _scenes: Dictionary[Scene, String] = {
 	Scene.GAME_OVER: "uid://djrcbfdpd5ytu"
 }
 
-var _transitions: Dictionary[Transition, String] = {
-	Transition.CIRCLE: "uid://bc7t6gr8ow85a",
+@onready var _transitions: Dictionary[Transition, Resource] = {
+	Transition.CIRCLE: preload("uid://bc7t6gr8ow85a"),
 }
 
 var changing_scenes = false
@@ -55,7 +55,7 @@ func load_scene(target_scene: Scene, transition: Transition = Transition.NONE) -
 	 
 	var transition_node: SceneTransition = null
 	if transition != Transition.NONE:
-		var transition_scene = load(_transitions[transition])
+		var transition_scene = _transitions[transition]
 		transition_node = transition_scene.instantiate()
 		get_tree().root.add_child(transition_node)
 		

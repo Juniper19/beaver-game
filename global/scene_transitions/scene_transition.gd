@@ -17,17 +17,17 @@ func _ready():
 func play(transition_out: bool = true, follow: Node2D = null):
 	
 	_following = follow
-	_physics_process(0.0)
-	$TextureRect.show()
-	
 	shader.set_shader_parameter("asp", color_rect.size.aspect())
+	
+	RenderingServer
 	
 	if transition_out:
 		animation_player.play("transition_out")
 	else:
 		animation_player.play_backwards("transition_out")
 
-func _physics_process(_delta: float):
+
+func _process(_delta: float):
 	if _following and shader:
 		var screen_pos = get_node_screen_position(_following)
 		shader.set_shader_parameter("center", screen_pos)

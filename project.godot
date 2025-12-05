@@ -13,6 +13,7 @@ config_version=5
 config/name="DAM!"
 run/main_scene="uid://cdqen5kv8kmhx"
 config/features=PackedStringArray("4.5", "Forward Plus")
+boot_splash/show_image=false
 config/icon="uid://dqd1c16usegfw"
 
 [autoload]

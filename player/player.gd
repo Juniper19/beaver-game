@@ -163,6 +163,21 @@ func _on_player_inventory_item_removed(_item):
 
 
 
+
+
+
+
+func _is_swimming():
+	var tiles: TileMapLayer = get_tree().get_first_node_in_group("tilemap")
+	if !tiles:
+		return false
+	
+	var tile_pos = tiles.to_local(global_position)
+	var cell_coords = tiles.local_to_map(tile_pos)
+	var tile_data: TileData = tiles.get_cell_tile_data(cell_coords)
+	return tile_data.get_custom_data("swimmable")
+
+
 func _on_interaction_area_entered_tutorial_check(area: Area2D) -> void:
 	if GlobalStats.tutorials_left <= 0:
 		_try_disconnect_tutorials()
@@ -173,13 +188,31 @@ func _on_interaction_area_entered_tutorial_check(area: Area2D) -> void:
 	
 	if GlobalStats.tutorial_interact and area is InteractionArea and area.get_parent() is not ExcessStorage and tutorial_popup.show_tutorial("e"):
 		GlobalStats.tutorial_interact = false
-		GlobalStats.tutorials_left -= 1
+		#GlobalStats.tutorials_left -= 1
 	
 	if GlobalStats.tutorial_store and area.get_parent() is ExcessStorage and !inventory.is_empty() and tutorial_popup.show_tutorial("q"):
 		GlobalStats.tutorial_store = false
-		GlobalStats.tutorials_left -= 1
+		#GlobalStats.tutorials_left -= 1
 	
 	_try_disconnect_tutorials()
+
+
+func _on_interaction_area_exited_tutorial_check(area: Area2D) -> void:
+	if GlobalStats.tutorials_left <= 0:
+		_try_disconnect_tutorials()
+		return
+	
+	if area.get_parent() is Door:
+		return
+	
+	if tutorial_popup.current_animation == "e" and area is InteractionArea and area.get_parent() is not ExcessStorage:
+		GlobalStats.tutorial_interact = true
+	
+	if tutorial_popup.current_animation == "q" and area.get_parent() is ExcessStorage:
+		GlobalStats.tutorial_store = true
+	
+	_try_disconnect_tutorials()
+
 
 func _on_item_added_tutorial_check(item: Node2D) -> void:
 	if GlobalStats.tutorials_left <= 0:
@@ -198,6 +231,25 @@ func _on_item_added_tutorial_check(item: Node2D) -> void:
 	
 	
 	_try_disconnect_tutorials()
+	
+
+func _on_item_removed_tutorial_check(item: Node2D) -> void:
+	if tutorial_popup.current_animation == "z" and (item as Item).item_name.containsn("seed"):
+		GlobalStats.tutorial_plant = false
+		GlobalStats.tutorials_left -= 1
+	elif tutorial_popup.current_animation == "space" and inventory.inventory_items.size() <= 1:
+		GlobalStats.tutorial_cycle = false
+		GlobalStats.tutorials_left -= 1
+
+
+func _on_item_cycled_tutorial_check(top_item: Node2D) -> void:
+	if tutorial_popup.current_animation == "z" and !(top_item as Item).item_name.containsn("seed"):
+		GlobalStats.tutorial_plant = true
+		GlobalStats.tutorials_left -= 1
+	elif GlobalStats.tutorial_plant and (top_item as Item).item_name.containsn("seed") and tutorial_popup.show_tutorial("z"):
+		GlobalStats.tutorial_plant = false
+		GlobalStats.tutorials_left -= 1
+
 
 func _try_disconnect_tutorials():
 	if GlobalStats.tutorials_left > 0:
@@ -205,14 +257,3 @@ func _try_disconnect_tutorials():
 	
 	interaction_area.area_entered.disconnect(_on_interaction_area_entered_tutorial_check)
 	inventory.item_added.disconnect(_on_item_added_tutorial_check)
-
-
-func _is_swimming():
-	var tiles: TileMapLayer = get_tree().get_first_node_in_group("tilemap")
-	if !tiles:
-		return false
-	
-	var tile_pos = tiles.to_local(global_position)
-	var cell_coords = tiles.local_to_map(tile_pos)
-	var tile_data: TileData = tiles.get_cell_tile_data(cell_coords)
-	return tile_data.get_custom_data("swimmable")

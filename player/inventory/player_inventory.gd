@@ -3,6 +3,7 @@ extends Marker2D
 
 signal item_added(item: Node2D)
 signal item_removed(item: Node2D)
+signal items_cycled(top_item: Node2D)
 
 @export var inventory_items: Array[Node2D] = []
 @export var item_separation: Vector2 = Vector2(0.0, -12.0)
@@ -24,7 +25,7 @@ func _ready():
 	#GlobalStats.ItemInExcessChest.connect(_on_item_in_excess_chest)
 	GlobalStats.ItemFromExcessChest.connect(_on_item_from_excess_chest)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if inventory_items.size() >= GlobalStats.carry_capacity:
 		GlobalStats.MaxedInv = true
 	else:
@@ -119,6 +120,7 @@ func cycle_items(down: bool = true):
 	else:
 		var item: Item = inventory_items.pop_back()
 		inventory_items.push_front(item)
+	items_cycled.emit(inventory_items.back())
 	_reset_item_positions(0.35)
 
 

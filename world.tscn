@@ -1110,8 +1110,6 @@ position = Vector2(199, -63)
 [node name="Player" parent="." instance=ExtResource("1_f3sb7")]
 position = Vector2(52, -17)
 base_move_speed = 250.0
-speed_mult_per_item = 0.75
-disable_camera = false
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -7)
@@ -1133,38 +1131,38 @@ oak_density = 28.642
 stone_density = 9.21
 
 [node name="Oak2" parent="InitialResourceSpawners" instance=ExtResource("17_udxuc")]
-polygon = PackedVector2Array(301, 20, 543, 13, 850, 15, 1157, 38, 1293, 63, 1317, 226, 1348, 478, 1346, 780, 1207, 1274, 1173, 1490, 1056, 1568, 859, 1599, 615, 1516, 190, 1499, -24, 1522, -98, 1639, 13, 1791, 22, 1955, -15, 2094, -35, 1985, -138, 1856, -406, 1775, -558, 1666, -594, 1590, -514, 1371, -305, 1247, -155, 1218, 112, 1266, 297, 1330, 532, 1333, 678, 1314, 934, 1149, 966, 821, 735, 551, 333, 567, 200, 620, 46, 574, -7, 448, 50, 301, 53, 212, 126, 186, 219, 157, 255, 71, 265, 28)
-oak_density = 28.642
-stone_density = 9.21
+polygon = PackedVector2Array(448, 34, 543, 13, 850, 15, 1157, 38, 1293, 63, 1317, 226, 1348, 478, 1346, 780, 1207, 1274, 1173, 1490, 1056, 1568, 859, 1599, 615, 1516, 190, 1499, -24, 1522, -98, 1639, 13, 1791, 22, 1955, -15, 2094, -35, 1985, -138, 1856, -406, 1775, -558, 1666, -594, 1590, -514, 1371, -305, 1247, -155, 1218, 112, 1266, 297, 1330, 532, 1333, 678, 1314, 934, 1149, 966, 821, 735, 551, 333, 567, 200, 620, 46, 574, -7, 448, 34, 335, 48, 234, 153, 234, 240, 206, 315, 168, 384, 117)
+oak_density = 22.073
+stone_density = 3.0
 
 [node name="Oak_Aspen" parent="InitialResourceSpawners" instance=ExtResource("17_udxuc")]
 polygon = PackedVector2Array(-1282, 2581, -1129, 2500, -927, 2564, -717, 2743, -529, 2946, -227, 2970, -85, 2885, -41, 2655, -52, 2544, -136, 2197, -198, 2079, -298, 1987, -450, 1909, -770, 1830, -884, 1594, -1316, 1590, -1345, 1779, -1288, 2355)
-oak_density = 16.8
-aspen_density = 29.386
-stone_density = 9.21
+oak_density = 12.42
+aspen_density = 20.627
+stone_density = 8.115
 
 [node name="Oak_Aspen2" parent="InitialResourceSpawners" instance=ExtResource("17_udxuc")]
 position = Vector2(1369, -20)
 polygon = PackedVector2Array(-1383, 2126, -1339, 1991, -1353, 1805, -1464, 1659, -1397, 1547, -1205, 1527, -761, 1542, -513, 1625, -314, 1596, -192, 1510, -180, 1697, -165, 1983, -133, 2278, -110, 2496, -122, 2709, -267, 2825, -620, 2817, -739, 2613, -976, 2429, -1176, 2544, -1285, 2642, -1288, 2535)
-oak_density = 10.221
-aspen_density = 23.684
+oak_density = 6.206
+aspen_density = 17.844
 stone_density = 9.21
 
 [node name="Aspen_Pine" parent="InitialResourceSpawners" instance=ExtResource("17_udxuc")]
 position = Vector2(1369, -20)
 polygon = PackedVector2Array(-1284, 2652, -1175, 2545, -978, 2435, -747, 2618, -628, 2826, -271, 2833, -121, 2715, -200, 3630, -215, 3750, -311, 3812, -560, 3848, -1211, 3866, -1314, 3870, -1313, 3771, -1242, 3468, -1367, 3114, -1370, 2988, -1335, 2838)
-oak_density = 2.765
-aspen_density = 8.333
-pine_density = 24.123
-stone_density = 9.21
+oak_density = 0.21
+aspen_density = 3.588
+pine_density = 17.554
+stone_density = 7.75
 
 [node name="Aspen_Pine2" parent="InitialResourceSpawners" instance=ExtResource("17_udxuc")]
 position = Vector2(1369, -20)
 polygon = PackedVector2Array(-2645, 2611, -2607, 3692, -2558, 3782, -2301, 3853, -1891, 3849, -1426, 3877, -1429, 3645, -1379, 3481, -1484, 3103, -1494, 2991, -1457, 2909, -1584, 2996, -1897, 2975, -2088, 2767, -2295, 2588, -2495, 2520)
-oak_density = 2.765
-aspen_density = 8.333
-pine_density = 24.123
-stone_density = 9.21
+oak_density = 0.94
+aspen_density = 5.413
+pine_density = 14.999
+stone_density = 6.655
 
 [node name="MudZone2" parent="." instance=ExtResource("11_ic0uy")]
 position = Vector2(-127, 636)
