@@ -22,7 +22,15 @@ func _ready() -> void:
 		global_stats = GlobalStatsScript.new()
 		global_stats.name = "GlobalStats"
 		get_tree().get_root().add_child(global_stats)
-	
+		
+	%Wood.visible = false
+	%Mud.visible = false
+	%Stone.visible = false
+	%OakSeed.visible = false
+	%PineSeed.visible = false
+	%AspenSeed.visible = false
+	%PineLog.visible = false
+	%AspenLog.visible = false
 	#connecting this chest to its slot in GlobalStats
 	if chest_id >=0:
 		if GlobalStats.excess_chest_storages.size() <= chest_id:
