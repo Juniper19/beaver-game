@@ -7,6 +7,7 @@ signal miss
 @onready var background: ColorRect = $Background
 @onready var hit_zone: ColorRect = $HitZone
 @onready var marker: ColorRect = $Marker
+@onready var cooldown_timer: Timer = $CooldownTimer
 
 @export var _marker_padding: float = 0.0
 @export var _hit_zone_padding: float = 2.0
@@ -72,6 +73,7 @@ func attempt_hit():
 	else:
 		miss.emit()
 		AudioManager.playSwing()
+		cooldown_timer.start()
 
 
 func _populate_y_bounds():
@@ -83,6 +85,9 @@ func _populate_y_bounds():
 
 
 func _physics_process(delta: float) -> void:
+	if cooldown_timer.time_left != 0:
+		return
+	
 	marker.position.y += _marker_velocity * delta
 	if marker.position.y < _marker_bounds.x:
 		var difference: float = _marker_bounds.x - marker.position.y # positive number i think
