@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cwo68e4tx8ejq" path="res://menu/main_menu.gd" id="1_06t4h"]
 [ext_resource type="Texture2D" uid="uid://be8xu8efgowfd" path="res://menu/menu_background.png" id="2_f5okj"]
-[ext_resource type="Shader" path="res://menu/main_menu.gdshader" id="2_o5w3e"]
+[ext_resource type="Shader" uid="uid://c74orcxpkor67" path="res://menu/main_menu.gdshader" id="2_o5w3e"]
 [ext_resource type="Texture2D" uid="uid://cfbelu2cor38x" path="res://menu/menu_buttons.png" id="4_1x3cv"]
 [ext_resource type="Texture2D" uid="uid://btt6ai64uwytp" path="res://art_assets/title.png" id="4_jc45y"]
 [ext_resource type="Script" uid="uid://cs5vb52s8yfae" path="res://menu/play_button.gd" id="6_s8mfa"]
@@ -66,7 +66,6 @@ offset_right = 210.91998
 offset_bottom = -3.080017
 grow_horizontal = 2
 grow_vertical = 0
-tooltip_text = "Start Game"
 alignment = 1
 
 [node name="PlayButton" type="TextureButton" parent="HBoxContainer"]
