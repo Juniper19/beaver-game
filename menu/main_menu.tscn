@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://cdqen5kv8kmhx"]
+[gd_scene load_steps=10 format=3 uid="uid://cdqen5kv8kmhx"]
 
 [ext_resource type="Script" uid="uid://cwo68e4tx8ejq" path="res://menu/main_menu.gd" id="1_06t4h"]
 [ext_resource type="Texture2D" uid="uid://be8xu8efgowfd" path="res://menu/menu_background.png" id="2_f5okj"]
-[ext_resource type="Shader" uid="uid://c74orcxpkor67" path="res://menu/main_menu.gdshader" id="2_o5w3e"]
+[ext_resource type="Shader" path="res://menu/main_menu.gdshader" id="2_o5w3e"]
 [ext_resource type="Texture2D" uid="uid://cfbelu2cor38x" path="res://menu/menu_buttons.png" id="4_1x3cv"]
 [ext_resource type="Texture2D" uid="uid://btt6ai64uwytp" path="res://art_assets/title.png" id="4_jc45y"]
+[ext_resource type="Script" uid="uid://cs5vb52s8yfae" path="res://menu/play_button.gd" id="6_s8mfa"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1x3cv"]
 shader = ExtResource("2_o5w3e")
@@ -12,6 +13,9 @@ shader_parameter/scroll_speed = Vector2(40, 40)
 shader_parameter/texture_size = Vector2(256, 256)
 
 [sub_resource type="Theme" id="Theme_jc45y"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s8mfa"]
+bg_color = Color(0.60784316, 0.36078432, 0.28627452, 0.8352941)
 
 [node name="MainMenu" type="Control"]
 texture_repeat = 2
@@ -66,50 +70,71 @@ tooltip_text = "Start Game"
 alignment = 1
 
 [node name="PlayButton" type="TextureButton" parent="HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
 theme = SubResource("Theme_jc45y")
 texture_normal = ExtResource("4_1x3cv")
 texture_pressed = ExtResource("4_1x3cv")
 texture_hover = ExtResource("4_1x3cv")
 texture_disabled = ExtResource("4_1x3cv")
 texture_focused = ExtResource("4_1x3cv")
+script = ExtResource("6_s8mfa")
 
 [node name="Label" type="Label" parent="HBoxContainer/PlayButton"]
 layout_mode = 0
 offset_right = 82.0
 offset_bottom = 25.0
+theme_override_colors/font_color = Color(0.32941177, 0.27058825, 0.23921569, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 0.7137255)
+theme_override_constants/outline_size = 2
 text = "Play"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="AudioSettings Button" type="TextureButton" parent="HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
 texture_normal = ExtResource("4_1x3cv")
 texture_pressed = ExtResource("4_1x3cv")
 texture_hover = ExtResource("4_1x3cv")
 texture_disabled = ExtResource("4_1x3cv")
 texture_focused = ExtResource("4_1x3cv")
+script = ExtResource("6_s8mfa")
 
 [node name="Label" type="Label" parent="HBoxContainer/AudioSettings Button"]
 layout_mode = 0
 offset_right = 82.0
 offset_bottom = 25.0
+theme_override_colors/font_color = Color(0.32941177, 0.27058825, 0.23921569, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 0.7137255)
+theme_override_constants/outline_size = 2
 text = "Settings"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="QuitButton" type="TextureButton" parent="HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
 texture_normal = ExtResource("4_1x3cv")
 texture_pressed = ExtResource("4_1x3cv")
 texture_hover = ExtResource("4_1x3cv")
 texture_disabled = ExtResource("4_1x3cv")
 texture_focused = ExtResource("4_1x3cv")
+script = ExtResource("6_s8mfa")
 
 [node name="Label" type="Label" parent="HBoxContainer/QuitButton"]
 layout_mode = 0
 offset_right = 82.0
 offset_bottom = 25.0
+theme_override_colors/font_color = Color(0.32941177, 0.27058825, 0.23921569, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 0.7137255)
+theme_override_constants/outline_size = 2
 text = "Quit"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -128,6 +153,7 @@ offset_right = 374.0
 offset_bottom = 211.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_s8mfa")
 
 [node name="Label" type="Label" parent="Panel"]
 layout_mode = 1
@@ -139,6 +165,9 @@ offset_top = 127.0
 offset_right = 63.0
 offset_bottom = 146.0
 grow_horizontal = 2
+theme_override_colors/font_color = Color(0.32941177, 0.27058825, 0.23921569, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 24
 text = "Audio Settings"
 
@@ -155,11 +184,14 @@ offset_right = 36.0
 offset_bottom = 82.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 8
+theme_override_constants/separation = 9
 
 [node name="SFX" type="Label" parent="Panel/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.32941177, 0.27058825, 0.23921569, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 0.7137255)
+theme_override_constants/outline_size = 3
 text = "SFX Volume"
 
 [node name="HSlider" type="HSlider" parent="Panel/VBoxContainer2"]
@@ -171,6 +203,9 @@ step = 0.01
 [node name="Music" type="Label" parent="Panel/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.32941177, 0.27058825, 0.23921569, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 0.7137255)
+theme_override_constants/outline_size = 3
 text = "Music Volume"
 
 [node name="HSlider2" type="HSlider" parent="Panel/VBoxContainer2"]
@@ -178,14 +213,43 @@ layout_mode = 2
 max_value = 1.0
 step = 0.01
 
-[node name="MMButton" type="Button" parent="Panel/VBoxContainer2"]
+[node name="MMButton" type="TextureButton" parent="Panel/VBoxContainer2"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture_normal = ExtResource("4_1x3cv")
+texture_pressed = ExtResource("4_1x3cv")
+texture_hover = ExtResource("4_1x3cv")
+texture_disabled = ExtResource("4_1x3cv")
+texture_focused = ExtResource("4_1x3cv")
+script = ExtResource("6_s8mfa")
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer2/MMButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = -6.5
+offset_right = 27.0
+offset_bottom = 6.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.32941177, 0.27058825, 0.23921569, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 0.7137255)
+theme_override_constants/outline_size = 2
 text = "Main Menu"
 
+[connection signal="mouse_entered" from="HBoxContainer/PlayButton" to="." method="_on_play_button_mouse_entered"]
+[connection signal="mouse_entered" from="HBoxContainer/AudioSettings Button" to="." method="_on_audio_settings_button_mouse_entered"]
 [connection signal="pressed" from="HBoxContainer/AudioSettings Button" to="." method="_on_audio_settings_button_pressed"]
+[connection signal="mouse_entered" from="HBoxContainer/QuitButton" to="." method="_on_quit_button_mouse_entered"]
 [connection signal="pressed" from="HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="changed" from="Panel/VBoxContainer2/HSlider" to="." method="_on_h_slider_changed"]
 [connection signal="value_changed" from="Panel/VBoxContainer2/HSlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="changed" from="Panel/VBoxContainer2/HSlider2" to="." method="_on_h_slider_2_changed"]
 [connection signal="value_changed" from="Panel/VBoxContainer2/HSlider2" to="." method="_on_h_slider_2_value_changed"]
+[connection signal="mouse_entered" from="Panel/VBoxContainer2/MMButton" to="." method="_on_mm_button_mouse_entered"]
 [connection signal="pressed" from="Panel/VBoxContainer2/MMButton" to="." method="_on_mm_button_pressed"]

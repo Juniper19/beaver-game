@@ -5,6 +5,7 @@ var music = AudioServer.get_bus_index("Music")
 var sfx = AudioServer.get_bus_index("SFX")
 
 @export var scroll_speed: Vector2 = Vector2(40, 40)  # pixels per second
+
 @onready var bg: TextureRect = $BG
 
 func _ready() -> void:
@@ -33,6 +34,7 @@ func _on_mm_button_pressed() -> void:
 
 func _on_h_slider_value_changed(value: float) -> void:
 	AudioServer.set_bus_volume_db(sfx, linear_to_db(value))
+	AudioManager.playMenuSound()
 
 func _on_h_slider_2_value_changed(value: float) -> void:
 	AudioServer.set_bus_volume_db(music, linear_to_db(value))
