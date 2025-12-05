@@ -35,7 +35,7 @@ func _physics_process(_delta: float) -> void:
 	if move_dir != Vector2(0.0,0.0):
 		if swimming:
 			 # play swim sound
-			pass
+			AudioManager.playSplash()
 		else:
 			AudioManager.playFootsteps()
 
