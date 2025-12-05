@@ -1,3 +1,4 @@
+class_name ExcessStorage
 extends Node2D
 
 const GlobalStatsScript = preload("res://global/global_stats.gd")

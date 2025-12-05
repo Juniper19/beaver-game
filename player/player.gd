@@ -9,6 +9,7 @@ var move_speed: float
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var interaction_area: Area2D = $InteractionArea
+@onready var tutorial_popup: TutorialPopup = $TutorialPopup
 
 @export var disable_camera: bool = false
 
@@ -18,6 +19,8 @@ var is_mining: bool = false
 
 func _ready() -> void:
 	_calculate_move_speed()
+	_try_disconnect_tutorials()
+
 
 func _process(_delta: float) -> void:
 	var move_dir: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -27,6 +30,9 @@ func _process(_delta: float) -> void:
 	move_and_slide()
 	
 	_update_anim(move_dir)
+
+		
+
 
 func _update_anim(dir: Vector2) -> void:
 	if is_mining:
@@ -63,16 +69,20 @@ func start_mining_animation() -> void:
 	is_mining = true
 	sprite.play("mine")
 
+
 func stop_mining_animation() -> void:
 	is_mining = false
 var is_cutting: bool = false
+
 
 func start_cutting_animation() -> void:
 	is_cutting = true
 	sprite.play("cut")
 
+
 func stop_cutting_animation() -> void:
 	is_cutting = false
+
 
 func _unhandled_key_input(event):
 	if event.is_action_pressed("interact"):
@@ -91,18 +101,29 @@ func _unhandled_key_input(event):
 		
 		if closest:
 			closest.interact(self)
+			if tutorial_popup.current_animation == "e":
+				tutorial_popup.hide_tutorial()
+
 
 	if event.is_action_pressed("drop_item"):
 		if GlobalStats.ExcessChestEntered == false and GlobalStats.QuotaChestEntered == false:
 			inventory.drop_top_item()
+			if tutorial_popup.current_animation == "q":
+				tutorial_popup.hide_tutorial()
+		elif tutorial_popup.current_animation == "q":
+				tutorial_popup.hide_tutorial()
 
 	if event.is_action_pressed("plant_seed"):
 		inventory.try_plant_seed(global_position + Vector2(0, 32))
+		if tutorial_popup.current_animation == "z":
+				tutorial_popup.hide_tutorial()
 	
 	if event.is_action_pressed("cycle_down"):
 		inventory.cycle_items(true)
 	elif event.is_action_pressed("cycle_up"):
 		inventory.cycle_items(false)
+		if tutorial_popup.current_animation == "space":
+				tutorial_popup.hide_tutorial()
 	
 
 func _calculate_move_speed() -> void:
@@ -129,3 +150,48 @@ func _on_player_inventory_item_added(_item):
 
 func _on_player_inventory_item_removed(_item):
 	_calculate_move_speed()
+
+
+
+func _on_interaction_area_entered_tutorial_check(area: Area2D) -> void:
+	if GlobalStats.tutorials_left <= 0:
+		_try_disconnect_tutorials()
+		return
+	
+	if area.get_parent() is Door:
+		return
+	
+	if GlobalStats.tutorial_interact and area is InteractionArea and area.get_parent() is not ExcessStorage and tutorial_popup.show_tutorial("e"):
+		GlobalStats.tutorial_interact = false
+		GlobalStats.tutorials_left -= 1
+	
+	if GlobalStats.tutorial_store and area.get_parent() is ExcessStorage and !inventory.is_empty() and tutorial_popup.show_tutorial("q"):
+		GlobalStats.tutorial_store = false
+		GlobalStats.tutorials_left -= 1
+	
+	_try_disconnect_tutorials()
+
+func _on_item_added_tutorial_check(item: Node2D) -> void:
+	if GlobalStats.tutorials_left <= 0:
+		_try_disconnect_tutorials()
+		return
+	
+	if GlobalStats.tutorial_plant and (item as Item).item_name.containsn("seed") and tutorial_popup.show_tutorial("z"):
+		GlobalStats.tutorial_plant = false
+		GlobalStats.tutorials_left -= 1
+	elif GlobalStats.tutorial_cycle and inventory.inventory_items.size() > 1 and tutorial_popup.show_tutorial("space"):
+		GlobalStats.tutorial_cycle = false
+		GlobalStats.tutorials_left -= 1
+	elif GlobalStats.tutorial_drop and inventory.is_full() and tutorial_popup.show_tutorial("q"):
+		GlobalStats.tutorial_drop = false
+		GlobalStats.tutorials_left -= 1
+	
+	
+	_try_disconnect_tutorials()
+
+func _try_disconnect_tutorials():
+	if GlobalStats.tutorials_left > 0:
+		return
+	
+	interaction_area.area_entered.disconnect(_on_interaction_area_entered_tutorial_check)
+	inventory.item_added.disconnect(_on_item_added_tutorial_check)

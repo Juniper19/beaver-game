@@ -1,3 +1,4 @@
+class_name Door
 extends Node2D
 #@export var target_scene:String, FILE, ".tscn,*.scn"
 @export var target_scene: SceneManager.Scene
