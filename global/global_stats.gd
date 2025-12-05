@@ -130,7 +130,7 @@ signal Add_to_Quota(item)
 signal inventory_item_placed(item)
 signal ItemInChest
 signal ItemInExcessChest(chest)
-signal ItemFromExcessChest
+signal ItemFromExcessChest(item_data: ItemData, item_receiver: Node2D)
 signal GameOver
 
 ## Janky-ass way to do it but... it works

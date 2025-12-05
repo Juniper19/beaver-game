@@ -85,7 +85,7 @@ func _on_item_placed(item) -> void:
 				_update_icon()
 
 
-func remove_item() -> void:
+func remove_item(_by: Node2D) -> void:
 	if storage.is_empty():
 		return
 	var item_data = storage.pop_back()   # last added first out (LIFO)
@@ -94,7 +94,7 @@ func remove_item() -> void:
 	#GlobalStats.storage.pop_back()
 	#GlobalStats.storageNames.pop_back()
 	# Send the ItemData to the inventory
-	GlobalStats.emit_signal("ItemFromExcessChest", item_data)
+	GlobalStats.emit_signal("ItemFromExcessChest", item_data, _by)
 
 	_update_icon()
 
@@ -157,4 +157,4 @@ func _on_interaction_area_player_left_area(player: Player) -> void:
 
 func _on_interaction_area_interaction(_by):
 	if GlobalStats.MaxedInv == false:
-		remove_item()
+		remove_item(_by)

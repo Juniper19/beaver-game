@@ -8,6 +8,7 @@ signal dropped(by: Node)
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var interaction_area: InteractionArea = $InteractionArea
+@onready var collision_shape: CollisionShape2D = $InteractionArea/CollisionShape2D
 
 
 @export var data: ItemData:
@@ -36,24 +37,24 @@ func _item_dropped_from_inventory(node: Node2D):
 	if node != self:
 		return
 	
-	interaction_area.monitorable = true
+	collision_shape.disabled = false
 	if _held_by and _held_by.has_signal("item_removed"):
 		_held_by.disconnect("item_removed", _item_dropped_from_inventory)
 	dropped.emit(_held_by)
 
 
 func _on_interaction(by: Node):
-	
-	if by is Player:
-		var player: Player = by as Player
-		if GlobalStats.ExcessChestEntered == false and GlobalStats.QuotaChestEntered == false:
-			if player.inventory.add_item(self) :
-				picked_up.emit(player)
-				interaction_area.monitorable = false
-				_held_by = player.inventory
-				
-				player.inventory.connect("item_removed", _item_dropped_from_inventory)
-			return
+	if by is Player and GlobalStats.ExcessChestEntered == false and GlobalStats.QuotaChestEntered == false:
+		player_pickup(by as Player)
+		return
 	
 	push_warning("Undandled interaction on item by %s" % by.get_class())
-	
+
+
+func player_pickup(player: Player):
+	if player.inventory.add_item(self) :
+		picked_up.emit(player)
+		collision_shape.disabled = true
+		_held_by = player.inventory
+		
+		player.inventory.connect("item_removed", _item_dropped_from_inventory)

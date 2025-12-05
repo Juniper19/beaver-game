@@ -11,6 +11,8 @@ var _following: Node2D
 
 func _ready():
 	animation_player.animation_finished.connect(finished.emit)
+	show.call_deferred()
+	
 
 func play(transition_out: bool = true, follow: Node2D = null):
 	

@@ -42,16 +42,15 @@ func get_items() -> Array[Node2D]:
 	return inventory_items
 
 
-func _on_item_from_excess_chest(item_data) -> void:
+func _on_item_from_excess_chest(item_data, item_receiver) -> void:
 	# item_data is an ItemData resource coming from the chest
 	var item_scene: PackedScene = load("res://interactables/items/item.tscn")
-	var item: Node2D = item_scene.instantiate()
-	
-	# The Item script uses `data` in _ready() to set name and texture
-	if "data" in item:
-		item.data = item_data
-	Test = true
-	add_item(item)
+	var item: Item = item_scene.instantiate()
+	item.data = item_data
+	add_child(item)
+	item.global_position = global_position
+	if item_receiver is Player:
+		item.player_pickup(item_receiver as Player)
 
 
 func is_full() -> bool:
@@ -74,6 +73,8 @@ func add_item(item: Node2D) -> bool:
 	if inventory_items.has(item):
 		push_warning("Tried to add inventory item that's already held")
 		return false
+	
+	print(inventory_items)
 	
 	var item_pos_global: Vector2 = item.global_position
 	if item.get_parent() != null:
