@@ -9,8 +9,8 @@ var global_stats: Node = null
 @export var all_cards: Array[Dictionary] = [
 	{"name": "Faster Legs", "desc": "Movement Speed +10%", "effect": {"move_speed_bonus": 0.1}},
 	{"name": "Depth Strider", "desc": "+30% speed boost when swimming", "effect": {"swim_speed_bonus": 0.3}},
-	{"name": "Ripped!", "desc": "Carry 1 Additional Item", "effect": {"carry_capacity": 1}},
-	{"name": "More Ripped!", "desc": "Carry 2 Additional Items", "effect": {"carry_capacity": 2}},
+	{"name": "Ripped I", "desc": "Carry 1 additional item", "effect": {"carry_capacity": 1}},
+	{"name": "Ripped II", "desc": "Carry 1 more item", "effect": {"carry_capacity": 1},"requires": "Ripped I"},
 	{"name": "Stone Smasher", "desc": "50% chance for rocks to drop an extra", "effect": {"extra_rock_chance": 0.5}},
 	{"name": "Thunder Thighs", "desc": "Item weight affects speed less", "effect": {"encumbrance_factor": .85}},
 	{"name": "Dam Insurance", "desc": "The dam is safe from 1 missed quota.", "effect": {"free_quota_miss": 1}},
