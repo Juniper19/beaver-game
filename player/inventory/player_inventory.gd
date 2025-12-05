@@ -74,8 +74,6 @@ func add_item(item: Node2D) -> bool:
 		push_warning("Tried to add inventory item that's already held")
 		return false
 	
-	print(inventory_items)
-	
 	var item_pos_global: Vector2 = item.global_position
 	if item.get_parent() != null:
 		item.get_parent().remove_child(item)
