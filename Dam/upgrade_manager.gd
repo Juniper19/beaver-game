@@ -8,6 +8,7 @@ var global_stats: Node = null
 # ----------CARD OPTIONS-----------------
 @export var all_cards: Array[Dictionary] = [
 	{"name": "Faster Legs", "desc": "Movement Speed +10%", "effect": {"move_speed_bonus": 0.1}},
+	{"name": "Depth Strider", "desc": "+30% speed boost when swimming", "effect": {"swim_speed_bonus": 0.3}},
 	{"name": "Ripped!", "desc": "Carry 1 Additional Item", "effect": {"carry_capacity": 1}},
 	{"name": "More Ripped!", "desc": "Carry 2 Additional Items", "effect": {"carry_capacity": 2}},
 	{"name": "Stone Smasher", "desc": "50% chance for rocks to drop an extra", "effect": {"extra_rock_chance": 0.5}},
@@ -72,39 +73,6 @@ func _get_random_cards(count: int) -> Array[Dictionary]:
 	return Array(pool.slice(0, min(count, pool.size())), TYPE_DICTIONARY, "", null)
 
 func _create_card(data: Dictionary) -> Control:
-	#var rect = ColorRect.new()
-	#rect.color = Color(0.15, 0.15, 0.15, 0.85)
-	#rect.custom_minimum_size = Vector2(220, 280)
-#
-	#var vbox = VBoxContainer.new()
-	#vbox.anchor_right = 1
-	#vbox.anchor_bottom = 1
-	#vbox.offset_left = 8
-	#vbox.offset_top = 8
-	#vbox.offset_right = -8
-	#vbox.offset_bottom = -8
-#
-	#var name_label = Label.new()
-	#name_label.text = data["name"]
-	#name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	#name_label.add_theme_font_size_override("font_size", 32)
-#
-	#var desc_label = Label.new()
-	#desc_label.text = data["desc"]
-	#desc_label.autowrap_mode = TextServer.AUTOWRAP_WORD
-	#desc_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	#desc_label.add_theme_font_size_override("font_size", 16)
-#
-	#var button = Button.new()
-	#button.text = "Choose"
-	#button.pressed.connect(func(): _apply_card(data))
-#
-	#vbox.add_child(name_label)
-	#vbox.add_child(desc_label)
-	#vbox.add_spacer(false)
-	#vbox.add_child(button)
-	#rect.add_child(vbox)
-	
 	var card: UpgradeCard = preload("res://Dam/upgrade_card.tscn").instantiate()
 	card.set_data(data["name"], data["desc"])
 	card.pressed.connect(_apply_card.bind(data))

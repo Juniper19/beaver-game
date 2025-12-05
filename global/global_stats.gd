@@ -57,6 +57,7 @@ var chosen_upgrades: Array[String] = []
 var ExcessStorageCount = 1
 var carry_capacity: int = 3
 var move_speed_bonus: float = 0
+var swim_speed_bonus: float = 0.0
 var encumbrance_factor: float = 1.0 # 1 is default slow, .5 half as much punishing, etc.
 var extra_rock_chance: float = 0.0
 var extra_wood_chance: float = 0.0
@@ -114,6 +115,7 @@ func reset():
 	# UPGRADABLE STATS
 	carry_capacity = 3
 	move_speed_bonus = 0
+	swim_speed_bonus = 0.0
 	encumbrance_factor = 1.0 # 1 is default slow, .5 half as much punishing, etc.
 	extra_rock_chance = 0.0
 	extra_wood_chance = 0.0
@@ -153,6 +155,11 @@ func apply_effect(effect: Dictionary) -> void:
 		if key == "move_speed_bonus":
 			move_speed_bonus += float(effect[key])
 			print("MOVE SPEED BONUS NOW =", move_speed_bonus)
+			continue
+		
+		if key == "swim_speed_bonus":
+			swim_speed_bonus += float(effect[key])
+			print("SWIM SPEED BONUS NOW =", move_speed_bonus)
 			continue
 			
 		if key == "encumbrance_factor":

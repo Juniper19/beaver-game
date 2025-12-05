@@ -18,6 +18,9 @@ func _ready() -> void:
 	$Panel/VBoxContainer2/HSlider.set_value_no_signal(db_to_linear(AudioServer.get_bus_volume_db(sfx)))
 	$Panel/VBoxContainer2/HSlider2.set_value_no_signal(db_to_linear(AudioServer.get_bus_volume_db(music)))
 
+func _process(delta: float) -> void:
+	print("o")
+
 func _on_play_pressed() -> void:
 	SceneManager.load_scene(SceneManager.Scene.WORLD, SceneManager.Transition.CIRCLE)
 
