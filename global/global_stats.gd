@@ -64,7 +64,7 @@ var swim_speed_bonus: float = 0.0
 var encumbrance_factor: float = 1.0 # 1 is default slow, .5 half as much punishing, etc.
 var extra_rock_chance: float = 0.0
 var extra_wood_chance: float = 0.0
-var free_quota_miss: int = 3
+var free_quota_miss: int = 1
 var early_bird_minutes: int = 0   # subtract from start time
 var sunrise_spark_duration: float = 0.0   # seconds
 var sunrise_spark_bonus: float = 0.0      # multiplier (e.g. 0.2 = +20%)
