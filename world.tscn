@@ -1110,8 +1110,6 @@ position = Vector2(199, -63)
 [node name="Player" parent="." instance=ExtResource("1_f3sb7")]
 position = Vector2(52, -17)
 base_move_speed = 250.0
-speed_mult_per_item = 0.75
-disable_camera = false
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -7)
