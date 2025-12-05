@@ -47,7 +47,7 @@ func _process(delta: float) -> void:
 	clock_label.text = _format_time(current_time)
 	
 	# counting up days
-	var new_day_time = 8 * 60
+	var new_day_time = 6 * 60
 	if current_time >= new_day_time and not has_triggered_new_day:
 		_on_new_day()
 		has_triggered_new_day = true

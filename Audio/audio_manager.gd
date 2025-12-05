@@ -172,3 +172,11 @@ func stopChainsaw():
 func playMudScoop():
 	if not mute:
 		$MudScoop.play()
+
+func playSleep():
+	if not mute:
+		$Sleep.play()
+		
+func playEnterDam():
+	if not mute:
+		$EnterDam.play()

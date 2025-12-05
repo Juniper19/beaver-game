@@ -17,6 +17,10 @@ var global_stats: Node = null
 	{"name": "Early Bird", "desc": "Start each day 2 hours earlier", "effect": {"early_bird_minutes": 120}},
 	{"name": "Sunrise Spark", "desc": "Move faster for the first 60 seconds of each day", "effect": {"sunrise_spark_duration": 60.0, "sunrise_spark_bonus": 0.20}},
 	{"name": "True Beaver", "desc": "50% chance to get extra wood from trees", "effect": {"extra_wood_chance": 0.5}},
+	{"name": "Storage I", "desc": "Gain an extra storage unit.", "effect": {"ExcessStorageCount": 1}},
+	{"name": "Storage II", "desc": "Gain an extra storage unit.", "effect": {"ExcessStorageCount": 1}, "requires": "Bigger Barn I"},
+	{"name": "Storage III", "desc": "Gain an extra storage unit.", "effect": {"ExcessStorageCount": 1}, "requires": "Bigger Barn II"},
+
 ]
 
 @onready var card_ui: CanvasLayer = $CardUI
@@ -60,10 +64,17 @@ func hide_cards() -> void:
 	card_ui.visible = false
 
 func _get_random_cards(count: int) -> Array[Dictionary]:
-	var pool = []
+	var pool: Array = []
 	for card in all_cards:
-		if not global_stats.chosen_upgrades.has(card["name"]):
-			pool.append(card)
+		if global_stats.chosen_upgrades.has(card["name"]):
+			continue
+
+		# Check requirements
+		if card.has("requires"):
+			if not global_stats.chosen_upgrades.has(card["requires"]):
+				continue
+
+		pool.append(card)
 
 	if pool.is_empty():
 		print("All upgrades already chosen!")

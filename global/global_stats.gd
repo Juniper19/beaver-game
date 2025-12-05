@@ -194,6 +194,11 @@ func apply_effect(effect: Dictionary) -> void:
 		if key == "sunrise_spark_bonus":
 			sunrise_spark_bonus += float(effect[key])
 			continue
+			
+		if key == "ExcessStorageCount":
+			ExcessStorageCount += int(effect[key])
+			print("Excess storage slots now: ", ExcessStorageCount)
+			continue
 
 
 		# Default stat behavior
