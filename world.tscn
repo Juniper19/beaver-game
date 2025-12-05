@@ -1084,7 +1084,7 @@ collision_mask = 0
 shape = SubResource("RectangleShape2D_wse8f")
 
 [node name="Quota Board" parent="." instance=ExtResource("4_aqk2v")]
-position = Vector2(197, -43)
+position = Vector2(199, -63)
 
 [node name="Player" parent="." instance=ExtResource("1_f3sb7")]
 position = Vector2(52, -17)

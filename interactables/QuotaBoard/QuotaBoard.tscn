@@ -27,9 +27,11 @@ stone_icon = ExtResource("6_bb7ti")
 [node name="InteractionArea" parent="." instance=ExtResource("2_ggoti")]
 
 [node name="Sprite2D" type="Sprite2D" parent="InteractionArea"]
+position = Vector2(0, 4)
 texture = ExtResource("8_lpsny")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+position = Vector2(0, 7)
 shape = SubResource("RectangleShape2D_ggoti")
 
 [node name="InteractLabel" type="Label" parent="InteractionArea"]
@@ -79,7 +81,7 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("9_lpsny")
-theme_override_font_sizes/font_size = 13
+theme_override_font_sizes/font_size = 16
 text = "Wood"
 
 [node name="TextureRect" type="TextureRect" parent="InteractionArea/PhysicalPanelContainer/HBoxContainer/VBoxContainerLeft/HBoxLeft1"]
@@ -94,7 +96,7 @@ alignment = 1
 [node name="Label" type="Label" parent="InteractionArea/PhysicalPanelContainer/HBoxContainer/VBoxContainerLeft/HBoxLeft2"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 13
+theme_override_font_sizes/font_size = 16
 text = "Mud"
 
 [node name="TextureRect" type="TextureRect" parent="InteractionArea/PhysicalPanelContainer/HBoxContainer/VBoxContainerLeft/HBoxLeft2"]
@@ -109,7 +111,7 @@ alignment = 1
 [node name="Label" type="Label" parent="InteractionArea/PhysicalPanelContainer/HBoxContainer/VBoxContainerLeft/HBoxLeft3"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 13
+theme_override_font_sizes/font_size = 16
 text = "Stone"
 
 [node name="TextureRect" type="TextureRect" parent="InteractionArea/PhysicalPanelContainer/HBoxContainer/VBoxContainerLeft/HBoxLeft3"]
@@ -132,7 +134,7 @@ alignment = 1
 [node name="Label" type="Label" parent="InteractionArea/PhysicalPanelContainer/HBoxContainer/VBoxContainerRight/HBoxRight1"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 13
+theme_override_font_sizes/font_size = 16
 text = "Wood"
 
 [node name="TextureRect" type="TextureRect" parent="InteractionArea/PhysicalPanelContainer/HBoxContainer/VBoxContainerRight/HBoxRight1"]
@@ -147,7 +149,7 @@ alignment = 1
 [node name="Label" type="Label" parent="InteractionArea/PhysicalPanelContainer/HBoxContainer/VBoxContainerRight/HBoxRight2"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 13
+theme_override_font_sizes/font_size = 16
 text = "Mud"
 
 [node name="TextureRect" type="TextureRect" parent="InteractionArea/PhysicalPanelContainer/HBoxContainer/VBoxContainerRight/HBoxRight2"]
@@ -163,7 +165,7 @@ alignment = 1
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 13
+theme_override_font_sizes/font_size = 16
 text = "Stone"
 
 [node name="TextureRect" type="TextureRect" parent="InteractionArea/PhysicalPanelContainer/HBoxContainer/VBoxContainerRight/HBoxRight3"]
