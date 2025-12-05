@@ -46,7 +46,7 @@ var excess_chest_storage_names: Array = []
 var chosen_upgrades: Array[String] = []
 
 	# UPGRADABLE STATS
-var ExcessStorageCount = 5
+var ExcessStorageCount = 1
 var carry_capacity: int = 3
 var move_speed_bonus: float = 0
 var encumbrance_factor: float = 1.0 # 1 is default slow, .5 half as much punishing, etc.
@@ -94,7 +94,7 @@ func reset():
 	ItemID = ""
 	ExcessChestEntered = false
 	QuotaChestEntered = false
-	ExcessStorageCount = 5
+	ExcessStorageCount = 1
 	MaxedInv = false
 	#For saving values when scene changes
 	excess_chest_storages = []

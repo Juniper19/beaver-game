@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cguixmr4uuih2" path="res://interactables/Storage/excess_storage.gd" id="1_64f8w"]
 [ext_resource type="PackedScene" uid="uid://dwafgcp2uqbfl" path="res://interactables/interaction_area.tscn" id="2_kj6is"]
-[ext_resource type="Texture2D" uid="uid://dk20kbr33ftot" path="res://art_assets/placeholder_storage_bin.png" id="3_kgw8d"]
+[ext_resource type="Texture2D" uid="uid://cks00rwci654c" path="res://art_assets/storage.png" id="3_physo"]
 [ext_resource type="Texture2D" uid="uid://cwtbcjtvn0g86" path="res://art_assets/items/oak_log.png" id="4_kgw8d"]
 [ext_resource type="Texture2D" uid="uid://bt2eabnqb07si" path="res://art_assets/items/mud.png" id="5_4p85k"]
 [ext_resource type="Texture2D" uid="uid://cw3kc3jkgdlq8" path="res://art_assets/items/oak_seed.png" id="6_physo"]
@@ -24,7 +24,7 @@ chest_id = null
 collision_layer = 18
 
 [node name="Sprite2D" type="Sprite2D" parent="InteractionArea"]
-texture = ExtResource("3_kgw8d")
+texture = ExtResource("3_physo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
 shape = SubResource("RectangleShape2D_64f8w")
