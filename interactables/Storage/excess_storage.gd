@@ -102,49 +102,59 @@ func remove_item(_by: Node2D) -> void:
 	_update_icon()
 
 func _update_icon() -> void:
-	if storage.is_empty():
-		%Wood.visible = false
-		%Mud.visible = false
-		%Stone.visible = false
-		%OakSeed.visible = false
-		%PineSeed.visible = false
-		%AspenSeed.visible = false
-		%PineLog.visible = false
-		%AspenLog.visible = false
-		$Count.text = " "
+	print("=== _update_icon called ===")
+	print("storage_names:", storage_names)
+
+	if storage_names.is_empty():
+		%ItemStack.visible = false
 		return
+
+	%ItemStack.visible = true
+
+	# --- YOUR ORIGINAL MAPPING (keep what used to work) ---
+	if storage_names[-1] == "Aspen Log":
+		original = %AspenLog
+	if storage_names[-1] == "Oak Log":
+		original = %Wood
+	elif storage_names[-1] == "Oak Seed":
+		original = %OakSeed
+	elif storage_names[-1] == "Pine Seed":
+		original = %PineSeed
+	elif storage_names[-1] == "Aspen Seed":
+		original = %AspenSeed
+	elif storage_names[-1] == "Mud":
+		original = %Mud
+	elif storage_names[-1] == "Stone":
+		original = %Stone
 	else:
-		if storage_names[-1] == "Oak Log":
-			original = %Wood
-			#%Mud.visible = false
-			#%Stone.visible = false
-		if storage_names[-1] == "Pine Log":
-			original = %PineLog
-		if storage_names[-1] == "Aspen Log":
-			original = %AspenLog
-		if storage_names[-1] == "Oak Seed":
-			original = %OakSeed
-		if storage_names[-1] == "Pine Seed":
-			original = %PineSeed
-		if storage_names[-1] == "Aspen Seed":
-			original = %AspenSeed
-		if storage_names[-1] == "Mud":
-			original = %Mud
-			#%Wood.visible = false
-			#%Stone.visible = false
-		if storage_names[-1] == "Stone":
-			original = %Stone
-			#%Wood.visible = false
-			#%Mud.visible = false
-		original.visible = true
-		for child in %ItemStack.get_children():
-			if child != original:
-				child.queue_free()
-		for i in range(1, storage_names.size()):
-			var copy = original.duplicate()
-			copy.position = original.position + (item_separation*i)
-			%ItemStack.add_child(copy)
-		$Count.text = "x" + str(storage.size())
+		print("No matching icon for:", storage_names[-1])
+		return
+
+	# Make sure the template is inside ItemStack and at a known position
+	if original.get_parent() != %ItemStack:
+		original.reparent(%ItemStack)
+
+	original.visible = true
+	original.position = Vector2.ZERO
+
+	# --- CLEAR OLD COPIES, BUT KEEP THE TEMPLATE ---
+	for child in %ItemStack.get_children():
+		if child != original:
+			child.queue_free()
+
+	# --- CREATE DUPLICATES ---
+	var count := storage_names.size()
+	print("creating stack for count =", count)
+
+	for i in range(1, count):
+		var copy: Sprite2D = original.duplicate()
+		copy.position = item_separation * i
+		copy.visible = true
+		%ItemStack.add_child(copy)
+		print("  added copy index", i, "at", copy.position)
+
+	print("ItemStack children now =", %ItemStack.get_child_count())
+	$Count.text = "x" + str(storage.size())
 	#var last_data = storage.back()
 	#if "texture" in last_data:
 	#	%IconSprite.texture = last_data.texture
