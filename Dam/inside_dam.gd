@@ -21,6 +21,7 @@ func _transition_node_alpha(node: CanvasItem, alpha: float):
 	t.tween_property(node, "modulate:a", alpha, 0.2)
 
 func _on_bed_interaction(_by):
+	
 	%Player.process_mode = Node.PROCESS_MODE_DISABLED
 	_transition_node_alpha($SleepText, 0.0)
 	$Bed.queue_free() # no more interaction!!
@@ -28,6 +29,7 @@ func _on_bed_interaction(_by):
 
 
 func _on_upgrade_selected():
+	AudioManager.playSleep()
 	#%Player.process_mode = Node.PROCESS_MODE_INHERIT
 	$AnimationPlayer.play("sleep")
 	$Door.process_mode = Node.PROCESS_MODE_INHERIT

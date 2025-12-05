@@ -65,6 +65,7 @@ func load_scene(target_scene: Scene, transition: Transition = Transition.NONE) -
 		await transition_node.finished
 	
 	if target_scene != Scene.WORLD:
+		AudioManager.playEnterDam()
 		AudioManager.stopOverworldMusic()
 		if target_scene == Scene.INSIDE_DAM:
 			if GlobalStats.DayOne == true:
