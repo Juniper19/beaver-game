@@ -39,6 +39,7 @@ day_night=""
 player=""
 qte=""
 transition_follow=""
+tilemap=""
 
 [gui]
 

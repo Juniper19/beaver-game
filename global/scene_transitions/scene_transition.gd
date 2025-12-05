@@ -16,6 +16,7 @@ func play(transition_out: bool = true, follow: Node2D = null):
 	
 	_following = follow
 	_physics_process(0.0)
+	$TextureRect.show()
 	
 	shader.set_shader_parameter("asp", color_rect.size.aspect())
 	

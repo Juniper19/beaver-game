@@ -27,6 +27,7 @@ func _process(_delta: float) -> void:
 	if move_dir != Vector2(0.0,0.0):
 		AudioManager.playFootsteps()
 	velocity = lerp(velocity, move_dir * move_speed, 0.09)
+	#velocity.x = sign(x) * floor(sign(x) * velocity.x)
 	move_and_slide()
 	
 	_update_anim(move_dir)
@@ -45,7 +46,7 @@ func _update_anim(dir: Vector2) -> void:
 
 	if dir.is_zero_approx():
 		if last_dir.x != 0:
-			sprite.play("idle_side")
+			sprite.play("swim_down" if _is_swimming() else "idle_side")
 			sprite.flip_h = last_dir.x > 0
 		else:
 			sprite.stop()
@@ -55,14 +56,14 @@ func _update_anim(dir: Vector2) -> void:
 
 	if abs(dir.x) > abs(dir.y):
 		# Horizontal movement
-		sprite.play("walk_side")
+		sprite.play("swim_side" if _is_swimming() else "walk_side")
 		sprite.flip_h = dir.x > 0
 	else:
 		# Vertical movement
 		if dir.y < 0:
-			sprite.play("walk_up")
+			sprite.play("swim_up" if _is_swimming() else "walk_up")
 		else:
-			sprite.play("walk_down")
+			sprite.play("swim_down" if _is_swimming() else "walk_down")
 
 
 func start_mining_animation() -> void:
@@ -143,6 +144,8 @@ func _calculate_move_speed() -> void:
 	if day_night and gs.sunrise_spark_duration > 0.0:
 		if day_night.time_since_day_start < gs.sunrise_spark_duration:
 			move_speed *= (1.0 + gs.sunrise_spark_bonus)
+	
+	move_speed = floor(move_speed)
 
 
 func _on_player_inventory_item_added(_item):
@@ -195,3 +198,14 @@ func _try_disconnect_tutorials():
 	
 	interaction_area.area_entered.disconnect(_on_interaction_area_entered_tutorial_check)
 	inventory.item_added.disconnect(_on_item_added_tutorial_check)
+
+
+func _is_swimming():
+	var tiles: TileMapLayer = get_tree().get_first_node_in_group("tilemap")
+	if !tiles:
+		return false
+	
+	var tile_pos = tiles.to_local(global_position)
+	var cell_coords = tiles.local_to_map(tile_pos)
+	var tile_data: TileData = tiles.get_cell_tile_data(cell_coords)
+	return tile_data.get_custom_data("swimmable")
