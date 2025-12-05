@@ -30,11 +30,11 @@ shape = SubResource("RectangleShape2D_64f8w")
 
 [node name="InteractLabel" type="Label" parent="InteractionArea"]
 unique_name_in_owner = true
-offset_left = -80.0
-offset_top = 18.0
-offset_right = 85.0
-offset_bottom = 50.0
-theme_override_font_sizes/font_size = 40
+offset_left = -33.0
+offset_top = 21.0
+offset_right = 33.0
+offset_bottom = 34.0
+theme_override_font_sizes/font_size = 16
 text = "Insert Item"
 
 [node name="Mud" type="Sprite2D" parent="InteractionArea"]
@@ -85,6 +85,16 @@ texture = ExtResource("10_physo")
 [node name="ItemStack" type="Node2D" parent="InteractionArea"]
 unique_name_in_owner = true
 visible = false
+
+[node name="Count" type="Label" parent="."]
+offset_left = 7.0
+offset_top = 6.0
+offset_right = 55.0
+offset_bottom = 19.0
+theme_override_colors/font_color = Color(0.33, 0.26994002, 0.23760001, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 3
+text = "xN"
 
 [connection signal="interaction" from="InteractionArea" to="." method="_on_interaction_area_interaction"]
 [connection signal="player_entered_area" from="InteractionArea" to="." method="_on_interaction_area_player_entered_area"]

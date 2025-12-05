@@ -31,6 +31,9 @@ func _ready() -> void:
 	%AspenSeed.visible = false
 	%PineLog.visible = false
 	%AspenLog.visible = false
+	
+	$Count.text = " "
+	
 	#connecting this chest to its slot in GlobalStats
 	if chest_id >=0:
 		if GlobalStats.excess_chest_storages.size() <= chest_id:
@@ -108,6 +111,7 @@ func _update_icon() -> void:
 		%AspenSeed.visible = false
 		%PineLog.visible = false
 		%AspenLog.visible = false
+		$Count.text = " "
 		return
 	else:
 		if storage_names[-1] == "Oak Log":
@@ -140,6 +144,7 @@ func _update_icon() -> void:
 			var copy = original.duplicate()
 			copy.position = original.position + (item_separation*i)
 			%ItemStack.add_child(copy)
+		$Count.text = "x" + str(storage.size())
 	#var last_data = storage.back()
 	#if "texture" in last_data:
 	#	%IconSprite.texture = last_data.texture
