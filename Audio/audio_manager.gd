@@ -143,6 +143,15 @@ func playInsideMusic():
 		$InsideMusic.play()
 		$InsideMusic.finished.connect($InsideMusic.play)
 		
+func stopAllMusic():
+	$Music1.stop()
+	$Music2.stop()
+	$InsideMusic.stop()
+	
+func stopOverworldMusic():
+	$Music1.stop()
+	$Music2.stop()
+		
 func stopInsideMusic():
 	$InsideMusic.stop()
 	

@@ -12,7 +12,7 @@ offset_bottom = 654.0
 color = Color(0.49019608, 0.6901961, 1, 1)
 
 [node name="Door" parent="." instance=ExtResource("2_3oati")]
-target_scene = "uid://dh7xd633s68f5"
+target_scene = 0
 
 [node name="Player" parent="." instance=ExtResource("1_qm7mk")]
 position = Vector2(216, 192)
