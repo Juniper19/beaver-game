@@ -212,28 +212,34 @@ bus = &"Music"
 stream = ExtResource("26_awwpy")
 volume_db = -15.0
 pitch_scale = 0.5
+bus = &"SFX"
 
 [node name="Chainsaw" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("26_awwpy")
 volume_db = -15.0
 pitch_scale = 0.8
+bus = &"SFX"
 
 [node name="MudScoop" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("27_ic4ac")
 volume_db = -11.0
 pitch_scale = 0.6
+bus = &"SFX"
 
 [node name="EnterDam" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("28_wr1o2")
+bus = &"SFX"
 parameters/looping = false
 
 [node name="Sleep" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("29_wr1o2")
 volume_db = -8.0
+bus = &"SFX"
 
 [node name="PageTurn" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("33_xnepa")
 volume_db = -7.0
+bus = &"SFX"
 
 [connection signal="timeout" from="DropTimer" to="." method="_on_drop_timer_timeout"]
 [connection signal="timeout" from="DepositTimer" to="." method="_on_deposit_timer_timeout"]

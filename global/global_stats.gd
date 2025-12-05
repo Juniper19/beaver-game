@@ -1,5 +1,11 @@
 extends Node
 
+var sfx_linear: float = 1.0
+var music_linear: float = 1.0
+
+# index of your buses
+const SFX_BUS := 1      # change to your actual index
+const MUSIC_BUS := 2
 
 #Audio Settings, don't reset
 var sfx_volume_db: float = 0.0
@@ -149,6 +155,7 @@ const ITEM_TO_TREE: Dictionary[String, String] = {
 	"Aspen Seed": "uid://de4jpe12kbg52",
 	"Pine Seed": "uid://coq60gmhpggti",
 }
+
 
 
 # Called when an upgrade is picked
