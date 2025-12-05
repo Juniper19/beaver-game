@@ -5,6 +5,8 @@ var drop: int =1
 var dep: int =1
 var depE: int =1
 var wait: bool = false
+var waitS: bool = false
+var RandomPitch:int = false
 var song = 1
 
 func playItemPickUp():
@@ -123,6 +125,37 @@ func playFootsteps():
 
 func _on_footstep_timer_timeout() -> void:
 	wait = false
+	
+func playSplash():
+	if not mute and not waitS:
+		var Random = randf_range(0,3)
+		
+		if RandomPitch == 1:
+			$Splash1.pitch_scale=0.80
+			$Splash2.pitch_scale=0.80
+			$Splash3.pitch_scale=0.80
+			RandomPitch = 2
+		else:
+			$Splash1.pitch_scale=1.1
+			$Splash2.pitch_scale=1.1
+			$Splash3.pitch_scale=1.1
+			RandomPitch = 1
+		if Random < 1:
+			$Splash1.play()
+			waitS = true
+			$SplashTimer.start()
+		elif Random >= 1 and Random < 2:
+			$Splash2.play()
+			waitS = true
+			$SplashTimer.start()
+		elif Random >= 2:
+			$Splash3.play()
+			waitS = true
+			$SplashTimer.start()
+		
+
+func _on_splash_timer_timeout() -> void:
+	waitS = false
 	
 func playMusic1():
 	if not mute:
