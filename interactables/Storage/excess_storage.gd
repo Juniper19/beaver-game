@@ -9,6 +9,8 @@ var original: Sprite2D
 
 var storage: Array = []
 var storage_names: Array = []
+var icon_templates: Array[Sprite2D] = []
+
 
 @export var chest_id: int = -1
 var Inside: bool
@@ -50,6 +52,21 @@ func _ready() -> void:
 	%InteractLabel.visible = false
 	
 	GlobalStats.inventory_item_placed.connect(_on_item_placed)
+	icon_templates = [
+		%OakSeed,
+		%Wood,
+		%PineLog,
+		%AspenLog,
+		%AspenSeed,
+		%PineSeed,
+		%Mud,
+		%Stone
+	]
+
+	# optional: hide templates, we’ll show copies instead
+	for t in icon_templates:
+		t.visible = false
+
 	_update_icon()
 
 func _process(_delta: float) -> void:
@@ -102,8 +119,6 @@ func remove_item(_by: Node2D) -> void:
 	_update_icon()
 
 func _update_icon() -> void:
-	print("=== _update_icon called ===")
-	print("storage_names:", storage_names)
 
 	if storage_names.is_empty():
 		%ItemStack.visible = false
@@ -114,7 +129,7 @@ func _update_icon() -> void:
 	# --- YOUR ORIGINAL MAPPING (keep what used to work) ---
 	if storage_names[-1] == "Aspen Log":
 		original = %AspenLog
-	if storage_names[-1] == "Oak Log":
+	elif storage_names[-1] == "Oak Log":
 		original = %Wood
 	elif storage_names[-1] == "Oak Seed":
 		original = %OakSeed
@@ -126,38 +141,25 @@ func _update_icon() -> void:
 		original = %Mud
 	elif storage_names[-1] == "Stone":
 		original = %Stone
-	else:
+	if original == null:
 		print("No matching icon for:", storage_names[-1])
 		return
 
-	# Make sure the template is inside ItemStack and at a known position
-	if original.get_parent() != %ItemStack:
-		original.reparent(%ItemStack)
-
-	original.visible = true
-	original.position = Vector2.ZERO
-
-	# --- CLEAR OLD COPIES, BUT KEEP THE TEMPLATE ---
+	# Clear only the copies
 	for child in %ItemStack.get_children():
-		if child != original:
-			child.queue_free()
+		if icon_templates.has(child):
+			continue
+		child.queue_free()
 
-	# --- CREATE DUPLICATES ---
 	var count := storage_names.size()
-	print("creating stack for count =", count)
-
-	for i in range(1, count):
-		var copy: Sprite2D = original.duplicate()
-		copy.position = item_separation * i
+	for i in range(count):
+		var copy := original.duplicate()
 		copy.visible = true
+		copy.position = original.position + item_separation * i
 		%ItemStack.add_child(copy)
-		print("  added copy index", i, "at", copy.position)
 
-	print("ItemStack children now =", %ItemStack.get_child_count())
-	$Count.text = "x" + str(storage.size())
-	#var last_data = storage.back()
-	#if "texture" in last_data:
-	#	%IconSprite.texture = last_data.texture
+	print("storage_names:", count, " | ItemStack children:", %ItemStack.get_child_count())
+
 
 func _on_interaction_area_player_entered_area(player: Player) -> void:
 	GlobalStats.ExcessChestEntered = true
