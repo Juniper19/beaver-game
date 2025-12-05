@@ -37,54 +37,54 @@ offset_bottom = 34.0
 theme_override_font_sizes/font_size = 16
 text = "Insert Item"
 
-[node name="Mud" type="Sprite2D" parent="InteractionArea"]
+[node name="ItemStack" type="Node2D" parent="InteractionArea"]
+unique_name_in_owner = true
+visible = false
+
+[node name="Mud" type="Sprite2D" parent="InteractionArea/ItemStack"]
 unique_name_in_owner = true
 visible = false
 position = Vector2(0.99999994, 0)
 texture = ExtResource("5_4p85k")
 
-[node name="Stone" type="Sprite2D" parent="InteractionArea"]
+[node name="Stone" type="Sprite2D" parent="InteractionArea/ItemStack"]
 unique_name_in_owner = true
 visible = false
 position = Vector2(0, 2)
 texture = ExtResource("6_x5e16")
 
-[node name="OakSeed" type="Sprite2D" parent="InteractionArea"]
+[node name="OakSeed" type="Sprite2D" parent="InteractionArea/ItemStack"]
 unique_name_in_owner = true
 visible = false
 texture = ExtResource("6_physo")
 
-[node name="Wood" type="Sprite2D" parent="InteractionArea"]
+[node name="Wood" type="Sprite2D" parent="InteractionArea/ItemStack"]
 unique_name_in_owner = true
 visible = false
 position = Vector2(0, 2.3841858e-07)
 texture = ExtResource("4_kgw8d")
 
-[node name="PineLog" type="Sprite2D" parent="InteractionArea"]
+[node name="PineLog" type="Sprite2D" parent="InteractionArea/ItemStack"]
 unique_name_in_owner = true
 visible = false
 position = Vector2(0, 1)
 texture = ExtResource("7_x5e16")
 
-[node name="AspenLog" type="Sprite2D" parent="InteractionArea"]
+[node name="AspenLog" type="Sprite2D" parent="InteractionArea/ItemStack"]
 unique_name_in_owner = true
 visible = false
 position = Vector2(0, 3)
 texture = ExtResource("8_cm6st")
 
-[node name="AspenSeed" type="Sprite2D" parent="InteractionArea"]
+[node name="AspenSeed" type="Sprite2D" parent="InteractionArea/ItemStack"]
 unique_name_in_owner = true
 visible = false
 texture = ExtResource("9_58gnw")
 
-[node name="PineSeed" type="Sprite2D" parent="InteractionArea"]
+[node name="PineSeed" type="Sprite2D" parent="InteractionArea/ItemStack"]
 unique_name_in_owner = true
 visible = false
 texture = ExtResource("10_physo")
-
-[node name="ItemStack" type="Node2D" parent="InteractionArea"]
-unique_name_in_owner = true
-visible = false
 
 [node name="Count" type="Label" parent="."]
 offset_left = 7.0

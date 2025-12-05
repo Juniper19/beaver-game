@@ -50,11 +50,24 @@ func _update_anim(dir: Vector2, swimming: bool = false) -> void:
 		return
 
 	if dir.is_zero_approx():
-		if last_dir.x != 0:
-			sprite.play("swim_down" if swimming else "idle_side")
-			sprite.flip_h = last_dir.x > 0
+		if swimming:
+			# Preserve last swimming animation + direction
+			if abs(last_dir.x) > abs(last_dir.y):
+				sprite.play("swim_side")
+				sprite.flip_h = last_dir.x > 0
+			elif last_dir.y < 0:
+				sprite.play("swim_up")
+			else:
+				sprite.play("swim_down")
 		else:
-			sprite.stop()
+			# Land idle logic
+			if abs(last_dir.x) > abs(last_dir.y):
+				sprite.play("idle_side")
+				sprite.flip_h = last_dir.x > 0
+			elif last_dir.y < 0:
+				sprite.play("walk_up")
+			else:
+				sprite.play("walk_down")
 		return
 
 	last_dir = dir

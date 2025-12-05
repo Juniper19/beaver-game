@@ -12,6 +12,9 @@ var day_number: int = 0
 var current_season: String = ""
 var DayOne: bool = true
 
+# Special calendar day stat for sleeping.
+var calendar_day : int = 0
+
 	## Upgradable Stats
 var rock_min_damage: float = 0
 var rock_max_damage: float = 1
@@ -54,7 +57,7 @@ var excess_chest_storage_names: Array = []
 var chosen_upgrades: Array[String] = []
 
 	# UPGRADABLE STATS, other stats are also uesd in upgrades but these are exclusively for upgrades
-var ExcessStorageCount = 1
+var ExcessStorageCount = 2
 var carry_capacity: int = 3
 var move_speed_bonus: float = 0
 var swim_speed_bonus: float = 0.0

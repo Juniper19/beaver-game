@@ -18,7 +18,7 @@ var _scenes: Dictionary[Scene, String] = {
 	Scene.WORLD: "uid://cl1jmkdurg2bg",
 	Scene.INSIDE_DAM: "uid://cus4fv7iknxoj",
 	Scene.MAIN_MENU: "uid://cdqen5kv8kmhx",
-	Scene.GAME_OVER: "uid://djrcbfdpd5ytu"
+	Scene.GAME_OVER: "uid://r6ajf0ispbbp"
 }
 
 @onready var _transitions: Dictionary[Transition, Resource] = {

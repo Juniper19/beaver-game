@@ -7,6 +7,8 @@ extends Control
 var tile_w: float
 var tile_h: float
 
+var calendar_day = 1
+
 
 func _ready() -> void:
 	tile_w = calendar_spritesheet.get_width() / 8.0
@@ -36,6 +38,8 @@ func _day_in_block(day: int) -> int:
 	return ((day - 1) % 7) + 1
 
 
+
+
 func _draw() -> void:
 	var stats = _get_stats()
 	if not stats:
@@ -46,9 +50,9 @@ func _draw() -> void:
 	var top_left_x = (control_w - calendar_w) * 0.5
 	var top_left_y = top_left.y
 
-	var today = max(stats.day_number, 1)
-	var block_start = _season_block_start(today)
-	var season_row = _season_index_for_day(today)
+	var today = max(stats.calendar_day, 0)
+	var block_start = _season_block_start(max(today,1))
+	var season_row = _season_index_for_day(max(today,1))
 
 	for i in range(7):
 		var day_abs = block_start + i

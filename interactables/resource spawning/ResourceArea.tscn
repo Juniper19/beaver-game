@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://nlwiy157iw5k"]
 
-[ext_resource type="Script" uid="uid://cifsgc0dwldeg" path="res://interactables/resource_spawning/resource_area.gd" id="1_fvbe3"]
+[ext_resource type="Script" uid="uid://cifsgc0dwldeg" path="res://interactables/resource spawning/resource_area.gd" id="1_fvbe3"]
 
 [node name="ResourceArea" type="Polygon2D"]
 color = Color(1, 1, 1, 0.34509805)

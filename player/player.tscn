@@ -341,9 +341,8 @@ position = Vector2(0, 19)
 
 [connection signal="area_entered" from="InteractionArea" to="." method="_on_interaction_area_area_entered"]
 [connection signal="area_entered" from="InteractionArea" to="." method="_on_interaction_area_entered_tutorial_check"]
-[connection signal="area_exited" from="InteractionArea" to="." method="_on_interaction_area_exited_tutorial_check"]
-[connection signal="item_added" from="PlayerInventory" to="." method="_on_item_added_tutorial_check"]
 [connection signal="item_added" from="PlayerInventory" to="." method="_on_player_inventory_item_added"]
+[connection signal="item_added" from="PlayerInventory" to="." method="_on_item_added_tutorial_check"]
 [connection signal="item_removed" from="PlayerInventory" to="." method="_on_player_inventory_item_removed"]
 [connection signal="item_removed" from="PlayerInventory" to="." method="_on_item_removed_tutorial_check"]
 [connection signal="items_cycled" from="PlayerInventory" to="." method="_on_item_cycled_tutorial_check"]

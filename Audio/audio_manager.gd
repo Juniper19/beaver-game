@@ -213,3 +213,7 @@ func playSleep():
 func playEnterDam():
 	if not mute:
 		$EnterDam.play()
+		
+func playPageTurn():
+	if not mute:
+		$PageTurn.play()
