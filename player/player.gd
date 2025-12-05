@@ -1,7 +1,8 @@
 class_name Player
 extends CharacterBody2D
 
-@export var base_move_speed: float = 250.0
+@export var base_move_speed: float = 175.0
+@export var speed_bonus: float = 1.25
 @export var speed_mult_per_item: float = 0.75
 var move_speed: float
 
@@ -21,20 +22,25 @@ func _ready() -> void:
 	_calculate_move_speed()
 	_try_disconnect_tutorials()
 
-
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var move_dir: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	if move_dir != Vector2(0.0,0.0):
-		AudioManager.playFootsteps()
 	velocity = lerp(velocity, move_dir * move_speed, 0.09)
+	#velocity.x = sign(x) * floor(sign(x) * velocity.x)
 	move_and_slide()
 	
-	_update_anim(move_dir)
+	var swimming = _is_swimming()
+	_update_anim(move_dir, swimming)
+	_calculate_move_speed(swimming)
 
-		
+	if move_dir != Vector2(0.0,0.0):
+		if swimming:
+			 # play swim sound
+			pass
+		else:
+			AudioManager.playFootsteps()
 
 
-func _update_anim(dir: Vector2) -> void:
+func _update_anim(dir: Vector2, swimming: bool = false) -> void:
 	if is_mining:
 		sprite.play("mine")
 		return
@@ -45,7 +51,7 @@ func _update_anim(dir: Vector2) -> void:
 
 	if dir.is_zero_approx():
 		if last_dir.x != 0:
-			sprite.play("idle_side")
+			sprite.play("swim_down" if swimming else "idle_side")
 			sprite.flip_h = last_dir.x > 0
 		else:
 			sprite.stop()
@@ -55,14 +61,14 @@ func _update_anim(dir: Vector2) -> void:
 
 	if abs(dir.x) > abs(dir.y):
 		# Horizontal movement
-		sprite.play("walk_side")
+		sprite.play("swim_side" if swimming else "walk_side")
 		sprite.flip_h = dir.x > 0
 	else:
 		# Vertical movement
 		if dir.y < 0:
-			sprite.play("walk_up")
+			sprite.play("swim_up" if swimming else "walk_up")
 		else:
-			sprite.play("walk_down")
+			sprite.play("swim_down" if swimming else "walk_down")
 
 
 func start_mining_animation() -> void:
@@ -126,7 +132,7 @@ func _unhandled_key_input(event):
 				tutorial_popup.hide_tutorial()
 	
 
-func _calculate_move_speed() -> void:
+func _calculate_move_speed(swimming: bool = false) -> void:
 	var gs = get_tree().root.get_node("GlobalStats")
 	var day_night = get_tree().get_first_node_in_group("day_night")
 
@@ -138,11 +144,15 @@ func _calculate_move_speed() -> void:
 		base_move_speed
 		* (1.0 + gs.move_speed_bonus)
 		* pow(effective_mult_per_item, item_count)
+		* (1.0 + GlobalStats.swim_speed_bonus * int(swimming)) 
 	)
+	
 
 	if day_night and gs.sunrise_spark_duration > 0.0:
 		if day_night.time_since_day_start < gs.sunrise_spark_duration:
 			move_speed *= (1.0 + gs.sunrise_spark_bonus)
+	
+	move_speed = floor(move_speed)
 
 
 func _on_player_inventory_item_added(_item):
@@ -195,3 +205,14 @@ func _try_disconnect_tutorials():
 	
 	interaction_area.area_entered.disconnect(_on_interaction_area_entered_tutorial_check)
 	inventory.item_added.disconnect(_on_item_added_tutorial_check)
+
+
+func _is_swimming():
+	var tiles: TileMapLayer = get_tree().get_first_node_in_group("tilemap")
+	if !tiles:
+		return false
+	
+	var tile_pos = tiles.to_local(global_position)
+	var cell_coords = tiles.local_to_map(tile_pos)
+	var tile_data: TileData = tiles.get_cell_tile_data(cell_coords)
+	return tile_data.get_custom_data("swimmable")

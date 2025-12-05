@@ -309,7 +309,6 @@ func try_plant_seed(plant_pos_global: Vector2) -> void:
 		return
 
 	if not _can_plant_at(plant_pos_global):
-		print("Cannot plant here - space is blocked!")
 		return
 		
 	var seed_item: Item = inventory_items.pop_back()
@@ -341,6 +340,21 @@ func _set_z_order():
 
 
 func _can_plant_at(pos: Vector2) -> bool:
+	var tiles: TileMapLayer = get_tree().get_first_node_in_group("tilemap")
+	if !tiles:
+		return false
+	
+	var tile_pos = tiles.to_local(pos)
+	var cell_coords = tiles.local_to_map(tile_pos)
+	var tile_data: TileData = tiles.get_cell_tile_data(cell_coords)
+	
+	if !tile_data:
+		return false
+	
+	if !tile_data.get_custom_data("plantable"):
+		return false
+	
+	
 	var space := get_world_2d().direct_space_state
 
 	var shape := RectangleShape2D.new()
