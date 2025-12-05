@@ -129,6 +129,8 @@ func _update_icon() -> void:
 	# --- YOUR ORIGINAL MAPPING (keep what used to work) ---
 	if storage_names[-1] == "Aspen Log":
 		original = %AspenLog
+	elif storage_names[-1] == "Pine Log":
+		original = %PineLog
 	elif storage_names[-1] == "Oak Log":
 		original = %Wood
 	elif storage_names[-1] == "Oak Seed":
