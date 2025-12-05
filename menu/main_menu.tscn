@@ -66,7 +66,6 @@ offset_right = 210.91998
 offset_bottom = -3.080017
 grow_horizontal = 2
 grow_vertical = 0
-tooltip_text = "Start Game"
 alignment = 1
 
 [node name="PlayButton" type="TextureButton" parent="HBoxContainer"]
