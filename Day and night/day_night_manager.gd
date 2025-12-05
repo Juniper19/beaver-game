@@ -49,10 +49,17 @@ func _process(delta: float) -> void:
 	if current_time < evening_start:
 		t = 0.0  # Full daylight
 	elif current_time >= night_start:
+		GlobalStats.LightEnergy = 0.6
 		t = 1.0  # Fully dark
 	else:
 		# Fade between 6 PM and 10 PM
 		t = float(current_time - evening_start) / float(night_start - evening_start)
+		
+	if current_time > 1210 and current_time < night_start:
+		GlobalStats.LightEnergy = 0.45
+	
+	if current_time > 1100 and current_time < 1210:
+		GlobalStats.LightEnergy = 0.3
 		
 	t_max = max(t, t_max)
 		

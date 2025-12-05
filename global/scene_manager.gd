@@ -67,6 +67,7 @@ func load_scene(target_scene: Scene, transition: Transition = Transition.NONE) -
 	if target_scene != Scene.WORLD:
 		AudioManager.playEnterDam()
 		AudioManager.stopOverworldMusic()
+		GlobalStats.LightEnergy = 0.0
 		if target_scene == Scene.INSIDE_DAM:
 			if GlobalStats.DayOne == true:
 				GlobalStats.DayOne = false

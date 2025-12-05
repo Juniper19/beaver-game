@@ -21,6 +21,7 @@ var is_mining: bool = false
 func _ready() -> void:
 	_calculate_move_speed()
 	_try_disconnect_tutorials()
+	
 
 func _physics_process(_delta: float) -> void:
 	var move_dir: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -38,7 +39,8 @@ func _physics_process(_delta: float) -> void:
 			AudioManager.playSplash()
 		else:
 			AudioManager.playFootsteps()
-
+	
+	$PointLight2D.energy = GlobalStats.LightEnergy
 
 func _update_anim(dir: Vector2, swimming: bool = false) -> void:
 	if is_mining:

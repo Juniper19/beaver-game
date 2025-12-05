@@ -25,6 +25,7 @@ var day_number: int = 0
 var current_season: String = ""
 var DayOne: bool = true
 
+var LightEnergy: float = 0.0
 # Special calendar day stat for sleeping.
 var calendar_day : int = 0
 
@@ -96,6 +97,7 @@ func reset():
 	day_number = 0
 	current_season = ""
 	DayOne = true
+	LightEnergy = 0
 
 	## Upgradable Stats
 	rock_min_damage = 0
