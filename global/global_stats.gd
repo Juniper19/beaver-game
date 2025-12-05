@@ -141,6 +141,13 @@ func reset():
 	early_bird_minutes= 0   # subtract from start time
 	sunrise_spark_duration = 0.0   # seconds
 	sunrise_spark_bonus = 0.0      # multiplier (e.g. 0.2 = +20%)
+	
+	## reset tutorials
+	tutorial_interact = true
+	tutorial_drop = true
+	tutorial_store = true
+	tutorial_cycle = true
+	tutorial_plant = true
 
 signal inventory_item_added(item)
 signal inventory_item_removed(item)
