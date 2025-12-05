@@ -57,7 +57,7 @@ var excess_chest_storage_names: Array = []
 var chosen_upgrades: Array[String] = []
 
 	# UPGRADABLE STATS, other stats are also uesd in upgrades but these are exclusively for upgrades
-var ExcessStorageCount = 1
+var ExcessStorageCount = 2
 var carry_capacity: int = 3
 var move_speed_bonus: float = 0
 var swim_speed_bonus: float = 0.0

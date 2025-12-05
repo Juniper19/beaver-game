@@ -3,6 +3,7 @@ extends Node
 #-----------AM/PM Clock related stuff----------------
 @export var day_color: Color = Color(1, 1, 1)
 @export var night_color: Color = Color(0.25, 0.3, 0.45)
+@export var evening_start: int = 17 * 60  # 5 PM - when fading should begin
 
 @export var time_speed: float = 60.0
 var current_time: float = 8 * 60.0  # Start at 8:00 AM
@@ -30,7 +31,6 @@ func _ready() -> void:
 
 	get_tree().connect("current_scene_changed", Callable(self, "_on_scene_changed"))
 	_on_scene_changed()
-
 func _process(delta: float) -> void:
 	time_since_day_start += delta
 
@@ -40,10 +40,23 @@ func _process(delta: float) -> void:
 	current_time += time_speed * delta
 	current_time = fmod(current_time, 1440)  # Wrap at 24h
 
-	var is_day = current_time >= day_start and current_time < night_start
-	var target_color = day_color if is_day else night_color
+	# Smooth evening fade (6 PM → 10 PM)
+	night_start = 22 * 60  # 10 PM, override old 8 PM setting
 
-	canvas_modulate.color = canvas_modulate.color.lerp(target_color, delta * 1.5)
+	var t := 0.0
+	if current_time < evening_start:
+		t = 0.0  # Full daylight
+	elif current_time >= night_start:
+		t = 1.0  # Fully dark
+	else:
+		# Fade between 6 PM and 10 PM
+		t = float(current_time - evening_start) / float(night_start - evening_start)
+
+	t = clamp(t, 0.0, 1.0)
+
+	var target_color = day_color.lerp(night_color, t)
+	canvas_modulate.color = canvas_modulate.color.lerp(target_color, delta * 0.75)
+
 	clock_label.text = _format_time(current_time)
 	
 	# counting up days
@@ -82,6 +95,7 @@ func _process(delta: float) -> void:
 	# Reset flag after wake time
 	if current_time >= wake_time:
 		has_triggered_2am = false
+
 
 func _on_new_day():
 	var stats = get_node("/root/GlobalStats")
