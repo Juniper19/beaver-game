@@ -52,19 +52,60 @@ func _process(_delta: float) -> void:
 	# If new day has begun, apply quota changes
 	if GlobalStats.day_number != Day:
 
-		# Consume quota amounts (clamped)
-		GlobalStats.wood = clamp(GlobalStats.wood - GlobalStats.ReqWood, 0, GlobalStats.wood)
-		GlobalStats.pine_log = clamp(GlobalStats.pine_log - GlobalStats.ReqPineLog, 0, GlobalStats.pine_log)
-		GlobalStats.aspen_log = clamp(GlobalStats.aspen_log - GlobalStats.ReqAspenLog, 0, GlobalStats.aspen_log)
-		GlobalStats.mud = clamp(GlobalStats.mud - GlobalStats.ReqMud, 0, GlobalStats.mud)
-		GlobalStats.stone = clamp(GlobalStats.stone - GlobalStats.ReqStone, 0, GlobalStats.stone)
+		## Consume quota amounts (clamped)
+		#GlobalStats.wood = clamp(GlobalStats.wood - GlobalStats.ReqWood, 0, GlobalStats.wood)
+		#GlobalStats.pine_log = clamp(GlobalStats.pine_log - GlobalStats.ReqPineLog, 0, GlobalStats.pine_log)
+		#GlobalStats.aspen_log = clamp(GlobalStats.aspen_log - GlobalStats.ReqAspenLog, 0, GlobalStats.aspen_log)
+		#GlobalStats.mud = clamp(GlobalStats.mud - GlobalStats.ReqMud, 0, GlobalStats.mud)
+		#GlobalStats.stone = clamp(GlobalStats.stone - GlobalStats.ReqStone, 0, GlobalStats.stone)
+		
+		GlobalStats.ReqWood = 0
+		GlobalStats.ReqAspenLog = 0
+		GlobalStats.ReqPineLog = 0
+		GlobalStats.ReqMud = 0
+		GlobalStats.ReqStone = 0
 
 		# Increasing next-day quotas
-		GlobalStats.ReqWood += int(randf_range(1,5))
-		GlobalStats.ReqPineLog += int(randf_range(1,5))
-		GlobalStats.ReqAspenLog += int(randf_range(1,5))
-		GlobalStats.ReqMud += int(randf_range(1,3))
-		GlobalStats.ReqStone += int(randf_range(1,2))
+		
+		# Days 1-5 = Oak wood, Rand 1-3 + MAX(Day - 2, 0) 
+		# Days 6-10 = Aspen wood, Rand 1-3 + (Day - 5) / 2 (CEILING)
+		# Days 11-15 = Pine wood, Rand 1-3 + (Day - 10) / 2 (CEILING)
+		# Mud & Stone = Rand 1-4, excluding days 1-2
+		
+		# Days 15-20 = Oak, Aspen, Pine, Rand 1-4
+		# Days 20+ = Oak, Aspen, Pine, Rand (1, 4 + Day - 20)
+		
+		var day = GlobalStats.day_number
+		
+		if (day > 2):
+			GlobalStats.ReqMud += int(randf_range(0,3 + int(ceil(day / 15.0))))
+			GlobalStats.ReqStone += int(randf_range(0,2 + int(ceil(day / 15.0))))
+		
+		if (day <= 5):
+			print ("DAY " + str(day) + " - OAK")
+			GlobalStats.ReqWood += int(randf_range(1,3 + max(day - 2, 0))) 
+		elif (day <= 10):
+			print ("DAY " + str(day) + " - ASPEN")
+			GlobalStats.ReqAspenLog += int(randf_range(1,3)) + int(ceil((day - 5) / 2.0))
+		elif (day <= 15):
+			print ("DAY " + str(day) + " - PINE")
+			GlobalStats.ReqPineLog += int(randf_range(1,3)) + int(ceil((day - 10) / 2.0))
+		elif (day <= 20):
+			GlobalStats.ReqWood += int(randf_range(4,6))
+			GlobalStats.ReqAspenLog += int(randf_range(4,6))
+		elif (day <= 22):
+			GlobalStats.ReqAspenLog += int(randf_range(5,8))
+			GlobalStats.ReqPineLog += int(randf_range(4,7))
+		elif (day <= 27):
+			GlobalStats.ReqWood += int(randf_range(1,5))
+			GlobalStats.ReqAspenLog += int(randf_range(1,5))
+			GlobalStats.ReqPineLog += int(randf_range(1,5))
+		else:
+			GlobalStats.ReqWood += int(randf_range(2,4 + day - 27))
+			GlobalStats.ReqAspenLog += int(randf_range(2,4 + day - 27))
+			GlobalStats.ReqPineLog += int(randf_range(2,4 + day - 27))
+		
+		
 
 		Day = GlobalStats.day_number
 
