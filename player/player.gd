@@ -133,12 +133,14 @@ func _unhandled_key_input(event):
 				tutorial_popup.hide_tutorial()
 
 	if event.is_action_pressed("plant_seed"):
-		inventory.try_plant_seed(global_position + Vector2(0, 32))
-		if tutorial_popup.current_animation == "z":
+		var is_planted: bool = inventory.try_plant_seed(global_position + Vector2(0, 32))
+		if is_planted and tutorial_popup.current_animation == "z":
 				tutorial_popup.hide_tutorial()
 	
 	if event.is_action_pressed("cycle_down"):
 		inventory.cycle_items(true)
+		if tutorial_popup.current_animation == "space":
+				tutorial_popup.hide_tutorial()
 	elif event.is_action_pressed("cycle_up"):
 		inventory.cycle_items(false)
 		if tutorial_popup.current_animation == "space":
@@ -171,7 +173,7 @@ func _calculate_move_speed(swimming: bool = false) -> void:
 func _on_player_inventory_item_added(_item):
 	_calculate_move_speed()
 
-func _on_player_inventory_item_removed(_item):
+func _on_player_inventory_item_removed(_item, _planted):
 	_calculate_move_speed()
 
 
@@ -220,53 +222,92 @@ func _on_interaction_area_exited_tutorial_check(area: Area2D) -> void:
 	
 	if tutorial_popup.current_animation == "e" and area is InteractionArea and area.get_parent() is not ExcessStorage:
 		GlobalStats.tutorial_interact = true
+		tutorial_popup.hide_tutorial()
 	
 	if tutorial_popup.current_animation == "q" and area.get_parent() is ExcessStorage:
 		GlobalStats.tutorial_store = true
+		tutorial_popup.hide_tutorial()
 	
 	_try_disconnect_tutorials()
 
 
 func _on_item_added_tutorial_check(item: Node2D) -> void:
-	if GlobalStats.tutorials_left <= 0:
-		_try_disconnect_tutorials()
-		return
+	#if GlobalStats.tutorials_left <= 0:
+		#_try_disconnect_tutorials()
+		#return
+	#
+	#if GlobalStats.tutorial_plant and (item as Item).item_name.containsn("seed") and tutorial_popup.show_tutorial("z"):
+		#GlobalStats.tutorial_plant = false
+		#GlobalStats.tutorials_left -= 1
+	#elif GlobalStats.tutorial_cycle and inventory.inventory_items.size() > 1 and tutorial_popup.show_tutorial("space"):
+		#GlobalStats.tutorial_cycle = false
+		#GlobalStats.tutorials_left -= 1
+	#elif GlobalStats.tutorial_drop and inventory.is_full() and tutorial_popup.show_tutorial("q"):
+		#GlobalStats.tutorial_drop = false
+		#GlobalStats.tutorials_left -= 1
+	#
+	#
+	#_try_disconnect_tutorials()
+	_inventory_tutorial_checks(item)
 	
-	if GlobalStats.tutorial_plant and (item as Item).item_name.containsn("seed") and tutorial_popup.show_tutorial("z"):
-		GlobalStats.tutorial_plant = false
-		GlobalStats.tutorials_left -= 1
-	elif GlobalStats.tutorial_cycle and inventory.inventory_items.size() > 1 and tutorial_popup.show_tutorial("space"):
-		GlobalStats.tutorial_cycle = false
-		GlobalStats.tutorials_left -= 1
-	elif GlobalStats.tutorial_drop and inventory.is_full() and tutorial_popup.show_tutorial("q"):
-		GlobalStats.tutorial_drop = false
-		GlobalStats.tutorials_left -= 1
-	
-	
-	_try_disconnect_tutorials()
 	
 
-func _on_item_removed_tutorial_check(item: Node2D) -> void:
-	if tutorial_popup.current_animation == "z" and (item as Item).item_name.containsn("seed"):
-		GlobalStats.tutorial_plant = false
-		GlobalStats.tutorials_left -= 1
-	elif tutorial_popup.current_animation == "space" and inventory.inventory_items.size() <= 1:
-		GlobalStats.tutorial_cycle = false
-		GlobalStats.tutorials_left -= 1
+func _on_item_removed_tutorial_check(_item: Node2D, planted: bool) -> void:
+	#if !planted and tutorial_popup.current_animation == "z" and (item as Item).item_name.containsn("seed"):
+		#GlobalStats.tutorial_plant = true
+		#tutorial_popup.hide_tutorial()
+		#_on_item_cycled_tutorial_check(inventory.get_items().back())
+	#elif tutorial_popup.current_animation == "space" and inventory.inventory_items.size() <= 1:
+		#GlobalStats.tutorial_cycle = true
+		#tutorial_popup.hide_tutorial()
+	_inventory_tutorial_checks(inventory.get_items().back(), planted)
 
 
 func _on_item_cycled_tutorial_check(top_item: Node2D) -> void:
-	if tutorial_popup.current_animation == "z" and !(top_item as Item).item_name.containsn("seed"):
+	#if !top_item:
+		#return
+		#
+	#if tutorial_popup.current_animation == "z" and !(top_item as Item).item_name.containsn("seed"):
+		#GlobalStats.tutorial_plant = true
+		#tutorial_popup.hide_tutorial()
+	##elif GlobalStats.tutorial_plant and (top_item as Item).item_name.containsn("seed") and tutorial_popup.show_tutorial("z"):
+		##GlobalStats.tutorial_plant = false
+	#
+	#_on_item_added_tutorial_check(top_item)
+	_inventory_tutorial_checks(top_item)
+
+
+func _inventory_tutorial_checks(top_item: Node2D, planted: bool = false) -> void:
+	
+	if !top_item and ((!planted and tutorial_popup.current_animation == "z") or (planted and tutorial_popup.current_animation == "space")):
+		if tutorial_popup.current_animation == "z":
+			GlobalStats.tutorial_plant = true
+		elif tutorial_popup.current_animation == "space":
+			GlobalStats.tutorial_drop = true
+		tutorial_popup.hide_tutorial()
+	
+	if !planted and tutorial_popup.current_animation == "z" and !(top_item as Item).item_name.containsn("seed"):
 		GlobalStats.tutorial_plant = true
-		GlobalStats.tutorials_left -= 1
-	elif GlobalStats.tutorial_plant and (top_item as Item).item_name.containsn("seed") and tutorial_popup.show_tutorial("z"):
+		tutorial_popup.hide_tutorial()
+	elif tutorial_popup.current_animation == "space" and inventory.inventory_items.size() <= 1:
+		GlobalStats.tutorial_cycle = true
+		tutorial_popup.hide_tutorial()
+	elif !planted and tutorial_popup.current_animation == "q" and !inventory.is_full():
+		GlobalStats.tutorial_drop = true
+	
+	
+	if GlobalStats.tutorial_plant and top_item and (top_item as Item).item_name.containsn("seed") and tutorial_popup.show_tutorial("z"):
 		GlobalStats.tutorial_plant = false
-		GlobalStats.tutorials_left -= 1
+	elif GlobalStats.tutorial_cycle and inventory.inventory_items.size() > 1 and tutorial_popup.show_tutorial("space"):
+		GlobalStats.tutorial_cycle = false
+	elif GlobalStats.tutorial_drop and inventory.is_full() and tutorial_popup.show_tutorial("q"):
+		GlobalStats.tutorial_drop = false
 
 
 func _try_disconnect_tutorials():
-	if GlobalStats.tutorials_left > 0:
-		return
-	
-	interaction_area.area_entered.disconnect(_on_interaction_area_entered_tutorial_check)
-	inventory.item_added.disconnect(_on_item_added_tutorial_check)
+	#if GlobalStats.tutorials_left > 0:
+		#return
+	#
+	#interaction_area.area_entered.disconnect(_on_interaction_area_entered_tutorial_check)
+	#inventory.item_added.disconnect(_on_item_added_tutorial_check)
+	pass

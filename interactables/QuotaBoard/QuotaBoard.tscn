@@ -1,8 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://dfskvkq4outll"]
+[gd_scene load_steps=11 format=3 uid="uid://dfskvkq4outll"]
 
 [ext_resource type="Script" uid="uid://dlw7yh385jns4" path="res://interactables/QuotaBoard/quota_board.gd" id="1_kd02m"]
 [ext_resource type="Texture2D" uid="uid://b3wimdrlsm0m4" path="res://art_assets/icon_1.png" id="2_g838p"]
-[ext_resource type="PackedScene" uid="uid://dwafgcp2uqbfl" path="res://interactables/interaction_area.tscn" id="2_ggoti"]
 [ext_resource type="Texture2D" uid="uid://dj77xs3evvd60" path="res://art_assets/icon_2.png" id="3_lpsny"]
 [ext_resource type="Texture2D" uid="uid://b1tijf34pup4g" path="res://art_assets/icon_3.png" id="4_7tna5"]
 [ext_resource type="Texture2D" uid="uid://c2dh1b1awu2tc" path="res://art_assets/icon_5.png" id="5_hc7cm"]
@@ -24,17 +23,17 @@ aspen_icon = ExtResource("4_7tna5")
 mud_icon = ExtResource("5_hc7cm")
 stone_icon = ExtResource("6_bb7ti")
 
-[node name="InteractionArea" parent="." instance=ExtResource("2_ggoti")]
+[node name="Node2D" type="Node2D" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="InteractionArea"]
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
 position = Vector2(0, 4)
 texture = ExtResource("8_lpsny")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D"]
 position = Vector2(0, 7)
 shape = SubResource("RectangleShape2D_ggoti")
 
-[node name="InteractLabel" type="Label" parent="InteractionArea"]
+[node name="InteractLabel" type="Label" parent="Node2D"]
 unique_name_in_owner = true
 offset_left = -58.0
 offset_top = -77.0
@@ -44,40 +43,40 @@ theme_override_fonts/font = ExtResource("9_lpsny")
 theme_override_font_sizes/font_size = 40
 text = "Interact"
 
-[node name="BoardUI" type="CanvasLayer" parent="InteractionArea"]
+[node name="BoardUI" type="CanvasLayer" parent="Node2D"]
 unique_name_in_owner = true
 
-[node name="PhysicalPanelContainer" type="PanelContainer" parent="InteractionArea"]
+[node name="PhysicalPanelContainer" type="PanelContainer" parent="Node2D"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -26.0
+offset_left = -32.5
 offset_top = -18.0
-offset_right = 27.0
-offset_bottom = 14.0
+offset_right = 33.5
+offset_bottom = 23.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_5fo6y")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="InteractionArea/PhysicalPanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Node2D/PhysicalPanelContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="VBoxContainerLeft" type="VBoxContainer" parent="InteractionArea/PhysicalPanelContainer/HBoxContainer"]
+[node name="VBoxContainerLeft" type="VBoxContainer" parent="Node2D/PhysicalPanelContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_constants/separation = 1
 alignment = 1
 
-[node name="HBoxLeft1" type="HBoxContainer" parent="InteractionArea/PhysicalPanelContainer/HBoxContainer/VBoxContainerLeft"]
+[node name="HBoxLeft1" type="HBoxContainer" parent="Node2D/PhysicalPanelContainer/HBoxContainer/VBoxContainerLeft"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 
-[node name="Label" type="Label" parent="InteractionArea/PhysicalPanelContainer/HBoxContainer/VBoxContainerLeft/HBoxLeft1"]
+[node name="Label" type="Label" parent="Node2D/PhysicalPanelContainer/HBoxContainer/VBoxContainerLeft/HBoxLeft1"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.32941177, 0.27058825, 0.23921569, 1)
@@ -87,16 +86,16 @@ theme_override_fonts/font = ExtResource("9_lpsny")
 theme_override_font_sizes/font_size = 16
 text = "Wood"
 
-[node name="TextureRect" type="TextureRect" parent="InteractionArea/PhysicalPanelContainer/HBoxContainer/VBoxContainerLeft/HBoxLeft1"]
+[node name="TextureRect" type="TextureRect" parent="Node2D/PhysicalPanelContainer/HBoxContainer/VBoxContainerLeft/HBoxLeft1"]
 layout_mode = 2
 stretch_mode = 5
 
-[node name="HBoxLeft2" type="HBoxContainer" parent="InteractionArea/PhysicalPanelContainer/HBoxContainer/VBoxContainerLeft"]
+[node name="HBoxLeft2" type="HBoxContainer" parent="Node2D/PhysicalPanelContainer/HBoxContainer/VBoxContainerLeft"]
 unique_name_in_owner = true
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="InteractionArea/PhysicalPanelContainer/HBoxContainer/VBoxContainerLeft/HBoxLeft2"]
+[node name="Label" type="Label" parent="Node2D/PhysicalPanelContainer/HBoxContainer/VBoxContainerLeft/HBoxLeft2"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.32941177, 0.27058825, 0.23921569, 1)
@@ -105,16 +104,16 @@ theme_override_constants/outline_size = 3
 theme_override_font_sizes/font_size = 16
 text = "Mud"
 
-[node name="TextureRect" type="TextureRect" parent="InteractionArea/PhysicalPanelContainer/HBoxContainer/VBoxContainerLeft/HBoxLeft2"]
+[node name="TextureRect" type="TextureRect" parent="Node2D/PhysicalPanelContainer/HBoxContainer/VBoxContainerLeft/HBoxLeft2"]
 layout_mode = 2
 stretch_mode = 5
 
-[node name="HBoxLeft3" type="HBoxContainer" parent="InteractionArea/PhysicalPanelContainer/HBoxContainer/VBoxContainerLeft"]
+[node name="HBoxLeft3" type="HBoxContainer" parent="Node2D/PhysicalPanelContainer/HBoxContainer/VBoxContainerLeft"]
 unique_name_in_owner = true
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="InteractionArea/PhysicalPanelContainer/HBoxContainer/VBoxContainerLeft/HBoxLeft3"]
+[node name="Label" type="Label" parent="Node2D/PhysicalPanelContainer/HBoxContainer/VBoxContainerLeft/HBoxLeft3"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.32941177, 0.27058825, 0.23921569, 1)
@@ -123,24 +122,24 @@ theme_override_constants/outline_size = 3
 theme_override_font_sizes/font_size = 16
 text = "Stone"
 
-[node name="TextureRect" type="TextureRect" parent="InteractionArea/PhysicalPanelContainer/HBoxContainer/VBoxContainerLeft/HBoxLeft3"]
+[node name="TextureRect" type="TextureRect" parent="Node2D/PhysicalPanelContainer/HBoxContainer/VBoxContainerLeft/HBoxLeft3"]
 layout_mode = 2
 stretch_mode = 5
 
-[node name="VBoxContainerRight" type="VBoxContainer" parent="InteractionArea/PhysicalPanelContainer/HBoxContainer"]
+[node name="VBoxContainerRight" type="VBoxContainer" parent="Node2D/PhysicalPanelContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_constants/separation = 1
 alignment = 1
 
-[node name="HBoxRight1" type="HBoxContainer" parent="InteractionArea/PhysicalPanelContainer/HBoxContainer/VBoxContainerRight"]
+[node name="HBoxRight1" type="HBoxContainer" parent="Node2D/PhysicalPanelContainer/HBoxContainer/VBoxContainerRight"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 
-[node name="Label" type="Label" parent="InteractionArea/PhysicalPanelContainer/HBoxContainer/VBoxContainerRight/HBoxRight1"]
+[node name="Label" type="Label" parent="Node2D/PhysicalPanelContainer/HBoxContainer/VBoxContainerRight/HBoxRight1"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.32941177, 0.27058825, 0.23921569, 1)
@@ -149,16 +148,16 @@ theme_override_constants/outline_size = 3
 theme_override_font_sizes/font_size = 16
 text = "Wood"
 
-[node name="TextureRect" type="TextureRect" parent="InteractionArea/PhysicalPanelContainer/HBoxContainer/VBoxContainerRight/HBoxRight1"]
+[node name="TextureRect" type="TextureRect" parent="Node2D/PhysicalPanelContainer/HBoxContainer/VBoxContainerRight/HBoxRight1"]
 layout_mode = 2
 stretch_mode = 5
 
-[node name="HBoxRight2" type="HBoxContainer" parent="InteractionArea/PhysicalPanelContainer/HBoxContainer/VBoxContainerRight"]
+[node name="HBoxRight2" type="HBoxContainer" parent="Node2D/PhysicalPanelContainer/HBoxContainer/VBoxContainerRight"]
 unique_name_in_owner = true
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="InteractionArea/PhysicalPanelContainer/HBoxContainer/VBoxContainerRight/HBoxRight2"]
+[node name="Label" type="Label" parent="Node2D/PhysicalPanelContainer/HBoxContainer/VBoxContainerRight/HBoxRight2"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.32941177, 0.27058825, 0.23921569, 1)
@@ -167,16 +166,16 @@ theme_override_constants/outline_size = 3
 theme_override_font_sizes/font_size = 16
 text = "Mud"
 
-[node name="TextureRect" type="TextureRect" parent="InteractionArea/PhysicalPanelContainer/HBoxContainer/VBoxContainerRight/HBoxRight2"]
+[node name="TextureRect" type="TextureRect" parent="Node2D/PhysicalPanelContainer/HBoxContainer/VBoxContainerRight/HBoxRight2"]
 layout_mode = 2
 stretch_mode = 5
 
-[node name="HBoxRight3" type="HBoxContainer" parent="InteractionArea/PhysicalPanelContainer/HBoxContainer/VBoxContainerRight"]
+[node name="HBoxRight3" type="HBoxContainer" parent="Node2D/PhysicalPanelContainer/HBoxContainer/VBoxContainerRight"]
 unique_name_in_owner = true
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="InteractionArea/PhysicalPanelContainer/HBoxContainer/VBoxContainerRight/HBoxRight3"]
+[node name="Label" type="Label" parent="Node2D/PhysicalPanelContainer/HBoxContainer/VBoxContainerRight/HBoxRight3"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
@@ -186,13 +185,13 @@ theme_override_constants/outline_size = 3
 theme_override_font_sizes/font_size = 16
 text = "Stone"
 
-[node name="TextureRect" type="TextureRect" parent="InteractionArea/PhysicalPanelContainer/HBoxContainer/VBoxContainerRight/HBoxRight3"]
+[node name="TextureRect" type="TextureRect" parent="Node2D/PhysicalPanelContainer/HBoxContainer/VBoxContainerRight/HBoxRight3"]
 layout_mode = 2
 stretch_mode = 5
 
-[node name="OtherUI" type="CanvasLayer" parent="InteractionArea"]
+[node name="OtherUI" type="CanvasLayer" parent="Node2D"]
 
-[node name="QuotaLabel" type="Label" parent="InteractionArea/OtherUI"]
+[node name="QuotaLabel" type="Label" parent="Node2D/OtherUI"]
 unique_name_in_owner = true
 visible = false
 anchors_preset = 3
@@ -206,9 +205,9 @@ grow_horizontal = 0
 grow_vertical = 0
 theme_override_font_sizes/font_size = 24
 
-[node name="TextTimer" type="Timer" parent="InteractionArea"]
+[node name="TextTimer" type="Timer" parent="Node2D"]
 unique_name_in_owner = true
 wait_time = 5.0
 one_shot = true
 
-[connection signal="timeout" from="InteractionArea/TextTimer" to="." method="_on_text_timer_timeout"]
+[connection signal="timeout" from="Node2D/TextTimer" to="." method="_on_text_timer_timeout"]

@@ -33,7 +33,7 @@ func _ready():
 	interaction_area.interaction.connect(_on_interaction)
 
 
-func _item_dropped_from_inventory(node: Node2D):
+func _item_dropped_from_inventory(node: Node2D, _planted: bool):
 	if node != self:
 		return
 	

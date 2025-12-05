@@ -19,8 +19,6 @@ func play(transition_out: bool = true, follow: Node2D = null):
 	_following = follow
 	shader.set_shader_parameter("asp", color_rect.size.aspect())
 	
-	RenderingServer
-	
 	if transition_out:
 		animation_player.play("transition_out")
 	else:

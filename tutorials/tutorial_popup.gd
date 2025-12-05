@@ -29,4 +29,5 @@ func hide_tutorial():
 	
 	tween = get_tree().create_tween()
 	tween.tween_property(self, "modulate:a", 0.0, 0.25)
-	tween.finished.connect(func(): current_animation = "")
+	#tween.finished.connect(func(): current_animation = "")
+	current_animation = ""

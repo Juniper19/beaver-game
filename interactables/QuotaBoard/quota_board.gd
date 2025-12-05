@@ -111,19 +111,6 @@ func _process(_delta: float) -> void:
 
 	update_resource_display()
 
-	# Interaction label
-	if $InteractionArea.get_overlapping_bodies().size() > 0:
-		%InteractLabel.visible = true
-	else:
-		%InteractLabel.visible = false
-
-	# Open / close quota board
-	if Input.is_action_just_pressed("ui_accept") and $InteractionArea.get_overlapping_bodies().size() > 0:
-		show_quota()
-	elif Input.is_action_just_pressed("ui_cancel") or $InteractionArea.get_overlapping_bodies().size() == 0:
-		hide_quota()
-
-
 #func onQuotaCheck():
 #
 	#if GlobalStats.DayOne:

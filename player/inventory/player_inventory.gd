@@ -2,7 +2,7 @@ class_name PlayerInventory
 extends Marker2D
 
 signal item_added(item: Node2D)
-signal item_removed(item: Node2D)
+signal item_removed(item: Node2D, dropped: bool)
 signal items_cycled(top_item: Node2D)
 
 @export var inventory_items: Array[Node2D] = []
@@ -234,7 +234,7 @@ func drop_item(index: int) -> void:
 	)
 
 
-	item_removed.emit(item)
+	item_removed.emit(item, false)
 
 	# >>> Chest logic <<<
 	# If we're putting this into a chest, tell the chest which item,
@@ -285,30 +285,30 @@ func _reset_item_positions(time: float = 0.2):
 	_set_z_order()
 
 
-func try_plant_seed(plant_pos_global: Vector2) -> void:
+func try_plant_seed(plant_pos_global: Vector2) -> bool:
 	# Must have at least one item
 	if inventory_items.is_empty():
-		return
+		return false
 
 	var top_item: Item = inventory_items[-1]
 
 	# Only seeds are plantable
 	if not top_item.item_name.ends_with("Seed"):
-		return
+		return false
 
 	var player := get_tree().get_first_node_in_group("player") as Node2D
 	if player == null:
 		print("No player found in 'player' group")
-		return
+		return false
 
 	if not _can_plant_at(plant_pos_global):
-		return
+		return false
 		
 	var seed_item: Item = inventory_items.pop_back()
 	var tree_data_uid = GlobalStats.ITEM_TO_TREE.get(seed_item.data.name)
 	if !tree_data_uid:
 		push_warning("Tried to plant seed with no tree data!")
-		return
+		return false
 	
 	
 	_plant_sapling(tree_data_uid, plant_pos_global)
@@ -321,11 +321,11 @@ func try_plant_seed(plant_pos_global: Vector2) -> void:
 
 	seed_item.queue_free()
 
-	item_removed.emit(seed_item)
+	item_removed.emit(seed_item, true)
 	GlobalStats.emit_signal("inventory_item_removed", seed_item)
 
 	_reset_item_positions()
-
+	return true
 
 func _set_z_order():
 	for i in inventory_items.size():

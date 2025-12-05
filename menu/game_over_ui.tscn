@@ -211,5 +211,5 @@ libraries = {
 autoplay = "show"
 
 [connection signal="pressed" from="Panel/VBoxContainer/RetryButton" to="." method="_on_retry_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/MainMenuButton" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/MainMenuButton" to="." method="_on_menu_pressed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
