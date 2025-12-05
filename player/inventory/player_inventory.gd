@@ -106,13 +106,8 @@ func add_item(item: Node2D) -> bool:
 			_blacklist.erase(item)
 	)
 	
-	
-	for child in item.get_children():
-		if child is Area2D:
-			child.monitorable = false
-	
 	return true
-	
+
 
 func cycle_items(down: bool = true):
 	if inventory_items.size() <= 1:
@@ -236,9 +231,6 @@ func drop_item(index: int) -> void:
 			_blacklist.erase(item)
 	)
 
-	for child in item.get_children():
-		if child is Area2D:
-			child.monitorable = false
 
 	item_removed.emit(item)
 
