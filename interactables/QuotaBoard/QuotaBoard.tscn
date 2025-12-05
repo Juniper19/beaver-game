@@ -80,6 +80,9 @@ alignment = 1
 [node name="Label" type="Label" parent="InteractionArea/PhysicalPanelContainer/HBoxContainer/VBoxContainerLeft/HBoxLeft1"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.32941177, 0.27058825, 0.23921569, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 3
 theme_override_fonts/font = ExtResource("9_lpsny")
 theme_override_font_sizes/font_size = 16
 text = "Wood"
@@ -96,6 +99,9 @@ alignment = 1
 [node name="Label" type="Label" parent="InteractionArea/PhysicalPanelContainer/HBoxContainer/VBoxContainerLeft/HBoxLeft2"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.32941177, 0.27058825, 0.23921569, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 3
 theme_override_font_sizes/font_size = 16
 text = "Mud"
 
@@ -111,6 +117,9 @@ alignment = 1
 [node name="Label" type="Label" parent="InteractionArea/PhysicalPanelContainer/HBoxContainer/VBoxContainerLeft/HBoxLeft3"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.32941177, 0.27058825, 0.23921569, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 3
 theme_override_font_sizes/font_size = 16
 text = "Stone"
 
@@ -134,6 +143,9 @@ alignment = 1
 [node name="Label" type="Label" parent="InteractionArea/PhysicalPanelContainer/HBoxContainer/VBoxContainerRight/HBoxRight1"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.32941177, 0.27058825, 0.23921569, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 3
 theme_override_font_sizes/font_size = 16
 text = "Wood"
 
@@ -149,6 +161,9 @@ alignment = 1
 [node name="Label" type="Label" parent="InteractionArea/PhysicalPanelContainer/HBoxContainer/VBoxContainerRight/HBoxRight2"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.32941177, 0.27058825, 0.23921569, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 3
 theme_override_font_sizes/font_size = 16
 text = "Mud"
 
@@ -165,6 +180,9 @@ alignment = 1
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.32941177, 0.27058825, 0.23921569, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 3
 theme_override_font_sizes/font_size = 16
 text = "Stone"
 
