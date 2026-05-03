@@ -20,19 +20,10 @@ func _ready():
 
 	if GlobalStats.initialize_world:
 		DirAccess.remove_absolute(SAVE_PATH)
-		_spawn_resources()
 		GlobalStats.initialize_world = false
-	$InitialResourceSpawners.queue_free()
 	
 	if FileAccess.file_exists(SAVE_PATH):
 		_load()
-
-
-func _spawn_resources():
-	for node in $InitialResourceSpawners.get_children():
-		if node is ResourceArea:
-			node.spawn_resources(self)
-
 
 func spawn_storage_grid(count: int):
 	for i in range(count):

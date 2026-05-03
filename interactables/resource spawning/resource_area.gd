@@ -13,8 +13,8 @@ const MAX_TRIES: int = 10
 
 const TREE = preload("uid://cd3s2mygwd6ul")
 const OAK_TREE = preload("uid://dps300dufah0")
-const ASPEN_TREE = preload("uid://de4jpe12kbg52")
-const PINE_TREE = preload("uid://coq60gmhpggti")
+const ASPEN_TREE = preload("res://interactables/trees/tree_resources/aspen_tree.tres")
+const PINE_TREE = preload("res://interactables/trees/tree_resources/pine_tree.tres")
 
 const ROCK = preload("uid://fbvlq216070u")
 
